@@ -1,5 +1,7 @@
-# React basic
+# Static website for Asino Puzzles.
 
-[Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview) allows you to easily build [React](https://reactjs.org/) apps in minutes. Use this repo with the [React quickstart](https://docs.microsoft.com/azure/static-web-apps/getting-started?tabs=react) to build and customize a new static site.
+Resources I used along the way:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Quickstart: Building your first static site with Azure Static Web Apps](https://learn.microsoft.com/en-us/azure/static-web-apps/getting-started?tabs=react)
+
+[React Router](https://www.w3schools.com/react/react_router.asp)
