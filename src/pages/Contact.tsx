@@ -1,7 +1,14 @@
 import React from 'react';
 
 const Contact = () => {
-  return <h1>Contact Me</h1>;
+  async function testAPI() {
+    const response = await fetch('/api/HttpTrigger?name=test');
+    const payload = await response.json();
+
+    console.log(payload);
+  }
+
+  return <h1 onClick={testAPI}>Contact Me</h1>;
 };
 
 export default Contact;
