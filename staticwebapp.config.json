@@ -4,20 +4,34 @@
   },
   "routes": [
     {
-      "route": "/login/aad",
-      "redirect": "/.auth/login/aad"
-    },
-    {
-      "route": "/login/github",
-      "redirect": "/.auth/login/github"
-    },
-    {
-      "route": "/login/twitter",
-      "redirect": "/.auth/login/twitter"
+      "route": "/login",
+      "redirect": "/.auth/login/aadb2c"
     },
     {
       "route": "/logout",
       "redirect": "/.auth/logout"
     }
-  ]
+  ],
+  "auth": {
+    "identityProviders": {
+      "customOpenIdConnectProviders": {
+        "aadb2c": {
+          "registration": {
+            "clientIdSettingName": "AADB2C_PROVIDER_CLIENT_ID",
+            "clientCredential": {
+              "clientSecretSettingName": "AADB2C_PROVIDER_CLIENT_SECRET"
+            },
+          "openIdConnectConfiguration": {
+              "wellKnownOpenIdConfiguration": "https://asinopuzzles.b2clogin.com/asinopuzzles.onmicrosoft.com/B2C_1_susi/v2.0/.well-known/openid-configuration"
+            }
+          },
+          "login": {
+            "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+            "scopes": [],
+            "loginParameterNames": []
+          }
+        }
+      }
+    }
+  }
 }
