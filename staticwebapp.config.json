@@ -22,7 +22,7 @@
               "clientSecretSettingName": "AADB2C_PROVIDER_CLIENT_SECRET"
             },
             "openIdConnectConfiguration": {
-              "wellKnownOpenIdConfiguration": "https://asinopuzzles.b2clogin.com/asinopuzzles.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1_susi"
+              "wellKnownOpenIdConfiguration": "https://asinopuzzles.b2clogin.com/asinopuzzles.onmicrosoft.com/B2C_1_susi/v2.0/.well-known/openid-configuration"
             }
           },
           "login": {
