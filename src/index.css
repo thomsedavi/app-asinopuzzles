@@ -1,3 +1,28 @@
+:root {
+  --hue-azure: 210;
+  --color-light: hsla(var(--hue-azure),25%,100%,1);
+  --color-dark: hsla(var(--hue-azure),25%,5%,1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: var(--color-dark);
+    --color: var(--color-light);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: var(--color-light);
+    --color: var(--color-dark);
+  }
+}
+
+html {
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
 body {
-  margin:0
+  margin: 0;
 }
