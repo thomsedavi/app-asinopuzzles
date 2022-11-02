@@ -12,22 +12,30 @@ const Layout = (props: LayoutProps) => {
       <nav className={props.isBurgerOpen ? '' : 'burger-closed'}>
         <svg className='burger'
              viewBox='0 0 30 30'
-             width='2.3em'
+             height='2.35em'
              xmlns='http://www.w3.org/2000/svg'
              onClick={() => props.setIsBurgerOpen(!props.isBurgerOpen)}>
+          {props.isBurgerOpen && <path d='M9,6L11,6L16,11L21,6L23,6L26,9L20,15L26,21L23,24L21,24L16,19L11,24L9,24L6,21L12,15L6,9Z'
+                                       className='burger-accent'/>}
+          {!props.isBurgerOpen && <path d='M10,8L24,8L24,10L10,10Z'
+                                        className='burger-accent'/>}
+          {!props.isBurgerOpen && <path d='M10,14L24,14L24,16L10,16Z'
+                                        className='burger-accent'/>}
+          {!props.isBurgerOpen && <path d='M10,20L24,20L24,22L10,22Z'
+                                        className='burger-accent'/>}
           {props.isBurgerOpen && <path d='M9,6L15,12L21,6L24,9L18,15L24,21L21,24L15,18L9,24L6,21L12,15L6,9Z'
                                        className='burger-fill'/>}
-          {!props.isBurgerOpen && <path d='M7,7L23,7L23,11L7,11Z'
+          {!props.isBurgerOpen && <path d='M8,8L22,8L22,10L8,10Z'
                                         className='burger-fill'/>}
-          {!props.isBurgerOpen && <path d='M7,13L23,13L23,17L7,17Z'
+          {!props.isBurgerOpen && <path d='M8,14L22,14L22,16L8,16Z'
                                         className='burger-fill'/>}
-          {!props.isBurgerOpen && <path d='M7,19L23,19L23,23L7,23Z'
+          {!props.isBurgerOpen && <path d='M8,20L22,20L22,22L8,22Z'
                                         className='burger-fill'/>}
         </svg>
         <Link to='/' className='logo'>
           <svg className='logo-large'
                viewBox='0 0 80 30'
-               width='5em'
+               height='1.5em'
                xmlns='http://www.w3.org/2000/svg'>
             <path d='M0,30L12,0L14,0L26,30L22,30L18,20L16,25L12,25L8,15L10,10L14,20L16,15L14,10L6,30Z'
                   className='logo-accent' />
@@ -52,7 +60,7 @@ const Layout = (props: LayoutProps) => {
           </svg>
           <svg className='logo-small'
                viewBox='0 0 68 15'
-               width='4.25em'
+               height='1em'
                xmlns='http://www.w3.org/2000/svg'>
             <path d='M4,15L2,10L6,0L18,0L12,15L4,15L2,10L10,10L12,5L8,5Z'
                   className='logo-accent' />

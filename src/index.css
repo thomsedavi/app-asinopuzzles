@@ -68,7 +68,7 @@ nav a {
   fill: var(--color);
 }
 
-.logo-accent {
+.logo-accent, .burger-accent {
   fill: var(--accent);
 }
 
