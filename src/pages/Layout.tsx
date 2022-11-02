@@ -17,13 +17,13 @@ const Layout = (props: LayoutProps) => {
              onClick={() => props.setIsBurgerOpen(!props.isBurgerOpen)}>
           {props.isBurgerOpen && <path d='M9,6L11,6L16,11L21,6L23,6L26,9L20,15L26,21L23,24L21,24L16,19L11,24L9,24L6,21L12,15L6,9Z'
                                        className='burger-accent'/>}
-          {!props.isBurgerOpen && <path d='M10,8L24,8L24,10L10,10Z'
+          {!props.isBurgerOpen && <path d='M7,7L25,7L25,11L7,11Z'
                                         className='burger-accent'/>}
-          {!props.isBurgerOpen && <path d='M10,14L24,14L24,16L10,16Z'
+          {!props.isBurgerOpen && <path d='M7,13L25,13L25,17L7,17Z'
                                         className='burger-accent'/>}
-          {!props.isBurgerOpen && <path d='M10,20L24,20L24,22L10,22Z'
+          {!props.isBurgerOpen && <path d='M7,19L25,19L25,23L7,23Z'
                                         className='burger-accent'/>}
-          {props.isBurgerOpen && <path d='M9,6L15,12L21,6L24,9L18,15L24,21L21,24L15,18L9,24L6,21L12,15L6,9Z'
+          {props.isBurgerOpen && <path d='M9,7L15,13L21,7L23,9L17,15L23,21L21,23L15,17L9,23L7,21L13,15L7,9Z'
                                        className='burger-fill'/>}
           {!props.isBurgerOpen && <path d='M8,8L22,8L22,10L8,10Z'
                                         className='burger-fill'/>}
@@ -60,7 +60,7 @@ const Layout = (props: LayoutProps) => {
           </svg>
           <svg className='logo-small'
                viewBox='0 0 68 15'
-               height='1em'
+               height='1.15em'
                xmlns='http://www.w3.org/2000/svg'>
             <path d='M4,15L2,10L6,0L18,0L12,15L4,15L2,10L10,10L12,5L8,5Z'
                   className='logo-accent' />
