@@ -86,10 +86,10 @@ const Layout = (props: LayoutProps) => {
                     className='logo-fill' />
             </svg>
           </Link>
-          <Link to='/blogs'>Blogs</Link>
-          <Link to='/contact'>Contact</Link>
-          {props.isLoggedIn === false && <a href='/login'>Login</a>}
+          <Link to='/about'>About</Link>
+          {props.isLoggedIn === true && <Link to='/profile'>Profile</Link>}
           {props.isLoggedIn === true && <a href='/logout'>Logout</a>}
+          {props.isLoggedIn === false && <a href='/login'>Login</a>}
           {props.isLoggedIn === undefined && <div>...</div>}
         </div>
       </nav>

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './pages/Layout';
 import Home from "./pages/Home";
-import Blogs from "./pages/Blogs";
-import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
 import './index.css';
 
@@ -55,8 +55,8 @@ export default class App extends React.Component<{}, AppState> {
                                            isBurgerOpen={this.state.isBurgerOpen}
                                            toggleIsBurgerOpen={this.toggleIsBurgerOpen} />}>
             <Route index element={<Home />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="contact" element={<Contact />} />
+            <Route path="about" element={<About />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
