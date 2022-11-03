@@ -28,9 +28,9 @@ export default class App extends React.Component<{}, AppState> {
     setTimeout(() => {
       fetch('/.auth/me')
         .then((response: Response) => response.json())
-        .then(() => {
+        .then((value: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
           this.setState({
-            isLoggedIn: true
+            isLoggedIn: value.clientPrincipal !== null
           });
         })
         .catch(() => {
