@@ -37,7 +37,6 @@ const Layout = (props: LayoutProps) => {
           <Link onClick={() => props.setIsBurgerOpen(false)} to='/' className='logo'>
             <svg className='logo-large'
                 viewBox='0 0 80 30'
-                 height='1.5em'
                  xmlns='http://www.w3.org/2000/svg'>
               <path d='M0,30L12,0L14,0L26,30L22,30L18,20L16,25L12,25L8,15L10,10L14,20L16,15L14,10L6,30Z'
                      className='logo-accent' />
@@ -62,7 +61,6 @@ const Layout = (props: LayoutProps) => {
             </svg>
             <svg className='logo-small'
                  viewBox='0 0 68 15'
-                 height='1.15em'
                  xmlns='http://www.w3.org/2000/svg'>
               <path d='M4,15L2,10L6,0L18,0L12,15L4,15L2,10L10,10L12,5L8,5Z'
                     className='logo-accent' />
@@ -86,10 +84,10 @@ const Layout = (props: LayoutProps) => {
                     className='logo-fill' />
             </svg>
           </Link>
-          <Link onClick={() => props.setIsBurgerOpen(false)} to='/about'>About</Link>
-          {props.isLoggedIn === true && <Link onClick={() => props.setIsBurgerOpen(false)} to='/profile'>Profile</Link>}
-          {props.isLoggedIn === true && <a href='/logout'>Logout</a>}
-          {props.isLoggedIn === false && <a href='/login'>Login</a>}
+          <Link onClick={() => props.setIsBurgerOpen(false)} to='/about'>ABOUT</Link>
+          {props.isLoggedIn === true && <Link onClick={() => props.setIsBurgerOpen(false)} to='/profile'>PROFILE</Link>}
+          {props.isLoggedIn === true && <a href='/logout'>LOGOUT</a>}
+          {props.isLoggedIn === false && <a href='/login'>LOGIN</a>}
           {props.isLoggedIn === undefined && <div>...</div>}
         </div>
       </nav>

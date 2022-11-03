@@ -51,6 +51,18 @@ body {
   margin: 0;
 }
 
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
 a {
   color: var(--color);
   text-decoration: none;
@@ -90,6 +102,10 @@ nav a {
     display: none;
   }
 
+  .logo-small {
+    height: 1.15em;
+  }
+
   nav.burger-closed > div > div, nav.burger-closed > div > a:not(.logo) {
     display: none;
   }
@@ -107,6 +123,10 @@ nav a {
 
   .burger {
     display: none;
+  }
+
+  .logo-large {
+    height: 1.4em;
   }
 
   .logo-small {
@@ -128,6 +148,10 @@ nav a {
     display: none;
   }
 
+  .logo-large {
+    height: 1.4em;
+  }
+
   .logo-small {
     display: none;
   }
@@ -145,6 +169,10 @@ nav a {
 
   .burger {
     display: none;
+  }
+
+  .logo-large {
+    height: 1.4em;
   }
 
   .logo-small {
@@ -166,6 +194,10 @@ nav a {
     display: none;
   }
 
+  .logo-large {
+    height: 1.4em;
+  }
+
   .logo-small {
     display: none;
   }
@@ -183,6 +215,10 @@ nav a {
 
   .burger {
     display: none;
+  }
+
+  .logo-large {
+    height: 1.4em;
   }
 
   .logo-small {

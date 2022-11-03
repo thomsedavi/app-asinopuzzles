@@ -7,7 +7,7 @@ const Contact = () => {
     console.log(response);
   }
 
-  return <h1 onClick={testAPI}>Profile</h1>;
+  return <h1 onClick={testAPI}>You goes here.</h1>;
 };
 
 export default Contact;
