@@ -82,7 +82,7 @@ nav a {
 }
 
 @media (max-width: 767px) {
-  nav a {
+  nav > div > div, nav > div > a {
     display: block;
   }
 
@@ -90,13 +90,13 @@ nav a {
     display: none;
   }
 
-  nav.burger-closed a:not(.logo) {
+  nav.burger-closed > div > div, nav.burger-closed > div > a:not(.logo) {
     display: none;
   }
 }
 
 @media (min-width: 766px) {
-  nav a {
+  nav > div > div, nav > div > a {
     display: inline-block;
   }
 

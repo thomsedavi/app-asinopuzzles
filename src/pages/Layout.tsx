@@ -2,9 +2,9 @@ import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 
 interface LayoutProps {
-  isLoggedIn: boolean;
+  isLoggedIn?: boolean;
   isBurgerOpen: boolean;
-  toggleIsBurgerOpen: (event: React.MouseEvent<SVGSVGElement>) => void;
+  toggleIsBurgerOpen: () => void;
 }
 
 const Layout = (props: LayoutProps) => {
@@ -88,8 +88,9 @@ const Layout = (props: LayoutProps) => {
           </Link>
           <Link to='/blogs'>Blogs</Link>
           <Link to='/contact'>Contact</Link>
-          {!props.isLoggedIn && <a href='/login'>Login</a>}
-          {props.isLoggedIn && <a href='/logout'>Logout</a>}
+          {props.isLoggedIn === false && <a href='/login'>Login</a>}
+          {props.isLoggedIn === true && <a href='/logout'>Logout</a>}
+          {props.isLoggedIn === undefined && <div>...</div>}
         </div>
       </nav>
       <div>

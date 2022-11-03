@@ -9,7 +9,7 @@ import NoPage from "./pages/NoPage";
 import './index.css';
 
 interface AppState {
-  isLoggedIn: boolean;
+  isLoggedIn?: boolean;
   isBurgerOpen: boolean;
 }
 
@@ -17,20 +17,31 @@ export default class App extends React.Component<{}, AppState> {
   constructor(props: Readonly<{}>) {
     super(props);
 
-    const cookies = document.cookie.split(';');
-
-    const staticWebAppsAuthCookieExists = cookies.some((item: string) => item.trim().startsWith('StaticWebAppsAuthCookie='));
-    const appServiceAuthSessionExists = cookies.some((item: string) => item.trim().startsWith('AppServiceAuthSession='));
-
     this.state = {
-      isLoggedIn: staticWebAppsAuthCookieExists && appServiceAuthSessionExists,
       isBurgerOpen: false
     };
 
     this.toggleIsBurgerOpen = this.toggleIsBurgerOpen.bind(this);
   }
 
-  toggleIsBurgerOpen = (event: React.MouseEvent<SVGSVGElement>): void => {
+  componentDidMount = (): void => {
+    setTimeout(() => {
+      fetch('/.auth/me')
+        .then((response: Response) => response.json())
+        .then(() => {
+          this.setState({
+            isLoggedIn: true
+          });
+        })
+        .catch(() => {
+          this.setState({
+            isLoggedIn: false
+          });
+        });
+      }, 1000);
+  }
+
+  toggleIsBurgerOpen = (): void => {
     this.setState((state: AppState, props: Readonly<{}>) => ({
       isBurgerOpen: !state.isBurgerOpen
     }));
