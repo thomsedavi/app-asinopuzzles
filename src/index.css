@@ -81,7 +81,7 @@ nav a {
   fill: var(--hover);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 575px) {
   nav > div > div, nav > div > a {
     display: block;
   }
@@ -95,13 +95,89 @@ nav a {
   }
 }
 
-@media (min-width: 766px) {
+@media (min-width: 576px) and (max-width: 767px) {
   nav > div > div, nav > div > a {
     display: inline-block;
   }
 
   #root > nav > div, #root > div {
-    width: 746px;
+    width: 556px;
+    margin: 0 auto;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .logo-small {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  nav > div > div, nav > div > a {
+    display: inline-block;
+  }
+
+  #root > nav > div, #root > div {
+    width: 748px;
+    margin: 0 auto;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .logo-small {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  nav > div > div, nav > div > a {
+    display: inline-block;
+  }
+
+  #root > nav > div, #root > div {
+    width: 972px;
+    margin: 0 auto;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .logo-small {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  nav > div > div, nav > div > a {
+    display: inline-block;
+  }
+
+  #root > nav > div, #root > div {
+    width: 1180px;
+    margin: 0 auto;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .logo-small {
+    display: none;
+  }
+}
+
+@media (min-width: 1400px) {
+  nav > div > div, nav > div > a {
+    display: inline-block;
+  }
+
+  #root > nav > div, #root > div {
+    width: 1380px;
     margin: 0 auto;
   }
 
