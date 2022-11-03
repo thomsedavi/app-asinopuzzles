@@ -4,7 +4,7 @@ import { Outlet, Link } from 'react-router-dom';
 interface LayoutProps {
   isLoggedIn?: boolean;
   isBurgerOpen: boolean;
-  toggleIsBurgerOpen: () => void;
+  setIsBurgerOpen: (isBurgerOpen: boolean) => void;
 }
 
 const Layout = (props: LayoutProps) => {
@@ -16,7 +16,7 @@ const Layout = (props: LayoutProps) => {
                viewBox='0 0 30 30'
                height='2.35em'
                xmlns='http://www.w3.org/2000/svg'
-               onClick={props.toggleIsBurgerOpen}>
+               onClick={() => props.setIsBurgerOpen(!props.isBurgerOpen)}>
             {props.isBurgerOpen && <path d='M9,6L11,6L16,11L21,6L23,6L26,9L20,15L26,21L23,24L21,24L16,19L11,24L9,24L6,21L12,15L6,9Z'
                                          className='burger-accent'/>}
             {!props.isBurgerOpen && <path d='M7,7L25,7L25,11L7,11Z'
@@ -34,7 +34,7 @@ const Layout = (props: LayoutProps) => {
             {!props.isBurgerOpen && <path d='M8,20L22,20L22,22L8,22Z'
                                           className='burger-fill'/>}
           </svg>
-          <Link to='/' className='logo'>
+          <Link onClick={() => props.setIsBurgerOpen(false)} to='/' className='logo'>
             <svg className='logo-large'
                 viewBox='0 0 80 30'
                  height='1.5em'
@@ -86,8 +86,8 @@ const Layout = (props: LayoutProps) => {
                     className='logo-fill' />
             </svg>
           </Link>
-          <Link to='/about'>About</Link>
-          {props.isLoggedIn === true && <Link to='/profile'>Profile</Link>}
+          <Link onClick={() => props.setIsBurgerOpen(false)} to='/about'>About</Link>
+          {props.isLoggedIn === true && <Link onClick={() => props.setIsBurgerOpen(false)} to='/profile'>Profile</Link>}
           {props.isLoggedIn === true && <a href='/logout'>Logout</a>}
           {props.isLoggedIn === false && <a href='/login'>Login</a>}
           {props.isLoggedIn === undefined && <div>...</div>}

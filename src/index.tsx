@@ -21,7 +21,7 @@ export default class App extends React.Component<{}, AppState> {
       isBurgerOpen: false
     };
 
-    this.toggleIsBurgerOpen = this.toggleIsBurgerOpen.bind(this);
+    this.setIsBurgerOpen = this.setIsBurgerOpen.bind(this);
   }
 
   componentDidMount = (): void => {
@@ -41,10 +41,10 @@ export default class App extends React.Component<{}, AppState> {
       }, 1000);
   }
 
-  toggleIsBurgerOpen = (): void => {
-    this.setState((state: AppState, props: Readonly<{}>) => ({
-      isBurgerOpen: !state.isBurgerOpen
-    }));
+  setIsBurgerOpen = (isBurgerOpen: boolean): void => {
+    this.setState({
+      isBurgerOpen: isBurgerOpen
+    });
   }
 
   render = () => {
@@ -53,7 +53,7 @@ export default class App extends React.Component<{}, AppState> {
         <Routes>
           <Route path="/" element={<Layout isLoggedIn={this.state.isLoggedIn}
                                            isBurgerOpen={this.state.isBurgerOpen}
-                                           toggleIsBurgerOpen={this.toggleIsBurgerOpen} />}>
+                                           setIsBurgerOpen={this.setIsBurgerOpen} />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="profile" element={<Profile />} />
