@@ -49,7 +49,7 @@ export default class App extends React.Component<{}, AppState> {
 
   render = () => {
     return (
-      <BrowserRouter>
+      this.state.isLoggedIn == undefined ? <></> : <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout isLoggedIn={this.state.isLoggedIn}
                                            isBurgerOpen={this.state.isBurgerOpen}

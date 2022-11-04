@@ -88,7 +88,6 @@ const Layout = (props: LayoutProps) => {
           {props.isLoggedIn === true && <Link onClick={() => props.setIsBurgerOpen(false)} to='/profile'>PROFILE</Link>}
           {props.isLoggedIn === true && <a href='/logout'>LOGOUT</a>}
           {props.isLoggedIn === false && <a href='/login'>LOGIN</a>}
-          {props.isLoggedIn === undefined && <div>...</div>}
         </div>
       </nav>
       <div>
