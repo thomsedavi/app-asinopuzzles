@@ -9,7 +9,7 @@ import NoPage from "./pages/NoPage";
 import './index.css';
 
 interface AppState {
-  isLoggedIn?: boolean;
+  userId?: string | null;
   isBurgerOpen: boolean;
 }
 
@@ -29,13 +29,23 @@ export default class App extends React.Component<{}, AppState> {
       fetch('/.auth/me')
         .then((response: Response) => response.json())
         .then((value: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
-          this.setState({
-            isLoggedIn: value.clientPrincipal !== null
-          });
+          if (value.clientPrincipal !== null) {
+            this.setState({
+              userId: value.clientPrincipal.userId
+            });
+
+            fetch(`./api/user/${value.clientPrincipal.userId}`)
+              .then((response: Response) => response.json())
+              .then((value: any) => console.log(value));
+          } else {
+            this.setState({
+              userId: null
+            });  
+          }
         })
         .catch(() => {
           this.setState({
-            isLoggedIn: false
+            userId: null
           });
         });
       }, 1000);
@@ -49,9 +59,9 @@ export default class App extends React.Component<{}, AppState> {
 
   render = () => {
     return (
-      this.state.isLoggedIn === undefined ? <></> : <BrowserRouter>
+      this.state.userId === undefined ? <></> : <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout isLoggedIn={this.state.isLoggedIn}
+          <Route path="/" element={<Layout isLoggedIn={typeof this.state.userId === 'string'}
                                            isBurgerOpen={this.state.isBurgerOpen}
                                            setIsBurgerOpen={this.setIsBurgerOpen} />}>
             <Route index element={<Home />} />
