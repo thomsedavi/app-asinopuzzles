@@ -1,13 +1,11 @@
 import React from 'react';
 
-const Contact = () => {
-  async function testAPI() {
-    const response = await fetch('/api/HttpTrigger?name=test');
+interface ContactProps {
+  userName?: string;
+}
 
-    console.log(response);
-  }
-
-  return <h1 onClick={testAPI}>You goes here.</h1>;
+const Contact = (props: ContactProps) => {
+  return <h1>You are {props.userName ?? 'Anonymous'}.</h1>;
 };
 
 export default Contact;

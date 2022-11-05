@@ -10,6 +10,7 @@ import './index.css';
 
 interface AppState {
   userId?: string | null;
+  userName?: string;
   isBurgerOpen: boolean;
 }
 
@@ -28,15 +29,21 @@ export default class App extends React.Component<{}, AppState> {
     setTimeout(() => {
       fetch('/.auth/me')
         .then((response: Response) => response.json())
-        .then((value: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
-          if (value.clientPrincipal !== null) {
-            this.setState({
-              userId: value.clientPrincipal.userId
-            });
-
-            fetch(`./api/user/${value.clientPrincipal.userId}`)
+        .then((authValue: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
+          if (authValue.clientPrincipal !== null) {
+            fetch(`./api/user/${authValue.clientPrincipal.userId}`)
               .then((response: Response) => response.json())
-              .then((value: any) => console.log(value));
+              .then((userValue: { id: string, name: string }) => {
+                this.setState({
+                  userId: userValue.id,
+                  userName: userValue.name
+                });
+              })
+              .catch(() => {
+                this.setState({
+                  userId: null
+                });  
+              });
           } else {
             this.setState({
               userId: null
@@ -66,7 +73,7 @@ export default class App extends React.Component<{}, AppState> {
                                            setIsBurgerOpen={this.setIsBurgerOpen} />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile" element={<Profile userName={this.state.userName} />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
