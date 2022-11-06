@@ -101,9 +101,16 @@ export default class App extends React.Component<{}, AppState> {
     if (userId !== undefined && userId !== null) {
       if (type === 'UserName') {
         fetch(`./api/user/${userId}`, { method: 'PUT', body: JSON.stringify({ name: this.state.textEditInput!.trim() }) })
-          .then((response: Response) => response.json())
-          .then((value) => console.log(value));
-        // TODO
+          .then((response: Response) => {
+            if (response.status === 200) {
+
+              this.setState(prevState => ({
+                userName: prevState.textEditInput!.trim(),
+                textEditInput: undefined,
+                textEditEntityType: undefined
+              }));
+            }
+          });
       }
     }
   }
