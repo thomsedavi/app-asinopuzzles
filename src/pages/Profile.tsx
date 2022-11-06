@@ -2,10 +2,20 @@ import React from 'react';
 
 interface ContactProps {
   userName?: string;
+  onClickEditTextEntity: (type: 'UserName') => void;
+  textEditEntityType?: 'UserName';
 }
 
 const Contact = (props: ContactProps) => {
-  return <h1>You are {props.userName ?? 'Anonymous'}.</h1>;
+  return (
+    props.userName === undefined
+      ? <h1>Logged Out</h1>
+      : <>
+        {props.textEditEntityType === 'UserName'
+           ? <div>Editing User Name</div>
+           : <h1>{props.userName ?? 'Anonymous'} <span className='edit' onClick={() => props.onClickEditTextEntity('UserName')}>✏️</span></h1>}
+      </>
+  );
 };
 
 export default Contact;

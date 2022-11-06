@@ -76,6 +76,10 @@ nav a {
   padding: 0.5em 0.5em;
 }
 
+span.edit {
+  cursor: pointer;
+}
+
 .logo-fill, .burger-fill {
   fill: var(--color);
 }

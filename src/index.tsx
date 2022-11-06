@@ -12,6 +12,7 @@ interface AppState {
   userId?: string | null;
   userName?: string;
   isBurgerOpen: boolean;
+  textEditEntityType?: 'UserName';
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -23,6 +24,7 @@ export default class App extends React.Component<{}, AppState> {
     };
 
     this.setIsBurgerOpen = this.setIsBurgerOpen.bind(this);
+    this.onClickEditTextEntity = this.onClickEditTextEntity.bind(this);
   }
 
   componentDidMount = (): void => {
@@ -64,6 +66,12 @@ export default class App extends React.Component<{}, AppState> {
     });
   }
 
+  onClickEditTextEntity = (type: 'UserName'): void => {
+    this.setState({
+      textEditEntityType: type
+    });
+  }
+
   render = () => {
     return (
       this.state.userId === undefined ? <></> : <BrowserRouter>
@@ -73,7 +81,9 @@ export default class App extends React.Component<{}, AppState> {
                                            setIsBurgerOpen={this.setIsBurgerOpen} />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
-            <Route path="profile" element={<Profile userName={this.state.userName} />} />
+            <Route path="profile" element={<Profile userName={this.state.userName} 
+                                                    onClickEditTextEntity={this.onClickEditTextEntity}
+                                                    textEditEntityType={this.state.textEditEntityType} />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
