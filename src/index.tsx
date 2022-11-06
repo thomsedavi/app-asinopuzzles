@@ -13,6 +13,7 @@ interface AppState {
   userName?: string;
   isBurgerOpen: boolean;
   textEditEntityType?: 'UserName';
+  textEditInput?: string;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -25,6 +26,7 @@ export default class App extends React.Component<{}, AppState> {
 
     this.setIsBurgerOpen = this.setIsBurgerOpen.bind(this);
     this.onClickEditTextEntity = this.onClickEditTextEntity.bind(this);
+    this.onClickHeaderLink = this.onClickHeaderLink.bind(this);
   }
 
   componentDidMount = (): void => {
@@ -66,9 +68,22 @@ export default class App extends React.Component<{}, AppState> {
     });
   }
 
-  onClickEditTextEntity = (type: 'UserName'): void => {
+  onClickHeaderLink = (): void => {
     this.setState({
-      textEditEntityType: type
+      isBurgerOpen: false,
+      textEditEntityType: undefined,
+      textEditInput: undefined
+    });
+  }
+
+  onClickEditTextEntity = (type: 'UserName'): void => {
+    let textEditInput: string | undefined = undefined;
+
+    type === 'UserName' && (textEditInput = this.state.userName);
+
+    this.setState({
+      textEditEntityType: type,
+      textEditInput: textEditInput
     });
   }
 
@@ -78,12 +93,14 @@ export default class App extends React.Component<{}, AppState> {
         <Routes>
           <Route path="/" element={<Layout isLoggedIn={typeof this.state.userId === 'string'}
                                            isBurgerOpen={this.state.isBurgerOpen}
-                                           setIsBurgerOpen={this.setIsBurgerOpen} />}>
+                                           setIsBurgerOpen={this.setIsBurgerOpen}
+                                           onClickHeaderLink={this.onClickHeaderLink} />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="profile" element={<Profile userName={this.state.userName} 
                                                     onClickEditTextEntity={this.onClickEditTextEntity}
-                                                    textEditEntityType={this.state.textEditEntityType} />} />
+                                                    textEditEntityType={this.state.textEditEntityType}
+                                                    textEditInput={this.state.textEditInput} />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

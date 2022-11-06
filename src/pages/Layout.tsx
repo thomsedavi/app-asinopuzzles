@@ -5,6 +5,7 @@ interface LayoutProps {
   isLoggedIn?: boolean;
   isBurgerOpen: boolean;
   setIsBurgerOpen: (isBurgerOpen: boolean) => void;
+  onClickHeaderLink: () => void;
 }
 
 const Layout = (props: LayoutProps) => {
@@ -34,7 +35,7 @@ const Layout = (props: LayoutProps) => {
             {!props.isBurgerOpen && <path d='M8,20L22,20L22,22L8,22Z'
                                           className='burger-fill'/>}
           </svg>
-          <Link onClick={() => props.setIsBurgerOpen(false)} to='/' className='logo'>
+          <Link to='/' className='logo' onClick={props.onClickHeaderLink}>
             <svg className='logo-large'
                 viewBox='0 0 80 30'
                  xmlns='http://www.w3.org/2000/svg'>
@@ -84,8 +85,8 @@ const Layout = (props: LayoutProps) => {
                     className='logo-fill' />
             </svg>
           </Link>
-          <Link onClick={() => props.setIsBurgerOpen(false)} to='/about'>ABOUT</Link>
-          {props.isLoggedIn === true && <Link onClick={() => props.setIsBurgerOpen(false)} to='/profile'>PROFILE</Link>}
+          <Link to='/about' onClick={props.onClickHeaderLink}>ABOUT</Link>
+          {props.isLoggedIn === true && <Link to='/profile' onClick={props.onClickHeaderLink}>PROFILE</Link>}
           {props.isLoggedIn === true && <a href='/logout'>LOGOUT</a>}
           {props.isLoggedIn === false && <a href='/login'>LOGIN</a>}
         </div>
