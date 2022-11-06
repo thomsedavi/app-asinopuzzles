@@ -27,6 +27,7 @@ export default class App extends React.Component<{}, AppState> {
     this.setIsBurgerOpen = this.setIsBurgerOpen.bind(this);
     this.onClickEditTextEntity = this.onClickEditTextEntity.bind(this);
     this.onClickHeaderLink = this.onClickHeaderLink.bind(this);
+    this.onChangeText = this.onChangeText.bind(this);
   }
 
   componentDidMount = (): void => {
@@ -87,6 +88,12 @@ export default class App extends React.Component<{}, AppState> {
     });
   }
 
+  onChangeText = (text: string): void => {
+    this.setState({
+      textEditInput: text
+    });
+  }
+
   render = () => {
     return (
       this.state.userId === undefined ? <></> : <BrowserRouter>
@@ -100,7 +107,8 @@ export default class App extends React.Component<{}, AppState> {
             <Route path="profile" element={<Profile userName={this.state.userName} 
                                                     onClickEditTextEntity={this.onClickEditTextEntity}
                                                     textEditEntityType={this.state.textEditEntityType}
-                                                    textEditInput={this.state.textEditInput} />} />
+                                                    textEditInput={this.state.textEditInput}
+                                                    onChangeText={this.onChangeText} />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
