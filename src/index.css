@@ -80,6 +80,10 @@ span.edit {
   cursor: pointer;
 }
 
+input {
+  font-size: 1em;
+}
+
 .logo-fill, .burger-fill {
   fill: var(--color);
 }
