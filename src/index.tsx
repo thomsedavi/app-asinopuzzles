@@ -28,15 +28,16 @@ export default class App extends React.Component<{}, AppState> {
     this.onClickEditTextEntity = this.onClickEditTextEntity.bind(this);
     this.onClickHeaderLink = this.onClickHeaderLink.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
+    this.onClickSaveTextEntity = this.onClickSaveTextEntity.bind(this);
   }
 
   componentDidMount = (): void => {
     setTimeout(() => {
-      fetch('/.auth/me')
+      fetch('/.auth/me', { method: 'GET'})
         .then((response: Response) => response.json())
         .then((authValue: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
           if (authValue.clientPrincipal !== null) {
-            fetch(`./api/user/${authValue.clientPrincipal.userId}`)
+            fetch(`./api/user/${authValue.clientPrincipal.userId}`, { method: 'GET' })
               .then((response: Response) => response.json())
               .then((userValue: { id: string, name: string }) => {
                 this.setState({
@@ -94,6 +95,19 @@ export default class App extends React.Component<{}, AppState> {
     });
   }
 
+  onClickSaveTextEntity = (type: 'UserName'): void => {
+    const userId = this.state.userId;
+
+    if (userId !== undefined && userId !== null) {
+      if (type === 'UserName') {
+        fetch(`./api/user/${userId}`, { method: 'PUT', body: JSON.stringify({ name: this.state.textEditInput!.trim() }) })
+          .then((response: Response) => response.json())
+          .then((value) => console.log(value));
+        // TODO
+      }
+    }
+  }
+
   render = () => {
     return (
       this.state.userId === undefined ? <></> : <BrowserRouter>
@@ -108,7 +122,8 @@ export default class App extends React.Component<{}, AppState> {
                                                     onClickEditTextEntity={this.onClickEditTextEntity}
                                                     textEditEntityType={this.state.textEditEntityType}
                                                     textEditInput={this.state.textEditInput}
-                                                    onChangeText={this.onChangeText} />} />
+                                                    onChangeText={this.onChangeText}
+                                                    onClickSaveTextEntity={this.onClickSaveTextEntity} />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
