@@ -11,8 +11,9 @@ import './index.css';
 interface AppState {
   userId?: string | null;
   userName?: string;
+  userBiography?: string;
   isBurgerOpen: boolean;
-  textEditEntityType?: 'UserName';
+  textEditEntityType?: string;
   textEditInput?: string;
 }
 
@@ -39,10 +40,11 @@ export default class App extends React.Component<{}, AppState> {
           if (authValue.clientPrincipal !== null) {
             fetch(`./api/user/${authValue.clientPrincipal.userId}`, { method: 'GET' })
               .then((response: Response) => response.json())
-              .then((userValue: { id: string, name: string }) => {
+              .then((userValue: { id: string, name: string, biography: string }) => {
                 this.setState({
                   userId: userValue.id,
-                  userName: userValue.name
+                  userName: userValue.name,
+                  userBiography: userValue.biography
                 });
               })
               .catch(() => {
@@ -78,7 +80,7 @@ export default class App extends React.Component<{}, AppState> {
     });
   }
 
-  onClickEditTextEntity = (type: 'UserName'): void => {
+  onClickEditTextEntity = (type: string): void => {
     let textEditInput: string | undefined = undefined;
 
     type === 'UserName' && (textEditInput = this.state.userName);
@@ -95,7 +97,7 @@ export default class App extends React.Component<{}, AppState> {
     });
   }
 
-  onClickSaveTextEntity = (type: 'UserName'): void => {
+  onClickSaveTextEntity = (type: string): void => {
     const userId = this.state.userId;
 
     if (userId !== undefined && userId !== null) {
@@ -105,12 +107,11 @@ export default class App extends React.Component<{}, AppState> {
         fetch(`./api/user/${userId}`, { method: 'PUT', body: JSON.stringify({ name: textEditInput }) })
           .then((response: Response) => {
             if (response.status === 200) {
-
-              this.setState(prevState => ({
+              this.setState({
                 userName: textEditInput,
                 textEditInput: undefined,
                 textEditEntityType: undefined
-              }));
+              });
             }
           });
       }
@@ -127,7 +128,8 @@ export default class App extends React.Component<{}, AppState> {
                                            onClickHeaderLink={this.onClickHeaderLink} />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
-            <Route path="profile" element={<Profile userName={this.state.userName} 
+            <Route path="profile" element={<Profile userName={this.state.userName}
+                                                    userBiography={this.state.userBiography}
                                                     onClickEditTextEntity={this.onClickEditTextEntity}
                                                     textEditEntityType={this.state.textEditEntityType}
                                                     textEditInput={this.state.textEditInput}

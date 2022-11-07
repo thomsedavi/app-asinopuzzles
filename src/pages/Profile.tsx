@@ -2,11 +2,12 @@ import React from 'react';
 
 interface ContactProps {
   userName?: string;
-  onClickEditTextEntity: (type: 'UserName') => void;
-  textEditEntityType?: 'UserName';
+  userBiography?: string;
+  onClickEditTextEntity: (type: string) => void;
+  textEditEntityType?: string;
   textEditInput?: string;
   onChangeText: (text: string) => void;
-  onClickSaveTextEntity: (type: 'UserName') => void;
+  onClickSaveTextEntity: (type: string) => void;
 }
 
 const Contact = (props: ContactProps) => {
@@ -17,6 +18,7 @@ const Contact = (props: ContactProps) => {
         {props.textEditEntityType === 'UserName'
            ? <h1><input maxLength={64} value={props.textEditInput} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChangeText(event.target.value)} /> <span className='edit' onClick={() => props.onClickSaveTextEntity('UserName')}>💾</span></h1>
            : <h1>{props.userName ?? 'Anonymous'} <span className='edit' onClick={() => props.onClickEditTextEntity('UserName')}>⌨️</span></h1>}
+           <div>{props.userBiography}</div>
       </>
   );
 };
