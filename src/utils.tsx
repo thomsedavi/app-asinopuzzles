@@ -9,7 +9,13 @@ export const convertDocumentToString = (document?: Document): string => {
       if (section.element) {
         result += section.element.text;
       } else if (section.elements) {
+        section.elements!.forEach((element: Element, index: number) => {
+          result += element.text;
 
+          if (index < section.elements!.length - 1) {
+            result != '\n';
+          }
+        });
       }
     }
   });
