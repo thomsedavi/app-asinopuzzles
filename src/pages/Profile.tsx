@@ -22,6 +22,7 @@ const Contact = (props: ContactProps) => {
         {props.textEditEntityType === 'UserBiography'
            ? <>
                <textarea value={props.textEditInput} placeholder="Asino Puzzler" rows={4} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChangeText(event.target.value)} />
+               <div className='edit' onClick={() => props.onClickSaveTextEntity('UserBiography')}>💾</div>
                {convertDocumentToElements(convertStringToDocument(props.textEditInput))}
              </>
            : <>
