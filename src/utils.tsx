@@ -4,19 +4,20 @@ import { Document, Section, Element } from './interfaces';
 export const convertDocumentToString = (document?: Document): string => {
   var result = '';
 
-  document?.sections?.forEach((section: Section) => {
+  document?.sections?.forEach((section: Section, index: number) => {
     if (section.type === 'PARAGRAPH') {
       if (section.element) {
         result += section.element.text;
       } else if (section.elements) {
         section.elements!.forEach((element: Element, index: number) => {
           result += element.text;
-
-          if (index < section.elements!.length - 1) {
-            result += '\n';
-          }
+          result += '\n';
         });
       }
+    }
+
+    if (index < document.sections!.length - 1) {
+      result += '\n';
     }
   });
 
