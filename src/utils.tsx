@@ -54,7 +54,7 @@ export const convertDocumentToElements = (document?: Document, editButton?: JSX.
   return test;
 }
 
-export const convertTextToDocument = (text?: string): Document => {
+export const convertStringToDocument = (text?: string): Document => {
   const document: Document = {};
 
   if (text) {

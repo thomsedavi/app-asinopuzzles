@@ -8,7 +8,7 @@ import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
 import './index.css';
 import { User } from './interfaces';
-import { convertDocumentToString } from './utils';
+import { convertDocumentToString, convertStringToDocument } from './utils';
 
 interface AppState {
   user?: User | null;
@@ -101,13 +101,26 @@ export default class App extends React.Component<{}, AppState> {
 
     if (user !== undefined && user !== null) {
       if (type === 'UserName' && this.state.textEditInput !== undefined) {
-        const textEditInput = this.state.textEditInput!.trim();
+        const name = this.state.textEditInput!.trim();
 
-        fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ name: textEditInput }) })
+        fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
           .then((response: Response) => {
             if (response.status === 200) {
               this.setState(prevState => ({
-                user: { ...prevState.user!, name: textEditInput },
+                user: { ...prevState.user!, name: name },
+                textEditInput: undefined,
+                textEditEntityType: undefined
+              }));
+            }
+          });
+      } else if (type === 'UserBiography' && this.state.textEditInput !== undefined) {
+        const biography = convertStringToDocument(this.state.textEditInput);
+
+        fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
+          .then((response: Response) => {
+            if (response.status === 200) {
+              this.setState(prevState => ({
+                user: { ...prevState.user!, biography: biography },
                 textEditInput: undefined,
                 textEditEntityType: undefined
               }));

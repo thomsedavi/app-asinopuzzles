@@ -1,6 +1,6 @@
 import React from 'react';
 import { User } from '../interfaces';
-import { convertDocumentToElements, convertTextToDocument } from '../utils';
+import { convertDocumentToElements, convertStringToDocument } from '../utils';
 
 interface ContactProps {
   user?: User | null;
@@ -22,7 +22,7 @@ const Contact = (props: ContactProps) => {
         {props.textEditEntityType === 'UserBiography'
            ? <>
                <textarea value={props.textEditInput} placeholder="Asino Puzzler" rows={4} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChangeText(event.target.value)} />
-               {convertDocumentToElements(convertTextToDocument(props.textEditInput))}
+               {convertDocumentToElements(convertStringToDocument(props.textEditInput))}
              </>
            : <>
                {convertDocumentToElements(props.user.biography ?? {}, <span className='edit' onClick={() => props.onClickEditTextEntity('UserBiography')}>⌨️</span>)}
