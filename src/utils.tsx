@@ -37,7 +37,7 @@ export const convertDocumentToElements = (document?: Document): JSX.Element[] =>
           }
         });
 
-        test.push(<p>{}</p>);
+        test.push(<p>{paragraphBits}</p>);
       }
     }
   });
