@@ -7,11 +7,11 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
 import './index.css';
+import { User } from './interfaces';
+import { convertDocumentToString } from './utils';
 
 interface AppState {
-  userId?: string | null;
-  userName?: string;
-  userBiography?: string;
+  user?: User | null;
   isBurgerOpen: boolean;
   textEditEntityType?: string;
   textEditInput?: string;
@@ -40,27 +40,25 @@ export default class App extends React.Component<{}, AppState> {
           if (authValue.clientPrincipal !== null) {
             fetch(`./api/user/${authValue.clientPrincipal.userId}`, { method: 'GET' })
               .then((response: Response) => response.json())
-              .then((userValue: { id: string, name: string, biography: string }) => {
+              .then((userValue: User) => {
                 this.setState({
-                  userId: userValue.id,
-                  userName: userValue.name,
-                  userBiography: userValue.biography
+                  user: userValue
                 });
               })
               .catch(() => {
                 this.setState({
-                  userId: null
+                  user: null
                 });  
               });
           } else {
             this.setState({
-              userId: null
+              user: null
             });  
           }
         })
         .catch(() => {
           this.setState({
-            userId: null
+            user: null
           });
         });
       }, 1000);
@@ -83,8 +81,8 @@ export default class App extends React.Component<{}, AppState> {
   onClickEditTextEntity = (type: string): void => {
     let textEditInput: string | undefined = undefined;
 
-    type === 'UserName' && (textEditInput = this.state.userName);
-    type === 'UserBiography' && (textEditInput = this.state.userBiography);
+    type === 'UserName' && (textEditInput = this.state.user?.name ?? 'Anonymous');
+    type === 'UserBiography' && (textEditInput = this.state.user && this.state.user.biography ? convertDocumentToString(this.state.user!.biography!) : 'Asino Puzzler');
 
     this.setState({
       textEditEntityType: textEditInput === undefined ? undefined : type,
@@ -99,20 +97,20 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   onClickSaveTextEntity = (type: string): void => {
-    const userId = this.state.userId;
+    const user = this.state.user;
 
-    if (userId !== undefined && userId !== null) {
+    if (user !== undefined && user !== null) {
       if (type === 'UserName' && this.state.textEditInput !== undefined) {
         const textEditInput = this.state.textEditInput!.trim();
 
-        fetch(`./api/user/${userId}`, { method: 'PUT', body: JSON.stringify({ name: textEditInput }) })
+        fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ name: textEditInput }) })
           .then((response: Response) => {
             if (response.status === 200) {
-              this.setState({
-                userName: textEditInput,
+              this.setState(prevState => ({
+                user: { ...prevState.user!, name: textEditInput },
                 textEditInput: undefined,
                 textEditEntityType: undefined
-              });
+              }));
             }
           });
       }
@@ -121,16 +119,15 @@ export default class App extends React.Component<{}, AppState> {
 
   render = () => {
     return (
-      this.state.userId === undefined ? <></> : <BrowserRouter>
+      this.state.user === undefined ? <></> : <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout isLoggedIn={typeof this.state.userId === 'string'}
+          <Route path="/" element={<Layout isLoggedIn={this.state.user !== undefined && this.state.user !== null}
                                            isBurgerOpen={this.state.isBurgerOpen}
                                            setIsBurgerOpen={this.setIsBurgerOpen}
                                            onClickHeaderLink={this.onClickHeaderLink} />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
-            <Route path="profile" element={<Profile userName={this.state.userName}
-                                                    userBiography={this.state.userBiography}
+            <Route path="profile" element={<Profile user={this.state.user}
                                                     onClickEditTextEntity={this.onClickEditTextEntity}
                                                     textEditEntityType={this.state.textEditEntityType}
                                                     textEditInput={this.state.textEditInput}
