@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Section } from './interfaces';
+import { Document, Section, Element } from './interfaces';
 
 export const convertDocumentToString = (document?: Document): string => {
   var result = '';
@@ -8,6 +8,8 @@ export const convertDocumentToString = (document?: Document): string => {
     if (section.type === 'PARAGRAPH') {
       if (section.element) {
         result += section.element.text;
+      } else if (section.elements) {
+
       }
     }
   });
@@ -22,6 +24,20 @@ export const convertDocumentToElements = (document?: Document): JSX.Element[] =>
     if (section.type === 'PARAGRAPH') {
       if (section.element) {
         test.push(<p>{section.element.text}</p>);
+      } else if (section.elements) {
+        const paragraphBits: (JSX.Element | string)[] = [];
+
+        section.elements.forEach((element: Element, index: number) => {
+          if (element.text) {
+            paragraphBits.push(element.text!);
+          }
+
+          if (index < section.elements!.length - 1) {
+            paragraphBits.push(<br />);
+          }
+        });
+
+        test.push(<p>{}</p>);
       }
     }
   });
@@ -38,7 +54,7 @@ export const convertTextToDocument = (text?: string): Document => {
     const split: string[] = text.split('\n');
 
     const elements: string[][] = [];
-    let bits: string[] = [];
+    let element: string[] = [];
 
     split.forEach((bit: string) => {
       let bitTrimmed = bit.trim();
@@ -47,21 +63,39 @@ export const convertTextToDocument = (text?: string): Document => {
         bitTrimmed = bitTrimmed.replaceAll('  ', ' ');
       }
 
-      if (bitTrimmed === '' && bits.length === 0) {
+      if (bitTrimmed === '' && element.length === 0) {
         // do nothing
       } else if (bitTrimmed === '') {
-        elements.push(bits);
-        bits = [];
+        elements.push(element);
+        element = [];
       } else {
-        bits.push(bitTrimmed);
+        element.push(bitTrimmed);
       }
     });
+
+    if (element.length) {
+      elements.push(element);
+    }
 
     elements.forEach((element: string[]) => {
       var section: Section = {};
 
       section.type = 'PARAGRAPH';
-      section.element = { text: element[0] };
+
+      if (element.length === 1) {
+        section.element = { text: element[0] };
+      }
+      else {
+        const bits: Element[] = [];
+
+        element.forEach((bit: string) => {
+          bits.push({
+            text: bit
+          });
+        });
+
+        section.elements = bits;
+      }
       
       sections.push(section);
     });
