@@ -17,13 +17,17 @@ export const convertDocumentToString = (document?: Document): string => {
   return result;
 }
 
-export const convertDocumentToElements = (document?: Document): JSX.Element[] => {
+export const convertDocumentToElements = (document?: Document, editButton?: JSX.Element): JSX.Element[] => {
   var test: JSX.Element[] = [];
 
-  document?.sections?.forEach((section: Section) => {
+  document?.sections?.forEach((section: Section, index: number) => {
     if (section.type === 'PARAGRAPH') {
       if (section.element) {
-        test.push(<p>{section.element.text}</p>);
+        if (editButton && index === document!.sections!.length - 1) {
+          test.push(<p>{section.element.text} {editButton}</p>);
+        } else {
+          test.push(<p>{section.element.text}</p>);
+        }
       } else if (section.elements) {
         const paragraphBits: (JSX.Element | string)[] = [];
 
@@ -37,7 +41,12 @@ export const convertDocumentToElements = (document?: Document): JSX.Element[] =>
           }
         });
 
-        test.push(<p>{paragraphBits}</p>);
+        if (editButton && index === document!.sections!.length - 1) {
+          test.push(<p>{paragraphBits} {editButton}</p>);
+        } else {
+          test.push(<p>{paragraphBits}</p>);
+        }
+
       }
     }
   });
