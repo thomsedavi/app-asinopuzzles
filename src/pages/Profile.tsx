@@ -25,7 +25,7 @@ const Contact = (props: ContactProps) => {
                {convertDocumentToElements(convertTextToDocument(props.textEditInput))}
              </>
            : <>
-               {convertDocumentToElements(props.user.biography ?? {}, <p className='edit' onClick={() => props.onClickEditTextEntity('UserBiography')}>⌨️</p>)}
+               {convertDocumentToElements(props.user.biography ?? {}, <span className='edit' onClick={() => props.onClickEditTextEntity('UserBiography')}>⌨️</span>)}
              </>}
       </>
   );
