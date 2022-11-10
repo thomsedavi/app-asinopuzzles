@@ -82,7 +82,7 @@ export default class App extends React.Component<{}, AppState> {
     let textEditInput: string | undefined = undefined;
 
     type === 'UserName' && (textEditInput = this.state.user?.name ?? 'Anonymous');
-    type === 'UserBiography' && (textEditInput = this.state.user && this.state.user.biography ? convertDocumentToString(this.state.user!.biography!) : 'Asino Puzzler');
+    type === 'UserBiography' && (textEditInput = this.state.user && this.state.user.biography ? convertDocumentToString(this.state.user!.biography) : 'Asino Puzzler');
 
     this.setState({
       textEditEntityType: textEditInput === undefined ? undefined : type,
