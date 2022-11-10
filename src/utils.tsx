@@ -13,7 +13,7 @@ export const convertDocumentToString = (document?: Document): string => {
           result += element.text;
 
           if (index < section.elements!.length - 1) {
-            result != '\n';
+            result += '\n';
           }
         });
       }
