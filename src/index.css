@@ -69,8 +69,7 @@ a {
 }
 
 textarea {
-  display: block;
-  margin: 0 auto;
+  display: inline-block;
 }
 
 nav {
@@ -81,12 +80,19 @@ nav a {
   padding: 0.5em 0.5em;
 }
 
+.textarea-container {
+  margin: 1em auto;
+  width: 21em;
+}
+
 .edit {
   cursor: pointer;
+  display: inline-block;
 }
 
 input {
   font-size: 1em;
+  width: 80%;
 }
 
 .logo-fill, .burger-fill {
@@ -109,6 +115,11 @@ input {
 @media (max-width: 575px) {
   nav > div > div, nav > div > a {
     display: block;
+  }
+
+  #root > nav > div, #root > div {
+    width: 340px;
+    margin: 0 auto;
   }
 
   .logo-large {

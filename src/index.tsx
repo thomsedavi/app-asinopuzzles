@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
+import Dev from './pages/Dev';
 import './index.css';
 import { User } from './interfaces';
 import { convertDocumentToString, convertStringToDocument } from './utils';
@@ -30,6 +31,7 @@ export default class App extends React.Component<{}, AppState> {
     this.onClickHeaderLink = this.onClickHeaderLink.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
     this.onClickSaveTextEntity = this.onClickSaveTextEntity.bind(this);
+    this.onClickCreateMockProfile = this.onClickCreateMockProfile.bind(this);
   }
 
   componentDidMount = (): void => {
@@ -130,6 +132,25 @@ export default class App extends React.Component<{}, AppState> {
     }
   }
 
+  onClickCreateMockProfile = () => {
+    this.setState({
+      user: {
+        id: '00000000-0000-0000-0000-000000000000',
+        name: 'A Vagrant',
+        biography: {
+          sections: [
+            {
+              type: 'PARAGRAPH',
+              element: {
+                text: 'I Am A Vagrant'
+              }
+            }
+          ]
+        }
+      }
+    });
+  }
+
   render = () => {
     return (
       this.state.user === undefined ? <></> : <BrowserRouter>
@@ -140,6 +161,7 @@ export default class App extends React.Component<{}, AppState> {
                                            onClickHeaderLink={this.onClickHeaderLink} />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
+            <Route path="dev" element={<Dev onClickCreateMockProfile={this.onClickCreateMockProfile} />} />
             <Route path="profile" element={<Profile user={this.state.user}
                                                     onClickEditTextEntity={this.onClickEditTextEntity}
                                                     textEditEntityType={this.state.textEditEntityType}

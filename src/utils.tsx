@@ -31,9 +31,9 @@ export const convertDocumentToElements = (document?: Document, editButton?: JSX.
     if (section.type === 'PARAGRAPH') {
       if (section.element) {
         if (editButton && index === document!.sections!.length - 1) {
-          test.push(<p>{section.element.text} {editButton}</p>);
+          test.push(<p key={`s${index}`}>{section.element.text} {editButton}</p>);
         } else {
-          test.push(<p>{section.element.text}</p>);
+          test.push(<p key={`s${index}`}>{section.element.text}</p>);
         }
       } else if (section.elements) {
         const paragraphBits: (JSX.Element | string)[] = [];
@@ -44,14 +44,14 @@ export const convertDocumentToElements = (document?: Document, editButton?: JSX.
           }
 
           if (index < section.elements!.length - 1) {
-            paragraphBits.push(<br />);
+            paragraphBits.push(<br key={`s${index}br${index}`} />);
           }
         });
 
         if (editButton && index === document!.sections!.length - 1) {
-          test.push(<p>{paragraphBits} {editButton}</p>);
+          test.push(<p key={`s${index}`}>{paragraphBits} {editButton}</p>);
         } else {
-          test.push(<p>{paragraphBits}</p>);
+          test.push(<p key={`s${index}`}>{paragraphBits}</p>);
         }
 
       }
