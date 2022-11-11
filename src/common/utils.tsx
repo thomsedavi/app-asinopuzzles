@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Section, Element } from './interfaces';
+import { Document, Section, Element } from '../interfaces';
 
 export const convertDocumentToString = (document?: Document): string => {
   var result = '';

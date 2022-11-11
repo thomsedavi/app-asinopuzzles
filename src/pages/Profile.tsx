@@ -1,6 +1,6 @@
 import React from 'react';
 import { User } from '../interfaces';
-import { convertDocumentToElements, convertStringToDocument } from '../utils';
+import { DocumentElement } from '../common/components';
 
 interface ProfileProps {
   user?: User | null;
@@ -9,9 +9,10 @@ interface ProfileProps {
   textEditInput?: string;
   onChangeText: (text: string) => void;
   onClickSaveTextEntity: (type: string) => void;
+  onClickCancel: () => void;
 }
 
-const Profile = (props: ProfileProps) => {
+const Profile = (props: ProfileProps): JSX.Element => {
   return (
     !props.user
       ? <h1>Logged Out</h1>
@@ -19,16 +20,14 @@ const Profile = (props: ProfileProps) => {
         {props.textEditEntityType === 'UserName'
            ? <h1><input maxLength={64} value={props.textEditInput} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChangeText(event.target.value)} /> <span className='edit' onClick={() => props.onClickSaveTextEntity('UserName')}>✔️</span></h1>
            : <h1>{props.user.name ?? 'Anonymous'} <span className='edit' onClick={() => props.onClickEditTextEntity('UserName')}>✏️</span></h1>}
-        {props.textEditEntityType === 'UserBiography'
-           ? <>
-               <div className='textarea-container'>
-                 <textarea value={props.textEditInput} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChangeText(event.target.value)} /> <div className='edit' onClick={() => props.onClickSaveTextEntity('UserBiography')}>✔️</div>
-               </div>
-               {convertDocumentToElements(convertStringToDocument(props.textEditInput))}
-             </>
-           : <>
-               {convertDocumentToElements(props.user.biography ?? {}, <span className='edit' onClick={() => props.onClickEditTextEntity('UserBiography')}>✏️</span>)}
-             </>}
+        <DocumentElement value={props.user.biography ?? {}}
+                         editing={props.textEditEntityType === 'UserBiography'}
+                         inputValue={props.textEditInput}
+                         onClickEdit={() => props.onClickEditTextEntity('UserBiography')}
+                         onChange={(inputValue: string) => props.onChangeText(inputValue)}
+                         onClickSave={() => props.onClickSaveTextEntity('UserBiography')}
+                         onClickCancel={props.onClickCancel}
+                         placeholder='Asino Puzzler' />
       </>
   );
 };

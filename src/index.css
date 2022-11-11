@@ -68,21 +68,12 @@ a {
   text-decoration: none;
 }
 
-textarea {
-  display: inline-block;
-}
-
 nav {
   box-shadow: 0 0 0.5em var(--shadow);
 }
 
 nav a {
   padding: 0.5em 0.5em;
-}
-
-.textarea-container {
-  margin: 1em auto;
-  width: 21em;
 }
 
 .edit {

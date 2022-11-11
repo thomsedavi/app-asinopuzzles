@@ -9,7 +9,7 @@ import NoPage from "./pages/NoPage";
 import Dev from './pages/Dev';
 import './index.css';
 import { User } from './interfaces';
-import { convertDocumentToString, convertStringToDocument } from './utils';
+import { convertDocumentToString, convertStringToDocument } from './common/utils';
 
 interface AppState {
   user?: User | null;
@@ -132,6 +132,13 @@ export default class App extends React.Component<{}, AppState> {
     }
   }
 
+  onClickCancel = () => {
+    this.setState({
+      textEditEntityType: undefined,
+      textEditInput: undefined
+    });
+  }
+
   onClickCreateMockProfile = () => {
     this.setState({
       user: {
@@ -167,7 +174,8 @@ export default class App extends React.Component<{}, AppState> {
                                                     textEditEntityType={this.state.textEditEntityType}
                                                     textEditInput={this.state.textEditInput}
                                                     onChangeText={this.onChangeText}
-                                                    onClickSaveTextEntity={this.onClickSaveTextEntity} />} />
+                                                    onClickSaveTextEntity={this.onClickSaveTextEntity}
+                                                    onClickCancel={this.onClickCancel}/>} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
