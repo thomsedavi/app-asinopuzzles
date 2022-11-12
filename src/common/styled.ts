@@ -31,6 +31,14 @@ export const Button = styled.button`
   color: var(--background-color);
   cursor: pointer;
   font-size: 1em;
+
+  &:hover {
+    background: var(--hover);
+  }
+
+  &:disabled {
+    background: var(--disabled);
+  }
 `;
 
 export const TextArea = styled.textarea`

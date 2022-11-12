@@ -125,7 +125,18 @@ export default class App extends React.Component<{}, AppState> {
                   textEditEntityType: undefined,
                   isWorking: false
                 }));
+              } else {
+                this.setState({
+                  errorMessage: 'Unknown error',
+                  isWorking: false
+                });
               }
+            })
+            .catch(() => {
+              this.setState({
+                errorMessage: 'Unknown error',
+                isWorking: false
+              });
             });
         });
       } else if (type === 'UserBiography' && this.state.textEditInput !== undefined) {

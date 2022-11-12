@@ -24,6 +24,7 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
         <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
       </ButtonContainer>
+      {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else {
     return <Heading1>{props.value} <span className='edit' onClick={props.onClickEdit}>✏️</span></Heading1>

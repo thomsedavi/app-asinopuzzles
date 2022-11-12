@@ -12,11 +12,13 @@
   --hue-magenta: 300;
   --hue-pink: 330;
   --color-light: hsla(var(--hue-azure),25%,100%,1);
-  --color-light-hover: hsla(var(--hue-azure),25%,50%,1);
+  --color-light-hover: hsla(var(--hue-azure),25%,75%,1);
+  --color-light-disabled: hsla(var(--hue-azure),25%,50%,1);
   --color-light-accent: hsla(var(--hue-chartreuse),75%,50%,1);
   --color-light-shadow: hsla(var(--hue-azure),25%,25%,1);
   --color-dark: hsla(var(--hue-azure),25%,5%,1);
-  --color-dark-hover: hsla(var(--hue-azure),25%,50%,1);
+  --color-dark-hover: hsla(var(--hue-azure),25%,25%,1);
+  --color-dark-disabled: hsla(var(--hue-azure),25%,50%,1);
   --color-dark-accent: hsla(var(--hue-pink),75%,50%,1);
   --color-dark-shadow: hsla(var(--hue-azure),25%,25%,1);
   --color-error: hsla(var(--hue-red),100%,50%,1);
@@ -27,6 +29,7 @@
     --background-color: var(--color-dark);
     --color: var(--color-light);
     --hover: var(--color-light-hover);
+    --disabled: var(--color-light-disabled);
     --accent: var(--color-dark-accent);
     --shadow: var(--color-dark-shadow);
     --error: var(--color-error);
@@ -38,6 +41,7 @@
     --background-color: var(--color-light);
     --color: var(--color-dark);
     --hover: var(--color-dark-hover);
+    --disabled: var(--color-dark-disabled);
     --accent: var(--color-light-accent);
     --shadow: var(--color-light-shadow);
     --error: var(--color-error);
