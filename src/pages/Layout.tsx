@@ -40,9 +40,9 @@ const Layout = (props: LayoutProps) => {
             <svg className='logo-large'
                 viewBox='0 0 80 30'
                  xmlns='http://www.w3.org/2000/svg'>
-              <path d='M0,30L12,0L14,0L26,30L22,30L18,20L16,25L12,25L8,15L10,10L14,20L16,15L14,10L6,30Z'
+              <path d='M0,30L24,0L26,0L26,30L22,30L22,20L18,25L14,25L12,15L16,10L18,20L22,15L22,10L6,30Z'
                      className='logo-accent' />
-              <path d='M30,30L28,25L34,25L32,20L34,15L42,15L40,20L36,20L38,25L36,30Z'
+              <path d='M30,30L30,25L34,25L32,20L34,15L42,15L40,20L36,20L38,25L36,30Z'
                     className='logo-accent' />
               <path d='M40,30L46,15L50,15L44,30Z'
                     className='logo-accent' />
@@ -50,9 +50,9 @@ const Layout = (props: LayoutProps) => {
                     className='logo-accent' />
               <path d='M68,30L66,25L70,15L78,15L80,20L76,30L68,30L66,25L74,25L76,20L72,20Z'
                    className='logo-accent' />
-              <path d='M0,30L12,0L24,30L20,30L16,20L14,25L10,25L6,15L8,10L12,20L14,15L12,10L4,30Z'
+              <path d='M0,30L24,0L24,30L20,30L20,20L16,25L12,25L12,15L16,10L16,20L20,15L20,10L4,30Z'
                     className='logo-fill' />
-              <path d='M28,30L26,25L32,25L30,20L32,15L40,15L38,20L34,20L36,25L34,30Z'
+              <path d='M28,30L28,25L32,25L30,20L32,15L40,15L38,20L34,20L36,25L34,30Z'
                     className='logo-fill' />
               <path d='M38,30L44,15L48,15L42,30Z'
                     className='logo-fill' />
