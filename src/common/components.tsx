@@ -13,6 +13,7 @@ interface EditableElementHeading1Props {
   onClickCancel: () => void;
   isWorking: boolean;
   placeholder?: string;
+  errorMessage?: string;
 }
 
 export const EditableElementHeading1 = (props: EditableElementHeading1Props): JSX.Element => {
@@ -34,6 +35,7 @@ interface EditableElementDocumentProps {
   onClickCancel: () => void;
   isWorking?: boolean;
   placeholder?: string;
+  errorMessage?: string;
 }
 
 export const EditableElementDocument = (props: EditableElementDocumentProps): JSX.Element => {
@@ -45,6 +47,7 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
       {!props.isWorking && <TextAreaSave onClick={props.onClickSave}>✔️</TextAreaSave>}
       {props.isWorking && <TextAreaWorking>⌛</TextAreaWorking>}
     </TextAreaContainer>
+    {props.errorMessage && <div>{props.errorMessage}</div>}
     {convertDocumentToElements(convertStringToDocument(props.inputValue))}
   </>
   } else {

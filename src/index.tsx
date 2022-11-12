@@ -17,6 +17,7 @@ interface AppState {
   textEditEntityType?: string;
   textEditInput?: string;
   isWorking: boolean;
+  errorMessage?: string;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -141,7 +142,33 @@ export default class App extends React.Component<{}, AppState> {
                   textEditEntityType: undefined,
                   isWorking: false
                 }));
+              } else if (response.status === 400) {
+                response.text()
+                  .then((error: string) => {
+                    if (error === 'BIOGRAPHY_TOO_LONG') {
+                      this.setState({
+                        errorMessage: 'Biography is too long',
+                        isWorking: false
+                      });
+                    } else {
+                      this.setState({
+                        errorMessage: 'Unknown error',
+                        isWorking: false
+                      });
+                    }
+                  });
+              } else {
+                this.setState({
+                  errorMessage: 'Unknown error',
+                  isWorking: false
+                });
               }
+            })
+            .catch(() => {
+              this.setState({
+                errorMessage: 'Unknown error',
+                isWorking: false
+              });
             });
         });
       }
@@ -192,7 +219,8 @@ export default class App extends React.Component<{}, AppState> {
                                                     onChangeText={this.onChangeText}
                                                     onClickSaveTextEntity={this.onClickSaveTextEntity}
                                                     onClickCancel={this.onClickCancel}
-                                                    isWorking={this.state.isWorking} />} />
+                                                    isWorking={this.state.isWorking}
+                                                    errorMessage={this.state.errorMessage} />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

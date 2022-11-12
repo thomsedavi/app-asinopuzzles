@@ -12,6 +12,7 @@ interface ProfileProps {
   onClickSaveTextEntity: (type: string) => void;
   onClickCancel: () => void;
   isWorking: boolean;
+  errorMessage?: string;
 }
 
 const Profile = (props: ProfileProps): JSX.Element => {
@@ -27,7 +28,8 @@ const Profile = (props: ProfileProps): JSX.Element => {
                                  onClickSave={() => props.onClickSaveTextEntity('UserName')}
                                  onClickCancel={props.onClickCancel}
                                  placeholder='Anonymous'
-                                 isWorking={props.isWorking} />
+                                 isWorking={props.isWorking}
+                                 errorMessage={props.errorMessage} />
         <EditableElementDocument value={props.user.biography ?? {}}
                                  editing={props.textEditEntityType === 'UserBiography'}
                                  inputValue={props.textEditInput}
@@ -36,7 +38,8 @@ const Profile = (props: ProfileProps): JSX.Element => {
                                  onClickSave={() => props.onClickSaveTextEntity('UserBiography')}
                                  onClickCancel={props.onClickCancel}
                                  placeholder='Asino Puzzler'
-                                 isWorking={props.isWorking} />
+                                 isWorking={props.isWorking}
+                                 errorMessage={props.errorMessage} />
       </>
   );
 };
