@@ -33,36 +33,9 @@ export const Button = styled.button`
   font-size: 1em;
 `;
 
-export const TextAreaContainer = styled.div`
-  position: relative;
-  width: 21em;
-  margin: 0 auto;
-`;
-
 export const TextArea = styled.textarea`
-  display: inline-block;
-`;
-
-export const ButtonIcon = styled.button`
-  position: absolute;
-  right: 0;
-  background: none;
-  border: none;
-  padding: 0;
-`;
-
-export const TextAreaCancel = styled(ButtonIcon)`
-  bottom: 1.8em;
-  cursor: pointer;
-`;
-
-export const TextAreaSave = styled(ButtonIcon)`
-  bottom: 0.4em;
-  cursor: pointer;
-`;
-
-export const TextAreaWorking = styled(ButtonIcon)`
-  bottom: 0.4em;
+  display: block;
+  margin: 0.5em auto;
 `;
 
 export const Navigation = styled.nav`

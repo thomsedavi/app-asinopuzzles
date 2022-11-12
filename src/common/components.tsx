@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import { TextAreaCancel, TextAreaSave, TextArea, TextAreaContainer, Heading1, TextAreaWorking, ErrorMessage } from './styled';
+import { TextArea, Heading1, ErrorMessage, ButtonContainer, Button } from './styled';
 
 interface EditableElementHeading1Props {
   value: string;
@@ -18,7 +18,13 @@ interface EditableElementHeading1Props {
 
 export const EditableElementHeading1 = (props: EditableElementHeading1Props): JSX.Element => {
   if (props.editing) {
-    return <Heading1><input maxLength={64} disabled={props.isWorking} value={props.inputValue} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /> {!props.isWorking && <span className='edit' onClick={props.onClickSave}>✔️</span>}{props.isWorking && <span className='edit'>⌛</span>}</Heading1>
+    return <>
+      <Heading1><input maxLength={64} disabled={props.isWorking} value={props.inputValue} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /></Heading1>
+      <ButtonContainer>
+        <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
+        <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
+      </ButtonContainer>
+    </>
   } else {
     return <Heading1>{props.value} <span className='edit' onClick={props.onClickEdit}>✏️</span></Heading1>
   }
@@ -41,15 +47,14 @@ interface EditableElementDocumentProps {
 export const EditableElementDocument = (props: EditableElementDocumentProps): JSX.Element => {
   if (props.editing) {
     return <>
-    <TextAreaContainer>
       <TextArea value={props.inputValue} disabled={props.isWorking} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)} />
-      {!props.isWorking && <TextAreaCancel onClick={props.onClickCancel}>❌</TextAreaCancel>}
-      {!props.isWorking && <TextAreaSave onClick={props.onClickSave}>✔️</TextAreaSave>}
-      {props.isWorking && <TextAreaWorking>⌛</TextAreaWorking>}
-    </TextAreaContainer>
-    {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
-    {convertDocumentToElements(convertStringToDocument(props.inputValue))}
-  </>
+      <ButtonContainer>
+        <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
+        <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
+      </ButtonContainer>
+      {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
+      {convertDocumentToElements(convertStringToDocument(props.inputValue))}
+    </>
   } else {
     return <>
       {convertDocumentToElements(props.value, <span className='edit' onClick={props.onClickEdit}>✏️</span>)}
