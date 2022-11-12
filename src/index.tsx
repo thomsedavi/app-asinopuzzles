@@ -10,6 +10,7 @@ import Dev from './pages/Dev';
 import './index.css';
 import { User } from './interfaces';
 import { convertDocumentToString, convertStringToDocument } from './common/utils';
+import { Placeholder } from './common/styled';
 
 interface AppState {
   user?: User | null;
@@ -217,7 +218,7 @@ export default class App extends React.Component<{}, AppState> {
 
   render = () => {
     return (
-      this.state.user === undefined ? <></> : <BrowserRouter>
+      this.state.user === undefined ? <Placeholder>…</Placeholder> : <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout isLoggedIn={this.state.user !== undefined && this.state.user !== null}
                                            isBurgerOpen={this.state.isBurgerOpen}

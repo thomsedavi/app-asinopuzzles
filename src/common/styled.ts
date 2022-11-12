@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+export const Placeholder = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8em;
+`;
+
 export const Heading1 = styled.h1`
   text-align: center;
   text-shadow: 0.05em 0.05em var(--accent);
