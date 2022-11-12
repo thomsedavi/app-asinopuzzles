@@ -18,7 +18,7 @@ interface EditableElementHeading1Props {
 
 export const EditableElementHeading1 = (props: EditableElementHeading1Props): JSX.Element => {
   if (props.editing) {
-    return <Heading1><input maxLength={64} value={props.inputValue} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /> <span className='edit' onClick={props.onClickSave}>✔️</span></Heading1>
+    return <Heading1><input maxLength={64} disabled={props.isWorking} value={props.inputValue} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /> {!props.isWorking && <span className='edit' onClick={props.onClickSave}>✔️</span>}{props.isWorking && <span className='edit'>⌛</span>}</Heading1>
   } else {
     return <Heading1>{props.value} <span className='edit' onClick={props.onClickEdit}>✏️</span></Heading1>
   }
@@ -42,7 +42,7 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
   if (props.editing) {
     return <>
     <TextAreaContainer>
-      <TextArea value={props.inputValue} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)} />
+      <TextArea value={props.inputValue} disabled={props.isWorking} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)} />
       {!props.isWorking && <TextAreaCancel onClick={props.onClickCancel}>❌</TextAreaCancel>}
       {!props.isWorking && <TextAreaSave onClick={props.onClickSave}>✔️</TextAreaSave>}
       {props.isWorking && <TextAreaWorking>⌛</TextAreaWorking>}
