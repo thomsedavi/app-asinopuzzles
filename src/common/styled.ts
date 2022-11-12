@@ -49,14 +49,19 @@ export const ButtonIcon = styled.button`
   background: none;
   border: none;
   padding: 0;
-  cursor: pointer;
 `;
 
 export const TextAreaCancel = styled(ButtonIcon)`
   bottom: 1.8em;
+  cursor: pointer;
 `;
 
 export const TextAreaSave = styled(ButtonIcon)`
+  bottom: 0.4em;
+  cursor: pointer;
+`;
+
+export const TextAreaWorking = styled(ButtonIcon)`
   bottom: 0.4em;
 `;
 

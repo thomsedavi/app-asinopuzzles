@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import { TextAreaCancel, TextAreaSave, TextArea, TextAreaContainer, Heading1 } from './styled';
+import { TextAreaCancel, TextAreaSave, TextArea, TextAreaContainer, Heading1, TextAreaWorking } from './styled';
 
 interface EditableElementHeading1Props {
   value: string;
@@ -11,6 +11,7 @@ interface EditableElementHeading1Props {
   onChange: (value: string) => void;
   onClickSave: () => void;
   onClickCancel: () => void;
+  isWorking: boolean;
   placeholder?: string;
 }
 
@@ -31,6 +32,7 @@ interface EditableElementDocumentProps {
   onChange: (value: string) => void;
   onClickSave: () => void;
   onClickCancel: () => void;
+  isWorking?: boolean;
   placeholder?: string;
 }
 
@@ -39,8 +41,9 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
     return <>
     <TextAreaContainer>
       <TextArea value={props.inputValue} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)} />
-      <TextAreaCancel onClick={props.onClickCancel}>❌</TextAreaCancel>
-      <TextAreaSave onClick={props.onClickSave}>✔️</TextAreaSave>
+      {!props.isWorking && <TextAreaCancel onClick={props.onClickCancel}>❌</TextAreaCancel>}
+      {!props.isWorking && <TextAreaSave onClick={props.onClickSave}>✔️</TextAreaSave>}
+      {props.isWorking && <TextAreaWorking>⌛</TextAreaWorking>}
     </TextAreaContainer>
     {convertDocumentToElements(convertStringToDocument(props.inputValue))}
   </>

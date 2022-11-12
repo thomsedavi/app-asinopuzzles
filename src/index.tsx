@@ -16,6 +16,7 @@ interface AppState {
   isBurgerOpen: boolean;
   textEditEntityType?: string;
   textEditInput?: string;
+  isWorking: boolean;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -23,7 +24,8 @@ export default class App extends React.Component<{}, AppState> {
     super(props);
 
     this.state = {
-      isBurgerOpen: false
+      isBurgerOpen: false,
+      isWorking: false
     };
 
     this.setIsBurgerOpen = this.setIsBurgerOpen.bind(this);
@@ -99,35 +101,49 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   onClickSaveTextEntity = (type: string): void => {
+    if (this.state.isWorking) {
+      return;
+    }
+
     const user = this.state.user;
 
     if (user !== undefined && user !== null) {
       if (type === 'UserName' && this.state.textEditInput !== undefined) {
-        const name = this.state.textEditInput!.trim();
+        const name = this.state.textEditInput!.trim().substring(0, 64);
 
-        fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
-          .then((response: Response) => {
-            if (response.status === 200) {
-              this.setState(prevState => ({
-                user: { ...prevState.user!, name: name },
-                textEditInput: undefined,
-                textEditEntityType: undefined
-              }));
-            }
-          });
+        this.setState({
+          isWorking: true
+        }, () => {
+          fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
+            .then((response: Response) => {
+              if (response.status === 200) {
+                this.setState(prevState => ({
+                  user: { ...prevState.user!, name: name },
+                  textEditInput: undefined,
+                  textEditEntityType: undefined,
+                  isWorking: false
+                }));
+              }
+            });
+        });
       } else if (type === 'UserBiography' && this.state.textEditInput !== undefined) {
         const biography = convertStringToDocument(this.state.textEditInput);
 
-        fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
-          .then((response: Response) => {
-            if (response.status === 200) {
-              this.setState(prevState => ({
-                user: { ...prevState.user!, biography: biography },
-                textEditInput: undefined,
-                textEditEntityType: undefined
-              }));
-            }
-          });
+        this.setState({
+          isWorking: true
+        }, () => {
+          fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
+            .then((response: Response) => {
+              if (response.status === 200) {
+                this.setState(prevState => ({
+                  user: { ...prevState.user!, biography: biography },
+                  textEditInput: undefined,
+                  textEditEntityType: undefined,
+                  isWorking: false
+                }));
+              }
+            });
+        });
       }
     }
   }
@@ -175,7 +191,8 @@ export default class App extends React.Component<{}, AppState> {
                                                     textEditInput={this.state.textEditInput}
                                                     onChangeText={this.onChangeText}
                                                     onClickSaveTextEntity={this.onClickSaveTextEntity}
-                                                    onClickCancel={this.onClickCancel}/>} />
+                                                    onClickCancel={this.onClickCancel}
+                                                    isWorking={this.state.isWorking} />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
