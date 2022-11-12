@@ -19,6 +19,7 @@ interface AppState {
   textEditInput?: string;
   isWorking: boolean;
   errorMessage?: string;
+  showPlaceholder?: boolean;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -36,6 +37,7 @@ export default class App extends React.Component<{}, AppState> {
     this.onChangeText = this.onChangeText.bind(this);
     this.onClickSaveTextEntity = this.onClickSaveTextEntity.bind(this);
     this.onClickCreateMockProfile = this.onClickCreateMockProfile.bind(this);
+    this.showPlaceholder = this.showPlaceholder.bind(this);
   }
 
   componentDidMount = (): void => {
@@ -216,14 +218,21 @@ export default class App extends React.Component<{}, AppState> {
     });
   }
 
+  showPlaceholder = () => {
+    this.setState({
+      showPlaceholder: true
+    });
+  }
+
   render = () => {
     return (
-      this.state.user === undefined ? <Placeholder>…</Placeholder> : <BrowserRouter>
+      this.state.showPlaceholder || this.state.user === undefined ? <Placeholder>…</Placeholder> : <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout isLoggedIn={this.state.user !== undefined && this.state.user !== null}
                                            isBurgerOpen={this.state.isBurgerOpen}
                                            setIsBurgerOpen={this.setIsBurgerOpen}
-                                           onClickHeaderLink={this.onClickHeaderLink} />}>
+                                           onClickHeaderLink={this.onClickHeaderLink}
+                                           showPlaceholder={this.showPlaceholder} />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="dev" element={<Dev onClickCreateMockProfile={this.onClickCreateMockProfile} />} />

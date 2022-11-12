@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Container, HeaderLinkExternal, HeaderLinkInternal, Navigation } from '../common/styled';
 
 interface LayoutProps {
+  showPlaceholder: () => void;
   isLoggedIn?: boolean;
   isBurgerOpen: boolean;
   setIsBurgerOpen: (isBurgerOpen: boolean) => void;
@@ -92,8 +93,8 @@ const Layout = (props: LayoutProps) => {
           </HeaderLinkInternal>
           <HeaderLinkInternal to='/about' onClick={props.onClickHeaderLink}>ABOUT</HeaderLinkInternal>
           {props.isLoggedIn === true && <HeaderLinkInternal to='/profile' onClick={props.onClickHeaderLink}>PROFILE</HeaderLinkInternal>}
-          {props.isLoggedIn === true && <HeaderLinkExternal href='/logout'>LOGOUT</HeaderLinkExternal>}
-          {props.isLoggedIn === false && <HeaderLinkExternal href='/login'>LOGIN</HeaderLinkExternal>}
+          {props.isLoggedIn === true && <HeaderLinkExternal href='/logout' onClick={props.showPlaceholder}>LOGOUT</HeaderLinkExternal>}
+          {props.isLoggedIn === false && <HeaderLinkExternal href='/login' onClick={props.showPlaceholder}>LOGIN</HeaderLinkExternal>}
         </Container>
       </Navigation>
       <Container>
