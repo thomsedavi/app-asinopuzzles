@@ -113,7 +113,8 @@ export default class App extends React.Component<{}, AppState> {
         const name = this.state.textEditInput!.trim().substring(0, 64);
 
         this.setState({
-          isWorking: true
+          isWorking: true,
+          errorMessage: undefined
         }, () => {
           fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
             .then((response: Response) => {
@@ -131,7 +132,8 @@ export default class App extends React.Component<{}, AppState> {
         const biography = convertStringToDocument(this.state.textEditInput);
 
         this.setState({
-          isWorking: true
+          isWorking: true,
+          errorMessage: undefined
         }, () => {
           fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
             .then((response: Response) => {
