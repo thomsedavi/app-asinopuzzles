@@ -5,7 +5,7 @@ export const Heading1 = styled.h1`
   text-align: center;
   text-shadow: 0.05em 0.05em var(--accent);
   font-variant: small-caps;
-  margin: 1em 0 0.5em;
+  margin: 0.5em 0;
 `;
 
 export const Heading2 = styled.h2`
@@ -68,12 +68,28 @@ export const HeaderLinkInternal = styled(Link)`
   color: var(--color);
   text-decoration: none;
   padding: 0.5em 0.5em;
+
+  @media (max-width: 575px) {
+    display: block;
+  }
+
+  @media (min-width: 576px) {
+    display: inline-block;
+  }
 `;
 
 export const HeaderLinkExternal = styled.a`
   color: var(--color);
   text-decoration: none;
   padding: 0.5em 0.5em;
+
+  @media (max-width: 575px) {
+    display: block;
+  }
+
+  @media (min-width: 576px) {
+    display: inline-block;
+  }
 `;
 
 export const Container = styled.div`

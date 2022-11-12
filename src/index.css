@@ -80,10 +80,6 @@ input {
 }
 
 @media (max-width: 575px) {
-  nav > div > div, nav > div > a {
-    display: block;
-  }
-
   .logo-large {
     display: none;
   }
@@ -98,10 +94,6 @@ input {
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
-  nav > div > div, nav > div > a {
-    display: inline-block;
-  }
-
   .burger {
     display: none;
   }
@@ -116,10 +108,6 @@ input {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  nav > div > div, nav > div > a {
-    display: inline-block;
-  }
-
   .burger {
     display: none;
   }
@@ -134,10 +122,6 @@ input {
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-  nav > div > div, nav > div > a {
-    display: inline-block;
-  }
-
   .burger {
     display: none;
   }
@@ -152,10 +136,6 @@ input {
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
-  nav > div > div, nav > div > a {
-    display: inline-block;
-  }
-
   .burger {
     display: none;
   }
@@ -170,10 +150,6 @@ input {
 }
 
 @media (min-width: 1400px) {
-  nav > div > div, nav > div > a {
-    display: inline-block;
-  }
-
   .burger {
     display: none;
   }
