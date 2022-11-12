@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import { TextAreaCancel, TextAreaSave, TextArea, TextAreaContainer, Heading1, TextAreaWorking } from './styled';
+import { TextAreaCancel, TextAreaSave, TextArea, TextAreaContainer, Heading1, TextAreaWorking, ErrorMessage } from './styled';
 
 interface EditableElementHeading1Props {
   value: string;
@@ -47,7 +47,7 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
       {!props.isWorking && <TextAreaSave onClick={props.onClickSave}>✔️</TextAreaSave>}
       {props.isWorking && <TextAreaWorking>⌛</TextAreaWorking>}
     </TextAreaContainer>
-    {props.errorMessage && <div>{props.errorMessage}</div>}
+    {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     {convertDocumentToElements(convertStringToDocument(props.inputValue))}
   </>
   } else {

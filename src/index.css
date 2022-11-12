@@ -19,6 +19,7 @@
   --color-dark-hover: hsla(var(--hue-azure),25%,50%,1);
   --color-dark-accent: hsla(var(--hue-pink),75%,50%,1);
   --color-dark-shadow: hsla(var(--hue-azure),25%,25%,1);
+  --color-error: hsla(var(--hue-red),100%,50%,1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,6 +29,7 @@
     --hover: var(--color-light-hover);
     --accent: var(--color-dark-accent);
     --shadow: var(--color-dark-shadow);
+    --error: var(--color-error);
   }
 }
 
@@ -38,6 +40,7 @@
     --hover: var(--color-dark-hover);
     --accent: var(--color-light-accent);
     --shadow: var(--color-light-shadow);
+    --error: var(--color-error);
   }
 }
 

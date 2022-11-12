@@ -69,6 +69,11 @@ export const Navigation = styled.nav`
   box-shadow: 0 0 0.5em var(--shadow);
 `;
 
+export const ErrorMessage = styled.div`
+  text-align: center;
+  color: var(--error);
+`;
+
 export const HeaderLinkInternal = styled(Link)`
   color: var(--color);
   text-decoration: none;
