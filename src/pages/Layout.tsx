@@ -46,6 +46,8 @@ const Layout = (props: LayoutProps) => {
                     className='logo-accent' />
               <path d='M40,30L46,15L50,15L44,30Z'
                     className='logo-accent' />
+              <path d='M48,10L50,5L54,5L52,10Z'
+                    className='logo-accent' />
               <path d='M48,30L54,15L62,15L64,20L60,30L56,30L60,20L56,20L52,30Z'
                     className='logo-accent' />
               <path d='M68,30L66,25L70,15L78,15L80,20L76,30L68,30L66,25L74,25L76,20L72,20Z'
@@ -55,6 +57,8 @@ const Layout = (props: LayoutProps) => {
               <path d='M28,30L28,25L32,25L30,20L32,15L40,15L38,20L34,20L36,25L34,30Z'
                     className='logo-fill' />
               <path d='M38,30L44,15L48,15L42,30Z'
+                    className='logo-fill' />
+              <path d='M46,10L48,5L52,5L50,10Z'
                     className='logo-fill' />
               <path d='M46,30L52,15L60,15L62,20L58,30L54,30L58,20L54,20L50,30Z'
                     className='logo-fill' />
