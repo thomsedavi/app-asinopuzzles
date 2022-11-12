@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import { Container, HeaderLinkExternal, HeaderLinkInternal, Navigation } from '../common/styled';
 
 interface LayoutProps {
   isLoggedIn?: boolean;
@@ -11,8 +12,8 @@ interface LayoutProps {
 const Layout = (props: LayoutProps) => {
   return (
     <>
-      <nav className={props.isBurgerOpen ? '' : 'burger-closed'}>
-        <div>
+      <Navigation className={props.isBurgerOpen ? '' : 'burger-closed'}>
+        <Container>
           <svg className='burger'
                viewBox='0 0 30 30'
                height='2.35em'
@@ -35,7 +36,7 @@ const Layout = (props: LayoutProps) => {
             {!props.isBurgerOpen && <path d='M8,20L22,20L22,22L8,22Z'
                                           className='burger-fill'/>}
           </svg>
-          <Link to='/' className='logo' onClick={props.onClickHeaderLink}>
+          <HeaderLinkInternal to='/' className='logo' onClick={props.onClickHeaderLink}>
             <svg className='logo-large'
                 viewBox='0 0 80 30'
                  xmlns='http://www.w3.org/2000/svg'>
@@ -84,16 +85,16 @@ const Layout = (props: LayoutProps) => {
               <path d='M54,15L52,10L56,0L64,0L66,5L62,15L54,15L52,10L60,10L62,5L58,5Z'
                     className='logo-fill' />
             </svg>
-          </Link>
-          <Link to='/about' onClick={props.onClickHeaderLink}>ABOUT</Link>
-          {props.isLoggedIn === true && <Link to='/profile' onClick={props.onClickHeaderLink}>PROFILE</Link>}
-          {props.isLoggedIn === true && <a href='/logout'>LOGOUT</a>}
-          {props.isLoggedIn === false && <a href='/login'>LOGIN</a>}
-        </div>
-      </nav>
-      <div>
+          </HeaderLinkInternal>
+          <HeaderLinkInternal to='/about' onClick={props.onClickHeaderLink}>ABOUT</HeaderLinkInternal>
+          {props.isLoggedIn === true && <HeaderLinkInternal to='/profile' onClick={props.onClickHeaderLink}>PROFILE</HeaderLinkInternal>}
+          {props.isLoggedIn === true && <HeaderLinkExternal href='/logout'>LOGOUT</HeaderLinkExternal>}
+          {props.isLoggedIn === false && <HeaderLinkExternal href='/login'>LOGIN</HeaderLinkExternal>}
+        </Container>
+      </Navigation>
+      <Container>
         <Outlet />
-      </div>
+      </Container>
     </>
   )
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { User } from '../interfaces';
-import { DocumentElement } from '../common/components';
+import { EditableElementDocument, EditableElementHeading1 } from '../common/components';
+import { Heading1 } from '../common/styled';
 
 interface ProfileProps {
   user?: User | null;
@@ -15,19 +16,24 @@ interface ProfileProps {
 const Profile = (props: ProfileProps): JSX.Element => {
   return (
     !props.user
-      ? <h1>Logged Out</h1>
+      ? <Heading1>Logged Out</Heading1>
       : <>
-        {props.textEditEntityType === 'UserName'
-           ? <h1><input maxLength={64} value={props.textEditInput} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChangeText(event.target.value)} /> <span className='edit' onClick={() => props.onClickSaveTextEntity('UserName')}>✔️</span></h1>
-           : <h1>{props.user.name ?? 'Anonymous'} <span className='edit' onClick={() => props.onClickEditTextEntity('UserName')}>✏️</span></h1>}
-        <DocumentElement value={props.user.biography ?? {}}
-                         editing={props.textEditEntityType === 'UserBiography'}
-                         inputValue={props.textEditInput}
-                         onClickEdit={() => props.onClickEditTextEntity('UserBiography')}
-                         onChange={(inputValue: string) => props.onChangeText(inputValue)}
-                         onClickSave={() => props.onClickSaveTextEntity('UserBiography')}
-                         onClickCancel={props.onClickCancel}
-                         placeholder='Asino Puzzler' />
+        <EditableElementHeading1 value={props.user.name ?? ''}
+                                 editing={props.textEditEntityType === 'UserName'}
+                                 inputValue={props.textEditInput}
+                                 onClickEdit={() => props.onClickEditTextEntity('UserName')}
+                                 onChange={(inputValue: string) => props.onChangeText(inputValue)}
+                                 onClickSave={() => props.onClickSaveTextEntity('UserName')}
+                                 onClickCancel={props.onClickCancel}
+                                 placeholder='Anonymous' />
+        <EditableElementDocument value={props.user.biography ?? {}}
+                                 editing={props.textEditEntityType === 'UserBiography'}
+                                 inputValue={props.textEditInput}
+                                 onClickEdit={() => props.onClickEditTextEntity('UserBiography')}
+                                 onChange={(inputValue: string) => props.onChangeText(inputValue)}
+                                 onClickSave={() => props.onClickSaveTextEntity('UserBiography')}
+                                 onClickCancel={props.onClickCancel}
+                                 placeholder='Asino Puzzler' />
       </>
   );
 };

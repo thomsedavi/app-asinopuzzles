@@ -1,7 +1,8 @@
 import React from 'react';
+import { Heading1 } from '../common/styled';
 
 const NoPage = () => {
-  return <h1>404</h1>;
+  return <Heading1>404</Heading1>;
 };
 
 export default NoPage;

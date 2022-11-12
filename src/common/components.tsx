@@ -1,9 +1,29 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import styled from 'styled-components';
+import { TextAreaCancel, TextAreaSave, TextArea, TextAreaContainer, Heading1 } from './styled';
 
-interface DocumentElementProps {
+interface EditableElementHeading1Props {
+  value: string;
+  editing: boolean;
+  inputValue?: string;
+  onClickEdit: () => void;
+  onChange: (value: string) => void;
+  onClickSave: () => void;
+  onClickCancel: () => void;
+  placeholder?: string;
+}
+
+export const EditableElementHeading1 = (props: EditableElementHeading1Props): JSX.Element => {
+  if (props.editing) {
+    return <Heading1><input maxLength={64} value={props.inputValue} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /> <span className='edit' onClick={props.onClickSave}>✔️</span></Heading1>
+  } else {
+    return <Heading1>{props.value} <span className='edit' onClick={props.onClickEdit}>✏️</span></Heading1>
+  }
+}
+
+
+interface EditableElementDocumentProps {
   value: Document;
   editing: boolean;
   inputValue?: string;
@@ -14,13 +34,13 @@ interface DocumentElementProps {
   placeholder?: string;
 }
 
-export const DocumentElement = (props: DocumentElementProps): JSX.Element => {
+export const EditableElementDocument = (props: EditableElementDocumentProps): JSX.Element => {
   if (props.editing) {
     return <>
     <TextAreaContainer>
       <TextArea value={props.inputValue} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)} />
-      <Cancel onClick={props.onClickCancel}>❌</Cancel>
-      <Save onClick={props.onClickSave}>✔️</Save>
+      <TextAreaCancel onClick={props.onClickCancel}>❌</TextAreaCancel>
+      <TextAreaSave onClick={props.onClickSave}>✔️</TextAreaSave>
     </TextAreaContainer>
     {convertDocumentToElements(convertStringToDocument(props.inputValue))}
   </>
@@ -30,30 +50,3 @@ export const DocumentElement = (props: DocumentElementProps): JSX.Element => {
     </>
   }
 }
-
-const TextAreaContainer = styled.div`
-  position: relative;
-  width: 21em;
-  margin: 0 auto;
-`;
-
-const TextArea = styled.textarea`
-  display: inline-block;
-`;
-
-const Button = styled.button`
-  position: absolute;
-  right: 0;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-`;
-
-const Cancel = styled(Button)`
-  bottom: 1.8em;
-`;
-
-const Save = styled(Button)`
-  bottom: 0.4em;
-`;

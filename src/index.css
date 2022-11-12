@@ -51,34 +51,10 @@ body {
   margin: 0;
 }
 
-h1 {
-  text-align: center;
-}
-
-h2 {
-  text-align: center;
-}
-
-p {
-  text-align: center;
-}
-
-a {
-  color: var(--color);
-  text-decoration: none;
-}
-
-nav {
-  box-shadow: 0 0 0.5em var(--shadow);
-}
-
-nav a {
-  padding: 0.5em 0.5em;
-}
-
 .edit {
   cursor: pointer;
   display: inline-block;
+  text-shadow: none;
 }
 
 input {
@@ -108,11 +84,6 @@ input {
     display: block;
   }
 
-  #root > nav > div, #root > div {
-    width: 340px;
-    margin: 0 auto;
-  }
-
   .logo-large {
     display: none;
   }
@@ -129,11 +100,6 @@ input {
 @media (min-width: 576px) and (max-width: 767px) {
   nav > div > div, nav > div > a {
     display: inline-block;
-  }
-
-  #root > nav > div, #root > div {
-    width: 556px;
-    margin: 0 auto;
   }
 
   .burger {
@@ -154,11 +120,6 @@ input {
     display: inline-block;
   }
 
-  #root > nav > div, #root > div {
-    width: 748px;
-    margin: 0 auto;
-  }
-
   .burger {
     display: none;
   }
@@ -175,11 +136,6 @@ input {
 @media (min-width: 992px) and (max-width: 1199px) {
   nav > div > div, nav > div > a {
     display: inline-block;
-  }
-
-  #root > nav > div, #root > div {
-    width: 972px;
-    margin: 0 auto;
   }
 
   .burger {
@@ -200,11 +156,6 @@ input {
     display: inline-block;
   }
 
-  #root > nav > div, #root > div {
-    width: 1180px;
-    margin: 0 auto;
-  }
-
   .burger {
     display: none;
   }
@@ -221,11 +172,6 @@ input {
 @media (min-width: 1400px) {
   nav > div > div, nav > div > a {
     display: inline-block;
-  }
-
-  #root > nav > div, #root > div {
-    width: 1380px;
-    margin: 0 auto;
   }
 
   .burger {

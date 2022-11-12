@@ -1,5 +1,6 @@
 import React from 'react';
 import { Document, Section, Element } from '../interfaces';
+import { Paragraph } from './styled';
 
 export const convertDocumentToString = (document?: Document): string => {
   var result = '';
@@ -31,9 +32,9 @@ export const convertDocumentToElements = (document?: Document, editButton?: JSX.
     if (section.type === 'PARAGRAPH') {
       if (section.element) {
         if (editButton && index === document!.sections!.length - 1) {
-          test.push(<p key={`s${index}`}>{section.element.text} {editButton}</p>);
+          test.push(<Paragraph key={`s${index}`}>{section.element.text} {editButton}</Paragraph>);
         } else {
-          test.push(<p key={`s${index}`}>{section.element.text}</p>);
+          test.push(<Paragraph key={`s${index}`}>{section.element.text}</Paragraph>);
         }
       } else if (section.elements) {
         const paragraphBits: (JSX.Element | string)[] = [];
@@ -49,9 +50,9 @@ export const convertDocumentToElements = (document?: Document, editButton?: JSX.
         });
 
         if (editButton && index === document!.sections!.length - 1) {
-          test.push(<p key={`s${index}`}>{paragraphBits} {editButton}</p>);
+          test.push(<Paragraph key={`s${index}`}>{paragraphBits} {editButton}</Paragraph>);
         } else {
-          test.push(<p key={`s${index}`}>{paragraphBits}</p>);
+          test.push(<Paragraph key={`s${index}`}>{paragraphBits}</Paragraph>);
         }
 
       }

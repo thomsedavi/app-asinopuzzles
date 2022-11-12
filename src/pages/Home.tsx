@@ -1,9 +1,10 @@
 import React from 'react';
+import { Heading1, Paragraph } from '../common/styled';
 
 const Home = () => {
   return <>
-    <h1>Asino Puzzles</h1>
-    <p>Coming soon?</p>
+    <Heading1>Asino Puzzles</Heading1>
+    <Paragraph>Coming soon?</Paragraph>
   </>;
 };
 
