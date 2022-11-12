@@ -180,7 +180,8 @@ export default class App extends React.Component<{}, AppState> {
   onClickCancel = () => {
     this.setState({
       textEditEntityType: undefined,
-      textEditInput: undefined
+      textEditInput: undefined,
+      errorMessage: undefined
     });
   }
 
