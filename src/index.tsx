@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, LoaderFunctionArgs, RouterProvider } from 'react-router-dom';
 import Layout from './pages/Layout';
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
+import UserPage from './pages/UserPage';
 import NoPage from "./pages/NoPage";
 import Dev from './pages/Dev';
 import './index.css';
@@ -38,6 +39,7 @@ export default class App extends React.Component<{}, AppState> {
     this.onClickSaveTextEntity = this.onClickSaveTextEntity.bind(this);
     this.onClickCreateMockProfile = this.onClickCreateMockProfile.bind(this);
     this.showPlaceholder = this.showPlaceholder.bind(this);
+    this.userLoader = this.userLoader.bind(this);
   }
 
   componentDidMount = (): void => {
@@ -70,6 +72,10 @@ export default class App extends React.Component<{}, AppState> {
           });
         });
       }, 1000);
+  }
+
+  userLoader = ({ params }: LoaderFunctionArgs) => {
+    console.log(params.userId);
   }
 
   setIsBurgerOpen = (isBurgerOpen: boolean): void => {
@@ -225,30 +231,56 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   render = () => {
+    const router = createBrowserRouter([
+      {
+        path: "/",
+        element: <Layout isLoggedIn={this.state.user !== undefined && this.state.user !== null}
+                         isBurgerOpen={this.state.isBurgerOpen}
+                         setIsBurgerOpen={this.setIsBurgerOpen}
+                         onClickHeaderLink={this.onClickHeaderLink}
+                         showPlaceholder={this.showPlaceholder} />,
+        children: [
+          {
+            index: true,
+            element: <Home />,
+          },
+          {
+            path: "about",
+            element: <About />,
+          },
+          {
+            path: "dev",
+            element: <Dev onClickCreateMockProfile={this.onClickCreateMockProfile} />,
+          },
+          {
+            path: "users/:userId",
+            element: <UserPage />,
+            loader: this.userLoader,
+          },
+          {
+            path: "profile",
+            element: <Profile user={this.state.user}
+                              onClickEditTextEntity={this.onClickEditTextEntity}
+                              textEditEntityType={this.state.textEditEntityType}
+                              textEditInput={this.state.textEditInput}
+                              onChangeText={this.onChangeText}
+                              onClickSaveTextEntity={this.onClickSaveTextEntity}
+                              onClickCancel={this.onClickCancel}
+                              isWorking={this.state.isWorking}
+                              errorMessage={this.state.errorMessage} />,
+          },
+          {
+            path: "*",
+            element: <NoPage />,
+          },
+        ],
+      },
+    ]);
+
     return (
-      this.state.showPlaceholder || this.state.user === undefined ? <Placeholder>…</Placeholder> : <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout isLoggedIn={this.state.user !== undefined && this.state.user !== null}
-                                           isBurgerOpen={this.state.isBurgerOpen}
-                                           setIsBurgerOpen={this.setIsBurgerOpen}
-                                           onClickHeaderLink={this.onClickHeaderLink}
-                                           showPlaceholder={this.showPlaceholder} />}>
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="dev" element={<Dev onClickCreateMockProfile={this.onClickCreateMockProfile} />} />
-            <Route path="profile" element={<Profile user={this.state.user}
-                                                    onClickEditTextEntity={this.onClickEditTextEntity}
-                                                    textEditEntityType={this.state.textEditEntityType}
-                                                    textEditInput={this.state.textEditInput}
-                                                    onChangeText={this.onChangeText}
-                                                    onClickSaveTextEntity={this.onClickSaveTextEntity}
-                                                    onClickCancel={this.onClickCancel}
-                                                    isWorking={this.state.isWorking}
-                                                    errorMessage={this.state.errorMessage} />} />
-            <Route path="*" element={<NoPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      this.state.showPlaceholder || this.state.user === undefined
+        ? <Placeholder>…</Placeholder>
+        : <RouterProvider router={router} />
     );
   }
 }
