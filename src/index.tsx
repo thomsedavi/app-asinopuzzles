@@ -15,7 +15,6 @@ import { Placeholder } from './common/styled';
 
 interface AppState {
   me?: User | null;
-  user?: User;
   isBurgerOpen: boolean;
   textEditEntityType?: string;
   textEditInput?: string;
@@ -255,8 +254,7 @@ export default class App extends React.Component<{}, AppState> {
           },
           {
             path: "users/:userId",
-            element: <UserPage user={this.state.user}
-                               errorMessage={this.state.errorMessage} />,
+            element: <UserPage />,
             loader: this.userLoader
           },
           {

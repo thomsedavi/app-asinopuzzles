@@ -4,25 +4,20 @@ import { ErrorMessage, Heading1 } from '../common/styled';
 import { convertDocumentToElements } from '../common/utils';
 import { User } from '../interfaces';
 
-interface UserPageProps {
-  user?: User;
-  errorMessage?: string;
-}
+const UserPage = (): JSX.Element => {
+  try {
+    const user = useLoaderData() as User;
 
-const UserPage = (props: UserPageProps): JSX.Element => {
-  const user = useLoaderData();
-
-  console.log('user', user);
-
-  if (props.errorMessage) {
-    return <ErrorMessage>{props.errorMessage}</ErrorMessage>;
-  } else if (!props.user) {
+    if (user) {
+      return <>
+        <Heading1>{user.name}</Heading1>
+        {convertDocumentToElements(user.biography)}
+      </>;
+    } else {
+      return <ErrorMessage>User not found</ErrorMessage>;
+    }
+  } catch (error: unknown) {
     return <ErrorMessage>User not found</ErrorMessage>;
-  } else {
-    return <>
-      <Heading1>{props.user.name}</Heading1>
-      {convertDocumentToElements(props.user.biography)}
-    </>;
   }
 }
 
