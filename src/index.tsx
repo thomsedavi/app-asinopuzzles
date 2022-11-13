@@ -80,18 +80,10 @@ export default class App extends React.Component<{}, AppState> {
     return fetch(`/api/user/${params.userId}`, { method: 'GET' });
   }
 
-  userAction = ({ request }: ActionFunctionArgs) => {
-    request.json()
-      .then((userValue: User) => {
-        this.setState({
-          user: userValue
-        });
-      })
-      .catch(() => {
-        this.setState({
-          errorMessage: 'Error retrieving user'
-        });  
-      });
+  userAction = async ({ request }: ActionFunctionArgs) => {
+    var response = await request.formData();
+
+    console.log('response', response);
   }
 
   setIsBurgerOpen = (isBurgerOpen: boolean): void => {
