@@ -1,5 +1,5 @@
 import React from 'react';
-import { ErrorMessage, Heading1, Placeholder } from '../common/styled';
+import { ErrorMessage, Heading1 } from '../common/styled';
 import { convertDocumentToElements } from '../common/utils';
 import { User } from '../interfaces';
 
