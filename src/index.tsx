@@ -50,7 +50,7 @@ export default class App extends React.Component<{}, AppState> {
         .then((response: Response) => response.json())
         .then((authValue: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
           if (authValue.clientPrincipal !== null) {
-            fetch(`./api/user/${authValue.clientPrincipal.userId}`, { method: 'GET' })
+            fetch(`/api/user/${authValue.clientPrincipal.userId}`, { method: 'GET' })
               .then((response: Response) => response.json())
               .then((userValue: User) => {
                 this.setState({
@@ -77,7 +77,7 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   userLoader = ({ params }: LoaderFunctionArgs) => {
-    return fetch(`./api/user/${params.userId}`, { method: 'GET' });
+    return fetch(`/api/user/${params.userId}`, { method: 'GET' });
   }
 
   userAction = async ({ params, request }: ActionFunctionArgs) => {
