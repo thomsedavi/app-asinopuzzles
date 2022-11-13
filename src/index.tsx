@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createBrowserRouter, LoaderFunctionArgs, RouterProvider } from 'react-router-dom';
+import { ActionFunctionArgs, createBrowserRouter, LoaderFunctionArgs, RouterProvider } from 'react-router-dom';
 import Layout from './pages/Layout';
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -41,6 +41,7 @@ export default class App extends React.Component<{}, AppState> {
     this.onClickCreateMockProfile = this.onClickCreateMockProfile.bind(this);
     this.showPlaceholder = this.showPlaceholder.bind(this);
     this.userLoader = this.userLoader.bind(this);
+    this.userAction = this.userAction.bind(this);
   }
 
   componentDidMount = (): void => {
@@ -76,39 +77,12 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   userLoader = ({ params }: LoaderFunctionArgs) => {
-    const userId = params.userId;
+    return fetch(`./api/user/${params.userId}`, { method: 'GET' });
+  }
 
-    // something has gone terribly wrong and this won't stop loading
-    if (this.state.user) {
-      console.log('already have user');
-    }
-
-    if (userId) {
-      this.setState({
-        isWorking: true,
-        errorMessage: undefined
-      }, () => {
-        fetch(`./api/user/${userId}`, { method: 'GET' })
-          .then((response: Response) => response.json())
-          .then((userValue: User) => {
-            this.setState({
-              user: userValue,
-              isWorking: false
-            });
-          })
-          .catch(() => {
-            this.setState({
-              user: undefined,
-              isWorking: false,
-              errorMessage: 'Error retrieving user'
-            });  
-          });
-      })
-    } else {
-      this.setState({
-        errorMessage: 'Something missing'
-      });
-    }
+  userAction = async ({ params, request }: ActionFunctionArgs) => {
+    console.log('params', params);
+    console.log('request', request);
   }
 
   setIsBurgerOpen = (isBurgerOpen: boolean): void => {
@@ -291,6 +265,7 @@ export default class App extends React.Component<{}, AppState> {
                                 errorMessage={this.state.errorMessage}
                                 isWorking={this.state.isWorking} />,
             loader: this.userLoader,
+            action: this.userAction
           },
           {
             path: "profile",
