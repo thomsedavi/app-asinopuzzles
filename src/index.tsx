@@ -78,6 +78,11 @@ export default class App extends React.Component<{}, AppState> {
   userLoader = ({ params }: LoaderFunctionArgs) => {
     const userId = params.userId;
 
+    // something has gone terribly wrong and this won't stop loading
+    if (this.state.user) {
+      console.log('already have user');
+    }
+
     if (userId) {
       this.setState({
         isWorking: true,
