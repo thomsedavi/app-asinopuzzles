@@ -1,12 +1,27 @@
 import React from 'react';
-import { Heading1 } from '../common/styled';
+import { ErrorMessage, Heading1, Placeholder } from '../common/styled';
+import { convertDocumentToElements } from '../common/utils';
+import { User } from '../interfaces';
 
-const UserPage = () => {
-  return (
-    <>
-      <Heading1>Test</Heading1>
-    </>
-  );
+interface UserPageProps {
+  user?: User;
+  isWorking: boolean;
+  errorMessage?: string;
+}
+
+const UserPage = (props: UserPageProps): JSX.Element => {
+  if (props.isWorking) {
+    return <Placeholder>…</Placeholder>;
+  } else if (props.errorMessage) {
+    return <ErrorMessage>{props.errorMessage}</ErrorMessage>;
+  } else if (!props.user) {
+    return <ErrorMessage>User not found</ErrorMessage>;
+  } else {
+    return <>
+      <Heading1>{props.user.name}</Heading1>
+      {convertDocumentToElements(props.user.biography)}
+    </>;
+  }
 }
 
 export default UserPage;

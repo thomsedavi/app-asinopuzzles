@@ -14,7 +14,8 @@ import { convertDocumentToString, convertStringToDocument } from './common/utils
 import { Placeholder } from './common/styled';
 
 interface AppState {
-  user?: User | null;
+  me?: User | null;
+  user?: User;
   isBurgerOpen: boolean;
   textEditEntityType?: string;
   textEditInput?: string;
@@ -52,30 +53,57 @@ export default class App extends React.Component<{}, AppState> {
               .then((response: Response) => response.json())
               .then((userValue: User) => {
                 this.setState({
-                  user: userValue
+                  me: userValue
                 });
               })
               .catch(() => {
                 this.setState({
-                  user: null
+                  me: null
                 });  
               });
           } else {
             this.setState({
-              user: null
+              me: null
             });  
           }
         })
         .catch(() => {
           this.setState({
-            user: null
+            me: null
           });
         });
       }, 1000);
   }
 
   userLoader = ({ params }: LoaderFunctionArgs) => {
-    console.log(params.userId);
+    const userId = params.userId;
+
+    if (userId) {
+      this.setState({
+        isWorking: true,
+        errorMessage: undefined
+      }, () => {
+        fetch(`./api/user/${userId}`, { method: 'GET' })
+          .then((response: Response) => response.json())
+          .then((userValue: User) => {
+            this.setState({
+              user: userValue,
+              isWorking: false
+            });
+          })
+          .catch(() => {
+            this.setState({
+              user: undefined,
+              isWorking: false,
+              errorMessage: 'Error retrieving user'
+            });  
+          });
+      })
+    } else {
+      this.setState({
+        errorMessage: 'Something missing'
+      });
+    }
   }
 
   setIsBurgerOpen = (isBurgerOpen: boolean): void => {
@@ -95,8 +123,8 @@ export default class App extends React.Component<{}, AppState> {
   onClickEditTextEntity = (type: string): void => {
     let textEditInput: string | undefined = undefined;
 
-    type === 'UserName' && (textEditInput = this.state.user?.name ?? 'Anonymous');
-    type === 'UserBiography' && (textEditInput = this.state.user && this.state.user.biography ? convertDocumentToString(this.state.user!.biography) : 'Asino Puzzler');
+    type === 'UserName' && (textEditInput = this.state.me?.name ?? 'Anonymous');
+    type === 'UserBiography' && (textEditInput = this.state.me && this.state.me.biography ? convertDocumentToString(this.state.me!.biography) : 'Asino Puzzler');
 
     this.setState({
       textEditEntityType: textEditInput === undefined ? undefined : type,
@@ -115,9 +143,9 @@ export default class App extends React.Component<{}, AppState> {
       return;
     }
 
-    const user = this.state.user;
+    const me = this.state.me;
 
-    if (user !== undefined && user !== null) {
+    if (me !== undefined && me !== null) {
       if (type === 'UserName' && this.state.textEditInput !== undefined) {
         const name = this.state.textEditInput!.trim().substring(0, 64);
 
@@ -125,11 +153,11 @@ export default class App extends React.Component<{}, AppState> {
           isWorking: true,
           errorMessage: undefined
         }, () => {
-          fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
+          fetch(`./api/user/${me.id}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
             .then((response: Response) => {
               if (response.status === 200) {
                 this.setState(prevState => ({
-                  user: { ...prevState.user!, name: name },
+                  me: { ...prevState.me!, name: name },
                   textEditInput: undefined,
                   textEditEntityType: undefined,
                   isWorking: false
@@ -155,11 +183,11 @@ export default class App extends React.Component<{}, AppState> {
           isWorking: true,
           errorMessage: undefined
         }, () => {
-          fetch(`./api/user/${user.id}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
+          fetch(`./api/user/${me.id}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
             .then((response: Response) => {
               if (response.status === 200) {
                 this.setState(prevState => ({
-                  user: { ...prevState.user!, biography: biography },
+                  me: { ...prevState.me!, biography: biography },
                   textEditInput: undefined,
                   textEditEntityType: undefined,
                   isWorking: false
@@ -207,7 +235,7 @@ export default class App extends React.Component<{}, AppState> {
 
   onClickCreateMockProfile = () => {
     this.setState({
-      user: {
+      me: {
         id: '00000000-0000-0000-0000-000000000000',
         name: 'A Vagrant',
         biography: {
@@ -234,7 +262,7 @@ export default class App extends React.Component<{}, AppState> {
     const router = createBrowserRouter([
       {
         path: "/",
-        element: <Layout isLoggedIn={this.state.user !== undefined && this.state.user !== null}
+        element: <Layout isLoggedIn={this.state.me !== undefined && this.state.me !== null}
                          isBurgerOpen={this.state.isBurgerOpen}
                          setIsBurgerOpen={this.setIsBurgerOpen}
                          onClickHeaderLink={this.onClickHeaderLink}
@@ -254,12 +282,14 @@ export default class App extends React.Component<{}, AppState> {
           },
           {
             path: "users/:userId",
-            element: <UserPage />,
+            element: <UserPage user={this.state.user}
+                                errorMessage={this.state.errorMessage}
+                                isWorking={this.state.isWorking} />,
             loader: this.userLoader,
           },
           {
             path: "profile",
-            element: <Profile user={this.state.user}
+            element: <Profile user={this.state.me}
                               onClickEditTextEntity={this.onClickEditTextEntity}
                               textEditEntityType={this.state.textEditEntityType}
                               textEditInput={this.state.textEditInput}
@@ -278,7 +308,7 @@ export default class App extends React.Component<{}, AppState> {
     ]);
 
     return (
-      this.state.showPlaceholder || this.state.user === undefined
+      this.state.showPlaceholder || this.state.me === undefined
         ? <Placeholder>…</Placeholder>
         : <RouterProvider router={router} />
     );
