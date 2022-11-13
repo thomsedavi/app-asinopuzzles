@@ -41,7 +41,6 @@ export default class App extends React.Component<{}, AppState> {
     this.onClickCreateMockProfile = this.onClickCreateMockProfile.bind(this);
     this.showPlaceholder = this.showPlaceholder.bind(this);
     this.userLoader = this.userLoader.bind(this);
-    this.userAction = this.userAction.bind(this);
   }
 
   componentDidMount = (): void => {
@@ -78,12 +77,6 @@ export default class App extends React.Component<{}, AppState> {
 
   userLoader = ({ params }: LoaderFunctionArgs) => {
     return fetch(`/api/user/${params.userId}`, { method: 'GET' });
-  }
-
-  userAction = async ({ request }: ActionFunctionArgs) => {
-    var response = await request.formData();
-
-    console.log('response', response);
   }
 
   setIsBurgerOpen = (isBurgerOpen: boolean): void => {
@@ -263,9 +256,8 @@ export default class App extends React.Component<{}, AppState> {
           {
             path: "users/:userId",
             element: <UserPage user={this.state.user}
-                                errorMessage={this.state.errorMessage} />,
-            loader: this.userLoader,
-            action: this.userAction
+                               errorMessage={this.state.errorMessage} />,
+            loader: this.userLoader
           },
           {
             path: "profile",

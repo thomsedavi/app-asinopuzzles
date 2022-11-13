@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { ErrorMessage, Heading1 } from '../common/styled';
 import { convertDocumentToElements } from '../common/utils';
 import { User } from '../interfaces';
@@ -9,6 +10,10 @@ interface UserPageProps {
 }
 
 const UserPage = (props: UserPageProps): JSX.Element => {
+  const user = useLoaderData();
+
+  console.log('user', user);
+
   if (props.errorMessage) {
     return <ErrorMessage>{props.errorMessage}</ErrorMessage>;
   } else if (!props.user) {
