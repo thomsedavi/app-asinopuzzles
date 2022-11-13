@@ -80,9 +80,18 @@ export default class App extends React.Component<{}, AppState> {
     return fetch(`/api/user/${params.userId}`, { method: 'GET' });
   }
 
-  userAction = async ({ params, request }: ActionFunctionArgs) => {
-    console.log('params', params);
-    console.log('request', request);
+  userAction = ({ request }: ActionFunctionArgs) => {
+    request.json()
+      .then((userValue: User) => {
+        this.setState({
+          user: userValue
+        });
+      })
+      .catch(() => {
+        this.setState({
+          errorMessage: 'Error retrieving user'
+        });  
+      });
   }
 
   setIsBurgerOpen = (isBurgerOpen: boolean): void => {
@@ -262,8 +271,7 @@ export default class App extends React.Component<{}, AppState> {
           {
             path: "users/:userId",
             element: <UserPage user={this.state.user}
-                                errorMessage={this.state.errorMessage}
-                                isWorking={this.state.isWorking} />,
+                                errorMessage={this.state.errorMessage} />,
             loader: this.userLoader,
             action: this.userAction
           },

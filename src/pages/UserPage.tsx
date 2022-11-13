@@ -5,14 +5,11 @@ import { User } from '../interfaces';
 
 interface UserPageProps {
   user?: User;
-  isWorking: boolean;
   errorMessage?: string;
 }
 
 const UserPage = (props: UserPageProps): JSX.Element => {
-  if (props.isWorking) {
-    return <Placeholder>…</Placeholder>;
-  } else if (props.errorMessage) {
+  if (props.errorMessage) {
     return <ErrorMessage>{props.errorMessage}</ErrorMessage>;
   } else if (!props.user) {
     return <ErrorMessage>User not found</ErrorMessage>;
