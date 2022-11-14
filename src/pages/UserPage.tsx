@@ -9,29 +9,25 @@ interface UserPageProps {
 }
 
 const UserPage = (props: UserPageProps): JSX.Element => {
-  try {
-    const user = useLoaderData() as User;
+  const user = useLoaderData() as User;
 
-    var [ name, setName ] = React.useState(user.name ?? '?');
+  var [ name, setName ] = React.useState(user.name ?? '?');
 
-    if (user) {
-      if (user.id === props.me?.id) {
+  if (user) {
+    if (user.id === props.me?.id) {
 
-        return <>
-          <Heading1>{user.name}</Heading1>
-          {convertDocumentToElements(user.biography)}
-          <div onClick={() => setName(name + '?')}>{name}</div>
-        </>;
-      } else {
-        return <>
-          <Heading1>{user.name}</Heading1>
-          {convertDocumentToElements(user.biography)}
-        </>;
-      }
+      return <>
+        <Heading1>{user.name}</Heading1>
+        {convertDocumentToElements(user.biography)}
+        <div onClick={() => setName(name + '?')}>{name}</div>
+      </>;
     } else {
-      return <ErrorMessage>User not found</ErrorMessage>;
+      return <>
+        <Heading1>{user.name}</Heading1>
+        {convertDocumentToElements(user.biography)}
+      </>;
     }
-  } catch (error: unknown) {
+  } else {
     return <ErrorMessage>User not found</ErrorMessage>;
   }
 }
