@@ -58,27 +58,27 @@ export default class App extends React.Component<{}, AppState> {
     return fetch(`/api/user/${params.userId}`, { method: 'GET' });
   }
 
-  render = () => {
+  render = (): JSX.Element => {
     if (this.state.me === undefined) {
-      return <Placeholder />    
+      return <Placeholder>…</Placeholder>
     } else {
       const router = createBrowserRouter([
         {
           index: true,
-          element: <Home />,
+          element: <Home me={this.state.me} />,
         },
         {
           path: "/about",
-          element: <About />,
+          element: <About me={this.state.me} />,
         },
         {
           path: "/users/:userId",
-          element: <UserPage me={this.state?.me} />,
+          element: <UserPage me={this.state.me} />,
           loader: this.userLoader
         },
         {
           path: "/*",
-          element: <NoPage />,
+          element: <NoPage me={this.state.me} />,
         },
       ]);
   
