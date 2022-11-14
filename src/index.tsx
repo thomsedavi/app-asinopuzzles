@@ -56,24 +56,26 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   render = () => {
+    console.log('state', this.state);
+
     const router = createBrowserRouter([
-          {
-            index: true,
-            element: <Home />,
-          },
-          {
-            path: "/about",
-            element: <About />,
-          },
-          {
-            path: "/users/:userId",
-            element: <UserPage me={this.state.me} />,
-            loader: this.userLoader
-          },
-          {
-            path: "/*",
-            element: <NoPage />,
-          },
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/users/:userId",
+        element: <UserPage me={this.state?.me} />,
+        loader: this.userLoader
+      },
+      {
+        path: "/*",
+        element: <NoPage />,
+      },
     ]);
 
     return <RouterProvider router={router} />;
