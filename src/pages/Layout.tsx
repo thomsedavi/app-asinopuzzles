@@ -12,6 +12,10 @@ interface LayoutProps {
 }
 
 const Layout = (props: LayoutProps) => {
+  const test: React.MouseEventHandler<HTMLAnchorElement> = (event: React.MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>): void => {
+    console.log('event', event);
+  }
+
   return (
     <>
       <Navigation className={props.isBurgerOpen ? '' : 'burger-closed'}>
@@ -92,8 +96,8 @@ const Layout = (props: LayoutProps) => {
                     className='logo-fill' />
             </svg>
           </HeaderLinkInternal>
-          <HeaderLinkInternal to='/about'>ABOUT</HeaderLinkInternal>
-          {props.me && <HeaderLinkInternal to={`/users/${props.me!.id}`}>PROFILE</HeaderLinkInternal>}
+          <HeaderLinkInternal to='/about' onClick={props.onClickHeaderLink}>ABOUT</HeaderLinkInternal>
+          {props.me && <HeaderLinkInternal to={`/users/${props.me!.id}`} onClick={test}>PROFILE</HeaderLinkInternal>}
           {props.me && <HeaderLinkExternal href='/logout' onClick={props.showPlaceholder}>LOGOUT</HeaderLinkExternal>}
           {!props.me && <HeaderLinkExternal href='/login' onClick={props.showPlaceholder}>LOGIN</HeaderLinkExternal>}
         </Container>
