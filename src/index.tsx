@@ -55,7 +55,12 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   userLoader = async ({ params }: LoaderFunctionArgs) => {
-    return fetch(`/api/user/${params.userId}`, { method: 'GET' });
+    if (params.userId === this.state.me?.id) {
+      // It's me! I don't need to fetch this
+      return this.state.me;
+    } else {
+      return fetch(`/api/user/${params.userId}`, { method: 'GET' });
+    }
   }
 
   render = (): JSX.Element => {
