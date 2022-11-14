@@ -234,7 +234,7 @@ export default class App extends React.Component<{}, AppState> {
     const router = createBrowserRouter([
       {
         path: "/",
-        element: <Layout isLoggedIn={this.state.me !== undefined && this.state.me !== null}
+        element: <Layout me={this.state.me}
                          isBurgerOpen={this.state.isBurgerOpen}
                          setIsBurgerOpen={this.setIsBurgerOpen}
                          onClickHeaderLink={this.onClickHeaderLink}
@@ -254,7 +254,7 @@ export default class App extends React.Component<{}, AppState> {
           },
           {
             path: "users/:userId",
-            element: <UserPage />,
+            element: <UserPage me={this.state.me} />,
             loader: this.userLoader
           },
           {

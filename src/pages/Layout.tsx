@@ -1,10 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container, HeaderLinkExternal, HeaderLinkInternal, Navigation } from '../common/styled';
+import { User } from '../interfaces';
 
 interface LayoutProps {
   showPlaceholder: () => void;
-  isLoggedIn?: boolean;
+  me?: User | null;
   isBurgerOpen: boolean;
   setIsBurgerOpen: (isBurgerOpen: boolean) => void;
   onClickHeaderLink: () => void;
@@ -92,9 +93,9 @@ const Layout = (props: LayoutProps) => {
             </svg>
           </HeaderLinkInternal>
           <HeaderLinkInternal to='/about' onClick={props.onClickHeaderLink}>ABOUT</HeaderLinkInternal>
-          {props.isLoggedIn === true && <HeaderLinkInternal to='/profile' onClick={props.onClickHeaderLink}>PROFILE</HeaderLinkInternal>}
-          {props.isLoggedIn === true && <HeaderLinkExternal href='/logout' onClick={props.showPlaceholder}>LOGOUT</HeaderLinkExternal>}
-          {props.isLoggedIn === false && <HeaderLinkExternal href='/login' onClick={props.showPlaceholder}>LOGIN</HeaderLinkExternal>}
+          {props.me && <HeaderLinkInternal to={`/user/${props.me!.id}`} onClick={props.onClickHeaderLink}>PROFILE</HeaderLinkInternal>}
+          {props.me && <HeaderLinkExternal href='/logout' onClick={props.showPlaceholder}>LOGOUT</HeaderLinkExternal>}
+          {!props.me && <HeaderLinkExternal href='/login' onClick={props.showPlaceholder}>LOGIN</HeaderLinkExternal>}
         </Container>
       </Navigation>
       <Container>
