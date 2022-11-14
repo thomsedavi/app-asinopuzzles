@@ -6,10 +6,11 @@ import { User } from '../interfaces';
 
 interface UserPageProps {
   me?: User | null;
-  onClick: () => void;
 }
 
 const UserPage = (props: UserPageProps): JSX.Element => {
+  var [ count, setCount ] = React.useState(5);
+
   try {
     const user = useLoaderData() as User;
 
@@ -18,7 +19,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         return <>
           <Heading1>{user.name}</Heading1>
           {convertDocumentToElements(user.biography)}
-          <div onClick={props.onClick}>(this is you)</div>
+          <div onClick={() => setCount(count + 1)}>{count}</div>
         </>;
       } else {
         return <>
