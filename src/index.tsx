@@ -74,7 +74,7 @@ export default class App extends React.Component<{}, AppState> {
       }, 1000);
   }
 
-  userLoader = ({ params }: LoaderFunctionArgs) => {
+  userLoader = async ({ params }: LoaderFunctionArgs) => {
     return fetch(`/api/user/${params.userId}`, { method: 'GET' });
   }
 
