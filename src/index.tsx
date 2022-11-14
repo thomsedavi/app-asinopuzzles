@@ -244,7 +244,8 @@ export default class App extends React.Component<{}, AppState> {
           },
           {
             path: "users/:userId",
-            element: <UserPage me={this.state.me} />,
+            element: <UserPage me={this.state.me}
+                               onClick={() => this.setState(prevState => ({ isBurgerOpen: !prevState.isBurgerOpen }))} />,
             loader: this.userLoader
           },
           {

@@ -6,6 +6,7 @@ import { User } from '../interfaces';
 
 interface UserPageProps {
   me?: User | null;
+  onClick: () => void;
 }
 
 const UserPage = (props: UserPageProps): JSX.Element => {
@@ -17,7 +18,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         return <>
           <Heading1>{user.name}</Heading1>
           {convertDocumentToElements(user.biography)}
-          <div>(this is you)</div>
+          <div onClick={props.onClick}>(this is you)</div>
         </>;
       } else {
         return <>
