@@ -9,17 +9,17 @@ interface UserPageProps {
 }
 
 const UserPage = (props: UserPageProps): JSX.Element => {
-  var [ count, setCount ] = React.useState(5);
-
   try {
     const user = useLoaderData() as User;
 
     if (user) {
       if (user.id === props.me?.id) {
+        var [ name, setName ] = React.useState(user.name ?? 'Bork');
+
         return <>
           <Heading1>{user.name}</Heading1>
           {convertDocumentToElements(user.biography)}
-          <div onClick={() => setCount(count + 1)}>{count}</div>
+          <div onClick={() => setName(name + '?')}>{name}</div>
         </>;
       } else {
         return <>
