@@ -34,7 +34,6 @@ export default class App extends React.Component<{}, AppState> {
 
     this.setIsBurgerOpen = this.setIsBurgerOpen.bind(this);
     this.onClickEditTextEntity = this.onClickEditTextEntity.bind(this);
-    this.onClickHeaderLink = this.onClickHeaderLink.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
     this.onClickSaveTextEntity = this.onClickSaveTextEntity.bind(this);
     this.onClickCreateMockProfile = this.onClickCreateMockProfile.bind(this);
@@ -81,16 +80,6 @@ export default class App extends React.Component<{}, AppState> {
   setIsBurgerOpen = (isBurgerOpen: boolean): void => {
     this.setState({
       isBurgerOpen: isBurgerOpen
-    });
-  }
-
-  onClickHeaderLink = (event: React.MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>): void => {
-    this.setState({
-      isBurgerOpen: false,
-      textEditEntityType: undefined,
-      textEditInput: undefined
-    }, () => {
-      console.log('event', event);
     });
   }
 
@@ -239,7 +228,6 @@ export default class App extends React.Component<{}, AppState> {
         element: <Layout me={this.state.me}
                          isBurgerOpen={this.state.isBurgerOpen}
                          setIsBurgerOpen={this.setIsBurgerOpen}
-                         onClickHeaderLink={this.onClickHeaderLink}
                          showPlaceholder={this.showPlaceholder} />,
         children: [
           {

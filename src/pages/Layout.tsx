@@ -8,7 +8,6 @@ interface LayoutProps {
   me?: User | null;
   isBurgerOpen: boolean;
   setIsBurgerOpen: (isBurgerOpen: boolean) => void;
-  onClickHeaderLink: (event: React.MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => void;
 }
 
 const Layout = (props: LayoutProps) => {
@@ -38,7 +37,7 @@ const Layout = (props: LayoutProps) => {
             {!props.isBurgerOpen && <path d='M8,20L22,20L22,22L8,22Z'
                                           className='burger-fill'/>}
           </svg>
-          <HeaderLinkInternal to='/' className='logo' onClick={props.onClickHeaderLink}>
+          <HeaderLinkInternal to='/' className='logo'>
             <svg className='logo-large'
                 viewBox='0 0 80 30'
                  xmlns='http://www.w3.org/2000/svg'>
@@ -92,8 +91,8 @@ const Layout = (props: LayoutProps) => {
                     className='logo-fill' />
             </svg>
           </HeaderLinkInternal>
-          <HeaderLinkInternal to='/about' onClick={props.onClickHeaderLink}>ABOUT</HeaderLinkInternal>
-          {props.me && <HeaderLinkInternal to={`/users/${props.me!.id}`} onClick={props.onClickHeaderLink}>PROFILE</HeaderLinkInternal>}
+          <HeaderLinkInternal to='/about'>ABOUT</HeaderLinkInternal>
+          {props.me && <HeaderLinkInternal to={`/users/${props.me!.id}`}>PROFILE</HeaderLinkInternal>}
           {props.me && <HeaderLinkExternal href='/logout' onClick={props.showPlaceholder}>LOGOUT</HeaderLinkExternal>}
           {!props.me && <HeaderLinkExternal href='/login' onClick={props.showPlaceholder}>LOGIN</HeaderLinkExternal>}
         </Container>
