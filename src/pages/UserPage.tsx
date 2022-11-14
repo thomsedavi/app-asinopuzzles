@@ -1,8 +1,9 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { ErrorMessage, Heading1 } from '../common/styled';
+import { Container, ErrorMessage, Heading1 } from '../common/styled';
 import { convertDocumentToElements } from '../common/utils';
 import { User } from '../interfaces';
+import Layout from './Layout';
 
 interface UserPageProps {
   me?: User | null;
@@ -17,9 +18,12 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     if (user.id === props.me?.id) {
 
       return <>
-        <Heading1>{user.name}</Heading1>
-        {convertDocumentToElements(user.biography)}
-        <div onClick={() => setName(name + '?')}>{name}</div>
+        <Layout showPlaceholder={() => {}} me={props.me} isBurgerOpen={false} setIsBurgerOpen={() => {}} />
+        <Container>
+          <Heading1>{user.name}</Heading1>
+          {convertDocumentToElements(user.biography)}
+          <div onClick={() => setName(name + '?')}>{name}</div>
+        </Container>
       </>;
     } else {
       return <>
