@@ -8,14 +8,10 @@ interface LayoutProps {
   me?: User | null;
   isBurgerOpen: boolean;
   setIsBurgerOpen: (isBurgerOpen: boolean) => void;
-  onClickHeaderLink: () => void;
+  onClickHeaderLink: (event: React.MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => void;
 }
 
 const Layout = (props: LayoutProps) => {
-  const test: React.MouseEventHandler<HTMLAnchorElement> = (event: React.MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>): void => {
-    console.log('event', event);
-  }
-
   return (
     <>
       <Navigation className={props.isBurgerOpen ? '' : 'burger-closed'}>
@@ -97,7 +93,7 @@ const Layout = (props: LayoutProps) => {
             </svg>
           </HeaderLinkInternal>
           <HeaderLinkInternal to='/about' onClick={props.onClickHeaderLink}>ABOUT</HeaderLinkInternal>
-          {props.me && <HeaderLinkInternal to={`/users/${props.me!.id}`} onClick={test}>PROFILE</HeaderLinkInternal>}
+          {props.me && <HeaderLinkInternal to={`/users/${props.me!.id}`} onClick={props.onClickHeaderLink}>PROFILE</HeaderLinkInternal>}
           {props.me && <HeaderLinkExternal href='/logout' onClick={props.showPlaceholder}>LOGOUT</HeaderLinkExternal>}
           {!props.me && <HeaderLinkExternal href='/login' onClick={props.showPlaceholder}>LOGIN</HeaderLinkExternal>}
         </Container>

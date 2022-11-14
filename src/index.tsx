@@ -84,11 +84,13 @@ export default class App extends React.Component<{}, AppState> {
     });
   }
 
-  onClickHeaderLink = (): void => {
+  onClickHeaderLink = (event: React.MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>): void => {
     this.setState({
       isBurgerOpen: false,
       textEditEntityType: undefined,
       textEditInput: undefined
+    }, () => {
+      console.log('event', event);
     });
   }
 
