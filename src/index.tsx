@@ -7,6 +7,7 @@ import UserPage from './pages/UserPage';
 import NoPage from "./pages/NoPage";
 import './index.css';
 import { User } from './interfaces';
+import { Placeholder } from './common/styled';
 
 interface AppState {
   me?: User | null;
@@ -15,6 +16,8 @@ interface AppState {
 export default class App extends React.Component<{}, AppState> {
   constructor(props: Readonly<{}>) {
     super(props);
+
+    this.setState({});
 
     this.userLoader = this.userLoader.bind(this);
   }
@@ -56,29 +59,31 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   render = () => {
-    console.log('state', this.state);
-
-    const router = createBrowserRouter([
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/users/:userId",
-        element: <UserPage me={this.state?.me} />,
-        loader: this.userLoader
-      },
-      {
-        path: "/*",
-        element: <NoPage />,
-      },
-    ]);
-
-    return <RouterProvider router={router} />;
+    if (this.state.me === undefined) {
+      return <Placeholder />    
+    } else {
+      const router = createBrowserRouter([
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/users/:userId",
+          element: <UserPage me={this.state?.me} />,
+          loader: this.userLoader
+        },
+        {
+          path: "/*",
+          element: <NoPage />,
+        },
+      ]);
+  
+      return <RouterProvider router={router} />;  
+    }
   }
 }
 
