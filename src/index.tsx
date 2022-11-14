@@ -17,7 +17,7 @@ export default class App extends React.Component<{}, AppState> {
   constructor(props: Readonly<{}>) {
     super(props);
 
-    this.setState({});
+    this.state = {};
 
     this.userLoader = this.userLoader.bind(this);
   }
