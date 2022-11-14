@@ -12,9 +12,10 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   try {
     const user = useLoaderData() as User;
 
+    var [ name, setName ] = React.useState(user.name ?? '?');
+
     if (user) {
       if (user.id === props.me?.id) {
-        var [ name, setName ] = React.useState(user.name ?? 'Bork');
 
         return <>
           <Heading1>{user.name}</Heading1>
