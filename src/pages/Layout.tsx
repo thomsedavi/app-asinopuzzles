@@ -87,6 +87,7 @@ const Layout = (props: LayoutProps) => {
                   className='logo-fill' />
           </svg>
         </HeaderLinkInternal>
+        <HeaderLinkInternal to='/miscellany'>MISCELLANY</HeaderLinkInternal>
         <HeaderLinkInternal to='/about'>ABOUT</HeaderLinkInternal>
         {props.userId && <HeaderLinkInternal to={`/users/${props.userId}`}>PROFILE</HeaderLinkInternal>}
         {props.userId && <HeaderLinkExternal href='/logout'>LOGOUT</HeaderLinkExternal>}

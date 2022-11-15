@@ -31,6 +31,11 @@ export const ButtonContainer = styled.div`
   text-align: center;
 `;
 
+export const Input = styled.input`
+  font-size: 1em;
+  width: 80%;
+`;
+
 export const EditIcon = styled.span`
   cursor: pointer;
   text-shadow: none;

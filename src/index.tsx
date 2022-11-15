@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserRouter, LoaderFunctionArgs, RouterProvider } from 'react-router-dom';
 import Home from "./pages/Home";
+import Miscellany from './pages/Miscellany';
 import About from "./pages/About";
 import UserPage from './pages/UserPage';
 import NoPage from "./pages/NoPage";
@@ -66,6 +67,10 @@ export default class App extends React.Component<{}, AppState> {
         {
           index: true,
           element: <Home userId={this.state.userId} />,
+        },
+        {
+          path: "/miscellany",
+          element: <Miscellany userId={this.state.userId} />,
         },
         {
           path: "/about",

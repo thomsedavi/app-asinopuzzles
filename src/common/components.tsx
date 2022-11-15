@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import { TextArea, Heading1, ErrorMessage, ButtonContainer, Button, EditIcon } from './styled';
+import { TextArea, Heading1, ErrorMessage, ButtonContainer, Button, EditIcon, Input } from './styled';
 
 interface EditableElementHeading1Props {
   isEditable: boolean;
@@ -20,7 +20,7 @@ interface EditableElementHeading1Props {
 export const EditableElementHeading1 = (props: EditableElementHeading1Props): JSX.Element => {
   if (props.isEditing) {
     return <>
-      <Heading1><input maxLength={64} disabled={props.isWorking} value={props.inputValue} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /></Heading1>
+      <Heading1><Input maxLength={64} disabled={props.isWorking} value={props.inputValue} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /></Heading1>
       <ButtonContainer>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
         <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>

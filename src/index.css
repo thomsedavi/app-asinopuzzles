@@ -58,11 +58,6 @@ body {
   margin: 0;
 }
 
-input {
-  font-size: 1em;
-  width: 80%;
-}
-
 .logo-fill, .burger-fill {
   fill: var(--color);
 }
