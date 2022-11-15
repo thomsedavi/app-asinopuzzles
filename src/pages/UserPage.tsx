@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1 } from '../common/components';
 import { Container, Heading1 } from '../common/styled';
-import { convertDocumentToString, tidyString } from '../common/utils';
+import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { User } from '../interfaces';
 import Layout from './Layout';
 
@@ -48,7 +48,42 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   }
 
   const saveBiography = (): void => {
-    console.log('test');
+    if (isWorking) {
+      return;
+    }
+
+    setErrorMessage(undefined);
+    setIsWorking(true);
+
+    const biography = convertStringToDocument(inputValue);
+
+    fetch(`/api/user/${props.userId}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
+      .then((response: Response) => {
+        if (response.status === 200) {
+          setUser({...user, biography: biography});
+          setEditingValue(undefined);
+          setInputValue(undefined);
+          setIsWorking(false);
+        } else if (response.status === 400) {
+          response.text()
+            .then((error: string) => {
+              if (error === 'BIOGRAPHY_TOO_LONG') {
+                setIsWorking(false);
+                setErrorMessage('Biography is too long');
+              } else {
+                setIsWorking(false);
+                setErrorMessage('Unknown Error');
+              }
+            });
+        } else {
+          setIsWorking(false);
+          setErrorMessage('Unknown Error');
+        }
+      })
+      .catch(() => {
+        setIsWorking(false);
+        setErrorMessage('Unknown Error');
+      });
   }
 
   if (user) {
