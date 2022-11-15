@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementHeading1 } from '../common/components';
 import { Container, Heading1 } from '../common/styled';
-import { convertDocumentToElements } from '../common/utils';
+import { convertDocumentToElements, tidyString } from '../common/utils';
 import { User } from '../interfaces';
 import Layout from './Layout';
 
@@ -11,11 +11,41 @@ interface UserPageProps {
 }
 
 const UserPage = (props: UserPageProps): JSX.Element => {
-  const [ inputValue, setInputValue ] = React.useState<string | undefined>(undefined);
-  const [ editingValue, setEditingValue ] = React.useState<string | undefined>(undefined);
-  const [ isBurgerOpen, setIsBurgerOpen ] = React.useState(false);
+  const [ inputValue, setInputValue ] = React.useState<string | undefined>();
+  const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
+  const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
+  const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
+  const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
 
-  const user = useLoaderData() as User;
+  const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
+
+  const saveName = (): void => {
+    if (isWorking) {
+      return;
+    }
+
+    setErrorMessage(undefined);
+    setIsWorking(true);
+
+    let name = tidyString(inputValue);
+
+    fetch(`./api/user/${props.userId}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
+      .then((response: Response) => {
+        if (response.status === 200) {
+          setUser({...user, name: name});
+          setEditingValue(undefined);
+          setInputValue(undefined);
+          setIsWorking(false);
+        } else {
+          setIsWorking(false);
+          setErrorMessage('Unknown Error');
+        }
+      })
+      .catch(() => {
+        setIsWorking(false);
+        setErrorMessage('Unknown Error');
+      });
+  }
 
   if (user) {
     return <>
@@ -28,11 +58,11 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  inputValue={inputValue}
                                  onClickEdit={setEditingValue}
                                  onChange={setInputValue}
-                                 onClickSave={() => { console.log('TODO') }}
+                                 onClickSave={saveName}
                                  onClickCancel={[ setInputValue, setEditingValue ]}
-                                 isWorking={false}
+                                 isWorking={isWorking}
                                  placeholder='User Name'
-                                 errorMessage='Error Message' />
+                                 errorMessage={errorMessage} />
         {convertDocumentToElements(user.biography)}
       </Container>
     </>;

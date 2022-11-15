@@ -2,6 +2,17 @@ import React from 'react';
 import { Document, Section, Element } from '../interfaces';
 import { Paragraph } from './styled';
 
+// TODO trim line endings and stuff
+export const tidyString = (input?: string): string => {
+  let output = input ?? ''
+
+  while (output.includes('  ')) {
+    output = output.replaceAll('  ', ' ');
+  }
+
+  return output?.trim();
+}
+
 export const convertDocumentToString = (document?: Document): string => {
   var result = '';
 
@@ -74,11 +85,7 @@ export const convertStringToDocument = (text?: string): Document => {
     let element: string[] = [];
 
     split.forEach((bit: string) => {
-      let bitTrimmed = bit.trim();
-
-      while (bitTrimmed.includes('  ')) {
-        bitTrimmed = bitTrimmed.replaceAll('  ', ' ');
-      }
+      let bitTrimmed = tidyString(bit);
 
       if (bitTrimmed === '' && element.length === 0) {
         // do nothing
