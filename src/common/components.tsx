@@ -4,30 +4,36 @@ import { Document } from '../interfaces';
 import { TextArea, Heading1, ErrorMessage, ButtonContainer, Button } from './styled';
 
 interface EditableElementHeading1Props {
+  isEditable: boolean;
+  id: string;
   value: string;
-  editing: boolean;
+  editingId: string | undefined;
   inputValue?: string;
-  onClickEdit: () => void;
-  onChange: (value: string) => void;
+  onClickEdit: React.Dispatch<React.SetStateAction<string | undefined>>;
+  onChange: React.Dispatch<React.SetStateAction<string | undefined>>;
   onClickSave: () => void;
-  onClickCancel: () => void;
+  onClickCancel: React.Dispatch<React.SetStateAction<string | undefined>>[];
   isWorking: boolean;
   placeholder?: string;
   errorMessage?: string;
 }
 
 export const EditableElementHeading1 = (props: EditableElementHeading1Props): JSX.Element => {
-  if (props.editing) {
+  if (props.editingId === props.id) {
     return <>
       <Heading1><input maxLength={64} disabled={props.isWorking} value={props.inputValue} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /></Heading1>
       <ButtonContainer>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
-        <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
+        <Button onClick={() => { props.onClickCancel.forEach((dispatch: React.Dispatch<React.SetStateAction<string | undefined>>) => { dispatch(undefined) })}} disabled={props.isWorking}>Cancel</Button>
       </ButtonContainer>
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else {
-    return <Heading1>{props.value} <span className='edit' onClick={props.onClickEdit}>✏️</span></Heading1>
+    if (props.isEditable) {
+      return <Heading1>{props.value} <span className='edit' onClick={() => props.onClickEdit(props.id)}>✏️</span></Heading1>
+    } else {
+      return <Heading1>{props.value}</Heading1>
+    }
   }
 }
 

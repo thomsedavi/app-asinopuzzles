@@ -1,6 +1,8 @@
 # Static website for Asino Puzzles.
 
-Various resources I have found useful:
+Code for my Asino Puzzles website. Please forgive some of the random decisions I have made in this code. Please.
+
+Various resources I have found useful while developing:
 
 [Quickstart: Building your first static site with Azure Static Web Apps](https://learn.microsoft.com/en-us/azure/static-web-apps/getting-started?tabs=react)
 

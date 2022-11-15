@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading1 } from '../common/styled';
+import { Container, Heading1 } from '../common/styled';
 import Layout from './Layout';
 
 interface NoPageProps {
@@ -11,7 +11,9 @@ const NoPage = (props: NoPageProps) => {
 
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
-    <Heading1>404</Heading1>
+    <Container>
+      <Heading1>404</Heading1>
+    </Container>
   </>;
 };
 
