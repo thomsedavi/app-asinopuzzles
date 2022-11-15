@@ -9,10 +9,10 @@ interface EditableElementHeading1Props {
   value: string;
   editingId: string | undefined;
   inputValue?: string;
-  onClickEdit: React.Dispatch<React.SetStateAction<string | undefined>>;
-  onChange: React.Dispatch<React.SetStateAction<string | undefined>>;
+  onClickEdit: () => void;
+  onChange: (value: string) => void;
   onClickSave: () => void;
-  onClickCancel: React.Dispatch<React.SetStateAction<string | undefined>>[];
+  onClickCancel: () => void;
   isWorking: boolean;
   placeholder?: string;
   errorMessage?: string;
@@ -24,13 +24,13 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
       <Heading1><input maxLength={64} disabled={props.isWorking} value={props.inputValue} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /></Heading1>
       <ButtonContainer>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
-        <Button onClick={() => { props.onClickCancel.forEach((dispatch: React.Dispatch<React.SetStateAction<string | undefined>>) => { dispatch(undefined) })}} disabled={props.isWorking}>Cancel</Button>
+        <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
       </ButtonContainer>
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else {
     if (props.isEditable) {
-      return <Heading1>{props.value} <span className='edit' onClick={() => props.onClickEdit(props.id)}>✏️</span></Heading1>
+      return <Heading1>{props.value} <span className='edit' onClick={props.onClickEdit}>✏️</span></Heading1>
     } else {
       return <Heading1>{props.value}</Heading1>
     }

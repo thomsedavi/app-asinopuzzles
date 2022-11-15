@@ -56,10 +56,10 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  value={user.name ?? 'Anonymous'}
                                  editingId={editingValue}
                                  inputValue={inputValue}
-                                 onClickEdit={setEditingValue}
-                                 onChange={setInputValue}
+                                 onClickEdit={() => { setEditingValue('NAME'); setInputValue(user.name ?? 'Anonymous'); }}
+                                 onChange={(value: string) => setInputValue(value)}
                                  onClickSave={saveName}
-                                 onClickCancel={[ setInputValue, setEditingValue ]}
+                                 onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
                                  isWorking={isWorking}
                                  placeholder='User Name'
                                  errorMessage={errorMessage} />
