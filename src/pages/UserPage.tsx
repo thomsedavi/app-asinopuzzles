@@ -37,10 +37,10 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       </Container>
     </>;
   } else {
-    return <>
+    return<>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
       <Container>
-        return <Heading1>User not found</Heading1>;
+        <Heading1>User not found</Heading1>
       </Container>
     </>;
   }
