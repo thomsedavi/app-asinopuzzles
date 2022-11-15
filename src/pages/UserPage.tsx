@@ -29,7 +29,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
     let name = tidyString(inputValue);
 
-    fetch(`./api/user/${props.userId}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
+    fetch(`api/user/${props.userId}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
       .then((response: Response) => {
         if (response.status === 200) {
           setUser({...user, name: name});
