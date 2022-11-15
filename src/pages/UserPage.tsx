@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { EditableElementHeading1 } from '../common/components';
+import { EditableElementDocument, EditableElementHeading1 } from '../common/components';
 import { Container, Heading1 } from '../common/styled';
-import { convertDocumentToElements, tidyString } from '../common/utils';
+import { convertDocumentToString, tidyString } from '../common/utils';
 import { User } from '../interfaces';
 import Layout from './Layout';
 
@@ -47,14 +47,17 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       });
   }
 
+  const saveBiography = (): void => {
+    console.log('test');
+  }
+
   if (user) {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
       <Container>
         <EditableElementHeading1 isEditable={user.id === props.userId}
-                                 id='NAME'
+                                 isEditing={editingValue === 'NAME'}
                                  value={user.name ?? 'Anonymous'}
-                                 editingId={editingValue}
                                  inputValue={inputValue}
                                  onClickEdit={() => { setEditingValue('NAME'); setInputValue(user.name ?? 'Anonymous'); }}
                                  onChange={(value: string) => setInputValue(value)}
@@ -63,7 +66,17 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  isWorking={isWorking}
                                  placeholder='User Name'
                                  errorMessage={errorMessage} />
-        {convertDocumentToElements(user.biography)}
+        <EditableElementDocument isEditable={user.id === props.userId}
+                                 isEditing={editingValue === 'BIOGRAPHY'}
+                                 value={user.biography ?? {}}
+                                 inputValue={inputValue}
+                                 onClickEdit={() => { setEditingValue('BIOGRAPHY'); setInputValue(convertDocumentToString(user.biography ?? {})); }}
+                                 onChange={(value: string) => setInputValue(value)}
+                                 onClickSave={saveBiography}
+                                 onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
+                                 isWorking={isWorking}
+                                 placeholder='Asino Puzzler'
+                                 errorMessage={errorMessage} />
       </Container>
     </>;
   } else {

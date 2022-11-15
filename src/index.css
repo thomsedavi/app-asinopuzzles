@@ -58,12 +58,6 @@ body {
   margin: 0;
 }
 
-.edit {
-  cursor: pointer;
-  display: inline-block;
-  text-shadow: none;
-}
-
 input {
   font-size: 1em;
   width: 80%;
