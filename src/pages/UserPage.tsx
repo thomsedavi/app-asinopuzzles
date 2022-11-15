@@ -6,19 +6,20 @@ import { User } from '../interfaces';
 import Layout from './Layout';
 
 interface UserPageProps {
-  me?: User | null;
+  userId?: string | null;
 }
 
 const UserPage = (props: UserPageProps): JSX.Element => {
   const user = useLoaderData() as User;
 
   var [ name, setName ] = React.useState(user.name ?? '?');
+  const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
 
   if (user) {
-    if (user.id === props.me?.id) {
+    if (user.id === props.userId) {
 
       return <>
-        <Layout showPlaceholder={() => {}} me={props.me} isBurgerOpen={false} setIsBurgerOpen={() => {}} />
+        <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
         <Container>
           <Heading1>{user.name}</Heading1>
           {convertDocumentToElements(user.biography)}
@@ -27,11 +28,13 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       </>;
     } else {
       return <>
+        <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
         <Heading1>{user.name}</Heading1>
         {convertDocumentToElements(user.biography)}
       </>;
     }
   } else {
+    <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
     return <ErrorMessage>User not found</ErrorMessage>;
   }
 }

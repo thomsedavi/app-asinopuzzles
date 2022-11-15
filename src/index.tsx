@@ -10,7 +10,7 @@ import { User } from './interfaces';
 import { Placeholder } from './common/styled';
 
 interface AppState {
-  me?: User | null;
+  userId?: string | null;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -32,58 +32,53 @@ export default class App extends React.Component<{}, AppState> {
               .then((response: Response) => response.json())
               .then((userValue: User) => {
                 this.setState({
-                  me: userValue
+                  userId: userValue.id
                 });
               })
               .catch(() => {
                 this.setState({
-                  me: null
+                  userId: null
                 });  
               });
           } else {
             this.setState({
-              me: null
+              userId: null
             });  
           }
         })
         .catch(() => {
           this.setState({
-            me: null
+            userId: null
           });
         });
       }, 1000);
   }
 
   userLoader = async ({ params }: LoaderFunctionArgs) => {
-    if (params.userId === this.state.me?.id) {
-      // It's me! I don't need to fetch this
-      return this.state.me;
-    } else {
-      return fetch(`/api/user/${params.userId}`, { method: 'GET' });
-    }
+    return fetch(`/api/user/${params.userId}`, { method: 'GET' });
   }
 
   render = (): JSX.Element => {
-    if (this.state.me === undefined) {
+    if (this.state.userId === undefined) {
       return <Placeholder>…</Placeholder>
     } else {
       const router = createBrowserRouter([
         {
           index: true,
-          element: <Home me={this.state.me} />,
+          element: <Home userId={this.state.userId} />,
         },
         {
           path: "/about",
-          element: <About me={this.state.me} />,
+          element: <About userId={this.state.userId} />,
         },
         {
           path: "/users/:userId",
-          element: <UserPage me={this.state.me} />,
+          element: <UserPage userId={this.state.userId} />,
           loader: this.userLoader
         },
         {
           path: "/*",
-          element: <NoPage me={this.state.me} />,
+          element: <NoPage userId={this.state.userId} />,
         },
       ]);
   

@@ -1,16 +1,17 @@
 import React from 'react';
 import { Heading1, Heading2, Paragraph } from '../common/styled';
-import { User } from '../interfaces';
 import Layout from './Layout';
 
 interface AboutPageProps {
-  me?: User | null;
+  userId?: string | null;
 }
 
 const About = (props: AboutPageProps) => {
+  const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
+
   return (
     <>
-      <Layout showPlaceholder={() => {}} me={props.me} isBurgerOpen={false} setIsBurgerOpen={() => {}} />
+      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
       <Heading1>About</Heading1>
       <Heading2>Asino Puzzles</Heading2>
       <Paragraph>Asino Puzzles is a puzzle framework created by Lotographia. The original assignment was to make a game similar to Sim City, but more puzzle-y. The result was a minor flop, but the attempt to make this game had the byproduct of this flexible puzzle framework that can be used for the creation of a wide variety of other bespoke puzzles.</Paragraph>

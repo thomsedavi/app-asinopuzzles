@@ -1,15 +1,16 @@
 import React from 'react';
 import { Heading1 } from '../common/styled';
-import { User } from '../interfaces';
 import Layout from './Layout';
 
 interface NoPageProps {
-  me?: User | null;
+  userId?: string | null;
 }
 
 const NoPage = (props: NoPageProps) => {
+  const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
+
   return <>
-    <Layout showPlaceholder={() => {}} me={props.me} isBurgerOpen={false} setIsBurgerOpen={() => {}} />
+    <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
     <Heading1>404</Heading1>
   </>;
 };

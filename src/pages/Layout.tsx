@@ -1,12 +1,10 @@
 import React from 'react';
 import { Container, HeaderLinkExternal, HeaderLinkInternal, Navigation } from '../common/styled';
-import { User } from '../interfaces';
 
 interface LayoutProps {
-  showPlaceholder: () => void;
-  me?: User | null;
+  userId?: string | null;
   isBurgerOpen: boolean;
-  setIsBurgerOpen: (isBurgerOpen: boolean) => void;
+  setIsBurgerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Layout = (props: LayoutProps) => {
@@ -90,9 +88,9 @@ const Layout = (props: LayoutProps) => {
           </svg>
         </HeaderLinkInternal>
         <HeaderLinkInternal to='/about'>ABOUT</HeaderLinkInternal>
-        {props.me && <HeaderLinkInternal to={`/users/${props.me!.id}`}>PROFILE</HeaderLinkInternal>}
-        {props.me && <HeaderLinkExternal href='/logout' onClick={props.showPlaceholder}>LOGOUT</HeaderLinkExternal>}
-        {!props.me && <HeaderLinkExternal href='/login' onClick={props.showPlaceholder}>LOGIN</HeaderLinkExternal>}
+        {props.userId && <HeaderLinkInternal to={`/users/${props.userId}`}>PROFILE</HeaderLinkInternal>}
+        {props.userId && <HeaderLinkExternal href='/logout'>LOGOUT</HeaderLinkExternal>}
+        {!props.userId && <HeaderLinkExternal href='/login'>LOGIN</HeaderLinkExternal>}
       </Container>
     </Navigation>
   )
