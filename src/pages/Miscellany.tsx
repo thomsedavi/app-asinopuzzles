@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonContainer, ButtonLink, Container, Heading1, Heading2, Paragraph, TextLink } from '../common/styled';
+import { ButtonContainer, ButtonLink, Container, Heading1, Heading2, Paragraph, TextLink } from '../common/styled';
 import Layout from './Layout';
 
 interface MiscellanyProps {
