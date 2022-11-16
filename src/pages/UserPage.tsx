@@ -110,7 +110,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  onClickSave={saveBiography}
                                  onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
                                  isWorking={isWorking}
-                                 placeholder='Asino Puzzler'
+                                 placeholder='User Biography'
                                  errorMessage={errorMessage} />
       </Container>
     </>;

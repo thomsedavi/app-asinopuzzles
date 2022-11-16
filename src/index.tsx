@@ -9,6 +9,7 @@ import NoPage from "./pages/NoPage";
 import './index.css';
 import { User } from './interfaces';
 import { Placeholder } from './common/styled';
+import Lexicologer from './pages/Lexicologer';
 
 interface AppState {
   userId?: string | null;
@@ -71,6 +72,10 @@ export default class App extends React.Component<{}, AppState> {
         {
           path: "/miscellany",
           element: <Miscellany userId={this.state.userId} />,
+        },
+        {
+          path: "/lexicologer/create",
+          element: <Lexicologer userId={this.state.userId} />,
         },
         {
           path: "/about",

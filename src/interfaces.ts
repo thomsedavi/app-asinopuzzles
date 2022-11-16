@@ -9,11 +9,17 @@ export interface Section {
 }
 
 export interface Document {
-  sections?: Section[]
+  sections?: Section[];
 }
 
 export interface User {
-  id: string,
-  name?: string,
-  biography?: Document
+  id: string;
+  name?: string;
+  biography?: Document;
+}
+
+export interface LexicologerGame {
+  id?: string;
+  userId?: string;
+  title?: string;
 }

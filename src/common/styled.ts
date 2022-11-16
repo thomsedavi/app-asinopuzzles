@@ -71,6 +71,7 @@ export const ButtonLink = styled(Link)`
   font-size: 1em;
   text-decoration: none;
   padding: 1px 6px;
+  display: inline-block;
 
   &:hover {
     background: var(--hover);
