@@ -17,22 +17,17 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
   const [ isWorking ] = React.useState<boolean>(false);
   const [ errorMessage ] = React.useState<string | undefined>();
+  const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame>(
+    useLoaderData() as LexicologerGame ??
+    (props.mode === 'create' && props.userId !== undefined && props.userId !== null && { userId: props.userId, title: 'Lexicologer Game' }) ??
+    undefined
+  );
 
-  let initialGame: LexicologerGame | undefined = undefined;
-
-  if (props.mode === 'create' && props.userId) {
-    initialGame = { userId: props.userId, title: 'Lexicologer Game' };
-  } else {
-    initialGame = useLoaderData() as LexicologerGame;
-
-    if (initialGame === undefined) {
-      return <Heading1>404</Heading1>
-    } else if (props.mode === 'update' && (props.userId === undefined || props.userId === null || props.userId !== initialGame.userId)) {
-      return <Heading1>401</Heading1>
-    }
+  if (lexicologerGame === undefined) {
+    return <Heading1>404</Heading1>
+  } else if (props.mode === 'update' && (props.userId === undefined || props.userId === null || props.userId !== lexicologerGame.userId)) {
+    return <Heading1>401</Heading1>
   }
-
-  const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame>(initialGame);
 
   console.log('game', lexicologerGame);
 

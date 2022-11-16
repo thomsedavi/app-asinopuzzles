@@ -16,7 +16,6 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
-
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
 
   const saveName = (): void => {
