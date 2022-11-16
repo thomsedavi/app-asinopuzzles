@@ -124,7 +124,7 @@ export const HeaderLinkExternal = styled.a`
 `;
 
 export const TextLink = styled.a`
-  color: var(--accent);
+  color: var(--accent-pale);
   font-weight: 700;
   text-decoration: none;
 `;
