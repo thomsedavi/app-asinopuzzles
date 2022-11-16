@@ -74,8 +74,8 @@ export default class App extends React.Component<{}, AppState> {
           element: <Miscellany userId={this.state.userId} />,
         },
         {
-          path: "/lexicologer/create",
-          element: <Lexicologer userId={this.state.userId} />,
+          path: "/lexicologers/create",
+          element: <Lexicologer userId={this.state.userId} mode='create' />,
         },
         {
           path: "/about",

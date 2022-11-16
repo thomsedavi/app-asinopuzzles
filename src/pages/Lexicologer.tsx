@@ -1,13 +1,14 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementHeading1 } from '../common/components';
-import { Container } from '../common/styled';
+import { Container, Heading1 } from '../common/styled';
 import { tidyString } from '../common/utils';
 import { LexicologerGame } from '../interfaces';
 import Layout from './Layout';
 
 interface LexicologerProps {
   userId?: string | null;
+  mode: 'create' | 'read' | 'update';
 }
 
 const Lexicologer = (props: LexicologerProps): JSX.Element => {
@@ -17,7 +18,21 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ isWorking ] = React.useState<boolean>(false);
   const [ errorMessage ] = React.useState<string | undefined>();
 
-  const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame>(useLoaderData() as LexicologerGame ?? { userId: props.userId ?? undefined, title: 'Lexicologer Game' });
+  let initialGame: LexicologerGame | undefined = undefined;
+
+  if (props.mode === 'create' && props.userId) {
+    initialGame = { userId: props.userId, title: 'Lexicologer Game' };
+  } else {
+    initialGame = useLoaderData() as LexicologerGame;
+
+    if (initialGame === undefined) {
+      return <Heading1>404</Heading1>
+    } else if (props.mode === 'update' && (props.userId === undefined || props.userId === null || props.userId !== initialGame.userId)) {
+      return <Heading1>401</Heading1>
+    }
+  }
+
+  const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame>(initialGame);
 
   console.log('game', lexicologerGame);
 

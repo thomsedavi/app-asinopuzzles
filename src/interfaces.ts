@@ -20,6 +20,6 @@ export interface User {
 
 export interface LexicologerGame {
   id?: string;
-  userId?: string;
+  userId: string;
   title?: string;
 }
