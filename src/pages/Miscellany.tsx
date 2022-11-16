@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Heading1, Heading2, Paragraph } from '../common/styled';
+import { ButtonContainer, ButtonLink, Container, Heading1, Heading2, Paragraph, TextLink } from '../common/styled';
 import Layout from './Layout';
 
 interface MiscellanyProps {
@@ -15,8 +15,11 @@ const Miscellany = (props: MiscellanyProps) => {
       <Container>
         <Heading1>Miscellany</Heading1>
         <Heading2>Lexicologer</Heading2>
-        <Paragraph>Lexicologer was designed for Read NZ Te Pou Muramura for their weekly #RāmereShorts game. Specify a set of words and challenge writers to compose something under a particular word count that uses all words.</Paragraph>
-        <Paragraph>TODO: migrate this over from the old Lotographia website.</Paragraph>
+        <Paragraph>Specify a set of words and challenge writers to compose something under a particular word count that uses all the words.</Paragraph>
+        {!props.userId && <Paragraph><TextLink href='/login'>Log in</TextLink> to create new Lexicologer exercices.</Paragraph>}
+        {props.userId && <ButtonContainer>
+          <ButtonLink to="/lexicologers/create">Create Lexicologer Exercise</ButtonLink>
+        </ButtonContainer>}
       </Container>
     </>
   );

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Placeholder = styled.div`
@@ -59,6 +59,24 @@ export const Button = styled.button`
   }
 `;
 
+export const ButtonLink = styled(Link)`
+  margin: 0.5em;
+  border: none;
+  box-shadow: 0.2em 0.2em var(--accent);
+  background: var(--color);
+  color: var(--background-color);
+  cursor: pointer;
+  font-size: 1em;
+
+  &:hover {
+    background: var(--hover);
+  }
+
+  &:disabled {
+    background: var(--disabled);
+  }
+`;
+
 export const TextArea = styled.textarea`
   display: block;
   margin: 0.5em auto;
@@ -73,7 +91,7 @@ export const ErrorMessage = styled.div`
   color: var(--error);
 `;
 
-export const HeaderLinkInternal = styled(Link)`
+export const HeaderLinkInternal = styled(NavLink)`
   color: var(--color);
   text-decoration: none;
   padding: 0.5em 0.5em;
@@ -99,6 +117,10 @@ export const HeaderLinkExternal = styled.a`
   @media (min-width: 576px) {
     display: inline-block;
   }
+`;
+
+export const TextLink = styled.a`
+
 `;
 
 export const Container = styled.div`
