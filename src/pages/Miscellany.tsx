@@ -18,7 +18,7 @@ const Miscellany = (props: MiscellanyProps) => {
         <Paragraph>Specify a set of words and challenge writers to compose something under a particular word count that uses all the words.</Paragraph>
         {!props.userId && <Paragraph><TextLink href='/login'>Log in</TextLink> to create a new Lexicologer exercice.</Paragraph>}
         {props.userId && <ButtonContainer>
-          <ButtonLink to="/lexicologers/create">Create Lexicologer Exercise</ButtonLink><Button>This Is Also A Button</Button>
+          <ButtonLink to="/lexicologers/create">Create Lexicologer Exercise</ButtonLink>
         </ButtonContainer>}
       </Container>
     </>

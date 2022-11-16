@@ -49,6 +49,8 @@ export const Button = styled.button`
   color: var(--background-color);
   cursor: pointer;
   font-size: 1em;
+  padding: 1px 6px;
+  font-family: inherit;
 
   &:hover {
     background: var(--hover);
@@ -67,6 +69,8 @@ export const ButtonLink = styled(Link)`
   color: var(--background-color);
   cursor: pointer;
   font-size: 1em;
+  text-decoration: none;
+  padding: 1px 6px;
 
   &:hover {
     background: var(--hover);
