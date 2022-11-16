@@ -29,10 +29,10 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     return <Heading1>401</Heading1>
   }
 
-  console.log('game', lexicologerGame);
-
   const saveName = () => {
     setLexicologerGame({ ...lexicologerGame, title: tidyString(inputValue) });
+    setInputValue(undefined);
+    setEditingValue(undefined);
   }
 
   return <>
