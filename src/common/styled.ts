@@ -166,19 +166,17 @@ export const Burger = styled.svg`
 `;
 
 export const LogoLarge = styled.svg`
+  display: inline-block;
+  height: 1.4em;
+
   @media (max-width: 575px) {
     display: none;
-  }
-
-  @media (min-width: 576px) {
-    height: 1.4em;
   }
 `;
 
 export const LogoSmall = styled.svg`
-  @media (max-width: 575px) {
-    height: 1.15em;
-  }
+  display: block;
+  height: 1.15em;
 
   @media (min-width: 576px) {
     display: none;
