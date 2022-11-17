@@ -187,4 +187,12 @@ export const PathFill = styled.path`
   ${Burger}:hover & {
     fill: var(--hover);
   }
+
+  ${LogoLarge}:hover & {
+    fill: var(--hover);
+  }
+
+  ${LogoSmall}:hover & {
+    fill: var(--hover);
+  }
 `;
