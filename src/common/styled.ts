@@ -102,6 +102,10 @@ export const HeaderLinkInternal = styled(NavLink)`
   padding: 0.5em 0.5em;
   text-shadow: 1px 0px 1px var(--accent);
 
+  &:hover {
+    color: var(--hover);
+  }
+
   @media (max-width: 575px) {
     display: block;
   }
@@ -116,6 +120,10 @@ export const HeaderLinkExternal = styled.a`
   text-decoration: none;
   padding: 0.5em 0.5em;
   text-shadow: 1px 0px 1px var(--accent);
+
+  &:hover {
+    color: var(--hover);
+  }
 
   @media (max-width: 575px) {
     display: block;
