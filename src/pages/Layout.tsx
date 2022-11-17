@@ -1,5 +1,5 @@
 import React from 'react';
-import { Burger, Container, HeaderLinkExternal, HeaderLinkInternal, Navigation, PathAccent, PathFill } from '../common/styled';
+import { Burger, Container, HeaderLinkExternal, HeaderLinkInternal, LogoLarge, LogoSmall, Navigation, PathAccent, PathFill } from '../common/styled';
 
 interface LayoutProps {
   userId?: string | null;
@@ -25,9 +25,8 @@ const Layout = (props: LayoutProps) => {
           {!props.isBurgerOpen && <PathFill d='M8,20L22,20L22,22L8,22Z' />}
         </Burger>
         <HeaderLinkInternal to='/' className='logo'>
-          <svg className='logo-large'
-              viewBox='0 0 80 30'
-               xmlns='http://www.w3.org/2000/svg'>
+          <LogoLarge viewBox='0 0 80 30'
+                     xmlns='http://www.w3.org/2000/svg'>
             <PathAccent d='M0,30L24,0L26,0L26,30L22,30L22,20L18,25L14,25L12,15L16,10L18,20L22,15L22,10L6,30Z' />
             <PathAccent d='M30,30L30,25L34,25L32,20L34,15L42,15L40,20L36,20L38,25L36,30Z' />
             <PathAccent d='M40,30L46,15L50,15L44,30Z' />
@@ -40,10 +39,9 @@ const Layout = (props: LayoutProps) => {
             <PathFill d='M46,10L48,5L52,5L50,10Z' />
             <PathFill d='M46,30L52,15L60,15L62,20L58,30L54,30L58,20L54,20L50,30Z' />
             <PathFill d='M66,30L64,25L68,15L76,15L78,20L74,30L66,30L64,25L72,25L74,20L70,20Z' />
-          </svg>
-          <svg className='logo-small'
-               viewBox='0 0 68 15'
-               xmlns='http://www.w3.org/2000/svg'>
+          </LogoLarge>
+          <LogoSmall viewBox='0 0 68 15'
+                     xmlns='http://www.w3.org/2000/svg'>
             <PathAccent d='M4,15L2,10L6,0L18,0L12,15L4,15L2,10L10,10L12,5L8,5Z' />
             <PathAccent d='M16,15L18,10L22,10L20,5L22,0L30,0L28,5L24,5L26,10L24,15Z' />
             <PathAccent d='M28,15L34,0L38,0L32,15Z' />
@@ -54,7 +52,7 @@ const Layout = (props: LayoutProps) => {
             <PathFill d='M26,15L32,0L36,0L30,15Z' />
             <PathFill d='M34,15L40,0L48,0L50,5L46,15L42,15L46,5L42,5L38,15Z' />
             <PathFill d='M54,15L52,10L56,0L64,0L66,5L62,15L54,15L52,10L60,10L62,5L58,5Z' />
-          </svg>
+          </LogoSmall>
         </HeaderLinkInternal>
         <HeaderLinkInternal to='/miscellany'>MISCELLANY</HeaderLinkInternal>
         <HeaderLinkInternal to='/about'>ABOUT</HeaderLinkInternal>
