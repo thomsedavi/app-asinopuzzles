@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { EditableElementHeading1 } from '../common/components';
+import { EditableElementDocument, EditableElementHeading1 } from '../common/components';
 import { Container, Heading1 } from '../common/styled';
-import { tidyString } from '../common/utils';
+import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame } from '../interfaces';
 import Layout from './Layout';
 
@@ -19,7 +19,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ errorMessage ] = React.useState<string | undefined>();
   const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame>(
     useLoaderData() as LexicologerGame ??
-    (props.mode === 'create' && props.userId !== undefined && props.userId !== null && { userId: props.userId, title: 'Lexicologer Game' }) ??
+    (props.mode === 'create' && props.userId !== undefined && props.userId !== null && { userId: props.userId, title: 'Lexicologer Game', details: { sections: [ { type: 'PARAGRAPH', element: { text: 'Try to write something within the character limit that makes use of all the words listed below' } } ] } }) ??
     undefined
   );
 
@@ -31,6 +31,12 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 
   const saveName = () => {
     setLexicologerGame({ ...lexicologerGame, title: tidyString(inputValue) });
+    setInputValue(undefined);
+    setEditingValue(undefined);
+  }
+
+  const saveDetails = () => {
+    setLexicologerGame({ ...lexicologerGame, details: convertStringToDocument(inputValue) });
     setInputValue(undefined);
     setEditingValue(undefined);
   }
@@ -48,6 +54,17 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
                                onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
                                isWorking={isWorking}
                                placeholder='Lexicologer Game Title'
+                               errorMessage={errorMessage} />
+      <EditableElementDocument isEditable={props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId}
+                               isEditing={editingValue === 'DETAILS'}
+                               value={lexicologerGame.details ?? {}}
+                               inputValue={inputValue}
+                               onClickEdit={() => { setEditingValue('DETAILS'); setInputValue(convertDocumentToString(lexicologerGame.details ?? {})); }}
+                               onChange={(value: string) => setInputValue(value)}
+                               onClickSave={saveDetails}
+                               onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
+                               isWorking={isWorking}
+                               placeholder='Lexicologer Game Information'
                                errorMessage={errorMessage} />
     </Container>
   </>;

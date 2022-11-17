@@ -22,4 +22,5 @@ export interface LexicologerGame {
   id?: string;
   userId: string;
   title?: string;
+  details?: Document;
 }
