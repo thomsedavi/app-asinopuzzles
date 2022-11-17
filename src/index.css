@@ -62,23 +62,6 @@ body {
   margin: 0;
 }
 
-.logo-fill, .burger-fill {
-  fill: var(--color);
-}
-
-.logo-accent, .burger-accent {
-  fill: var(--accent);
-}
-
-.burger {
-  float: right;
-  cursor: pointer;
-}
-
-.burger:hover .burger-fill {
-  fill: var(--hover);
-}
-
 @media (max-width: 575px) {
   .logo-large {
     display: none;
@@ -94,10 +77,6 @@ body {
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
-  .burger {
-    display: none;
-  }
-
   .logo-large {
     height: 1.4em;
   }
@@ -108,10 +87,6 @@ body {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .burger {
-    display: none;
-  }
-
   .logo-large {
     height: 1.4em;
   }
@@ -122,10 +97,6 @@ body {
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-  .burger {
-    display: none;
-  }
-
   .logo-large {
     height: 1.4em;
   }
@@ -136,10 +107,6 @@ body {
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
-  .burger {
-    display: none;
-  }
-
   .logo-large {
     height: 1.4em;
   }
@@ -150,10 +117,6 @@ body {
 }
 
 @media (min-width: 1400px) {
-  .burger {
-    display: none;
-  }
-
   .logo-large {
     height: 1.4em;
   }

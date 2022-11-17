@@ -100,6 +100,7 @@ export const HeaderLinkInternal = styled(NavLink)`
   color: var(--color);
   text-decoration: none;
   padding: 0.5em 0.5em;
+  text-shadow: 1px 0px 1px var(--accent);
 
   @media (max-width: 575px) {
     display: block;
@@ -114,6 +115,7 @@ export const HeaderLinkExternal = styled.a`
   color: var(--color);
   text-decoration: none;
   padding: 0.5em 0.5em;
+  text-shadow: 1px 0px 1px var(--accent);
 
   @media (max-width: 575px) {
     display: block;
@@ -143,5 +145,26 @@ export const Container = styled.div`
 
   @media (min-width: 768px) {
     width: 748px;
+  }
+`;
+
+export const Burger = styled.svg`
+  float: right;
+  cursor: pointer;
+
+  @media (min-width: 576px) {
+    display: none;
+  }
+`;
+
+export const PathAccent = styled.path`
+  fill: var(--accent);
+`;
+
+export const PathFill = styled.path`
+  fill: var(--color);
+
+  ${Burger}:hover & {
+    fill: var(--hover);
   }
 `;
