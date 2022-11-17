@@ -20,7 +20,7 @@ interface EditableElementHeading1Props {
 export const EditableElementHeading1 = (props: EditableElementHeading1Props): JSX.Element => {
   if (props.isEditing) {
     return <>
-      <Heading1><Input maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => { console.log('key', event.key); console.log('keyCode', event.keyCode); console.log('charCode', event.charCode); }} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /></Heading1>
+      <Heading1><Input maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => { event.keyCode === 13 && props.onClickSave() }} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /></Heading1>
       <ButtonContainer>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
         <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
