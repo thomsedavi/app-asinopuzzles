@@ -9,11 +9,16 @@ export const Placeholder = styled.div`
   font-size: 8em;
 `;
 
-export const Heading1 = styled.h1`
+interface HeaderProps {
+  editable?: boolean
+}
+
+export const Heading1 = styled.h1<HeaderProps>`
   text-align: center;
   text-shadow: 0.05em 0.05em var(--accent);
   font-variant: small-caps;
   margin: 0.5em 0;
+  cursor: ${props => props.editable ? "pointer" : "text"}
 `;
 
 export const Heading2 = styled.h2`
