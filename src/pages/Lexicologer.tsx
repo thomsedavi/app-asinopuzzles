@@ -12,6 +12,13 @@ interface LexicologerProps {
 }
 
 const Lexicologer = (props: LexicologerProps): JSX.Element => {
+  const defaultGame: LexicologerGame | undefined = props.userId !== undefined && props.userId !== null ? {
+    userId: props.userId,
+    title: 'Lexicologer Game',
+    characterLimit: 140,
+    details: { sections: [ { type: 'PARAGRAPH', element: { text: 'Try to write something within the character limit that makes use of all the words listed below' } } ] }
+  } : undefined;
+
   const [ inputValue, setInputValue ] = React.useState<string | undefined>();
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
@@ -19,7 +26,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ errorMessage ] = React.useState<string | undefined>();
   const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame>(
     useLoaderData() as LexicologerGame ??
-    (props.mode === 'create' && props.userId !== undefined && props.userId !== null && { userId: props.userId, title: 'Lexicologer Game', details: { sections: [ { type: 'PARAGRAPH', element: { text: 'Try to write something within the character limit that makes use of all the words listed below' } } ] } }) ??
+    (props.mode === 'create' && defaultGame) ??
     undefined
   );
 
