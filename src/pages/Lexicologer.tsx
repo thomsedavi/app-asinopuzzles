@@ -93,8 +93,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         <SingleNumberInput id='CharacterLimit'
                            label='Character Limit'
                            value={lexicologerGame.characterLimit ?? 140}
-                           onChange={(value: string) => setCharacterLimit(value)} />}
-      </InputGroup>
+                           onChange={(value: string) => setCharacterLimit(value)} />
+      </InputGroup>}
     </Container>
   </>;
 }
