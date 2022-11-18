@@ -238,3 +238,7 @@ export const InlineInput = styled.input<InlineInputProps>`
   box-sizing: border-box;
   width: ${props => props.short ? '4em' : ''}
 `;
+
+export const InputGroup = styled.div`
+  margin: 0.5em 0px;
+`;

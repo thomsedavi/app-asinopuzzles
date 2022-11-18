@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, SingleNumberInput } from '../common/components';
-import { Container, Heading1 } from '../common/styled';
+import { Container, Heading1, InputGroup } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame } from '../interfaces';
 import Layout from './Layout';
@@ -33,7 +33,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   if (lexicologerGame === undefined) {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
-      <Heading1>404</Heading1>
+      <Heading1>Please log in to create a Lexicologer game</Heading1>
     </>
   } else if (props.mode === 'update' && (props.userId === undefined || props.userId === null || props.userId !== lexicologerGame.userId)) {
     return <>
@@ -62,7 +62,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     }
   }
 
-  const isEditable = props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
+  const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
 
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
@@ -89,10 +89,12 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
                                isWorking={isWorking}
                                placeholder='Lexicologer Game Information'
                                errorMessage={errorMessage} />
-      {isEditable && <SingleNumberInput id='CharacterLimit'
-                                        label='Character Limit'
-                                        value={lexicologerGame.characterLimit ?? 140}
-                                        onChange={(value: string) => setCharacterLimit(value)} />}
+      {isEditable && <InputGroup>
+        <SingleNumberInput id='CharacterLimit'
+                           label='Character Limit'
+                           value={lexicologerGame.characterLimit ?? 140}
+                           onChange={(value: string) => setCharacterLimit(value)} />}
+      </InputGroup>
     </Container>
   </>;
 }
