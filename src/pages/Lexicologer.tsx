@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Container, Heading1, InputGroup } from '../common/styled';
+import { Button, ButtonGroup, Container, Heading1, Information, InputGroup, Paragraph } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame } from '../interfaces';
 import Layout from './Layout';
@@ -104,6 +104,12 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
                              value={lexicologerGame.characterLimit ?? 140}
                              onChange={(value: string) => setCharacterLimit(value)} />
         </InputGroup>
+        <Information>
+          Primary Word will display in the list of Required Words (for example, "love")<br />
+          Secondary Words is a comma separated a list of alternative words that will also match (for example, "lover, loving")<br />
+          Use the '*' symbol as a wildcard match in the Secondary Words (for example, "love*" will match "lover" and "loved")<br />
+          Word matching is case insensitive
+        </Information>
         <ButtonGroup>
           <Button onClick={addRequiredWord}>Add Required Word</Button>
         </ButtonGroup>

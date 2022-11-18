@@ -59,7 +59,7 @@ export const Button = styled.button`
   color: var(--background-color);
   cursor: pointer;
   font-size: 1em;
-  padding: 1px 6px;
+  padding: 2px 8px;
   font-family: inherit;
 
   &:hover {
@@ -241,4 +241,9 @@ export const InlineInput = styled.input<InlineInputProps>`
 
 export const InputGroup = styled.div`
   margin: 1em 0px;
+`;
+
+export const Information = styled.div`
+  text-align: center;
+  margin: 1em 0;
 `;

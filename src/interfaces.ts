@@ -19,8 +19,8 @@ export interface User {
 }
 
 export interface LexicologerRequiredWord {
-  primary?: string;
-  secondary?: string[];
+  primaryWord?: string;
+  secondaryWords?: string[];
 }
 
 export interface LexicologerGame {
