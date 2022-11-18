@@ -160,7 +160,7 @@ export const Burger = styled.svg`
   float: right;
   cursor: pointer;
 
-  @media (min-width: 576px) {
+  @media (width >= 576px) {
     display: none;
   }
 `;
