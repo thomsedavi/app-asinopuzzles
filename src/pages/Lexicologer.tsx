@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, SingleNumberInput } from '../common/components';
 import { Button, ButtonGroup, Container, Heading1, Information, InputGroup } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
-import { LexicologerGame } from '../interfaces';
+import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
 
 interface LexicologerProps {
@@ -70,6 +70,17 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
   }
 
+  const addRandomRequiredWord = () => {
+    const requiredWords = lexicologerGame.requiredWords ?? [];
+    const randomWord = exampleRequiredWords[Math.floor(Math.random() * exampleRequiredWords.length)];
+
+    console.log(randomWord);
+
+    requiredWords.push(randomWord);
+
+    setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
+  }
+
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
 
   return <>
@@ -105,13 +116,15 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
                              onChange={(value: string) => setCharacterLimit(value)} />
         </InputGroup>
         <Information>
-          Primary Word will display in the list of Required Words (for example, "love")<br />
-          Secondary Words is a comma separated a list of alternative words that will also match (for example, "lover, loving")<br />
-          Use the '*' symbol as a wildcard match in the Secondary Words (for example, "love*" will match "lover" and "loved")<br />
+          The Primary Word will display in the list of Required Words (for example, "love")<br />
+          Secondary Words is a comma separated list of alternative words that will also match (for example, "lover, loving")<br />
+          Use the '*' symbol as a wildcard match in the Secondary Words (for example, "lov*" will match "loved" and "loving")<br />
           Word matching is case insensitive
         </Information>
+        {}
         <ButtonGroup>
           <Button onClick={addRequiredWord}>Add Required Word</Button>
+          <Button onClick={addRandomRequiredWord}>Add Random Required Word</Button>
         </ButtonGroup>
       </>}
     </Container>
@@ -119,3 +132,11 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 }
 
 export default Lexicologer;
+
+const exampleRequiredWords: LexicologerRequiredWord[] = [
+  {primaryWord: 'love', secondaryWords: ['lov*']},
+  {primaryWord: 'loss', secondaryWords: ['lose']},
+  {primaryWord: 'hope', secondaryWords: ['hope*', 'hoping']},
+  {primaryWord: 'magic', secondaryWords: ['magic*']},
+  {primaryWord: 'cold', secondaryWords: ['cold*']},
+];

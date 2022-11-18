@@ -16,7 +16,7 @@
   --color-light-disabled: hsla(var(--hue-azure),25%,50%,1);
   --color-light-accent: hsla(var(--hue-chartreuse),75%,50%,1);
   --color-light-accent-pale: hsla(var(--hue-chartreuse),75%,25%,1);
-  --color-light-accent-background: hsla(var(--hue-chartreuse),75%,10%,1);
+  --color-light-accent-background: hsla(var(--hue-chartreuse),75%,90%,1);
   --color-light-shadow: hsla(var(--hue-azure),25%,25%,1);
   --color-dark: hsla(var(--hue-azure),25%,5%,1);
   --color-dark-hover: hsla(var(--hue-azure),25%,25%,1);
