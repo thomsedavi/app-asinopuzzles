@@ -69,7 +69,7 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
     </>
   } else if (props.isEditable) {
     return <>
-      {convertDocumentToElements(props.value, <EditIcon onClick={props.onClickEdit}>✏️</EditIcon>)}
+      {convertDocumentToElements(props.value, props.onClickEdit)}
     </>
   } else {
     return <>

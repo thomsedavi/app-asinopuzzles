@@ -27,9 +27,14 @@ export const Heading2 = styled.h2`
   margin: 1em 0 0.5em;
 `;
 
-export const Paragraph = styled.p`
+interface ParagraphProps {
+  editable?: boolean
+}
+
+export const Paragraph = styled.p<ParagraphProps>`
   text-align: center;
   margin: 0.5em 0;
+  cursor: ${props => props.editable ? "pointer" : "text"}
 `;
 
 export const ButtonContainer = styled.div`

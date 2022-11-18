@@ -1,6 +1,6 @@
 import React from 'react';
 import { Document, Section, Element } from '../interfaces';
-import { Paragraph } from './styled';
+import { EditIcon, Paragraph } from './styled';
 
 // TODO trim line endings and stuff
 export const tidyString = (input?: string): string => {
@@ -36,16 +36,17 @@ export const convertDocumentToString = (document?: Document): string => {
   return result;
 }
 
-export const convertDocumentToElements = (document?: Document, editButton?: JSX.Element): JSX.Element[] => {
-  var test: JSX.Element[] = [];
+export const convertDocumentToElements = (document?: Document, onClick?: () => void): JSX.Element[] => {
+  const test: JSX.Element[] = [];
+  const editable = onClick !== undefined;
 
   document?.sections?.forEach((section: Section, index: number) => {
     if (section.type === 'PARAGRAPH') {
       if (section.element) {
-        if (editButton && index === document!.sections!.length - 1) {
-          test.push(<Paragraph key={`s${index}`}>{section.element.text} {editButton}</Paragraph>);
+        if (editable && index === document!.sections!.length - 1) {
+          test.push(<Paragraph key={`s${index}`} editable={editable} onClick={() => editable && onClick()}>{section.element.text} <EditIcon>✏️</EditIcon></Paragraph>);
         } else {
-          test.push(<Paragraph key={`s${index}`}>{section.element.text}</Paragraph>);
+          test.push(<Paragraph key={`s${index}`} editable={editable} onClick={() => editable && onClick()}>{section.element.text}</Paragraph>);
         }
       } else if (section.elements) {
         const paragraphBits: (JSX.Element | string)[] = [];
@@ -60,10 +61,10 @@ export const convertDocumentToElements = (document?: Document, editButton?: JSX.
           }
         });
 
-        if (editButton && index === document!.sections!.length - 1) {
-          test.push(<Paragraph key={`s${index}`}>{paragraphBits} {editButton}</Paragraph>);
+        if (editable && index === document!.sections!.length - 1) {
+          test.push(<Paragraph key={`s${index}`} editable={editable} onClick={() => editable && onClick()}>{paragraphBits} <EditIcon>✏️</EditIcon></Paragraph>);
         } else {
-          test.push(<Paragraph key={`s${index}`}>{paragraphBits}</Paragraph>);
+          test.push(<Paragraph key={`s${index}`} editable={editable} onClick={() => editable && onClick()}>{paragraphBits}</Paragraph>);
         }
 
       }
