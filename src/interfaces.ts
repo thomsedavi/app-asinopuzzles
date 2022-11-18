@@ -23,4 +23,5 @@ export interface LexicologerGame {
   userId: string;
   title?: string;
   details?: Document;
+  characterLimit?: number
 }

@@ -4,13 +4,18 @@ import { Document } from '../interfaces';
 import { TextArea, Heading1, ErrorMessage, ButtonContainer, Button, EditIcon, Input, InlineLabel, InlineInput } from './styled';
 
 interface SingleNumberInputProps {
-
+ id: string;
+ label: string;
+ min?: number;
+ value: number;
+ onChange: (value: string) => void;
 }
 
 export const SingleNumberInput = (props: SingleNumberInputProps): JSX.Element => {
   return <>
-    <InlineLabel htmlFor="maximumCharacterCount">Maximum Character Count</InlineLabel>
-    <InlineInput short type="number" id="maximumCharacterCount" name="maximumCharacterCount" min={0} />
+    <InlineLabel htmlFor={props.id}>{props.label}</InlineLabel>
+    <InlineInput short type="number" id={props.id} name={props.id} min={props.min ?? 0} value={props.value}
+                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
   </>;
 }
 

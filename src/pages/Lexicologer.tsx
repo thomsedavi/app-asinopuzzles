@@ -41,10 +41,20 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setEditingValue(undefined);
   }
 
+  const setCharacterLimit = (value: string) => {
+    const characterLimit = Number(value);
+
+    if (!isNaN(characterLimit)) {
+      setLexicologerGame({ ...lexicologerGame, characterLimit: characterLimit });
+    }
+  }
+
+  const isEditable = props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
+
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
     <Container>
-      <EditableElementHeading1 isEditable={props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId}
+      <EditableElementHeading1 isEditable={isEditable}
                                isEditing={editingValue === 'TITLE'}
                                value={lexicologerGame.title ?? 'Lexicologer Game'}
                                inputValue={inputValue}
@@ -55,7 +65,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
                                isWorking={isWorking}
                                placeholder='Lexicologer Game Title'
                                errorMessage={errorMessage} />
-      <EditableElementDocument isEditable={props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId}
+      <EditableElementDocument isEditable={isEditable}
                                isEditing={editingValue === 'DETAILS'}
                                value={lexicologerGame.details ?? {}}
                                inputValue={inputValue}
@@ -66,7 +76,10 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
                                isWorking={isWorking}
                                placeholder='Lexicologer Game Information'
                                errorMessage={errorMessage} />
-      <SingleNumberInput />
+      {isEditable && <SingleNumberInput id='CharacterLimit'
+                                        label='Character Limit'
+                                        value={lexicologerGame.characterLimit ?? 140}
+                                        onChange={(value: string) => setCharacterLimit(value)} />}
     </Container>
   </>;
 }
