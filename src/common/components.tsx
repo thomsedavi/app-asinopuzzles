@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import { TextArea, Heading1, ErrorMessage, ButtonContainer, Button, EditIcon, Input, Label } from './styled';
+import { TextArea, Heading1, ErrorMessage, ButtonContainer, Button, EditIcon, Input, InlineLabel, InlineInput } from './styled';
 
 interface SingleNumberInputProps {
 
@@ -9,8 +9,8 @@ interface SingleNumberInputProps {
 
 export const SingleNumberInput = (props: SingleNumberInputProps): JSX.Element => {
   return <>
-    <Label htmlFor="maximumCharacterCount">Maximum Character Count</Label>
-    <input type="number" id="maximumCharacterCount" name="maximumCharacterCount" min={0} />
+    <InlineLabel htmlFor="maximumCharacterCount">Maximum Character Count</InlineLabel>
+    <InlineInput short type="number" id="maximumCharacterCount" name="maximumCharacterCount" min={0} />
   </>;
 }
 

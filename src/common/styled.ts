@@ -220,6 +220,21 @@ export const PathFill = styled.path`
   }
 `;
 
-export const Label = styled.label`
+export const InlineLabel = styled.label`
+  width: 50%;
+  display: inline-block;
+  text-align: right;
+  padding-right: 0.5em;
+  box-sizing: border-box;
+`;
 
+interface InlineInputProps {
+  short?: boolean;  
+}
+
+export const InlineInput = styled.input<InlineInputProps>`
+  display: inline-block;
+  margin-left: 0.5em;
+  box-sizing: border-box;
+  width: ${props => props.short ? '4em' : ''}
 `;
