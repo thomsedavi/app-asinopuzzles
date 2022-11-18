@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { EditableElementDocument, EditableElementHeading1 } from '../common/components';
+import { EditableElementDocument, EditableElementHeading1, SingleNumberInput } from '../common/components';
 import { Container, Heading1 } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame } from '../interfaces';
@@ -66,6 +66,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
                                isWorking={isWorking}
                                placeholder='Lexicologer Game Information'
                                errorMessage={errorMessage} />
+      <SingleNumberInput />
     </Container>
   </>;
 }

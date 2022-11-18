@@ -219,3 +219,7 @@ export const PathFill = styled.path`
     fill: var(--hover);
   }
 `;
+
+export const Label = styled.label`
+
+`;
