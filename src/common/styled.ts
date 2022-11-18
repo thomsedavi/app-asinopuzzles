@@ -244,10 +244,10 @@ export const InputGroup = styled.div`
 `;
 
 export const Information = styled.div`
-  background-color: var(--background-color-information)
+  background-color: var(--background-color-information);
   font-size: 0.8em;
   text-align: center;
-  border: 1px solid var(--accent)
+  border: 1px solid var(--accent);
   padding: 0.5em;
   margin: 1em 0;
 `;
