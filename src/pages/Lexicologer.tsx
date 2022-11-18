@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Container, Heading1, Information, InputGroup, Paragraph } from '../common/styled';
+import { Button, ButtonGroup, Container, Heading1, Information, InputGroup } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame } from '../interfaces';
 import Layout from './Layout';
