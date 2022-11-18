@@ -65,16 +65,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 
   const addRequiredWord = () => {
     const requiredWords = lexicologerGame.requiredWords ?? [];
-    requiredWords.push({});
-
-    setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
-  }
-
-  const addRandomRequiredWord = () => {
-    const requiredWords = lexicologerGame.requiredWords ?? [];
     const randomWord = exampleRequiredWords[Math.floor(Math.random() * exampleRequiredWords.length)];
-
-    console.log(randomWord);
 
     requiredWords.push(randomWord);
 
@@ -82,6 +73,14 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   }
 
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
+
+  const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
+    return <tr key={`requiredWordRow${index}`}>
+      <th>{word.primaryWord}</th>
+      <th></th>
+      <th></th>
+    </tr>;
+  });
 
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
@@ -121,11 +120,19 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           Use the '*' symbol as a wildcard match in the Secondary Words (for example, "lov*" will match "loved" and "loving")<br />
           Word matching is case insensitive
         </Information>
-        {}
-        <ButtonGroup>
-          <Button onClick={addRequiredWord}>Add Required Word</Button>
-          <Button onClick={addRandomRequiredWord}>Add Random Required Word</Button>
-        </ButtonGroup>
+        <table>
+          <tr>
+            <th>Primary Word</th>
+            <th>Secondary Words</th>
+            <th>Actions</th>
+          </tr>
+          {requiredWords}
+          <tr>
+            <td></td>
+            <td></td>
+            <td><span onClick={addRequiredWord}>➕</span></td>
+          </tr>
+        </table>
       </>}
     </Container>
   </>;
