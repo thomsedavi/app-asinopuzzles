@@ -62,7 +62,7 @@ body {
   margin: 0;
 }
 
-@media (max-width: 575px) {
+@media (width < 576px) {
   nav.burger-closed > div > div, nav.burger-closed > div > a:not(.logo) {
     display: none;
   }
