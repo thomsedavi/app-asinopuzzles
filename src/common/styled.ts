@@ -106,11 +106,11 @@ export const HeaderLinkInternal = styled(NavLink)`
     color: var(--hover);
   }
 
-  @media (max-width: 575px) {
+  @media (width < 576px) {
     display: block;
   }
 
-  @media (min-width: 576px) {
+  @media (576px <= width) {
     display: inline-block;
   }
 `;
@@ -125,11 +125,11 @@ export const HeaderLinkExternal = styled.a`
     color: var(--hover);
   }
 
-  @media (max-width: 575px) {
+  @media (width < 576px) {
     display: block;
   }
 
-  @media (min-width: 576px) {
+  @media (576px <= width) {
     display: inline-block;
   }
 `;
@@ -143,15 +143,15 @@ export const TextLink = styled.a`
 export const Container = styled.div`
   margin: 0 auto;
 
-  @media (max-width: 575px) {
+  @media (width < 576px) {
     width: 340px;
   }
 
-  @media (min-width: 576px) and (max-width: 767px) {
+  @media (576px <= width < 768px) {
     width: 556px;
   }
 
-  @media (min-width: 768px) {
+  @media (768px <= width) {
     width: 748px;
   }
 `;
@@ -160,17 +160,20 @@ export const Burger = styled.svg`
   float: right;
   cursor: pointer;
 
-  @media (width >= 576px) {
+  @media (576px <= width) {
     display: none;
   }
 `;
 
 export const LogoLarge = styled.svg`
-  display: inline-block;
   height: 1.4em;
 
-  @media (max-width: 575px) {
+  @media (width < 576px) {
     display: none;
+  }
+
+  @media (576px <= width) {
+    display: inline-block;
   }
 `;
 
@@ -178,7 +181,11 @@ export const LogoSmall = styled.svg`
   display: block;
   height: 1.15em;
 
-  @media (min-width: 576px) {
+  @media (width < 576px) {
+    display: block;
+  }
+
+  @media (576px <= width) {
     display: none;
   }
 `;
