@@ -33,11 +33,11 @@ interface ParagraphProps {
 
 export const Paragraph = styled.p<ParagraphProps>`
   text-align: center;
-  margin: 0.5em 0;
+  margin: 1em 0;
   cursor: ${props => props.editable ? "pointer" : "text"}
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonGroup = styled.div`
   text-align: center;
 `;
 
@@ -240,5 +240,5 @@ export const InlineInput = styled.input<InlineInputProps>`
 `;
 
 export const InputGroup = styled.div`
-  margin: 0.5em 0px;
+  margin: 1em 0px;
 `;

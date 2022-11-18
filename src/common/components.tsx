@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import { TextArea, Heading1, ErrorMessage, ButtonContainer, Button, EditIcon, Input, InlineLabel, InlineInput } from './styled';
+import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput } from './styled';
 
 interface SingleNumberInputProps {
  id: string;
@@ -44,10 +44,10 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
 
     return <>
       <Heading1><Input maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /></Heading1>
-      <ButtonContainer>
+      <ButtonGroup>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
         <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
-      </ButtonContainer>
+      </ButtonGroup>
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else if (props.isEditable) {
@@ -76,10 +76,10 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
   if (props.isEditing) {
     return <>
       <TextArea value={props.inputValue} disabled={props.isWorking} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)} />
-      <ButtonContainer>
+      <ButtonGroup>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
         <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
-      </ButtonContainer>
+      </ButtonGroup>
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
       {convertDocumentToElements(convertStringToDocument(props.inputValue))}
     </>

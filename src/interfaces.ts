@@ -18,10 +18,16 @@ export interface User {
   biography?: Document;
 }
 
+export interface LexicologerRequiredWord {
+  primary?: string;
+  secondary?: string[];
+}
+
 export interface LexicologerGame {
   id?: string;
   userId: string;
   title?: string;
   details?: Document;
-  characterLimit?: number
+  characterLimit?: number,
+  requiredWords?: LexicologerRequiredWord[];
 }
