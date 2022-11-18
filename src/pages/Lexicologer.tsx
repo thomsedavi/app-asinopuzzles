@@ -31,9 +31,15 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   );
 
   if (lexicologerGame === undefined) {
-    return <Heading1>404</Heading1>
+    return <>
+      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+      <Heading1>404</Heading1>
+    </>
   } else if (props.mode === 'update' && (props.userId === undefined || props.userId === null || props.userId !== lexicologerGame.userId)) {
-    return <Heading1>401</Heading1>
+    return <>
+      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+      <Heading1>401</Heading1>
+    </>
   }
 
   const saveName = () => {
