@@ -89,8 +89,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
       <Container>
-        <EditableElementHeading1 isEditable={user.id === props.userId}
-                                 isEditing={editingValue === 'NAME'}
+        <EditableElementHeading1 editState={user.id === props.userId ? (editingValue === 'NAME' ? 'editing' : 'editable') : 'disabled'}
                                  value={user.name ?? 'Anonymous'}
                                  inputValue={inputValue}
                                  onClickEdit={() => { setEditingValue('NAME'); setInputValue(user.name ?? 'Anonymous'); }}
@@ -100,8 +99,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  isWorking={isWorking}
                                  placeholder='User Name'
                                  errorMessage={errorMessage} />
-        <EditableElementDocument isEditable={user.id === props.userId}
-                                 isEditing={editingValue === 'BIOGRAPHY'}
+        <EditableElementDocument editState={user.id === props.userId ? (editingValue === 'BIOGRAPHY' ? 'editing' : 'editable') : 'disabled'}
                                  value={user.biography ?? {}}
                                  inputValue={inputValue}
                                  onClickEdit={() => { setEditingValue('BIOGRAPHY'); setInputValue(convertDocumentToString(user.biography ?? {})); }}
