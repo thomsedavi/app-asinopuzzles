@@ -118,6 +118,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+    <Heading1>Test, editing: {editingValue}, input: {inputValue}</Heading1>
     <Container>
       <EditableElementHeading1
         editState={isEditable ? (editingValue === 'TITLE' ? 'editing' : 'editable') : 'disabled'}
