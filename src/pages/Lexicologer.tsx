@@ -72,13 +72,21 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
   }
 
+  const deleteRequiredWord = (index: number) => {
+    const requiredWords = lexicologerGame.requiredWords ?? [];
+
+    index < requiredWords.length && (requiredWords.splice(index, 1));
+
+    setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
+  }
+
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
 
   const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
     return <Tr key={`requiredWordRow${index}`}>
       <Td>{word.primaryWord}</Td>
-      <Td></Td>
-      <Td></Td>
+      <Td>{word.secondaryWords?.join(', ')}</Td>
+      <Td>{deleteRequiredWord(index)}</Td>
     </Tr>;
   });
 
@@ -122,15 +130,15 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         </Information>
         <Table>
           <Tr>
-            <Th oneFifth>Primary Word</Th>
-            <Th threeFifths>Secondary Words</Th>
-            <Th oneFifth>Actions</Th>
+            <Th oneFifth title='Primary Word'>Primary Word</Th>
+            <Th threeFifths title='Secondary Words'>Secondary Words</Th>
+            <Th oneFifth title='Actions'>Actions</Th>
           </Tr>
           {requiredWords}
           <Tr>
             <Td></Td>
             <Td></Td>
-            <Td><span onClick={addRequiredWord}>➕</span></Td>
+            <Td><span onClick={addRequiredWord} style={{ cursor: 'pointer' }}>➕</span></Td>
           </Tr>
         </Table>
       </>}

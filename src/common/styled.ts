@@ -277,9 +277,13 @@ export const Th = styled.th<ThProps>`
   border: 1px solid var(--color);
   width: ${props => getThWidth(props)};
   padding: 0.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Td = styled.td`
   border: 1px solid var(--color);
   padding: 0.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
