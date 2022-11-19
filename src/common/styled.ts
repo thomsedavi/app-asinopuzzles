@@ -275,7 +275,7 @@ const getThWidth = (props: ThProps): string => {
 
 export const Th = styled.th<ThProps>`
   border: 1px solid var(--color);
-  width: ${props => getThWidth(props)}
+  width: ${props => getThWidth(props)};
   padding: 0.5em;
 `;
 
