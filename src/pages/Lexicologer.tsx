@@ -86,7 +86,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     return <Tr key={`requiredWordRow${index}`}>
       <Td>{word.primaryWord}</Td>
       <Td>{word.secondaryWords?.join(', ')}</Td>
-      <Td>{deleteRequiredWord(index)}</Td>
+      <Td>{() => deleteRequiredWord(index)}</Td>
     </Tr>;
   });
 

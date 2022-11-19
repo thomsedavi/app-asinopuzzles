@@ -279,6 +279,7 @@ export const Th = styled.th<ThProps>`
   padding: 0.5em;
   overflow: hidden;
   text-overflow: ellipsis;
+  box-sizing: border-box;
 `;
 
 export const Td = styled.td`
