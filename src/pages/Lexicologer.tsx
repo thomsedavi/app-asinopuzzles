@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, SingleNumberInput } from '../common/components';
-import { Container, Heading1, Information, InputGroup } from '../common/styled';
+import { Container, Heading1, Information, InputGroup, Table, Td, Th, Tr } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -75,11 +75,11 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
 
   const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
-    return <tr key={`requiredWordRow${index}`}>
-      <th>{word.primaryWord}</th>
-      <th></th>
-      <th></th>
-    </tr>;
+    return <Tr key={`requiredWordRow${index}`}>
+      <Td>{word.primaryWord}</Td>
+      <Td></Td>
+      <Td></Td>
+    </Tr>;
   });
 
   return <>
@@ -120,19 +120,19 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           Use the '*' symbol as a wildcard match in the Secondary Words (for example, "lov*" will match "loved" and "loving")<br />
           Word matching is case insensitive
         </Information>
-        <table>
-          <tr>
-            <th>Primary Word</th>
-            <th>Secondary Words</th>
-            <th>Actions</th>
-          </tr>
+        <Table>
+          <Tr>
+            <Th>Primary Word</Th>
+            <Th>Secondary Words</Th>
+            <Th>Actions</Th>
+          </Tr>
           {requiredWords}
-          <tr>
-            <td></td>
-            <td></td>
-            <td><span onClick={addRequiredWord}>➕</span></td>
-          </tr>
-        </table>
+          <Tr>
+            <Td></Td>
+            <Td></Td>
+            <Td><span onClick={addRequiredWord}>➕</span></Td>
+          </Tr>
+        </Table>
       </>}
     </Container>
   </>;
