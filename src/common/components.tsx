@@ -1,7 +1,20 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput } from './styled';
+import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput, TableCell } from './styled';
+
+interface EditableElementTableCellProps {
+  editState: 'disabled' | 'editable' | 'editing';
+  value: string;
+}
+
+export const EditableTableCell = (props: EditableElementTableCellProps): JSX.Element => {
+  if (props.editState === 'editable') {
+    return <TableCell editable>{props.value} <EditIcon>✏️</EditIcon></TableCell>;
+  } else {
+    return <TableCell>{props.value}</TableCell>;
+  }
+}
 
 interface SingleNumberInputProps {
  id: string;
@@ -20,8 +33,7 @@ export const SingleNumberInput = (props: SingleNumberInputProps): JSX.Element =>
 }
 
 interface EditableElementHeading1Props {
-  isEditable: boolean;
-  isEditing: boolean;
+  editState: 'disabled' | 'editable' | 'editing';
   value: string;
   inputValue?: string;
   onClickEdit: () => void;
@@ -34,7 +46,7 @@ interface EditableElementHeading1Props {
 }
 
 export const EditableElementHeading1 = (props: EditableElementHeading1Props): JSX.Element => {
-  if (props.isEditing) {
+  if (props.editState === 'editing') {
     const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.keyCode === 13) {
         event.preventDefault();
@@ -50,7 +62,7 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
       </ButtonGroup>
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
-  } else if (props.isEditable) {
+  } else if (props.editState === 'editable') {
     return <Heading1 editable onClick={props.onClickEdit}>{props.value} <EditIcon>✏️</EditIcon></Heading1>
   } else {
     return <Heading1>{props.value}</Heading1>
@@ -59,8 +71,7 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
 
 
 interface EditableElementDocumentProps {
-  isEditable: boolean;
-  isEditing: boolean;
+  editState: 'disabled' | 'editable' | 'editing';
   value: Document;
   inputValue?: string;
   onClickEdit: () => void;
@@ -73,7 +84,7 @@ interface EditableElementDocumentProps {
 }
 
 export const EditableElementDocument = (props: EditableElementDocumentProps): JSX.Element => {
-  if (props.isEditing) {
+  if (props.editState === 'editing') {
     return <>
       <TextArea value={props.inputValue} disabled={props.isWorking} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)} />
       <ButtonGroup>
@@ -83,7 +94,7 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
       {convertDocumentToElements(convertStringToDocument(props.inputValue))}
     </>
-  } else if (props.isEditable) {
+  } else if (props.editState === 'editable') {
     return <>
       {convertDocumentToElements(props.value, props.onClickEdit)}
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { EditableElementDocument, EditableElementHeading1, SingleNumberInput } from '../common/components';
-import { Container, EditIcon, Heading1, Information, InputGroup, Table, Td, Th, Tr } from '../common/styled';
+import { EditableElementDocument, EditableElementHeading1, EditableTableCell, SingleNumberInput } from '../common/components';
+import { Container, EditIcon, Heading1, Information, InputGroup, Table, TableCell, TableHeader, TableRow } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -83,18 +83,17 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
 
   const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
-    return <Tr key={`requiredWordRow${index}`}>
-      <Td>{word.primaryWord} <EditIcon>✏️</EditIcon></Td>
-      <Td>{word.secondaryWords?.join(', ')} <EditIcon>✏️</EditIcon></Td>
-      <Td><span onClick={() => deleteRequiredWord(index)} style={{ cursor: 'pointer' }}>➖</span></Td>
-    </Tr>;
+    return <TableRow key={`requiredWordRow${index}`}>
+      <EditableTableCell editState='editable' value={word.primaryWord ?? ''} />
+      <TableCell>{word.secondaryWords?.join(', ')} <EditIcon>✏️</EditIcon></TableCell>
+      <TableCell><span onClick={() => deleteRequiredWord(index)} style={{ cursor: 'pointer' }}>➖</span></TableCell>
+    </TableRow>;
   });
 
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
     <Container>
-      <EditableElementHeading1 isEditable={isEditable}
-                               isEditing={editingValue === 'TITLE'}
+      <EditableElementHeading1 editState={isEditable ? (editingValue === 'TITLE' ? 'editing' : 'editable') : 'disabled'}
                                value={lexicologerGame.title ?? 'Lexicologer Game'}
                                inputValue={inputValue}
                                onClickEdit={() => { setEditingValue('TITLE'); setInputValue(lexicologerGame.title ?? 'Lexicologer Game'); }}
@@ -104,8 +103,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
                                isWorking={isWorking}
                                placeholder='Lexicologer Game Title'
                                errorMessage={errorMessage} />
-      <EditableElementDocument isEditable={isEditable}
-                               isEditing={editingValue === 'DETAILS'}
+      <EditableElementDocument editState={isEditable ? (editingValue === 'DETAILS' ? 'editing' : 'editable') : 'disabled'}
                                value={lexicologerGame.details ?? {}}
                                inputValue={inputValue}
                                onClickEdit={() => { setEditingValue('DETAILS'); setInputValue(convertDocumentToString(lexicologerGame.details ?? {})); }}
@@ -129,17 +127,17 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           Word matching is case insensitive
         </Information>
         <Table>
-          <Tr>
-            <Th oneFifth title='Primary Word'>Primary Word</Th>
-            <Th threeFifths title='Secondary Words'>Secondary Words</Th>
-            <Th oneFifth title='Actions'>Actions</Th>
-          </Tr>
+          <TableRow>
+            <TableHeader oneFifth title='Primary Word'>Primary Word</TableHeader>
+            <TableHeader threeFifths title='Secondary Words'>Secondary Words</TableHeader>
+            <TableHeader oneFifth title='Actions'>Actions</TableHeader>
+          </TableRow>
           {requiredWords}
-          <Tr>
-            <Td></Td>
-            <Td></Td>
-            <Td><span onClick={addRequiredWord} style={{ cursor: 'pointer' }}>➕</span></Td>
-          </Tr>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell><span onClick={addRequiredWord} style={{ cursor: 'pointer' }}>➕</span></TableCell>
+          </TableRow>
         </Table>
       </>}
     </Container>

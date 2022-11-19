@@ -47,7 +47,6 @@ export const Input = styled.input`
 `;
 
 export const EditIcon = styled.span`
-  cursor: pointer;
   text-shadow: none;
 `;
 
@@ -259,7 +258,7 @@ export const Table = styled.table`
   table-layout: fixed;
 `;
 
-export const Tr = styled.tr`
+export const TableRow = styled.tr`
 `;
 
 interface ThProps {
@@ -273,7 +272,7 @@ const getThWidth = (props: ThProps): string => {
   else return 'auto';
 }
 
-export const Th = styled.th<ThProps>`
+export const TableHeader = styled.th<ThProps>`
   border: 1px solid var(--color);
   width: ${props => getThWidth(props)};
   padding: 0.5em;
@@ -282,9 +281,14 @@ export const Th = styled.th<ThProps>`
   box-sizing: border-box;
 `;
 
-export const Td = styled.td`
+interface TableCellProps {
+  editable?: boolean
+}
+
+export const TableCell = styled.td<TableCellProps>`
   border: 1px solid var(--color);
   padding: 0.5em;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: ${props => props.editable ? "pointer" : "text"}
 `;
