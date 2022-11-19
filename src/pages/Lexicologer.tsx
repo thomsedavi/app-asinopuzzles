@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { EditableElementDocument, EditableElementHeading1, EditableTableCell, SingleNumberInput } from '../common/components';
+import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
 import { Container, EditIcon, Heading1, Information, InputGroup, Table, TableCell, TableCellAction, TableHeader, TableRow } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
@@ -23,8 +23,6 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ inputValue, setInputValue ] = React.useState<string | undefined>();
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
-  const [ isWorking ] = React.useState<boolean>(false);
-  const [ errorMessage ] = React.useState<string | undefined>();
   const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame>(
     useLoaderData() as LexicologerGame ??
     (props.mode === 'create' && defaultGame) ??
@@ -89,11 +87,27 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
   }
 
+  const savePrimaryWord = (index: number) => {
+    const requiredWords = lexicologerGame.requiredWords ?? [];
+
+    index < requiredWords.length && (requiredWords[index].primaryWord = tidyString(inputValue));
+
+    setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
+  }
+
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
 
   const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
     return <TableRow key={`requiredWordRow${index}`}>
-      <EditableTableCell editState='editable' value={word.primaryWord ?? ''} />
+      <EditableTableCellParagraph
+        editState={isEditable ? (editingValue === `PRIMARY_WORD_${index}` ? 'editing' : 'editable') : 'disabled'}
+        value={word.primaryWord ?? ''}
+        inputValue={inputValue}
+        onClickEdit={() => { setEditingValue(`PRIMARY_WORD_${index}`); setInputValue(lexicologerGame.title ?? 'Lexicologer Game'); }}
+        onChange={(value: string) => setInputValue(value)}
+        onClickSave={() => savePrimaryWord(index)}
+        onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
+      />
       <TableCell>{word.secondaryWords?.join(', ')} <EditIcon>✏️</EditIcon></TableCell>
       <TableCell>
         <TableCellAction onClick={() => randomiseWord(index)}>🎲</TableCellAction>
@@ -105,26 +119,26 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
     <Container>
-      <EditableElementHeading1 editState={isEditable ? (editingValue === 'TITLE' ? 'editing' : 'editable') : 'disabled'}
-                               value={lexicologerGame.title ?? 'Lexicologer Game'}
-                               inputValue={inputValue}
-                               onClickEdit={() => { setEditingValue('TITLE'); setInputValue(lexicologerGame.title ?? 'Lexicologer Game'); }}
-                               onChange={(value: string) => setInputValue(value)}
-                               onClickSave={saveName}
-                               onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
-                               isWorking={isWorking}
-                               placeholder='Lexicologer Game Title'
-                               errorMessage={errorMessage} />
-      <EditableElementDocument editState={isEditable ? (editingValue === 'DETAILS' ? 'editing' : 'editable') : 'disabled'}
-                               value={lexicologerGame.details ?? {}}
-                               inputValue={inputValue}
-                               onClickEdit={() => { setEditingValue('DETAILS'); setInputValue(convertDocumentToString(lexicologerGame.details ?? {})); }}
-                               onChange={(value: string) => setInputValue(value)}
-                               onClickSave={saveDetails}
-                               onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
-                               isWorking={isWorking}
-                               placeholder='Lexicologer Game Information'
-                               errorMessage={errorMessage} />
+      <EditableElementHeading1
+        editState={isEditable ? (editingValue === 'TITLE' ? 'editing' : 'editable') : 'disabled'}
+        value={lexicologerGame.title ?? 'Lexicologer Game'}
+        inputValue={inputValue}
+        onClickEdit={() => { setEditingValue('TITLE'); setInputValue(lexicologerGame.title ?? 'Lexicologer Game'); }}
+        onChange={(value: string) => setInputValue(value)}
+        onClickSave={saveName}
+        onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
+        placeholder='Lexicologer Game Title'
+      />
+      <EditableElementDocument
+        editState={isEditable ? (editingValue === 'DETAILS' ? 'editing' : 'editable') : 'disabled'}
+        value={lexicologerGame.details ?? {}}
+        inputValue={inputValue}
+        onClickEdit={() => { setEditingValue('DETAILS'); setInputValue(convertDocumentToString(lexicologerGame.details ?? {})); }}
+        onChange={(value: string) => setInputValue(value)}
+        onClickSave={saveDetails}
+        onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
+        placeholder='Lexicologer Game Information'
+      />
       {isEditable && <>
         <InputGroup>
           <SingleNumberInput id='CharacterLimit'

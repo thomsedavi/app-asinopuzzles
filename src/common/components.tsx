@@ -6,10 +6,31 @@ import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input,
 interface EditableElementTableCellProps {
   editState: 'disabled' | 'editable' | 'editing';
   value: string;
+  inputValue?: string;
+  onClickEdit: () => void;
+  onChange: (value: string) => void;
+  onClickSave: () => void;
+  onClickCancel: () => void;
+  isWorking?: boolean;
+  placeholder?: string;
+  errorMessage?: string;
 }
 
-export const EditableTableCell = (props: EditableElementTableCellProps): JSX.Element => {
-  if (props.editState === 'editable') {
+export const EditableTableCellParagraph = (props: EditableElementTableCellProps): JSX.Element => {
+  if (props.editState === 'editing') {
+    const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        props.onClickSave();
+      }
+    }
+
+    return <>
+      <TableCell>
+        <Input maxLength={32} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
+      </TableCell>
+    </>
+  } else if (props.editState === 'editable') {
     return <TableCell editable>{props.value} <EditIcon>✏️</EditIcon></TableCell>;
   } else {
     return <TableCell>{props.value}</TableCell>;
@@ -55,7 +76,9 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
     }
 
     return <>
-      <Heading1><Input maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} /></Heading1>
+      <Heading1>
+        <Input maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
+      </Heading1>
       <ButtonGroup>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
         <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
