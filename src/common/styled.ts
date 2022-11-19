@@ -229,7 +229,7 @@ export const InlineLabel = styled.label`
 `;
 
 interface InlineInputProps {
-  short?: boolean;  
+  short?: boolean;
 }
 
 export const InlineInput = styled.input<InlineInputProps>`
@@ -255,16 +255,31 @@ export const Information = styled.div`
 export const Table = styled.table`
   width: 100%;
   border: 1px solid var(--color);
+  border-collapse: collapse;
+  table-layout: fixed;
 `;
 
 export const Tr = styled.tr`
-
 `;
 
-export const Th = styled.th`
+interface ThProps {
+  oneFifth?: boolean;
+  threeFifths?: boolean;
+}
+
+const getThWidth = (props: ThProps): string => {
+  if (props.oneFifth) return '20%';
+  else if (props.threeFifths) return '60%';
+  else return 'auto';
+}
+
+export const Th = styled.th<ThProps>`
   border: 1px solid var(--color);
+  width: ${props => getThWidth(props)}
+  padding: 0.5em;
 `;
 
 export const Td = styled.td`
   border: 1px solid var(--color);
+  padding: 0.5em;
 `;
