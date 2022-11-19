@@ -31,7 +31,7 @@ export const EditableTableCellParagraph = (props: EditableElementTableCellProps)
       </TableCell>
     </>
   } else if (props.editState === 'editable') {
-    return <TableCell editable>{props.value} <EditIcon>✏️</EditIcon></TableCell>;
+    return <TableCell editable onClick={props.onClickEdit}>{props.value} <EditIcon>✏️</EditIcon></TableCell>;
   } else {
     return <TableCell>{props.value}</TableCell>;
   }
