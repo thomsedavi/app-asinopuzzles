@@ -93,6 +93,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     index < requiredWords.length && (requiredWords[index].primaryWord = tidyString(inputValue));
 
     setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
+    setInputValue(undefined);
+    setEditingValue(undefined);
   }
 
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
@@ -103,7 +105,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         editState={isEditable ? (editingValue === `PRIMARY_WORD_${index}` ? 'editing' : 'editable') : 'disabled'}
         value={word.primaryWord ?? ''}
         inputValue={inputValue}
-        onClickEdit={() => { setEditingValue(`PRIMARY_WORD_${index}`); setInputValue(lexicologerGame.title ?? 'Lexicologer Game'); }}
+        onClickEdit={() => { setEditingValue(`PRIMARY_WORD_${index}`); setInputValue(word.primaryWord ?? ''); }}
         onChange={(value: string) => setInputValue(value)}
         onClickSave={() => savePrimaryWord(index)}
         onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
@@ -118,7 +120,6 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
-    <Heading1>Test, editing: {editingValue}, input: {inputValue}</Heading1>
     <Container>
       <EditableElementHeading1
         editState={isEditable ? (editingValue === 'TITLE' ? 'editing' : 'editable') : 'disabled'}
