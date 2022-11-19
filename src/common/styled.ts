@@ -292,3 +292,7 @@ export const TableCell = styled.td<TableCellProps>`
   text-overflow: ellipsis;
   cursor: ${props => props.editable ? "pointer" : "text"}
 `;
+
+export const TableCellAction = styled.span`
+  cursor: pointer;
+`;

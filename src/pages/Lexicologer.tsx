@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCell, SingleNumberInput } from '../common/components';
-import { Container, EditIcon, Heading1, Information, InputGroup, Table, TableCell, TableHeader, TableRow } from '../common/styled';
+import { Container, EditIcon, Heading1, Information, InputGroup, Table, TableCell, TableCellAction, TableHeader, TableRow } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -63,11 +63,20 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     }
   }
 
-  const addRequiredWord = () => {
+  const createRequiredWord = () => {
     const requiredWords = lexicologerGame.requiredWords ?? [];
+
+    requiredWords.push({});
+
+    setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
+  }
+
+  const randomiseWord = (index: number) => {
     const randomWord = exampleRequiredWords[Math.floor(Math.random() * exampleRequiredWords.length)];
 
-    requiredWords.push(randomWord);
+    const requiredWords = lexicologerGame.requiredWords ?? [];
+
+    index < requiredWords.length && (requiredWords.splice(index, 1, randomWord));
 
     setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
   }
@@ -86,7 +95,10 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     return <TableRow key={`requiredWordRow${index}`}>
       <EditableTableCell editState='editable' value={word.primaryWord ?? ''} />
       <TableCell>{word.secondaryWords?.join(', ')} <EditIcon>✏️</EditIcon></TableCell>
-      <TableCell><span onClick={() => deleteRequiredWord(index)} style={{ cursor: 'pointer' }}>➖</span></TableCell>
+      <TableCell>
+        <TableCellAction onClick={() => randomiseWord(index)}>🎲</TableCellAction>
+        <TableCellAction onClick={() => deleteRequiredWord(index)}>➖</TableCellAction>
+      </TableCell>
     </TableRow>;
   });
 
@@ -136,7 +148,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           <TableRow>
             <TableCell></TableCell>
             <TableCell></TableCell>
-            <TableCell><span onClick={addRequiredWord} style={{ cursor: 'pointer' }}>➕</span></TableCell>
+            <TableCell><span onClick={createRequiredWord} style={{ cursor: 'pointer' }}>➕</span></TableCell>
           </TableRow>
         </Table>
       </>}
