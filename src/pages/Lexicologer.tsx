@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, SingleNumberInput } from '../common/components';
-import { Container, Heading1, Information, InputGroup, Table, Td, Th, Tr } from '../common/styled';
+import { Container, EditIcon, Heading1, Information, InputGroup, Table, Td, Th, Tr } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -84,9 +84,9 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 
   const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
     return <Tr key={`requiredWordRow${index}`}>
-      <Td>{word.primaryWord}</Td>
-      <Td>{word.secondaryWords?.join(', ')}</Td>
-      <Td>{() => deleteRequiredWord(index)}</Td>
+      <Td>{word.primaryWord} <EditIcon>✏️</EditIcon></Td>
+      <Td>{word.secondaryWords?.join(', ')} <EditIcon>✏️</EditIcon></Td>
+      <Td><span onClick={() => deleteRequiredWord(index)} style={{ cursor: 'pointer' }}>➖</span></Td>
     </Tr>;
   });
 
