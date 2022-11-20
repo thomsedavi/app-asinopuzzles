@@ -119,6 +119,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         onChange={(value: string) => setInputValue(value)}
         onClickSave={() => savePrimaryWord(index)}
         onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
+        maxLength={32}
       />
       <EditableTableCellParagraph
         editState={isEditable ? (editingValue === `WORD_SECONDARY_${index}` ? 'editing' : 'editable') : 'disabled'}
@@ -128,6 +129,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         onChange={(value: string) => setInputValue(value)}
         onClickSave={() => saveSecondaryWord(index)}
         onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
+        maxLength={64}
       />
       <TableCell>
         <TableCellAction onClick={() => randomiseWord(index)}>🎲</TableCellAction>

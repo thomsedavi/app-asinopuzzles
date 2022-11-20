@@ -315,8 +315,10 @@ export const TableHeader = styled.th`
 interface TableCellProps {
   editable?: boolean;
   editing?: boolean;
-  hideRightBorder?: boolean;
-  hideLeftBorder?: boolean;
+  noBorderRight?: boolean;
+  noBorderLeft?: boolean;
+  noPaddingRight?: boolean;
+  noPaddingLeft?: boolean;
 }
 
 export const TableCell = styled.td<TableCellProps>`
@@ -325,8 +327,10 @@ export const TableCell = styled.td<TableCellProps>`
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: ${props => props.editable ? "pointer" : "auto"};
-  border-right: ${props => props.hideRightBorder ? "none" : "auto"};
-  border-left: ${props => props.hideLeftBorder ? "none" : "auto"};
+  border-right: ${props => props.noBorderRight ? "none" : "auto"};
+  border-left: ${props => props.noBorderLeft ? "none" : "auto"};
+  padding-right: ${props => props.noPaddingRight ? 0 : props.editing ? "0.4em" : "0.5em"};
+  padding-left: ${props => props.noPaddingLeft ? 0 : props.editing ? "0.4em" : "0.5em"};
 `;
 
 export const TableCellAction = styled.span`

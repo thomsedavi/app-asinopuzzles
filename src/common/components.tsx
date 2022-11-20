@@ -14,6 +14,7 @@ interface EditableElementTableCellProps {
   isWorking?: boolean;
   placeholder?: string;
   errorMessage?: string;
+  maxLength: number
 }
 
 export const EditableTableCellParagraph = (props: EditableElementTableCellProps): JSX.Element => {
@@ -30,13 +31,13 @@ export const EditableTableCellParagraph = (props: EditableElementTableCellProps)
 
     return <>
       <TableCell editing colSpan={2}>
-        <TableCellInput onBlur={props.onClickSave} autoFocus maxLength={32} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
+        <TableCellInput onBlur={props.onClickSave} autoFocus maxLength={props.maxLength} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
       </TableCell>
     </>
   } else if (props.editState === 'editable') {
     return <>
-      <TableCell hideRightBorder editable onClick={props.onClickEdit}>{props.value}</TableCell>
-      <TableCell hideLeftBorder editable onClick={props.onClickEdit}><EditIcon>✏️</EditIcon></TableCell>
+      <TableCell noBorderRight noPaddingRight editable onClick={props.onClickEdit}>{props.value}</TableCell>
+      <TableCell noBorderLeft noPaddingLeft editable onClick={props.onClickEdit}><EditIcon>✏️</EditIcon></TableCell>
     </>;
   } else {
     return <TableCell colSpan={2}>{props.value}</TableCell>;
