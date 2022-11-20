@@ -100,7 +100,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const saveSecondaryWord = (index: number) => {
     const requiredWords = lexicologerGame.requiredWords ?? [];
 
-    // do things
+    index < requiredWords.length && (requiredWords[index].secondaryWords = inputValue?.split(',').map(word => tidyString(word)) ?? requiredWords[index].secondaryWords);
 
     setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
     setInputValue(undefined);

@@ -77,7 +77,7 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
 
     return <>
       <Heading1>
-        <Input autoFocus maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
+        <Input onBlur={props.onClickSave} autoFocus maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
       </Heading1>
       <ButtonGroup>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
@@ -109,7 +109,7 @@ interface EditableElementDocumentProps {
 export const EditableElementDocument = (props: EditableElementDocumentProps): JSX.Element => {
   if (props.editState === 'editing') {
     return <>
-      <TextArea autoFocus value={props.inputValue} disabled={props.isWorking} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)} />
+      <TextArea onBlur={props.onClickSave} autoFocus value={props.inputValue} disabled={props.isWorking} placeholder="Asino Puzzler" rows={8} cols={40} maxLength={4000} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)} />
       <ButtonGroup>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
         <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
