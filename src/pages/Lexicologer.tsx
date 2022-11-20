@@ -173,15 +173,22 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           Word matching is case insensitive
         </Information>
         <Table>
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
           <TableRow>
-            <TableHeader oneFifth title='Primary Word' colSpan={2}>Primary Word</TableHeader>
-            <TableHeader threeFifths title='Secondary Words' colSpan={2}>Secondary Words</TableHeader>
-            <TableHeader oneFifth title='Actions'>Actions</TableHeader>
+            <TableHeader title='Primary Word' colSpan={2}>Primary Word</TableHeader>
+            <TableHeader title='Secondary Words' colSpan={2}>Secondary Words</TableHeader>
+            <TableHeader title='Actions'>Actions</TableHeader>
           </TableRow>
           {requiredWords}
           <TableRow>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
+            <TableCell colSpan={2}></TableCell>
+            <TableCell colSpan={2}></TableCell>
             <TableCell><span onClick={createRequiredWord} style={{ cursor: 'pointer' }}>➕</span></TableCell>
           </TableRow>
         </Table>

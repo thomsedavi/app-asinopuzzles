@@ -261,20 +261,8 @@ export const Table = styled.table`
 export const TableRow = styled.tr`
 `;
 
-interface ThProps {
-  oneFifth?: boolean;
-  threeFifths?: boolean;
-}
-
-const getThWidth = (props: ThProps): string => {
-  if (props.oneFifth) return '20%';
-  else if (props.threeFifths) return '60%';
-  else return 'auto';
-}
-
-export const TableHeader = styled.th<ThProps>`
+export const TableHeader = styled.th`
   border: 1px solid var(--color);
-  width: ${props => getThWidth(props)};
   padding: 0.5em;
   overflow: hidden;
   text-overflow: ellipsis;
