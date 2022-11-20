@@ -19,6 +19,8 @@ interface EditableElementTableCellProps {
 export const EditableTableCellParagraph = (props: EditableElementTableCellProps): JSX.Element => {
   if (props.editState === 'editing') {
     const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      console.log(event.keyCode);
+
       if (event.keyCode === 13) {
         event.preventDefault();
         props.onClickSave();
