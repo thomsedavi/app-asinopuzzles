@@ -29,14 +29,17 @@ export const EditableTableCellParagraph = (props: EditableElementTableCellProps)
     }
 
     return <>
-      <TableCell editing>
+      <TableCell editing colSpan={2}>
         <TableCellInput onBlur={props.onClickSave} autoFocus maxLength={32} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
       </TableCell>
     </>
   } else if (props.editState === 'editable') {
-    return <TableCell editable onClick={props.onClickEdit}>{props.value} <EditIcon>✏️</EditIcon></TableCell>;
+    return <>
+      <TableCell editable onClick={props.onClickEdit}>{props.value}</TableCell>
+      <TableCell editable onClick={props.onClickEdit}><EditIcon>✏️</EditIcon></TableCell>
+    </>;
   } else {
-    return <TableCell>{props.value}</TableCell>;
+    return <TableCell colSpan={2}>{props.value}</TableCell>;
   }
 }
 

@@ -174,8 +174,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         </Information>
         <Table>
           <TableRow>
-            <TableHeader oneFifth title='Primary Word'>Primary Word</TableHeader>
-            <TableHeader threeFifths title='Secondary Words'>Secondary Words</TableHeader>
+            <TableHeader oneFifth title='Primary Word' colSpan={2}>Primary Word</TableHeader>
+            <TableHeader threeFifths title='Secondary Words' colSpan={2}>Secondary Words</TableHeader>
             <TableHeader oneFifth title='Actions'>Actions</TableHeader>
           </TableRow>
           {requiredWords}
