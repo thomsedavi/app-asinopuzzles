@@ -35,8 +35,8 @@ export const EditableTableCellParagraph = (props: EditableElementTableCellProps)
     </>
   } else if (props.editState === 'editable') {
     return <>
-      <TableCell hideRightMargin editable onClick={props.onClickEdit}>{props.value}</TableCell>
-      <TableCell hideLeftMargin editable onClick={props.onClickEdit}><EditIcon>✏️</EditIcon></TableCell>
+      <TableCell hideRightBorder editable onClick={props.onClickEdit}>{props.value}</TableCell>
+      <TableCell hideLeftBorder editable onClick={props.onClickEdit}><EditIcon>✏️</EditIcon></TableCell>
     </>;
   } else {
     return <TableCell colSpan={2}>{props.value}</TableCell>;
