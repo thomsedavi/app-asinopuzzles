@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
-import { Container, EditIcon, Heading1, Information, InputGroup, Table, TableCell, TableCellAction, TableHeader, TableRow } from '../common/styled';
+import { Container, Heading1, Information, InputGroup, Table, TableCell, TableCellAction, TableHeader, TableRow } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
