@@ -92,9 +92,9 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else if (props.editState === 'editable') {
-    return <Heading1 editable onClick={props.onClickEdit}>{props.value} <EditIcon>✏️</EditIcon></Heading1>
+    return <Heading1 editable onClick={props.onClickEdit} title={props.value}>{props.value} <EditIcon>✏️</EditIcon></Heading1>
   } else {
-    return <Heading1>{props.value}</Heading1>
+    return <Heading1 title={props.value}>{props.value}</Heading1>
   }
 }
 
