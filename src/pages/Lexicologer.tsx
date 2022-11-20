@@ -199,6 +199,9 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           <Button onClick={() => setIsPlaying(true)}>Preview</Button>
         </ButtonGroup>
       </>}
+      {isPlaying && isEditable && <ButtonGroup>
+        <Button onClick={() => setIsPlaying(false)}>Edit</Button>
+      </ButtonGroup>}
     </Container>
   </>;
 }
