@@ -172,13 +172,13 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           Use the '*' symbol as a wildcard match in the Secondary Words (for example, "lov*" will match "loved" and "loving")<br />
           Word matching is case insensitive
         </Information>
-        <Table smallWidth='10em' mediumWidth='15em' largeWidth='20em'>
+        <Table smallWidth='21em' mediumWidth='35em' largeWidth='37em'>
           <ColumnGroup>
-            <Column width='1em' />
-            <Column smallWidth='1em' mediumWidth='11em' largeWidth='1em' />
-            <Column width='1em' />
-            <Column smallWidth='6em' mediumWidth='11em' largeWidth='16em' />
-            <Column width='1em' />
+            <Column smallWidth='4.4em' mediumWidth='7em' largeWidth='7em' />
+            <Column width='2.5em' />
+            <Column smallWidth='7em' mediumWidth='18.4em' largeWidth='20.4em' />
+            <Column width='2.5em' />
+            <Column width='4.6em' />
           </ColumnGroup>
           <TableRow>
             <TableHeader title='Primary Word' colSpan={2}>Primary Word</TableHeader>

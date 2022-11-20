@@ -153,15 +153,15 @@ export const Container = styled.div`
   margin: 0 auto;
 
   @media (width < 576px) {
-    width: 340px;
+    width: 21em;
   }
 
   @media (576px <= width < 768px) {
-    width: 556px;
+    width: 35em;
   }
 
   @media (768px <= width) {
-    width: 748px;
+    width: 37em;
   }
 `;
 
