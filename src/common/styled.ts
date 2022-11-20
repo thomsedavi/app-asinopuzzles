@@ -288,10 +288,10 @@ interface TableCellProps {
 
 export const TableCell = styled.td<TableCellProps>`
   border: 1px solid var(--color);
-  padding: ${props => props.editing ? "0.4em" : "0.5em"}
+  padding: ${props => props.editing ? "0.4em" : "0.5em"};
   overflow: hidden;
   text-overflow: ellipsis;
-  cursor: ${props => props.editable ? "pointer" : "text"}
+  cursor: ${props => props.editable ? "pointer" : "text"};
 `;
 
 export const TableCellAction = styled.span`
