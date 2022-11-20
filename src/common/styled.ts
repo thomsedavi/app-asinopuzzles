@@ -251,11 +251,54 @@ export const Information = styled.div`
   margin: 1em 0;
 `;
 
-export const Table = styled.table`
-  width: 100%;
+interface TableProps {
+  width?: string | number;
+  smallWidth?: string | number;
+  mediumWidth?: string | number;
+  largeWidth?: string | number;
+}
+
+export const Table = styled.table<TableProps>`
   border: 1px solid var(--color);
   border-collapse: collapse;
   table-layout: fixed;
+  margin: 0 auto;
+
+  @media (width < 576px) {
+    width: ${props => props.smallWidth ?? props.width ?? 'auto'};
+  }
+
+  @media (576px <= width < 768px) {
+    width: ${props => props.mediumWidth ?? props.width ?? 'auto'};
+  }
+
+  @media (768px <= width) {
+    width: ${props => props.largeWidth ?? props.width ?? 'auto'};
+  }
+`;
+
+export const ColumnGroup = styled.colgroup`
+`;
+
+interface ColumnProps {
+  width?: string | number;
+  smallWidth?: string | number;
+  mediumWidth?: string | number;
+  largeWidth?: string | number;
+}
+
+export const Column = styled.col<ColumnProps>`
+  @media (width < 576px) {
+    width: ${props => props.smallWidth ?? props.width ?? 'auto'};
+  }
+
+  @media (576px <= width < 768px) {
+    width: ${props => props.mediumWidth ?? props.width ?? 'auto'};
+  }
+
+  @media (768px <= width) {
+    width: ${props => props.largeWidth ?? props.width ?? 'auto'};
+  }
 `;
 
 export const TableRow = styled.tr`

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
-import { Container, Heading1, Information, InputGroup, Table, TableCell, TableCellAction, TableHeader, TableRow } from '../common/styled';
+import { Column, ColumnGroup, Container, Heading1, Information, InputGroup, Table, TableCell, TableCellAction, TableHeader, TableRow } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -172,14 +172,14 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           Use the '*' symbol as a wildcard match in the Secondary Words (for example, "lov*" will match "loved" and "loving")<br />
           Word matching is case insensitive
         </Information>
-        <Table>
-          <colgroup>
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-          </colgroup>
+        <Table smallWidth='10em' mediumWidth='15em' largeWidth='20em'>
+          <ColumnGroup>
+            <Column width='1em' />
+            <Column smallWidth='1em' mediumWidth='11em' largeWidth='1em' />
+            <Column width='1em' />
+            <Column smallWidth='6em' mediumWidth='11em' largeWidth='16em' />
+            <Column width='1em' />
+          </ColumnGroup>
           <TableRow>
             <TableHeader title='Primary Word' colSpan={2}>Primary Word</TableHeader>
             <TableHeader title='Secondary Words' colSpan={2}>Secondary Words</TableHeader>
