@@ -175,10 +175,10 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         <Table>
           <colgroup>
             <col />
-            <col width='2.5em' />
             <col />
-            <col width='2.5em' />
-            <col width='4.6em' />
+            <col />
+            <col />
+            <col />
           </colgroup>
           <TableRow>
             <TableHeader title='Primary Word' colSpan={2}>Primary Word</TableHeader>
