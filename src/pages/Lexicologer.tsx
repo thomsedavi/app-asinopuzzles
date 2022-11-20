@@ -97,20 +97,38 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setEditingValue(undefined);
   }
 
+  const saveSecondaryWord = (index: number) => {
+    const requiredWords = lexicologerGame.requiredWords ?? [];
+
+    // do things
+
+    setLexicologerGame({ ...lexicologerGame, requiredWords: requiredWords });
+    setInputValue(undefined);
+    setEditingValue(undefined);
+  }
+
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
 
   const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
     return <TableRow key={`requiredWordRow${index}`}>
       <EditableTableCellParagraph
-        editState={isEditable ? (editingValue === `PRIMARY_WORD_${index}` ? 'editing' : 'editable') : 'disabled'}
+        editState={isEditable ? (editingValue === `WORD_PRIMARY_${index}` ? 'editing' : 'editable') : 'disabled'}
         value={word.primaryWord ?? ''}
         inputValue={inputValue}
-        onClickEdit={() => { setEditingValue(`PRIMARY_WORD_${index}`); setInputValue(word.primaryWord ?? ''); }}
+        onClickEdit={() => { setEditingValue(`WORD_PRIMARY_${index}`); setInputValue(word.primaryWord ?? ''); }}
         onChange={(value: string) => setInputValue(value)}
         onClickSave={() => savePrimaryWord(index)}
         onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
       />
-      <TableCell>{word.secondaryWords?.join(', ')} <EditIcon>✏️</EditIcon></TableCell>
+      <EditableTableCellParagraph
+        editState={isEditable ? (editingValue === `WORD_SECONDARY_${index}` ? 'editing' : 'editable') : 'disabled'}
+        value={word.secondaryWords?.join(', ') ?? ''}
+        inputValue={inputValue}
+        onClickEdit={() => { setEditingValue(`WORD_SECONDARY_${index}`); setInputValue(word.secondaryWords?.join(', ') ?? ''); }}
+        onChange={(value: string) => setInputValue(value)}
+        onClickSave={() => saveSecondaryWord(index)}
+        onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
+      />
       <TableCell>
         <TableCellAction onClick={() => randomiseWord(index)}>🎲</TableCellAction>
         <TableCellAction onClick={() => deleteRequiredWord(index)}>➖</TableCellAction>

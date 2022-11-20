@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput, TableCell } from './styled';
+import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput, TableCell, TableCellInput } from './styled';
 
 interface EditableElementTableCellProps {
   editState: 'disabled' | 'editable' | 'editing';
@@ -26,8 +26,8 @@ export const EditableTableCellParagraph = (props: EditableElementTableCellProps)
     }
 
     return <>
-      <TableCell>
-        <Input maxLength={32} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
+      <TableCell editing>
+        <TableCellInput maxLength={32} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
       </TableCell>
     </>
   } else if (props.editState === 'editable') {

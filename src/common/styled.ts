@@ -282,12 +282,13 @@ export const TableHeader = styled.th<ThProps>`
 `;
 
 interface TableCellProps {
-  editable?: boolean
+  editable?: boolean;
+  editing?: boolean;
 }
 
 export const TableCell = styled.td<TableCellProps>`
   border: 1px solid var(--color);
-  padding: 0.5em;
+  padding: ${props => props.editing ? "0.4em" : "0.5em"}
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: ${props => props.editable ? "pointer" : "text"}
@@ -295,4 +296,10 @@ export const TableCell = styled.td<TableCellProps>`
 
 export const TableCellAction = styled.span`
   cursor: pointer;
+`;
+
+export const TableCellInput = styled.input`
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
 `;
