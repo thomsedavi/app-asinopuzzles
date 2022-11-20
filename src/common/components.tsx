@@ -19,11 +19,12 @@ interface EditableElementTableCellProps {
 export const EditableTableCellParagraph = (props: EditableElementTableCellProps): JSX.Element => {
   if (props.editState === 'editing') {
     const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      console.log(event.keyCode);
-
       if (event.keyCode === 13) {
         event.preventDefault();
         props.onClickSave();
+      } else if (event.keyCode === 27) {
+        event.preventDefault();
+        props.onClickCancel();
       }
     }
 
@@ -74,6 +75,9 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
       if (event.keyCode === 13) {
         event.preventDefault();
         props.onClickSave();
+      } else if (event.keyCode === 27) {
+        event.preventDefault();
+        props.onClickCancel();
       }
     }
 
@@ -81,10 +85,6 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
       <Heading1>
         <Input onBlur={props.onClickSave} autoFocus maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
       </Heading1>
-      <ButtonGroup>
-        <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
-        <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
-      </ButtonGroup>
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else if (props.editState === 'editable') {
