@@ -141,13 +141,13 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 
   const requiredWordChecklist: (JSX.Element | string)[] = [];
 
-  // to lower case and strip accents, eg 'é' => 'e'
+  // to lower case and strip accents, eg 'é' => 'e', but keep the wildcard '*'
   const cleanWord = (word: string): string => {
     let cleanedWord = ''
 
     for (let c of word.toLowerCase().normalize('NFKD')) {
-      if (c !== c.toUpperCase()) {
-        cleanedWord = cleanedWord + c;
+      if (c !== c.toUpperCase() || c === '*') {
+        cleanedWord += c;
       }
     }
 
@@ -155,24 +155,43 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   }
 
   if (isPlaying) {
-    const words: string[] = [];
+    const usedWords: string[] = [];
     let word: string = '';
 
     for (let c of inputValue ?? '') {
       if (c.toLowerCase() !== c.toUpperCase()) {
-        word = word + c;
+        word += c;
       } else {
-        word !== '' && words.push(cleanWord(word));
+        word !== '' && usedWords.push(cleanWord(word));
         word = '';
       }
     }
 
-    word !== '' && words.push(cleanWord(word));
+    word !== '' && usedWords.push(cleanWord(word));
 
-    console.log('words', words);
+    lexicologerGame.requiredWords?.forEach((requiredWord: LexicologerRequiredWord, index: number) => {
+      let match = false;
 
-    lexicologerGame.requiredWords?.forEach((word: LexicologerRequiredWord, index: number) => {
+      if (requiredWord.primaryWord) {
+        let regex = '/\b';
 
+        for (let c of cleanWord(requiredWord.primaryWord)) {
+          if (c === '*') {
+            regex += '\w+'
+          } else {
+            regex += c;
+          }
+        }
+        regex += '/'
+
+        var regExp = new RegExp(regex);
+
+        usedWords.forEach((usedWord: string) => {
+          match ||= regExp.test(usedWord);
+        });
+      }
+
+      console.log('match', match);
     });
   }
 
