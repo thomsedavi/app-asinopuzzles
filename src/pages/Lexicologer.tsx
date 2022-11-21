@@ -173,7 +173,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       let match = false;
 
       if (requiredWord.primaryWord) {
-        let regex = '/\\b';
+        let regex = '\\b';
 
         for (let c of cleanWord(requiredWord.primaryWord)) {
           if (c === '*') {
@@ -182,12 +182,9 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             regex += c;
           }
         }
-        regex += '\\b/'
+        regex += '\\b'
 
         var regExp = new RegExp(regex);
-
-        console.log('regex', regex);
-        console.log('regExp', regExp);
 
         usedWords.forEach((usedWord: string) => {
           match ||= regExp.test(usedWord);
