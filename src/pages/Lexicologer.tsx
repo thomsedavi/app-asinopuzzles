@@ -323,7 +323,7 @@ const StatusTooLong: React.FunctionComponent = (props) => {
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
-    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0 auto" }}>
+    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", display: "block", margin: "0 auto" }}>
     <StatusText x="196.291px" y="105.646px">Too long!</StatusText>
     <g>
       <DarkPinkPath d="M744.457,45c0,0 -25.399,0.808 -33.713,5.608c-5.735,3.311 -7.703,10.656 -4.392,16.392c3.312,5.735 10.657,7.704 16.392,4.392c8.314,-4.8 21.713,-26.392 21.713,-26.392Z" />
@@ -397,7 +397,7 @@ const StatusGood: React.FunctionComponent = (props) => {
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
-    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0 auto" }}>
+    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", display: "block", margin: "0 auto" }}>
     <StatusText x="253.068px" y="105.646px">Good!</StatusText>
     <g>
       <DarkPinkPath d="M660,28c0,0 -12,22.4 -12,32c0,6.623 5.377,12 12,12c6.623,0 12,-5.377 12,-12c0,-9.6 -12,-32 -12,-32Z" />
