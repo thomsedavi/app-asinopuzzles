@@ -154,6 +154,28 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     return cleanedWord;
   }
 
+  const isUsedWordRequiredWord = (requiredWord: string, usedWords: string[]): boolean => {
+    let match: boolean = false;
+    let regex: string = '\\b';
+
+    for (let c of cleanWord(requiredWord)) {
+      if (c === '*') {
+        regex += '\\w+'
+      } else {
+        regex += c;
+      }
+    }
+    regex += '\\b'
+
+    var regExp = new RegExp(regex);
+
+    for (let i = 0; i < usedWords.length && !match; i++) {
+      match ||= regExp.test(usedWords[i]);
+    }
+
+    return match;
+  }
+
   if (isPlaying) {
     const usedWords: string[] = [];
     let word: string = '';
@@ -173,25 +195,26 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       let match = false;
 
       if (requiredWord.primaryWord) {
-        let regex = '\\b';
-
-        for (let c of cleanWord(requiredWord.primaryWord)) {
-          if (c === '*') {
-            regex += '\\w+'
-          } else {
-            regex += c;
-          }
-        }
-        regex += '\\b'
-
-        var regExp = new RegExp(regex);
-
-        usedWords.forEach((usedWord: string) => {
-          match ||= regExp.test(usedWord);
-        });
+        match ||= isUsedWordRequiredWord(requiredWord.primaryWord!, usedWords);
       }
 
-      console.log('match', match);
+      if (!match && requiredWord.secondaryWords) {
+        for (let i = 0; i < requiredWord.secondaryWords.length && !match; i++) {
+          match ||= isUsedWordRequiredWord(requiredWord.secondaryWords[i], usedWords);
+        }
+      }
+
+      if (match) {
+        requiredWordChecklist.push(<span key={`requiredWord${index}`} style={{ color: 'green'}}>{requiredWord.primaryWord ?? '?'}</span>);
+      } else {
+        requiredWordChecklist.push(<span key={`requiredWord${index}`} style={{ color: 'red'}}>{requiredWord.primaryWord ?? '?'}</span>);
+      }
+
+      if (index < lexicologerGame.requiredWords!.length - 2) {
+        requiredWordChecklist.push(', ');
+      } else if (index === lexicologerGame.requiredWords!.length - 2) {
+        requiredWordChecklist.push(' and ');
+      }
     });
   }
 
