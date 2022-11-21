@@ -324,7 +324,7 @@ const StatusTooLong: React.FunctionComponent = (props) => {
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
     style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0, auto" }}>
-    <StatusText x="196.291px" y="105.646px" style={{ fontFamily: "'DustismoRoman-BoldItalic', 'Dustismo Roman'", fontStyle: "italic", fontSize: "72px", fontWeight: 700 }}>Too long!</StatusText>
+    <StatusText x="196.291px" y="105.646px">Too long!</StatusText>
     <g>
       <DarkPinkPath d="M744.457,45c0,0 -25.399,0.808 -33.713,5.608c-5.735,3.311 -7.703,10.656 -4.392,16.392c3.312,5.735 10.657,7.704 16.392,4.392c8.314,-4.8 21.713,-26.392 21.713,-26.392Z" />
       <DarkPinkPath d="M780.958,80c0,0 -22.4,-12 -32,-12c-6.623,0 -12,5.377 -12,12c0,6.623 5.377,12 12,12c9.6,0 32,-12 32,-12Z" />
@@ -398,7 +398,7 @@ const StatusGood: React.FunctionComponent = (props) => {
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
     style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0, auto" }}>
-    <StatusText x="253.068px" y="105.646px" style={{ fontFamily: "'DustismoRoman-BoldItalic', 'Dustismo Roman'", fontStyle: "italic", fontSize: "72px", fontWeight: 700 }}>Good!</StatusText>
+    <StatusText x="253.068px" y="105.646px">Good!</StatusText>
     <g>
       <DarkPinkPath d="M660,28c0,0 -12,22.4 -12,32c0,6.623 5.377,12 12,12c6.623,0 12,-5.377 12,-12c0,-9.6 -12,-32 -12,-32Z" />
       <DarkPinkPath d="M686,34.967c0,0 -21.592,13.399 -26.392,21.712c-3.312,5.736 -1.344,13.081 4.392,16.393c5.736,3.311 13.081,1.343 16.392,-4.393c4.8,-8.313 5.608,-33.712 5.608,-33.712Z" />
@@ -465,7 +465,7 @@ const StatusRequiredWords: React.FunctionComponent = (props) => {
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
     style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", display: "block", margin: "0, auto" }}>
-    <StatusText x="96.676px" y="105.646px" style={{ fontFamily: "'DustismoRoman-BoldItalic', 'Dustismo Roman'", fontStyle: "italic", fontSize: "72px", fontWeight: 700 }}>Words Missing!</StatusText>
+    <StatusText x="96.676px" y="105.646px">Words Missing!</StatusText>
     <g>
       <DarkPinkPath d="M686,34.967c0,0 -21.592,13.399 -26.392,21.712c-3.312,5.736 -1.344,13.081 4.392,16.393c5.736,3.311 13.081,1.343 16.392,-4.393c4.8,-8.313 5.608,-33.712 5.608,-33.712Z" />
       <DarkPinkPath d="M705.033,54c0,0 -25.399,0.808 -33.712,5.608c-5.736,3.311 -7.704,10.656 -4.393,16.392c3.312,5.736 10.657,7.704 16.393,4.392c8.313,-4.8 21.712,-26.392 21.712,-26.392Z" />
@@ -532,11 +532,11 @@ const YellowPath = styled.path`
 
 const LightPinkPath = styled.path`
   @media (prefers-color-scheme: dark) {
-    fill: #037;
+    fill: #4bf;
   }
 
   @media (prefers-color-scheme: light) {
-    fill: #f9d;
+    fill: #825;
   }
 `;
 
@@ -552,17 +552,22 @@ const MediumPinkPath = styled.path`
 
 const DarkPinkPath = styled.path`
   @media (prefers-color-scheme: dark) {
-    fill: #4bf;
+    fill: #037;
   }
 
   @media (prefers-color-scheme: light) {
-    fill: #825;
+    fill: #f9d;
   }
 `;
 
 const StatusText = styled.text`
+  font-family: DustismoRoman-BoldItalic, "Dustismo Roman";
+  font-style: italic;
+  font-size: 72px;
+  font-weight: 700;
+
   @media (prefers-color-scheme: dark) {
-    fill: #07a;
+    fill: #4bf;
   }
 
   @media (prefers-color-scheme: light) {
