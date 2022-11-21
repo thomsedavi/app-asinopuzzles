@@ -323,7 +323,7 @@ const StatusTooLong: React.FunctionComponent = (props) => {
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
-    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0, auto" }}>
+    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0 auto" }}>
     <StatusText x="196.291px" y="105.646px">Too long!</StatusText>
     <g>
       <DarkPinkPath d="M744.457,45c0,0 -25.399,0.808 -33.713,5.608c-5.735,3.311 -7.703,10.656 -4.392,16.392c3.312,5.735 10.657,7.704 16.392,4.392c8.314,-4.8 21.713,-26.392 21.713,-26.392Z" />
@@ -332,12 +332,12 @@ const StatusTooLong: React.FunctionComponent = (props) => {
       <DarkPinkPath d="M573.085,108c0,0 25.399,-0.808 33.713,-5.608c5.736,-3.311 7.704,-10.656 4.392,-16.392c-3.311,-5.735 -10.656,-7.704 -16.392,-4.392c-8.314,4.8 -21.713,26.392 -21.713,26.392Z" />
       <DarkPinkPath d="M38.989,84c0,0 22.4,12 32,12c6.623,0 12,-5.377 12,-12c0,-6.623 -5.377,-12 -12,-12c-9.6,0 -32,12 -32,12Z" />
       <DarkPinkPath d="M571.797,50c0,0 13.399,21.592 21.713,26.392c5.736,3.312 13.081,1.343 16.392,-4.392c3.312,-5.736 1.344,-13.081 -4.392,-16.392c-8.314,-4.8 -33.713,-5.608 -33.713,-5.608Z" />
-      <DarkPinkPath d="M747.018,63.269c0,0 -20.168,-4.949 -27.702,-2.93c-5.331,1.428 -8.5,6.916 -7.071,12.247c1.428,5.331 6.916,8.5 12.247,7.071c7.534,-2.018 22.526,-16.388 22.526,-16.388Z" />
-      <DarkPinkPath d="M785.425,96.731c0,0 -14.992,-14.37 -22.526,-16.388c-5.331,-1.429 -10.819,1.74 -12.247,7.071c-1.429,5.331 1.74,10.819 7.071,12.247c7.534,2.019 27.702,-2.93 27.702,-2.93Z" />
-      <DarkPinkPath d="M532.87,108.383c0,0 19.94,-5.798 25.456,-11.314c3.902,-3.903 3.902,-10.239 0,-14.142c-3.903,-3.903 -10.24,-3.903 -14.142,0c-5.516,5.515 -11.314,25.456 -11.314,25.456Z" />
-      <DarkPinkPath d="M76.31,103.731c0,0 20.168,4.949 27.702,2.93c5.331,-1.428 8.5,-6.916 7.071,-12.247c-1.428,-5.331 -6.916,-8.5 -12.247,-7.071c-7.534,2.018 -22.526,16.388 -22.526,16.388Z" />
-      <DarkPinkPath d="M108.463,73.341c0,0 14.991,14.37 22.526,16.389c5.331,1.428 10.819,-1.74 12.247,-7.071c1.429,-5.331 -1.74,-10.819 -7.071,-12.248c-7.534,-2.018 -27.702,2.93 -27.702,2.93Z" />
-      <DarkPinkPath d="M50.164,51.617c0,0 5.798,19.941 11.314,25.456c3.902,3.903 10.239,3.903 14.142,0c3.902,-3.903 3.902,-10.239 0,-14.142c-5.516,-5.516 -25.456,-11.314 -25.456,-11.314Z" />
+      <MediumPinkPath d="M747.018,63.269c0,0 -20.168,-4.949 -27.702,-2.93c-5.331,1.428 -8.5,6.916 -7.071,12.247c1.428,5.331 6.916,8.5 12.247,7.071c7.534,-2.018 22.526,-16.388 22.526,-16.388Z" />
+      <MediumPinkPath d="M785.425,96.731c0,0 -14.992,-14.37 -22.526,-16.388c-5.331,-1.429 -10.819,1.74 -12.247,7.071c-1.429,5.331 1.74,10.819 7.071,12.247c7.534,2.019 27.702,-2.93 27.702,-2.93Z" />
+      <MediumPinkPath d="M532.87,108.383c0,0 19.94,-5.798 25.456,-11.314c3.902,-3.903 3.902,-10.239 0,-14.142c-3.903,-3.903 -10.24,-3.903 -14.142,0c-5.516,5.515 -11.314,25.456 -11.314,25.456Z" />
+      <MediumPinkPath d="M76.31,103.731c0,0 20.168,4.949 27.702,2.93c5.331,-1.428 8.5,-6.916 7.071,-12.247c-1.428,-5.331 -6.916,-8.5 -12.247,-7.071c-7.534,2.018 -22.526,16.388 -22.526,16.388Z" />
+      <MediumPinkPath d="M108.463,73.341c0,0 14.991,14.37 22.526,16.389c5.331,1.428 10.819,-1.74 12.247,-7.071c1.429,-5.331 -1.74,-10.819 -7.071,-12.248c-7.534,-2.018 -27.702,2.93 -27.702,2.93Z" />
+      <MediumPinkPath d="M50.164,51.617c0,0 5.798,19.941 11.314,25.456c3.902,3.903 10.239,3.903 14.142,0c3.902,-3.903 3.902,-10.239 0,-14.142c-5.516,-5.516 -25.456,-11.314 -25.456,-11.314Z" />
       <LightPinkPath d="M759.262,62c0,0 -16.124,0.072 -21.32,3.072c-3.824,2.207 -5.136,7.104 -2.929,10.928c2.208,3.824 7.105,5.136 10.929,2.928c5.196,-3 13.32,-16.928 13.32,-16.928Z" />
       <LightPinkPath d="M800,80c0,0 -14,-8 -20,-8c-4.415,0 -8,3.585 -8,8c0,4.415 3.585,8 8,8c6,0 20,-8 20,-8Z" />
       <LightPinkPath d="M739.186,110.22c0,0 -8.125,-13.928 -13.321,-16.928c-3.824,-2.207 -8.72,-0.895 -10.928,2.928c-2.208,3.824 -0.896,8.721 2.928,10.929c5.196,3 21.321,3.071 21.321,3.071Z" />
@@ -397,7 +397,7 @@ const StatusGood: React.FunctionComponent = (props) => {
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
-    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0, auto" }}>
+    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0 auto" }}>
     <StatusText x="253.068px" y="105.646px">Good!</StatusText>
     <g>
       <DarkPinkPath d="M660,28c0,0 -12,22.4 -12,32c0,6.623 5.377,12 12,12c6.623,0 12,-5.377 12,-12c0,-9.6 -12,-32 -12,-32Z" />
@@ -464,7 +464,7 @@ const StatusRequiredWords: React.FunctionComponent = (props) => {
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
-    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", display: "block", margin: "0, auto" }}>
+    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", display: "block", margin: "0 auto" }}>
     <StatusText x="96.676px" y="105.646px">Words Missing!</StatusText>
     <g>
       <DarkPinkPath d="M686,34.967c0,0 -21.592,13.399 -26.392,21.712c-3.312,5.736 -1.344,13.081 4.392,16.393c5.736,3.311 13.081,1.343 16.392,-4.393c4.8,-8.313 5.608,-33.712 5.608,-33.712Z" />
@@ -567,7 +567,7 @@ const StatusText = styled.text`
   font-weight: 700;
 
   @media (prefers-color-scheme: dark) {
-    fill: #4bf;
+    fill: #07a;
   }
 
   @media (prefers-color-scheme: light) {
