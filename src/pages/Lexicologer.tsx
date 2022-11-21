@@ -173,11 +173,11 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       let match = false;
 
       if (requiredWord.primaryWord) {
-        let regex = '/\b';
+        let regex = '/\\b';
 
         for (let c of cleanWord(requiredWord.primaryWord)) {
           if (c === '*') {
-            regex += '\w+'
+            regex += '\\w+'
           } else {
             regex += c;
           }
