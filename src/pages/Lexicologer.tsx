@@ -141,6 +141,19 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 
   const requiredWordChecklist: (JSX.Element | string)[] = [];
 
+  // to lower case and strip accents, eg 'é' => 'e'
+  const cleanWord = (word: string): string => {
+    let cleanedWord = ''
+
+    for (let c of word.toLowerCase().normalize('NFKD')) {
+      if (c != c.toUpperCase()) {
+        cleanedWord = cleanedWord + c;
+      }
+    }
+
+    return cleanedWord;
+  }
+
   if (isPlaying) {
     const words: string[] = [];
     let word: string = '';
@@ -149,12 +162,12 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       if (c.toLowerCase() !== c.toUpperCase()) {
         word = word + c;
       } else {
-        words.push(word);
+        word !== '' && words.push(cleanWord(word));
         word = '';
       }
     }
 
-    if (word !== '') words.push(word);
+    word !== '' && words.push(cleanWord(word));
 
     console.log('words', words);
 
