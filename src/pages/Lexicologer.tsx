@@ -567,10 +567,10 @@ const StatusText = styled.text`
   font-weight: 700;
 
   @media (prefers-color-scheme: dark) {
-    fill: #07a;
+    fill: #4bf;
   }
 
   @media (prefers-color-scheme: light) {
-    fill: #f9d;
+    fill: #d6a;
   }
 `;
