@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Column, ColumnGroup, Container, Heading1, Information, InputGroup, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
+import { Button, ButtonGroup, Column, ColumnGroup, Container, Heading1, Information, InputGroup, Paragraph, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -196,7 +196,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           </TableRow>
         </Table>
         <ButtonGroup>
-          <Button onClick={() => setIsPlaying(true)}>Preview</Button>
+          <Button onClick={() => {setInputValue(''); setIsPlaying(true);}}>Preview</Button>
         </ButtonGroup>
       </>}
       {isPlaying && <>
@@ -208,10 +208,10 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           maxLength={4000}
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(event.target.value)}
         />
-        <p>{inputValue?.length ?? '?'}/{lexicologerGame.characterLimit ?? '?'}</p>
+        <Paragraph>{inputValue?.replaceAll('\n', '').length ?? '?'}/{lexicologerGame.characterLimit ?? '?'}</Paragraph>
       </>}
       {isPlaying && isEditable && <ButtonGroup>
-        <Button onClick={() => setIsPlaying(false)}>Edit</Button>
+        <Button onClick={() => {setInputValue(undefined); setIsPlaying(false);}}>Edit</Button>
       </ButtonGroup>}
     </Container>
   </>;
