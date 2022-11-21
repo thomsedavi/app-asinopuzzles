@@ -146,7 +146,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     let cleanedWord = ''
 
     for (let c of word.toLowerCase().normalize('NFKD')) {
-      if (c != c.toUpperCase()) {
+      if (c !== c.toUpperCase()) {
         cleanedWord = cleanedWord + c;
       }
     }
