@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Column, ColumnGroup, Container, Heading1, Information, InputGroup, Table, TableCell, TableCellAction, TableHeader, TableRow } from '../common/styled';
+import { Button, ButtonGroup, Column, ColumnGroup, Container, Heading1, Information, InputGroup, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -198,6 +198,17 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         <ButtonGroup>
           <Button onClick={() => setIsPlaying(true)}>Preview</Button>
         </ButtonGroup>
+      </>}
+      {isPlaying && <>
+        <TextArea
+          autoFocus
+          value={inputValue}
+          rows={8}
+          cols={40}
+          maxLength={4000}
+          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(event.target.value)}
+        />
+        <p>{inputValue?.length ?? '?'}/{lexicologerGame.characterLimit ?? '?'}</p>
       </>}
       {isPlaying && isEditable && <ButtonGroup>
         <Button onClick={() => setIsPlaying(false)}>Edit</Button>
