@@ -22,6 +22,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   } : undefined;
 
   const [ inputValue, setInputValue ] = React.useState<string | undefined>();
+  const [ solutionValue, setSolutionValue ] = React.useState<string>('');
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
   const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame | undefined>(
@@ -182,7 +183,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     const usedWords: string[] = [];
     let word: string = '';
 
-    for (let c of inputValue ?? '') {
+    for (let c of solutionValue) {
       if (c.toLowerCase() !== c.toUpperCase()) {
         word += c;
       } else {
@@ -279,26 +280,26 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           </TableRow>
         </Table>
         <ButtonGroup>
-          <Button onClick={() => {setInputValue(''); setIsPlaying(true);}}>Preview</Button>
+          <Button onClick={() => setIsPlaying(true)}>Preview</Button>
         </ButtonGroup>
       </>}
       {isPlaying && <>
         <Paragraph>{requiredWordChecklist}</Paragraph>
         <TextArea
           autoFocus
-          value={inputValue}
+          value={solutionValue}
           rows={8}
           cols={40}
           maxLength={4000}
-          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setSolutionValue(event.target.value)}
         />
         <ParagraphAccent>
-          {inputValue?.replaceAll('\n', '').length ?? '?'}/{lexicologerGame.characterLimit ?? '?'}
+          {solutionValue.replaceAll('\n', '').length ?? '?'}/{lexicologerGame.characterLimit ?? '?'}
         </ParagraphAccent>
-        {!requiredWordsPass ? <StatusRequiredWords /> : ((inputValue?.replaceAll('\n', '').length ?? 0) > (lexicologerGame.characterLimit ?? 0) ? <StatusTooLong /> : <StatusGood />)}
+        {!requiredWordsPass ? <StatusRequiredWords /> : ((solutionValue.replaceAll('\n', '').length ?? 0) > (lexicologerGame.characterLimit ?? 0) ? <StatusTooLong /> : <StatusGood />)}
       </>}
       {isPlaying && isEditable && <ButtonGroup>
-        <Button onClick={() => {setInputValue(undefined); setIsPlaying(false);}}>Edit</Button>
+        <Button onClick={() => setIsPlaying(false)}>Edit</Button>
       </ButtonGroup>}
     </Container>
   </>;
