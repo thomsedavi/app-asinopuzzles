@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Column, ColumnGroup, Container, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
+import { Button, ButtonGroup, Column, ColumnGroup, Container, FailureSpan, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -205,9 +205,9 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       }
 
       if (match) {
-        requiredWordChecklist.push(<span key={`requiredWord${index}`} style={{ color: 'green'}}>{requiredWord.primaryWord ?? '?'}</span>);
+        requiredWordChecklist.push(<SuccessSpan key={`requiredWord${index}`}>{requiredWord.primaryWord ?? '?'}</SuccessSpan>);
       } else {
-        requiredWordChecklist.push(<span key={`requiredWord${index}`} style={{ color: 'red'}}>{requiredWord.primaryWord ?? '?'}</span>);
+        requiredWordChecklist.push(<FailureSpan key={`requiredWord${index}`}>{requiredWord.primaryWord ?? '?'}</FailureSpan>);
       }
 
       if (index < lexicologerGame.requiredWords!.length - 2) {
@@ -302,8 +302,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 export default Lexicologer;
 
 const exampleRequiredWords: LexicologerRequiredWord[] = [
-  {primaryWord: 'love', secondaryWords: ['lov*']},
-  {primaryWord: 'loss', secondaryWords: ['lose']},
+  {primaryWord: 'love', secondaryWords: ['lov*', '*love*']},
+  {primaryWord: 'loss', secondaryWords: ['lose', '*less']},
   {primaryWord: 'hope', secondaryWords: ['hope*', 'hoping']},
   {primaryWord: 'magic', secondaryWords: ['magic*']},
   {primaryWord: 'cold', secondaryWords: ['cold*']},

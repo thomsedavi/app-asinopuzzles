@@ -25,7 +25,8 @@
   --color-dark-accent-pale: hsla(var(--hue-pink),75%,75%,1);
   --color-dark-accent-background: hsla(var(--hue-pink),75%,10%,1);
   --color-dark-shadow: hsla(var(--hue-azure),25%,25%,1);
-  --color-error: hsla(var(--hue-red),100%,50%,1);
+  --color-failure: hsla(var(--hue-red),100%,50%,1);
+  --color-success: hsla(var(--hue-green),100%,50%,1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,7 +37,8 @@
     --disabled: var(--color-light-disabled);
     --accent: var(--color-dark-accent);
     --shadow: var(--color-dark-shadow);
-    --error: var(--color-error);
+    --failure: var(--color-failure);
+    --success: var(--color-success);
     --accent-pale: var(--color-dark-accent-pale);
     --background-color-information: var(--color-dark-accent-background);
   }
@@ -50,7 +52,8 @@
     --disabled: var(--color-dark-disabled);
     --accent: var(--color-light-accent);
     --shadow: var(--color-light-shadow);
-    --error: var(--color-error);
+    --failure: var(--color-failure);
+    --success: var(--color-success);
     --accent-pale: var(--color-light-accent-pale);
     --background-color-information: var(--color-light-accent-background);
   }

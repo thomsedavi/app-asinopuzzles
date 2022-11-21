@@ -38,7 +38,7 @@ export const Paragraph = styled.p<ParagraphProps>`
 `;
 
 export const ParagraphAccent = styled.p`
-  color: var(--accent-pale)
+  color: var(--accent-pale);
   text-align: center;
   margin: 1em 0;
   font-size: 0.9em;
@@ -109,7 +109,7 @@ export const Navigation = styled.nav`
 
 export const ErrorMessage = styled.div`
   text-align: center;
-  color: var(--error);
+  color: var(--failure);
 `;
 
 export const HeaderLinkInternal = styled(NavLink)`
@@ -348,4 +348,14 @@ export const TableCellInput = styled.input`
   font-size: 1em;
   width: 100%;
   box-sizing: border-box;
+`;
+
+export const FailureSpan = styled.span`
+  font-weight: 700;
+  color: var(--failure);
+`;
+
+export const SuccessSpan = styled.span`
+  font-weight: 700;
+  color: var(--success);
 `;
