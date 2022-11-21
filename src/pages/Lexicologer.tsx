@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Column, ColumnGroup, Container, Heading1, Information, InputGroup, Paragraph, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
+import { Button, ButtonGroup, Column, ColumnGroup, Container, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -23,7 +23,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ inputValue, setInputValue ] = React.useState<string | undefined>();
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
-  const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame>(
+  const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame | undefined>(
     useLoaderData() as LexicologerGame ??
     (props.mode === 'create' && defaultGame) ??
     undefined
@@ -139,6 +139,30 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     </TableRow>;
   });
 
+  const requiredWordChecklist: (JSX.Element | string)[] = [];
+
+  if (isPlaying) {
+    const words: string[] = [];
+    let word: string = '';
+
+    for (let c of inputValue ?? '') {
+      if (c.toLowerCase() !== c.toUpperCase()) {
+        word = word + c;
+      } else {
+        words.push(word);
+        word = '';
+      }
+    }
+
+    if (word !== '') words.push(word);
+
+    console.log('words', words);
+
+    lexicologerGame.requiredWords?.forEach((word: LexicologerRequiredWord, index: number) => {
+
+    });
+  }
+
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
     <Container>
@@ -200,6 +224,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         </ButtonGroup>
       </>}
       {isPlaying && <>
+        <Paragraph>{requiredWordChecklist}</Paragraph>
         <TextArea
           autoFocus
           value={inputValue}
@@ -208,7 +233,9 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           maxLength={4000}
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(event.target.value)}
         />
-        <Paragraph>{inputValue?.replaceAll('\n', '').length ?? '?'}/{lexicologerGame.characterLimit ?? '?'}</Paragraph>
+        <ParagraphAccent>
+          {inputValue?.replaceAll('\n', '').length ?? '?'}/{lexicologerGame.characterLimit ?? '?'}
+        </ParagraphAccent>
       </>}
       {isPlaying && isEditable && <ButtonGroup>
         <Button onClick={() => {setInputValue(undefined); setIsPlaying(false);}}>Edit</Button>

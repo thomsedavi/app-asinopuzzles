@@ -34,7 +34,14 @@ interface ParagraphProps {
 export const Paragraph = styled.p<ParagraphProps>`
   text-align: center;
   margin: 1em 0;
-  cursor: ${props => props.editable ? "pointer" : "text"}
+  cursor: ${props => props.editable ? "pointer" : "auto"}
+`;
+
+export const ParagraphAccent = styled.p`
+  color: var(--accent-pale)
+  text-align: center;
+  margin: 1em 0;
+  font-size: 0.9em;
 `;
 
 export const ButtonGroup = styled.div`
