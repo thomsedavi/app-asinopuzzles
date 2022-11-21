@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import styled from 'styled-components';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
 import { Button, ButtonGroup, Column, ColumnGroup, Container, FailureSpan, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
@@ -294,7 +295,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         <ParagraphAccent>
           {inputValue?.replaceAll('\n', '').length ?? '?'}/{lexicologerGame.characterLimit ?? '?'}
         </ParagraphAccent>
-        {requiredWordsPass ? <StatusRequiredWords darkMode={true} /> : ((inputValue?.replaceAll('\n', '').length ?? 0) > (lexicologerGame.characterLimit ?? 0) ? <StatusTooLong darkMode={true} /> : <StatusGood darkMode={true} />)}
+        {!requiredWordsPass ? <StatusRequiredWords darkMode={true} /> : ((inputValue?.replaceAll('\n', '').length ?? 0) > (lexicologerGame.characterLimit ?? 0) ? <StatusTooLong darkMode={true} /> : <StatusGood darkMode={true} />)}
       </>}
       {isPlaying && isEditable && <ButtonGroup>
         <Button onClick={() => {setInputValue(undefined); setIsPlaying(false);}}>Edit</Button>
@@ -321,9 +322,6 @@ interface ModeProps {
 const blue1: string = '#037';
 const blue2: string = '#07a';
 const blue3: string = '#4bf';
-const green1: string = '#140';
-const green2: string = '#290';
-const green3: string = '#3f3';
 const orange3: string = '#f90';
 const pink1: string = '#825';
 const pink2: string = '#d6a';
@@ -338,7 +336,7 @@ const StatusTooLong: React.FunctionComponent<ModeProps> = (props) => {
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
-    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%" }}>
+    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0, auto" }}>
     <text x="196.291px" y="105.646px" style={{ fontFamily: "'DustismoRoman-BoldItalic', 'Dustismo Roman'", fontStyle: "italic", fontSize: "72px", fontWeight: 700, fill: props.darkMode ? blue3 : pink2 }}>Too long!</text>
     <g>
       <path d="M744.457,45c0,0 -25.399,0.808 -33.713,5.608c-5.735,3.311 -7.703,10.656 -4.392,16.392c3.312,5.735 10.657,7.704 16.392,4.392c8.314,-4.8 21.713,-26.392 21.713,-26.392Z" style={{ fill: props.darkMode ? blue1 : pink3 }} />
@@ -412,7 +410,7 @@ const StatusGood: React.FunctionComponent<ModeProps> = (props) => {
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
-    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%" }}>
+    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", margin: "0, auto" }}>
     <text x="253.068px" y="105.646px" style={{ fontFamily: "'DustismoRoman-BoldItalic', 'Dustismo Roman'", fontStyle: "italic", fontSize: "72px", fontWeight: 700, fill: props.darkMode ? blue3 : pink2 }}>Good!</text>
     <g>
       <path d="M660,28c0,0 -12,22.4 -12,32c0,6.623 5.377,12 12,12c6.623,0 12,-5.377 12,-12c0,-9.6 -12,-32 -12,-32Z" style={{ fill: props.darkMode ? blue1 : pink3 }} />
@@ -454,19 +452,19 @@ const StatusGood: React.FunctionComponent<ModeProps> = (props) => {
       <path d="M678.532,64.75c-0.985,-1.197 -2.085,-2.297 -3.282,-3.282l-3.173,2.091c-1.206,-0.886 -2.507,-1.637 -3.877,-2.239l0.225,-3.793c-1.453,-0.544 -2.954,-0.947 -4.485,-1.201l-1.701,3.397c-1.488,-0.164 -2.99,-0.164 -4.478,0l-1.701,-3.397c-1.531,0.254 -3.032,0.657 -4.485,1.201l0.225,3.793c-1.37,0.602 -2.671,1.353 -3.877,2.239l-3.173,-2.091c-1.197,0.985 -2.297,2.085 -3.282,3.282l2.091,3.173c-0.886,1.206 -1.637,2.507 -2.239,3.877l-3.793,-0.225c-0.544,1.453 -0.947,2.954 -1.201,4.485l3.397,1.701c-0.164,1.488 -0.164,2.99 0,4.478l-3.397,1.701c0.254,1.531 0.657,3.032 1.201,4.485l3.793,-0.225c0.602,1.37 1.353,2.671 2.239,3.877l-2.091,3.173c0.985,1.197 2.085,2.297 3.282,3.282l3.173,-2.091c1.206,0.886 2.507,1.637 3.877,2.239l-0.225,3.793c1.453,0.544 2.954,0.947 4.485,1.201l1.701,-3.397c1.488,0.164 2.99,0.164 4.478,0l1.701,3.397c1.531,-0.254 3.032,-0.657 4.485,-1.201l-0.225,-3.793c1.37,-0.602 2.671,-1.353 3.877,-2.239l3.173,2.091c1.197,-0.985 2.297,-2.085 3.282,-3.282l-2.091,-3.173c0.886,-1.206 1.637,-2.507 2.239,-3.877l3.793,0.225c0.544,-1.453 0.947,-2.954 1.201,-4.485l-3.397,-1.701c0.164,-1.488 0.164,-2.99 0,-4.478l3.397,-1.701c-0.254,-1.531 -0.657,-3.032 -1.201,-4.485l-3.793,0.225c-0.602,-1.37 -1.353,-2.671 -2.239,-3.877l2.091,-3.173Zm-15.138,11.856c1.873,1.873 1.873,4.915 0,6.788c-1.873,1.873 -4.915,1.873 -6.788,0c-1.873,-1.873 -1.873,-4.915 0,-6.788c1.873,-1.873 4.915,-1.873 6.788,0Z" style={{ fill: props.darkMode ? orange3 : yellow3 }} />
     </g>
     <g>
-      <path d="M112.937,84c0,0 -14.369,14.992 -16.388,22.526c-1.429,5.331 1.74,10.819 7.071,12.247c5.331,1.429 10.819,-1.74 12.247,-7.071c2.019,-7.534 -2.93,-27.702 -2.93,-27.702Z" style={{ fill: props.darkMode ? green2 : green3 }} />
-      <path d="M774.233,105.429c0,0 -19.94,5.798 -25.456,11.314c-3.902,3.902 -3.902,10.239 0,14.142c3.903,3.902 10.24,3.902 14.143,0c5.515,-5.516 11.313,-25.456 11.313,-25.456Z" style={{ fill: props.darkMode ? green2 : green3 }} />
-      <path d="M600.824,90.414c0,0 -20.168,-4.949 -27.703,-2.93c-5.331,1.429 -8.499,6.916 -7.071,12.247c1.429,5.332 6.917,8.5 12.248,7.072c7.534,-2.019 22.526,-16.389 22.526,-16.389Z" style={{ fill: props.darkMode ? green2 : green3 }} />
-      <path d="M152.32,95.077c0,0 14.992,14.37 22.526,16.389c5.331,1.428 10.819,-1.74 12.248,-7.071c1.428,-5.331 -1.74,-10.819 -7.071,-12.248c-7.535,-2.018 -27.703,2.93 -27.703,2.93Z" style={{ fill: props.darkMode ? green2 : green3 }} />
-      <path d="M32.903,102.921c0,0 5.798,19.94 11.313,25.455c3.903,3.903 10.24,3.903 14.142,0c3.903,-3.902 3.903,-10.239 0,-14.142c-5.515,-5.515 -25.455,-11.313 -25.455,-11.313Z" style={{ fill: props.darkMode ? green2 : green3 }} />
-      <path d="M530.875,65.442c0,0 -4.948,20.168 -2.929,27.702c1.428,5.331 6.916,8.5 12.247,7.071c5.331,-1.428 8.499,-6.916 7.071,-12.247c-2.019,-7.534 -16.389,-22.526 -16.389,-22.526Z" style={{ fill: props.darkMode ? green2 : green3 }} />
-      <path d="M146.143,80c0,0 -8,14 -8,20c0,4.415 3.585,8 8,8c4.415,0 8,-3.585 8,-8c0,-6 -8,-20 -8,-20Z" style={{ fill: props.darkMode ? green1 : green2 }} />
-      <path d="M565.721,71.34c0,0 -13.928,8.124 -16.928,13.32c-2.208,3.824 -0.896,8.721 2.928,10.928c3.824,2.208 8.721,0.896 10.928,-2.928c3,-5.196 3.072,-21.32 3.072,-21.32Z" style={{ fill: props.darkMode ? green1 : green2 }} />
-      <path d="M522.906,77c0,0 -16.124,0.072 -21.32,3.072c-3.824,2.207 -5.136,7.104 -2.928,10.928c2.207,3.824 7.104,5.136 10.928,2.928c5.196,-3 13.32,-16.928 13.32,-16.928Z" style={{ fill: props.darkMode ? green1 : green2 }} />
-      <path d="M742.459,109.822c0,0 -14,-8 -20,-8c-4.415,0 -8,3.585 -8,8c0,4.415 3.585,8 8,8c6,0 20,-8 20,-8Z" style={{ fill: props.darkMode ? green1 : green2 }} />
-      <path d="M448.746,88c0,0 14,8 20,8c4.416,0 8,-3.585 8,-8c0,-4.415 -3.584,-8 -8,-8c-6,0 -20,8 -20,8Z" style={{ fill: props.darkMode ? green1 : green2 }} />
-      <path d="M66.008,106.559c0,0 8.124,13.928 13.321,16.928c3.823,2.208 8.72,0.895 10.928,-2.928c2.207,-3.824 0.895,-8.721 -2.928,-10.929c-5.197,-3 -21.321,-3.071 -21.321,-3.071Z" style={{ fill: props.darkMode ? green1 : green2 }} />
-      <path d="M208.11,84c0,0 0.072,16.124 3.072,21.321c2.208,3.823 7.104,5.135 10.928,2.928c3.824,-2.208 5.136,-7.105 2.928,-10.928c-3,-5.197 -16.928,-13.321 -16.928,-13.321Z" style={{ fill: props.darkMode ? green1 : green2 }} />
+      <DarkGreenPath d="M112.937,84c0,0 -14.369,14.992 -16.388,22.526c-1.429,5.331 1.74,10.819 7.071,12.247c5.331,1.429 10.819,-1.74 12.247,-7.071c2.019,-7.534 -2.93,-27.702 -2.93,-27.702Z" />
+      <DarkGreenPath d="M774.233,105.429c0,0 -19.94,5.798 -25.456,11.314c-3.902,3.902 -3.902,10.239 0,14.142c3.903,3.902 10.24,3.902 14.143,0c5.515,-5.516 11.313,-25.456 11.313,-25.456Z" />
+      <DarkGreenPath d="M600.824,90.414c0,0 -20.168,-4.949 -27.703,-2.93c-5.331,1.429 -8.499,6.916 -7.071,12.247c1.429,5.332 6.917,8.5 12.248,7.072c7.534,-2.019 22.526,-16.389 22.526,-16.389Z" />
+      <DarkGreenPath d="M152.32,95.077c0,0 14.992,14.37 22.526,16.389c5.331,1.428 10.819,-1.74 12.248,-7.071c1.428,-5.331 -1.74,-10.819 -7.071,-12.248c-7.535,-2.018 -27.703,2.93 -27.703,2.93Z" />
+      <DarkGreenPath d="M32.903,102.921c0,0 5.798,19.94 11.313,25.455c3.903,3.903 10.24,3.903 14.142,0c3.903,-3.902 3.903,-10.239 0,-14.142c-5.515,-5.515 -25.455,-11.313 -25.455,-11.313Z" />
+      <DarkGreenPath d="M530.875,65.442c0,0 -4.948,20.168 -2.929,27.702c1.428,5.331 6.916,8.5 12.247,7.071c5.331,-1.428 8.499,-6.916 7.071,-12.247c-2.019,-7.534 -16.389,-22.526 -16.389,-22.526Z" />
+      <LightGreenPath d="M146.143,80c0,0 -8,14 -8,20c0,4.415 3.585,8 8,8c4.415,0 8,-3.585 8,-8c0,-6 -8,-20 -8,-20Z" />
+      <LightGreenPath d="M565.721,71.34c0,0 -13.928,8.124 -16.928,13.32c-2.208,3.824 -0.896,8.721 2.928,10.928c3.824,2.208 8.721,0.896 10.928,-2.928c3,-5.196 3.072,-21.32 3.072,-21.32Z" />
+      <LightGreenPath d="M522.906,77c0,0 -16.124,0.072 -21.32,3.072c-3.824,2.207 -5.136,7.104 -2.928,10.928c2.207,3.824 7.104,5.136 10.928,2.928c5.196,-3 13.32,-16.928 13.32,-16.928Z" />
+      <LightGreenPath d="M742.459,109.822c0,0 -14,-8 -20,-8c-4.415,0 -8,3.585 -8,8c0,4.415 3.585,8 8,8c6,0 20,-8 20,-8Z" />
+      <LightGreenPath d="M448.746,88c0,0 14,8 20,8c4.416,0 8,-3.585 8,-8c0,-4.415 -3.584,-8 -8,-8c-6,0 -20,8 -20,8Z" />
+      <LightGreenPath d="M66.008,106.559c0,0 8.124,13.928 13.321,16.928c3.823,2.208 8.72,0.895 10.928,-2.928c2.207,-3.824 0.895,-8.721 -2.928,-10.929c-5.197,-3 -21.321,-3.071 -21.321,-3.071Z" />
+      <LightGreenPath d="M208.11,84c0,0 0.072,16.124 3.072,21.321c2.208,3.823 7.104,5.135 10.928,2.928c3.824,-2.208 5.136,-7.105 2.928,-10.928c-3,-5.197 -16.928,-13.321 -16.928,-13.321Z" />
     </g>
   </svg>;
 }
@@ -479,7 +477,7 @@ const StatusRequiredWords: React.FunctionComponent<ModeProps> = (props) => {
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     xmlSpace="preserve"
-    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%" }}>
+    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2, overflow: "visible", width: "24em", maxWidth: "100%", display: "block", margin: "0, auto" }}>
     <text x="96.676px" y="105.646px" style={{ fontFamily: "'DustismoRoman-BoldItalic', 'Dustismo Roman'", fontStyle: "italic", fontSize: "72px", fontWeight: 700, fill: props.darkMode ? blue3 : pink2 }}>Words Missing!</text>
     <g>
       <path d="M686,34.967c0,0 -21.592,13.399 -26.392,21.712c-3.312,5.736 -1.344,13.081 4.392,16.393c5.736,3.311 13.081,1.343 16.392,-4.393c4.8,-8.313 5.608,-33.712 5.608,-33.712Z" style={{ fill: props.darkMode ? blue1 : pink3 }} />
@@ -507,10 +505,30 @@ const StatusRequiredWords: React.FunctionComponent<ModeProps> = (props) => {
       <path d="M678.532,64.75c-0.985,-1.197 -2.085,-2.297 -3.282,-3.282l-3.173,2.091c-1.206,-0.886 -2.507,-1.637 -3.877,-2.239l0.225,-3.793c-1.453,-0.544 -2.954,-0.947 -4.485,-1.201l-1.701,3.397c-1.488,-0.164 -2.99,-0.164 -4.478,0l-1.701,-3.397c-1.531,0.254 -3.032,0.657 -4.485,1.201l0.225,3.793c-1.37,0.602 -2.671,1.353 -3.877,2.239l-3.173,-2.091c-1.197,0.985 -2.297,2.085 -3.282,3.282l2.091,3.173c-0.886,1.206 -1.637,2.507 -2.239,3.877l-3.793,-0.225c-0.544,1.453 -0.947,2.954 -1.201,4.485l3.397,1.701c-0.164,1.488 -0.164,2.99 0,4.478l-3.397,1.701c0.254,1.531 0.657,3.032 1.201,4.485l3.793,-0.225c0.602,1.37 1.353,2.671 2.239,3.877l-2.091,3.173c0.985,1.197 2.085,2.297 3.282,3.282l3.173,-2.091c1.206,0.886 2.507,1.637 3.877,2.239l-0.225,3.793c1.453,0.544 2.954,0.947 4.485,1.201l1.701,-3.397c1.488,0.164 2.99,0.164 4.478,0l1.701,3.397c1.531,-0.254 3.032,-0.657 4.485,-1.201l-0.225,-3.793c1.37,-0.602 2.671,-1.353 3.877,-2.239l3.173,2.091c1.197,-0.985 2.297,-2.085 3.282,-3.282l-2.091,-3.173c0.886,-1.206 1.637,-2.507 2.239,-3.877l3.793,0.225c0.544,-1.453 0.947,-2.954 1.201,-4.485l-3.397,-1.701c0.164,-1.488 0.164,-2.99 0,-4.478l3.397,-1.701c-0.254,-1.531 -0.657,-3.032 -1.201,-4.485l-3.793,0.225c-0.602,-1.37 -1.353,-2.671 -2.239,-3.877l2.091,-3.173Zm-15.138,11.856c1.873,1.873 1.873,4.915 0,6.788c-1.873,1.873 -4.915,1.873 -6.788,0c-1.873,-1.873 -1.873,-4.915 0,-6.788c1.873,-1.873 4.915,-1.873 6.788,0Z" style={{ fill: props.darkMode ? orange3 : yellow3 }} />
     </g>
     <g>
-      <path d="M774.233,105.429c0,0 -19.94,5.798 -25.456,11.314c-3.902,3.902 -3.902,10.239 0,14.142c3.903,3.902 10.24,3.902 14.143,0c5.515,-5.516 11.313,-25.456 11.313,-25.456Z" style={{ fill: props.darkMode ? green2 : green3 }} />
-      <path d="M32.903,102.921c0,0 5.798,19.94 11.313,25.455c3.903,3.903 10.24,3.903 14.142,0c3.903,-3.902 3.903,-10.239 0,-14.142c-5.515,-5.515 -25.455,-11.313 -25.455,-11.313Z" style={{ fill: props.darkMode ? green2 : green3 }} />
-      <path d="M742.459,109.822c0,0 -14,-8 -20,-8c-4.415,0 -8,3.585 -8,8c0,4.415 3.585,8 8,8c6,0 20,-8 20,-8Z" style={{ fill: props.darkMode ? green1 : green2 }} />
-      <path d="M66.008,106.559c0,0 8.124,13.928 13.321,16.928c3.823,2.208 8.72,0.895 10.928,-2.928c2.207,-3.824 0.895,-8.721 -2.928,-10.929c-5.197,-3 -21.321,-3.071 -21.321,-3.071Z" style={{ fill: props.darkMode ? green1 : green2 }} />
+      <DarkGreenPath d="M774.233,105.429c0,0 -19.94,5.798 -25.456,11.314c-3.902,3.902 -3.902,10.239 0,14.142c3.903,3.902 10.24,3.902 14.143,0c5.515,-5.516 11.313,-25.456 11.313,-25.456Z" />
+      <DarkGreenPath d="M32.903,102.921c0,0 5.798,19.94 11.313,25.455c3.903,3.903 10.24,3.903 14.142,0c3.903,-3.902 3.903,-10.239 0,-14.142c-5.515,-5.515 -25.455,-11.313 -25.455,-11.313Z" />
+      <LightGreenPath d="M742.459,109.822c0,0 -14,-8 -20,-8c-4.415,0 -8,3.585 -8,8c0,4.415 3.585,8 8,8c6,0 20,-8 20,-8Z" />
+      <LightGreenPath d="M66.008,106.559c0,0 8.124,13.928 13.321,16.928c3.823,2.208 8.72,0.895 10.928,-2.928c2.207,-3.824 0.895,-8.721 -2.928,-10.929c-5.197,-3 -21.321,-3.071 -21.321,-3.071Z" />
     </g>
   </svg>;
 }
+
+const LightGreenPath = styled.path`
+  @media (prefers-color-scheme: dark) {
+    fill: #140;
+  }
+
+  @media (prefers-color-scheme: light) {
+    fill: #290;
+  }
+`;
+
+const DarkGreenPath = styled.path`
+  @media (prefers-color-scheme: dark) {
+    fill: #290;
+  }
+
+  @media (prefers-color-scheme: light) {
+    fill: #3f3;
+  }
+`;
