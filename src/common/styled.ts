@@ -357,7 +357,7 @@ export const FailureSpan = styled.span`
   font-weight: 700;
 
   @media (prefers-color-scheme: dark) {
-    color: var(--accent;
+    color: var(--accent);
   }
 
   @media (prefers-color-scheme: light) {

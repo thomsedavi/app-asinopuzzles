@@ -23,6 +23,7 @@
   --color-light-shadow: hsla(var(--hue-azure),25%,25%,1);
   --color-light-failure: hsla(var(--hue-red),100%,50%,1);
   --color-light-success: hsla(var(--hue-green),100%,35%,1);
+  --color-light-boop: hsla(var(--hue-yellow),100%,50%,1);
   --color-dark: hsla(var(--hue-azure),25%,5%,1);
   --color-dark-hover: hsla(var(--hue-azure),25%,25%,1);
   --color-dark-disabled: hsla(var(--hue-azure),25%,50%,1);
@@ -35,6 +36,7 @@
   --color-dark-shadow: hsla(var(--hue-azure),25%,25%,1);
   --color-dark-failure: hsla(var(--hue-red),100%,50%,1);
   --color-dark-success: hsla(var(--hue-green),100%,35%,1);
+  --color-dark-boop: hsla(var(--hue-orange),100%,50%,1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -53,7 +55,7 @@
     --failure: var(--color-dark-failure);
     --success: var(--color-dark-success);
     --background-color-information: var(--color-dark-accent-background);
-    --boop: red;
+    --boop: var(--color-dark-boop);
   }
 }
 
@@ -73,7 +75,7 @@
     --failure: var(--color-light-failure);
     --success: var(--color-light-success);
     --background-color-information: var(--color-light-accent-background);
-    --boop: red;
+    --boop: var(--color-light-boop);
   }
 }
 
