@@ -554,5 +554,5 @@ const StatusText = styled.text`
   font-style: italic;
   font-size: 72px;
   font-weight: 700;
-  fill: var(--opposite);
+  fill: var(--opposite-pale);
 `;

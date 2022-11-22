@@ -360,5 +360,5 @@ export const FailureSpan = styled.span`
 
 export const SuccessSpan = styled.span`
   font-weight: 700;
-  color: var(--success);
+  color: var(--accent);
 `;
