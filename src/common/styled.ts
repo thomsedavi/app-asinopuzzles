@@ -18,6 +18,7 @@ export const Heading1 = styled.h1<HeaderProps>`
   text-shadow: 0.05em 0.05em var(--accent);
   font-variant: small-caps;
   margin: 0.5em 0;
+  padding: 0.5em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
   border: ${props => props.editable ? "1px solid var(--accent-pale)" : "none"};
 `;
@@ -35,7 +36,7 @@ interface ParagraphProps {
 export const Paragraph = styled.p<ParagraphProps>`
   text-align: center;
   margin: 1em 0;
-  padding: 0.3em 0;
+  padding: 0.5em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
   border: ${props => props.editable ? "1px solid var(--accent-pale)" : "none"};
 `;
@@ -68,7 +69,7 @@ export const Button = styled.button`
   color: var(--background-color);
   cursor: pointer;
   font-size: 1em;
-  padding: 2px 8px;
+  padding: 4px 10px;
   font-family: inherit;
 
   &:hover {
