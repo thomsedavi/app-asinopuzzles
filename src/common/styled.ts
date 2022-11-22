@@ -357,11 +357,11 @@ export const FailureSpan = styled.span`
   font-weight: 700;
 
   @media (prefers-color-scheme: dark) {
-    fill: var(--accent;
+    color: var(--accent;
   }
 
   @media (prefers-color-scheme: light) {
-    fill: var(--opposite);
+    color: var(--opposite);
   }
 `;
 
@@ -369,10 +369,10 @@ export const SuccessSpan = styled.span`
   font-weight: 700;
   
   @media (prefers-color-scheme: dark) {
-    fill: var(--opposite);
+    color: var(--opposite);
   }
 
   @media (prefers-color-scheme: light) {
-    fill: var(--accent);
+    color: var(--accent);
   }
 `;

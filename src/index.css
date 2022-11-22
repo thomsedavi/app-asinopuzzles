@@ -18,8 +18,8 @@
   --color-light-accent-pale: hsla(var(--hue-chartreuse),75%,25%,1);
   --color-light-accent-background: hsla(var(--hue-chartreuse),75%,90%,1);
   --color-light-opposite: hsla(var(--hue-violet),75%,50%,1);;
-  --color-light-opposite-pale: hsla(var(--hue-violet),75%,75%,1);;
-  --color-light-opposite-strong: hsla(var(--hue-violet),75%,25%,1);;
+  --color-light-opposite-pale: hsla(var(--hue-violet),75%,65%,1);;
+  --color-light-opposite-strong: hsla(var(--hue-violet),75%,35%,1);;
   --color-light-shadow: hsla(var(--hue-azure),25%,25%,1);
   --color-light-failure: hsla(var(--hue-red),100%,50%,1);
   --color-light-success: hsla(var(--hue-green),100%,35%,1);
@@ -30,8 +30,8 @@
   --color-dark-accent-pale: hsla(var(--hue-pink),75%,75%,1);
   --color-dark-accent-background: hsla(var(--hue-pink),75%,10%,1);
   --color-dark-opposite: hsla(var(--hue-mint),75%,50%,1);;
-  --color-dark-opposite-pale: hsla(var(--hue-mint),75%,75%,1);;
-  --color-dark-opposite-strong: hsla(var(--hue-mint),75%,25%,1);;
+  --color-dark-opposite-pale: hsla(var(--hue-mint),75%,65%,1);;
+  --color-dark-opposite-strong: hsla(var(--hue-mint),75%,35%,1);;
   --color-dark-shadow: hsla(var(--hue-azure),25%,25%,1);
   --color-dark-failure: hsla(var(--hue-red),100%,50%,1);
   --color-dark-success: hsla(var(--hue-green),100%,35%,1);
@@ -53,6 +53,7 @@
     --failure: var(--color-dark-failure);
     --success: var(--color-dark-success);
     --background-color-information: var(--color-dark-accent-background);
+    --boop: red;
   }
 }
 
@@ -72,6 +73,7 @@
     --failure: var(--color-light-failure);
     --success: var(--color-light-success);
     --background-color-information: var(--color-light-accent-background);
+    --boop: red;
   }
 }
 

@@ -510,13 +510,7 @@ const DarkGreenPath = styled.path`
 `;
 
 const YellowPath = styled.path`
-  @media (prefers-color-scheme: dark) {
-    fill: #f90;
-  }
-
-  @media (prefers-color-scheme: light) {
-    fill: #ff4;
-  }
+  fill: var(--boop);
 `;
 
 const LightPinkPath = styled.path`
@@ -525,7 +519,7 @@ const LightPinkPath = styled.path`
   }
 
   @media (prefers-color-scheme: light) {
-    fill: var(--opposite-pale);
+    fill: var(--opposite-strong);
   }
 `;
 
@@ -541,11 +535,11 @@ const MediumPinkPath = styled.path`
 
 const DarkPinkPath = styled.path`
   @media (prefers-color-scheme: dark) {
-    fill: var(--opposite-pale-strong);
+    fill: var(--opposite-strong);
   }
 
   @media (prefers-color-scheme: light) {
-    fill: var(--opposite-pale-strong);
+    fill: var(--opposite-pale);
   }
 `;
 
