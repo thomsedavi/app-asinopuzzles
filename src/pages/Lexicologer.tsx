@@ -110,6 +110,10 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setEditingValue(undefined);
   }
 
+  const save = () => {
+    alert('Not able to save yet, sorry!');
+  }
+
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
 
   const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
@@ -300,6 +304,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       </>}
       {isPlaying && isEditable && <ButtonGroup>
         <Button onClick={() => setIsPlaying(false)}>Edit</Button>
+        <Button onClick={save}>Save</Button>
       </ButtonGroup>}
     </Container>
   </>;
@@ -309,10 +314,13 @@ export default Lexicologer;
 
 const exampleRequiredWords: LexicologerRequiredWord[] = [
   {primaryWord: 'love', secondaryWords: ['lov*', '*love*']},
-  {primaryWord: 'loss', secondaryWords: ['lose', '*less']},
+  {primaryWord: 'loss', secondaryWords: ['lose', '*less', 'lost']},
   {primaryWord: 'hope', secondaryWords: ['hope*', 'hoping']},
   {primaryWord: 'magic', secondaryWords: ['magic*']},
   {primaryWord: 'cold', secondaryWords: ['cold*']},
+  {primaryWord: 'hot', secondaryWords: ['hot*', 'heat*']},
+  {primaryWord: 'summer', secondaryWords: ['summer*']},
+  {primaryWord: 'winter', secondaryWords: ['winter*']},
 ];
 
 // everything below here is borrowed directly from my old Lotographia website, which is why it doesn't match other stuff on this website
