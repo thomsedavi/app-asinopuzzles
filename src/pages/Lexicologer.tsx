@@ -521,31 +521,31 @@ const YellowPath = styled.path`
 
 const LightPinkPath = styled.path`
   @media (prefers-color-scheme: dark) {
-    fill: #4bf;
+    fill: var(--opposite-pale);
   }
 
   @media (prefers-color-scheme: light) {
-    fill: #825;
+    fill: var(--opposite-pale);
   }
 `;
 
 const MediumPinkPath = styled.path`
   @media (prefers-color-scheme: dark) {
-    fill: #07a;
+    fill: var(--opposite);
   }
 
   @media (prefers-color-scheme: light) {
-    fill: #d6a;
+    fill: var(--opposite);
   }
 `;
 
 const DarkPinkPath = styled.path`
   @media (prefers-color-scheme: dark) {
-    fill: #037;
+    fill: var(--opposite-pale-strong);
   }
 
   @media (prefers-color-scheme: light) {
-    fill: #f9d;
+    fill: var(--opposite-pale-strong);
   }
 `;
 
