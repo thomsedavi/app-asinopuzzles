@@ -554,12 +554,5 @@ const StatusText = styled.text`
   font-style: italic;
   font-size: 72px;
   font-weight: 700;
-
-  @media (prefers-color-scheme: dark) {
-    fill: #4bf;
-  }
-
-  @media (prefers-color-scheme: light) {
-    fill: #d6a;
-  }
+  fill: var(--opposite);
 `;

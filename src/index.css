@@ -17,6 +17,7 @@
   --color-light-accent: hsla(var(--hue-chartreuse),75%,50%,1);
   --color-light-accent-pale: hsla(var(--hue-chartreuse),75%,25%,1);
   --color-light-accent-background: hsla(var(--hue-chartreuse),75%,90%,1);
+  --color-light-opposite: hsla(var(--hue-violet),75%,50%,1);;
   --color-light-shadow: hsla(var(--hue-azure),25%,25%,1);
   --color-light-failure: hsla(var(--hue-red),100%,50%,1);
   --color-light-success: hsla(var(--hue-green),100%,35%,1);
@@ -26,6 +27,7 @@
   --color-dark-accent: hsla(var(--hue-pink),75%,50%,1);
   --color-dark-accent-pale: hsla(var(--hue-pink),75%,75%,1);
   --color-dark-accent-background: hsla(var(--hue-pink),75%,10%,1);
+  --color-dark-opposite: hsla(var(--hue-mint),75%,50%,1);;
   --color-dark-shadow: hsla(var(--hue-azure),25%,25%,1);
   --color-dark-failure: hsla(var(--hue-red),100%,50%,1);
   --color-dark-success: hsla(var(--hue-green),100%,35%,1);
@@ -38,10 +40,11 @@
     --hover: var(--color-light-hover);
     --disabled: var(--color-light-disabled);
     --accent: var(--color-dark-accent);
+    --accent-pale: var(--color-dark-accent-pale);
+    --opposite: var(--color-dark-opposite);
     --shadow: var(--color-dark-shadow);
     --failure: var(--color-dark-failure);
     --success: var(--color-dark-success);
-    --accent-pale: var(--color-dark-accent-pale);
     --background-color-information: var(--color-dark-accent-background);
   }
 }
@@ -53,10 +56,11 @@
     --hover: var(--color-dark-hover);
     --disabled: var(--color-dark-disabled);
     --accent: var(--color-light-accent);
+    --accent-pale: var(--color-light-accent-pale);
+    --opposite: var(--color-light-opposite);
     --shadow: var(--color-light-shadow);
     --failure: var(--color-light-failure);
     --success: var(--color-light-success);
-    --accent-pale: var(--color-light-accent-pale);
     --background-color-information: var(--color-light-accent-background);
   }
 }

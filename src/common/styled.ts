@@ -355,7 +355,7 @@ export const TableCellInput = styled.input`
 
 export const FailureSpan = styled.span`
   font-weight: 700;
-  color: var(--failure);
+  color: var(--opposite);
 `;
 
 export const SuccessSpan = styled.span`
