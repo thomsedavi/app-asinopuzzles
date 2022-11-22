@@ -502,23 +502,11 @@ const StatusRequiredWords: React.FunctionComponent = (props) => {
 }
 
 const LightGreenPath = styled.path`
-  @media (prefers-color-scheme: dark) {
-    fill: #140;
-  }
-
-  @media (prefers-color-scheme: light) {
-    fill: #290;
-  }
+  fill: var(--accent-pale);
 `;
 
 const DarkGreenPath = styled.path`
-  @media (prefers-color-scheme: dark) {
-    fill: #290;
-  }
-
-  @media (prefers-color-scheme: light) {
-    fill: #3f3;
-  }
+  fill: var(--accent);
 `;
 
 const YellowPath = styled.path`
