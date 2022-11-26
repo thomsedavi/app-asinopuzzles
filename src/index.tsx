@@ -78,12 +78,17 @@ export default class App extends React.Component<{}, AppState> {
           element: <Miscellany userId={this.state.userId} />,
         },
         {
+          path: "/lexicologers/:lexicologerId/edit",
+          element: <Lexicologer userId={this.state.userId} mode='update' />,
+          loader: this.lexicologerLoader
+        },
+        {
           path: "/lexicologers/create",
           element: <Lexicologer userId={this.state.userId} mode='create' />,
         },
         {
           path: "/lexicologers/:lexicologerId",
-          element: <Lexicologer userId={this.state.userId} mode='create' />,
+          element: <Lexicologer userId={this.state.userId} mode='read' />,
           loader: this.lexicologerLoader
         },
         {
@@ -91,8 +96,13 @@ export default class App extends React.Component<{}, AppState> {
           element: <About userId={this.state.userId} />,
         },
         {
+          path: "/users/:userId/edit",
+          element: <UserPage userId={this.state.userId} mode='update' />,
+          loader: this.userLoader
+        },
+        {
           path: "/users/:userId",
-          element: <UserPage userId={this.state.userId} />,
+          element: <UserPage userId={this.state.userId} mode='read' />,
           loader: this.userLoader
         },
         {
