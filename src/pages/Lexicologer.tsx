@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Column, ColumnGroup, Container, FailureSpan, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
+import { Button, ButtonGroup, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -31,6 +31,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     undefined
   );
   const [ isPlaying, setIsPlaying ] = React.useState<boolean>(props.mode === 'read');
+  const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
+  const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
 
   if (lexicologerGame === undefined) {
     return <>
@@ -111,7 +113,34 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   }
 
   const save = () => {
-    alert('Not able to save yet, sorry!');
+    if (isWorking) {
+      return;
+    }
+
+    setErrorMessage(undefined);
+    setIsWorking(true);
+
+    if (lexicologerGame.id === undefined) {
+      fetch(`/api/lexicologers`, { method: 'POST', body: JSON.stringify(lexicologerGame) })
+      .then((response: Response) => {
+        if (response.status === 200) {
+          response.json()
+            .then((gameResponse: LexicologerGame) => {
+              setLexicologerGame(gameResponse);
+              setIsWorking(false);
+            });
+        } else {
+          setIsWorking(false);
+          setErrorMessage('Unknown Error');
+        }
+      })
+      .catch(() => {
+        setIsWorking(false);
+        setErrorMessage('Unknown Error');
+      });
+    } else {
+      alert('Not able to update yet, sorry!');
+    }
   }
 
   const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
@@ -127,6 +156,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         onClickSave={() => savePrimaryWord(index)}
         onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
         maxLength={32}
+        isWorking={isWorking}
       />
       <EditableTableCellParagraph
         editState={isEditable ? (editingValue === `WORD_SECONDARY_${index}` ? 'editing' : 'editable') : 'disabled'}
@@ -137,10 +167,11 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         onClickSave={() => saveSecondaryWord(index)}
         onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
         maxLength={64}
+        isWorking={isWorking}
       />
       <TableCell>
-        <TableCellAction onClick={() => randomiseWord(index)}>🎲</TableCellAction>
-        <TableCellAction onClick={() => deleteRequiredWord(index)}>➖</TableCellAction>
+        <TableCellAction onClick={() => !isWorking && randomiseWord(index)}>🎲</TableCellAction>
+        <TableCellAction onClick={() => !isWorking && deleteRequiredWord(index)}>➖</TableCellAction>
       </TableCell>
     </TableRow>;
   });
@@ -239,6 +270,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         onClickSave={saveName}
         onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
         placeholder='Lexicologer Game Title'
+        isWorking={isWorking}
       />
       <EditableElementDocument
         editState={!isPlaying && isEditable ? (editingValue === 'DETAILS' ? 'editing' : 'editable') : 'disabled'}
@@ -249,13 +281,15 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         onClickSave={saveDetails}
         onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
         placeholder='Lexicologer Game Information'
+        isWorking={isWorking}
       />
       {!isPlaying && isEditable && <>
         <InputGroup>
           <SingleNumberInput id='CharacterLimit'
                              label='Character Limit'
                              value={lexicologerGame.characterLimit ?? 140}
-                             onChange={(value: string) => setCharacterLimit(value)} />
+                             onChange={(value: string) => setCharacterLimit(value)}
+                             isWorking={isWorking} />
         </InputGroup>
         <Information>
           The Primary Word will display in the list of Required Words (for example, "love")<br />
@@ -280,16 +314,17 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           <TableRow>
             <TableCell colSpan={2}></TableCell>
             <TableCell colSpan={2}></TableCell>
-            <TableCell><span onClick={createRequiredWord} style={{ cursor: 'pointer' }}>➕</span></TableCell>
+            <TableCell><span onClick={() => !isWorking && createRequiredWord()} style={{ cursor: 'pointer' }}>➕</span></TableCell>
           </TableRow>
         </Table>
         <ButtonGroup>
-          <Button onClick={() => setIsPlaying(true)}>Preview</Button>
+          <Button onClick={() => !isWorking && setIsPlaying(true)}>Preview</Button>
         </ButtonGroup>
       </>}
       {isPlaying && <>
         <Paragraph>{requiredWordChecklist}</Paragraph>
         <TextArea
+          disabled={isWorking}
           autoFocus
           value={solutionValue}
           rows={8}
@@ -302,10 +337,13 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         </ParagraphAccent>
         {!requiredWordsPass ? <StatusRequiredWords /> : ((solutionValue.replaceAll('\n', '').length ?? 0) > (lexicologerGame.characterLimit ?? 0) ? <StatusTooLong /> : <StatusGood />)}
       </>}
-      {isPlaying && isEditable && <ButtonGroup>
-        <Button onClick={() => setIsPlaying(false)}>Edit</Button>
-        <Button onClick={save}>Save</Button>
-      </ButtonGroup>}
+      {isPlaying && isEditable && <>
+        <ButtonGroup>
+          <Button disabled={isWorking} onClick={() => setIsPlaying(false)}>Edit</Button>
+          <Button disabled={isWorking} onClick={save}>Save</Button>
+        </ButtonGroup>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      </>}
     </Container>
   </>;
 }

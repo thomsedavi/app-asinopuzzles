@@ -50,12 +50,14 @@ interface SingleNumberInputProps {
  min?: number;
  value: number;
  onChange: (value: string) => void;
+ isWorking?: boolean;
 }
 
 export const SingleNumberInput = (props: SingleNumberInputProps): JSX.Element => {
   return <>
     <InlineLabel htmlFor={props.id}>{props.label}</InlineLabel>
     <InlineInput short type="number" id={props.id} name={props.id} min={props.min ?? 0} value={props.value}
+                 disabled={props.isWorking}
                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
   </>;
 }
