@@ -16,6 +16,7 @@ export interface User {
   id: string;
   name?: string;
   biography?: Document;
+  lexicologerIds?: string[];
 }
 
 export interface LexicologerRequiredWord {

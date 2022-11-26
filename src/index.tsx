@@ -30,7 +30,7 @@ export default class App extends React.Component<{}, AppState> {
         .then((response: Response) => response.json())
         .then((authValue: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
           if (authValue.clientPrincipal !== null) {
-            fetch(`/api/user/${authValue.clientPrincipal.userId}`, { method: 'GET' })
+            fetch(`/api/users/${authValue.clientPrincipal.userId}`, { method: 'GET' })
               .then((response: Response) => response.json())
               .then((userValue: User) => {
                 this.setState({
@@ -57,7 +57,11 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   userLoader = async ({ params }: LoaderFunctionArgs) => {
-    return fetch(`/api/user/${params.userId}`, { method: 'GET' });
+    return fetch(`/api/users/${params.userId}`, { method: 'GET' });
+  }
+
+  lexicologerLoader = async ({ params }: LoaderFunctionArgs) => {
+    return fetch(`/api/lexicologers/${params.lexicologerId}`, { method: 'GET' });
   }
 
   render = (): JSX.Element => {
@@ -76,6 +80,11 @@ export default class App extends React.Component<{}, AppState> {
         {
           path: "/lexicologers/create",
           element: <Lexicologer userId={this.state.userId} mode='create' />,
+        },
+        {
+          path: "/lexicologers/:lexicologerId",
+          element: <Lexicologer userId={this.state.userId} mode='create' />,
+          loader: this.lexicologerLoader
         },
         {
           path: "/about",
