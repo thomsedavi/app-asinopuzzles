@@ -340,7 +340,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       {isPlaying && isEditable && <>
         <ButtonGroup>
           <Button disabled={isWorking} onClick={() => setIsPlaying(false)}>Edit</Button>
-          <Button disabled={isWorking} onClick={save}>Save</Button>
+          {lexicologerGame.id === undefined && <Button disabled={isWorking} onClick={save}>Save</Button>}
         </ButtonGroup>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </>}
