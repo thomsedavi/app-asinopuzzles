@@ -21,6 +21,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     requiredWords: []    
   } : undefined;
 
+  const [ mode, setMode ] = React.useState<'create' | 'read' | 'update'>(props.mode);
   const [ inputValue, setInputValue ] = React.useState<string | undefined>();
   const [ solutionValue, setSolutionValue ] = React.useState<string>('');
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
@@ -39,7 +40,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
       <Heading1>Please log in to create a Lexicologer game</Heading1>
     </>
-  } else if (props.mode === 'update' && (props.userId === undefined || props.userId === null || props.userId !== lexicologerGame.userId)) {
+  } else if (mode === 'update' && (props.userId === undefined || props.userId === null || props.userId !== lexicologerGame.userId)) {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
       <Heading1>401</Heading1>
@@ -112,7 +113,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setEditingValue(undefined);
   }
 
-  const save = () => {
+  const create = () => {
     if (isWorking) {
       return;
     }
@@ -120,30 +121,54 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setErrorMessage(undefined);
     setIsWorking(true);
 
-    if (lexicologerGame.id === undefined) {
-      fetch(`/api/lexicologers`, { method: 'POST', body: JSON.stringify(lexicologerGame) })
-      .then((response: Response) => {
-        if (response.status === 200) {
-          response.json()
-            .then((gameResponse: LexicologerGame) => {
-              setLexicologerGame(gameResponse);
-              setIsWorking(false);
-            });
-        } else {
-          setIsWorking(false);
-          setErrorMessage('Unknown Error');
-        }
-      })
-      .catch(() => {
+    fetch(`/api/lexicologers`, { method: 'POST', body: JSON.stringify(lexicologerGame) })
+    .then((response: Response) => {
+      if (response.status === 200) {
+        response.json()
+          .then((gameResponse: LexicologerGame) => {
+            setLexicologerGame(gameResponse);
+            setIsWorking(false);
+            setMode('update');
+          });
+      } else {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
-      });
-    } else {
-      alert('Not able to update yet, sorry!');
-    }
+      }
+    })
+    .catch(() => {
+      setIsWorking(false);
+      setErrorMessage('Unknown Error');
+    });
   }
 
-  const isEditable = props.mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
+  const update = () => {
+    if (isWorking) {
+      return;
+    }
+
+    setErrorMessage(undefined);
+    setIsWorking(true);
+
+    fetch(`/api/lexicologers/${lexicologerGame.id}`, { method: 'PUT', body: JSON.stringify(lexicologerGame) })
+    .then((response: Response) => {
+      if (response.status === 200) {
+        response.json()
+          .then((gameResponse: LexicologerGame) => {
+            setLexicologerGame(gameResponse);
+            setIsWorking(false);
+          });
+      } else {
+        setIsWorking(false);
+        setErrorMessage('Unknown Error');
+      }
+    })
+    .catch(() => {
+      setIsWorking(false);
+      setErrorMessage('Unknown Error');
+    });
+  }
+
+  const isEditable = mode !== 'read' && props.userId !== undefined && props.userId !== null && lexicologerGame.userId === props.userId;
 
   const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
     return <TableRow key={`requiredWordRow${index}`}>
@@ -340,7 +365,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       {isPlaying && isEditable && <>
         <ButtonGroup>
           <Button disabled={isWorking} onClick={() => setIsPlaying(false)}>Edit</Button>
-          {lexicologerGame.id === undefined && <Button disabled={isWorking} onClick={save}>Save</Button>}
+          {mode === 'create' && <Button disabled={isWorking} onClick={create}>Create</Button>}
+          {mode === 'update' && <Button disabled={isWorking} onClick={update}>Update</Button>}
         </ButtonGroup>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </>}

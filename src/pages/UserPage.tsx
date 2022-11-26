@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1 } from '../common/components';
-import { Container, Heading1 } from '../common/styled';
+import { Button, ButtonGroup, Container, Heading1 } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { User } from '../interfaces';
 import Layout from './Layout';
@@ -12,6 +12,7 @@ interface UserPageProps {
 }
 
 const UserPage = (props: UserPageProps): JSX.Element => {
+  const [ mode, setMode ] = React.useState<'read' | 'update'>(props.mode);
   const [ inputValue, setInputValue ] = React.useState<string | undefined>();
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
@@ -90,7 +91,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
       <Container>
-        <EditableElementHeading1 editState={props.mode === 'update' && user.id === props.userId ? (editingValue === 'NAME' ? 'editing' : 'editable') : 'disabled'}
+        <EditableElementHeading1 editState={mode === 'update' && user.id === props.userId ? (editingValue === 'NAME' ? 'editing' : 'editable') : 'disabled'}
                                  value={user.name ?? 'Anonymous'}
                                  inputValue={inputValue}
                                  onClickEdit={() => { setEditingValue('NAME'); setInputValue(user.name ?? 'Anonymous'); }}
@@ -100,7 +101,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  isWorking={isWorking}
                                  placeholder='User Name'
                                  errorMessage={errorMessage} />
-        <EditableElementDocument editState={props.mode === 'update' && user.id === props.userId ? (editingValue === 'BIOGRAPHY' ? 'editing' : 'editable') : 'disabled'}
+        <EditableElementDocument editState={mode === 'update' && user.id === props.userId ? (editingValue === 'BIOGRAPHY' ? 'editing' : 'editable') : 'disabled'}
                                  value={user.biography ?? {}}
                                  inputValue={inputValue}
                                  onClickEdit={() => { setEditingValue('BIOGRAPHY'); setInputValue(convertDocumentToString(user.biography ?? {})); }}
@@ -111,6 +112,10 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  placeholder='User Biography'
                                  errorMessage={errorMessage} />
       </Container>
+      <ButtonGroup>
+        {mode === 'read' && user.id === props.userId && <Button onClick={() => setMode('update')}>Edit</Button>}
+        {mode === 'update' && <Button onClick={() => setMode('read')}>Finished Editing</Button>}
+      </ButtonGroup>
     </>;
   } else {
     return<>

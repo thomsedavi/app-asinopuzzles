@@ -44,7 +44,7 @@ export const Paragraph = styled.p<ParagraphProps>`
 export const ParagraphAccent = styled.p`
   color: var(--accent-pale);
   text-align: center;
-  margin: 1em 0;
+  margin: 0;
   font-size: 0.9em;
 `;
 
