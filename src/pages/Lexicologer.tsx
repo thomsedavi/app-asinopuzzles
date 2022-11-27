@@ -369,6 +369,13 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           {mode === 'update' && <Button disabled={isWorking} onClick={update}>Update</Button>}
         </ButtonGroup>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+        {lexicologerGame.id !== undefined && <>
+          <p>Link for this game:</p>
+          <p><code>{window.location.origin}/lexicologers/{lexicologerGame.id}</code></p>
+          <ButtonGroup>
+            <Button onClick={() => navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`)}>Copy to Clipboard</Button>
+          </ButtonGroup>
+        </>}
       </>}
     </Container>
   </>;

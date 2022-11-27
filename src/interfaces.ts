@@ -16,7 +16,9 @@ export interface User {
   id: string;
   name?: string;
   biography?: Document;
-  lexicologerIds?: string[];
+  lexicologers?: { id?: string, title?: string }[];
+  dateCreated?: string;
+  dateUpdated?: string;
 }
 
 export interface LexicologerRequiredWord {
@@ -31,4 +33,6 @@ export interface LexicologerGame {
   details?: Document;
   characterLimit?: number,
   requiredWords?: LexicologerRequiredWord[];
+  dateCreated?: string;
+  dateUpdated?: string;
 }
