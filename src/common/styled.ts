@@ -41,6 +41,10 @@ export const Paragraph = styled.p<ParagraphProps>`
   border: ${props => props.editable ? "1px solid var(--accent-pale)" : "none"};
 `;
 
+export const Code = styled.code`
+  background: var(--background-color-information);
+`;
+
 export const ParagraphAccent = styled.p`
   color: var(--accent-pale);
   text-align: center;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
+import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -370,8 +370,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         </ButtonGroup>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         {lexicologerGame.id !== undefined && <>
-          <Paragraph>Link for this game:</Paragraph>
-          <Paragraph><code>{window.location.origin}/lexicologers/{lexicologerGame.id}</code></Paragraph>
+          <Paragraph>Link for this game:<br />
+          <Code>{window.location.origin}/lexicologers/{lexicologerGame.id}</Code></Paragraph>
           <ButtonGroup>
             <Button onClick={() => navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`)}>Copy to Clipboard</Button>
           </ButtonGroup>
