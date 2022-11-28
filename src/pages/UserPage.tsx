@@ -91,7 +91,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
       <Container>
-        {user.id === props.userId && <EditToggleButton mode={mode} onClick={() => { console.log('test'); setMode(mode === 'read' ? 'update' : 'read');}} />}
+        {user.id === props.userId && <EditToggleButton mode={mode} onClick={() => setMode(mode === 'read' ? 'update' : 'read')} />}
         <EditableElementHeading1 editState={mode === 'update' && user.id === props.userId ? (editingValue === 'NAME' ? 'editing' : 'editable') : 'disabled'}
                                  value={user.name ?? 'Anonymous'}
                                  inputValue={inputValue}
