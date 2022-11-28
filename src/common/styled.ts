@@ -20,7 +20,7 @@ export const Heading1 = styled.h1<HeaderProps>`
   margin: 0.25em 0;
   padding: 0.25em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
-  border: ${props => props.editable ? "1px solid var(--accent-pale)" : "1px solid transparent"};
+  border: ${props => props.editable ? "1px solid var(--accent-faded)" : "1px solid transparent"};
 `;
 
 export const Heading2 = styled.h2`
@@ -38,7 +38,7 @@ export const Paragraph = styled.p<ParagraphProps>`
   margin: 0.25em 0;
   padding: 0.25em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
-  border: ${props => props.editable ? "1px solid var(--accent-pale)" : "1px solid transparent"};
+  border: ${props => props.editable ? "1px solid var(--accent-faded)" : "1px solid transparent"};
 `;
 
 export const Code = styled.code`

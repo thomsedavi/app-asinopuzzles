@@ -15,8 +15,10 @@
   --color-light-hover: hsla(var(--hue-azure),25%,75%,1);
   --color-light-disabled: hsla(var(--hue-azure),25%,50%,1);
   --color-light-accent: hsla(var(--hue-chartreuse),75%,50%,1);
-  --color-light-accent-pale: hsla(var(--hue-chartreuse),75%,25%,1);
+  --color-light-accent-pale: hsla(var(--hue-chartreuse),75%,35%,1);
+  --color-light-accent-strong: hsla(var(--hue-chartreuse),75%,65%,1);
   --color-light-accent-background: hsla(var(--hue-chartreuse),75%,90%,1);
+  --color-light-accent-faded: hsla(var(--hue-chartreuse),75%,35%,0.5);
   --color-light-opposite: hsla(var(--hue-violet),75%,50%,1);;
   --color-light-opposite-pale: hsla(var(--hue-violet),75%,65%,1);;
   --color-light-opposite-strong: hsla(var(--hue-violet),75%,35%,1);;
@@ -28,8 +30,10 @@
   --color-dark-hover: hsla(var(--hue-azure),25%,25%,1);
   --color-dark-disabled: hsla(var(--hue-azure),25%,50%,1);
   --color-dark-accent: hsla(var(--hue-pink),75%,50%,1);
-  --color-dark-accent-pale: hsla(var(--hue-pink),75%,75%,1);
+  --color-dark-accent-pale: hsla(var(--hue-pink),75%,65%,1);
+  --color-dark-accent-strong: hsla(var(--hue-pink),75%,35%,1);
   --color-dark-accent-background: hsla(var(--hue-pink),75%,10%,1);
+  --color-dark-accent-faded: hsla(var(--hue-pink),75%,65%,0.5);
   --color-dark-opposite: hsla(var(--hue-mint),75%,50%,1);;
   --color-dark-opposite-pale: hsla(var(--hue-mint),75%,65%,1);;
   --color-dark-opposite-strong: hsla(var(--hue-mint),75%,35%,1);;
@@ -48,6 +52,7 @@
     --accent: var(--color-dark-accent);
     --accent-pale: var(--color-dark-accent-pale);
     --accent-strong: var(--color-dark-accent-strong);
+    --accent-faded: var(--color-dark-accent-faded);
     --opposite: var(--color-dark-opposite);
     --opposite-pale: var(--color-dark-opposite-pale);
     --opposite-strong: var(--color-dark-opposite-strong);
@@ -68,6 +73,7 @@
     --accent: var(--color-light-accent);
     --accent-pale: var(--color-light-accent-pale);
     --accent-strong: var(--color-light-accent-strong);
+    --accent-faded: var(--color-light-accent-faded);
     --opposite: var(--color-light-opposite);
     --opposite-pale: var(--color-light-opposite-pale);
     --opposite-strong: var(--color-light-opposite-strong);
