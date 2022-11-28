@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
-import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, SingleNumberInput } from '../common/components';
+import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, EditToggleButton, SingleNumberInput } from '../common/components';
 import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
@@ -31,7 +31,6 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     (props.mode === 'create' && defaultGame) ??
     undefined
   );
-  const [ isPlaying, setIsPlaying ] = React.useState<boolean>(props.mode === 'read');
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
 
@@ -239,7 +238,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     return match;
   }
 
-  if (isPlaying) {
+  if (mode === 'read') {
     const usedWords: string[] = [];
     let word: string = '';
 
@@ -283,11 +282,14 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     });
   }
 
+  const toggleButtonMode: 'create' | 'read' | 'update' = mode === 'read' ? (lexicologerGame.id === undefined ? 'create' : 'update') : 'read';
+
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
     <Container>
+      {isEditable && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}
       <EditableElementHeading1
-        editState={!isPlaying && isEditable ? (editingValue === 'TITLE' ? 'editing' : 'editable') : 'disabled'}
+        editState={mode !== 'read' && isEditable ? (editingValue === 'TITLE' ? 'editing' : 'editable') : 'disabled'}
         value={lexicologerGame.title ?? 'Lexicologer Game'}
         inputValue={inputValue}
         onClickEdit={() => { setEditingValue('TITLE'); setInputValue(lexicologerGame.title ?? 'Lexicologer Game'); }}
@@ -298,7 +300,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         isWorking={isWorking}
       />
       <EditableElementDocument
-        editState={!isPlaying && isEditable ? (editingValue === 'DETAILS' ? 'editing' : 'editable') : 'disabled'}
+        editState={mode !== 'read' && isEditable ? (editingValue === 'DETAILS' ? 'editing' : 'editable') : 'disabled'}
         value={lexicologerGame.details ?? {}}
         inputValue={inputValue}
         onClickEdit={() => { setEditingValue('DETAILS'); setInputValue(convertDocumentToString(lexicologerGame.details ?? {})); }}
@@ -308,7 +310,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         placeholder='Lexicologer Game Information'
         isWorking={isWorking}
       />
-      {!isPlaying && isEditable && <>
+      {mode !== 'read' && isEditable && <>
         <InputGroup>
           <SingleNumberInput id='CharacterLimit'
                              label='Character Limit'
@@ -342,11 +344,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             <TableCell><span onClick={() => !isWorking && createRequiredWord()} style={{ cursor: 'pointer' }}>➕</span></TableCell>
           </TableRow>
         </Table>
-        <ButtonGroup>
-          <Button onClick={() => !isWorking && setIsPlaying(true)}>Preview</Button>
-        </ButtonGroup>
       </>}
-      {isPlaying && <>
+      {mode === 'read' && <>
         <Paragraph>{requiredWordChecklist.length > 0 ? requiredWordChecklist : '(none)'}</Paragraph>
         <TextArea
           disabled={isWorking}
@@ -362,9 +361,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         </ParagraphAccent>
         {!requiredWordsPass ? <StatusRequiredWords /> : ((solutionValue.replaceAll('\n', '').length ?? 0) > (lexicologerGame.characterLimit ?? 0) ? <StatusTooLong /> : <StatusGood />)}
       </>}
-      {isPlaying && isEditable && <>
+      {mode !== 'read' && isEditable && <>
         <ButtonGroup>
-          <Button disabled={isWorking} onClick={() => setIsPlaying(false)}>Edit</Button>
           {mode === 'create' && <Button disabled={isWorking} onClick={create}>Create</Button>}
           {mode === 'update' && <Button disabled={isWorking} onClick={update}>Update</Button>}
         </ButtonGroup>

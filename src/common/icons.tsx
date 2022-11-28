@@ -6,13 +6,9 @@ export const Icon = (): JSX.Element => {
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
-              xmlSpace="preserve"
-              style={{ fillRule: 'evenodd', clipRule: 'evenodd', strokeLinejoin: 'round', strokeMiterlimit: 2, overflow: 'visible', maxHeight: '1em', maxWidth: '1em', position: 'relative', top: '1.em' }}>
-    <path d="M-100,0Q-70,0,-40,-40" />
-    <path d="M100,0Q70,0,40,-40" />
-    <path d="M0,-30Q40,-30,40,-40C15,-75,10,-100,0,-100S-15,-75,-40,-40Q-40,-30,0,-30Z" />
-    <path d="M-50,25Q-30,0,-25,-15" />
-    <path d="M50,25Q30,0,25,-15" />
+              xmlSpace="preserve" >
+    <path d="M20,20L50,20L80,50L60,50L50,40L50,30L20,30Z" />
+    <path d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
   </Svg>;
 }
 

@@ -5,7 +5,7 @@ import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input,
 import { Icon } from './icons';
 
 interface EditToggleButtonProps {
-  mode: 'read' | 'update';
+  mode: 'create' | 'read' | 'update';
   onClick: () => void;
 }
 
