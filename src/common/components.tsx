@@ -129,7 +129,7 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
   if (props.editState === 'editing') {
     return <>
       <TextArea
-        onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => { console.log(event); props.onClickSave; }}
+        onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => { console.log(event); props.onClickSave(); }}
         autoFocus
         value={props.inputValue}
         disabled={props.isWorking}
