@@ -85,6 +85,11 @@ export const Button = styled.button`
   }
 `;
 
+
+
+export const ToggleButton = styled.button`
+`;
+
 export const ButtonLink = styled(Link)`
   margin: 0.5em;
   border: none;

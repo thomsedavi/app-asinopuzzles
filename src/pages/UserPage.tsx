@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { EditableElementDocument, EditableElementHeading1 } from '../common/components';
+import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { Button, ButtonGroup, Container, Heading1 } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { User } from '../interfaces';
@@ -90,6 +90,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   if (user) {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+      {user.id === props.userId && <EditToggleButton mode={mode} onClick={() => setMode(mode === 'read' ? 'update' : 'read')} />}
       <Container>
         <EditableElementHeading1 editState={mode === 'update' && user.id === props.userId ? (editingValue === 'NAME' ? 'editing' : 'editable') : 'disabled'}
                                  value={user.name ?? 'Anonymous'}
@@ -112,10 +113,6 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  placeholder='User Biography'
                                  errorMessage={errorMessage} />
       </Container>
-      <ButtonGroup>
-        {mode === 'read' && user.id === props.userId && <Button onClick={() => setMode('update')}>Edit</Button>}
-        {mode === 'update' && <Button onClick={() => setMode('read')}>Finished Editing</Button>}
-      </ButtonGroup>
     </>;
   } else {
     return<>

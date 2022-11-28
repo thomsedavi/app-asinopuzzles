@@ -1,7 +1,18 @@
 import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
-import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput, TableCell, TableCellInput } from './styled';
+import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput, TableCell, TableCellInput, ToggleButton } from './styled';
+
+interface EditToggleButtonProps {
+  mode: 'read' | 'update';
+  onClick: () => void;
+}
+
+export const EditToggleButton = (props: EditToggleButtonProps): JSX.Element => {
+  return <ToggleButton>
+    {props.mode === 'read' ? 'Edit' : 'View'} 🔄
+  </ToggleButton>;
+}
 
 interface EditableElementTableCellProps {
   editState: 'disabled' | 'editable' | 'editing';
