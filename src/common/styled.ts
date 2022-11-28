@@ -387,11 +387,11 @@ export const FailureSpan = styled.span`
   font-weight: 700;
 
   @media (prefers-color-scheme: dark) {
-    color: var(--accent);
+    color: var(--accent-pale);
   }
 
   @media (prefers-color-scheme: light) {
-    color: var(--opposite);
+    color: var(--opposite-pale);
   }
 `;
 
@@ -399,10 +399,10 @@ export const SuccessSpan = styled.span`
   font-weight: 700;
   
   @media (prefers-color-scheme: dark) {
-    color: var(--opposite);
+    color: var(--opposite-pale);
   }
 
   @media (prefers-color-scheme: light) {
-    color: var(--accent);
+    color: var(--accent-pale);
   }
 `;
