@@ -10,9 +10,8 @@ interface EditToggleButtonProps {
 }
 
 export const EditToggleButton = (props: EditToggleButtonProps): JSX.Element => {
-  return <ToggleButton onClick={props.onClick} width='4.5em'>
-    {props.mode === 'read' ? 'Edit' : 'View'}
-    <Icon />
+  return <ToggleButton onClick={props.onClick} width='10.5em'>
+    {props.mode === 'read' ? 'Edit' : 'View'} <Icon /> words
   </ToggleButton>;
 }
 
