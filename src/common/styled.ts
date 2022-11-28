@@ -17,10 +17,10 @@ export const Heading1 = styled.h1<HeaderProps>`
   text-align: center;
   text-shadow: 0.05em 0.05em var(--accent);
   font-variant: small-caps;
-  margin: 0;
-  padding: 0.5em;
+  margin: 0.25em 0;
+  padding: 0.25em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
-  border: ${props => props.editable ? "1px solid var(--accent-pale)" : "none"};
+  border: ${props => props.editable ? "1px solid var(--accent-pale)" : "1px solid transparent"};
 `;
 
 export const Heading2 = styled.h2`
@@ -35,10 +35,10 @@ interface ParagraphProps {
 
 export const Paragraph = styled.p<ParagraphProps>`
   text-align: center;
-  margin: 0;
-  padding: 0.5em;
+  margin: 0.25em 0;
+  padding: 0.25em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
-  border: ${props => props.editable ? "1px solid var(--accent-pale)" : "none"};
+  border: ${props => props.editable ? "1px solid var(--accent-pale)" : "1px solid transparent"};
 `;
 
 export const Code = styled.code`
