@@ -35,7 +35,7 @@ interface ParagraphProps {
 
 export const Paragraph = styled.p<ParagraphProps>`
   text-align: center;
-  margin: 1em 0;
+  margin: 0;
   padding: 0.5em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
   border: ${props => props.editable ? "1px solid var(--accent-pale)" : "none"};
@@ -88,6 +88,25 @@ export const Button = styled.button`
 
 
 export const ToggleButton = styled.button`
+  margin-left: auto;
+  display: block;
+  margin: 0.5em;
+  border: none;
+  box-shadow: 0.2em 0.2em var(--accent);
+  background: var(--color);
+  color: var(--background-color);
+  cursor: pointer;
+  font-size: 1em;
+  padding: 4px 10px;
+  font-family: inherit;
+
+  &:hover {
+    background: var(--hover);
+  }
+
+  &:disabled {
+    background: var(--disabled);
+  }
 `;
 
 export const ButtonLink = styled(Link)`
