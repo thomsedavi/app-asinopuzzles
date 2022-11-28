@@ -287,7 +287,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   return <>
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
     <Container>
-      {isEditable && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}
+      {(mode === 'create' || props.userId === lexicologerGame.userId) && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}
       <EditableElementHeading1
         editState={mode !== 'read' && isEditable ? (editingValue === 'TITLE' ? 'editing' : 'editable') : 'disabled'}
         value={lexicologerGame.title ?? 'Lexicologer Game'}
