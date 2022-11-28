@@ -108,7 +108,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  onClickEdit={() => { setEditingValue('BIOGRAPHY'); setInputValue(convertDocumentToString(user.biography ?? {})); }}
                                  onChange={(value: string) => setInputValue(value)}
                                  onClickSave={saveBiography}
-                                 onClickCancel={() => { setInputValue(undefined); setEditingValue(undefined) }}
+                                 onClickCancel={(event: React.MouseEvent<HTMLButtonElement>) => { event.preventDefault(); setInputValue(undefined); setEditingValue(undefined) }}
                                  isWorking={isWorking}
                                  placeholder='User Biography'
                                  errorMessage={errorMessage} />

@@ -119,7 +119,7 @@ interface EditableElementDocumentProps {
   onClickEdit: () => void;
   onChange: (value: string) => void;
   onClickSave: () => void;
-  onClickCancel: () => void;
+  onClickCancel: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isWorking?: boolean;
   placeholder?: string;
   errorMessage?: string;
@@ -141,7 +141,7 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
       />
       <ButtonGroup>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
-        <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
+        <Button onClick={(event: React.MouseEvent<HTMLButtonElement>) => props.onClickCancel(event)} disabled={props.isWorking}>Cancel</Button>
       </ButtonGroup>
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
       {convertDocumentToElements(convertStringToDocument(props.inputValue))}
