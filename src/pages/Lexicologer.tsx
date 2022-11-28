@@ -347,7 +347,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         </ButtonGroup>
       </>}
       {isPlaying && <>
-        <Paragraph>{requiredWordChecklist}</Paragraph>
+        <Paragraph>{requiredWordChecklist.length > 0 ? requiredWordChecklist : '(none)'}</Paragraph>
         <TextArea
           disabled={isWorking}
           autoFocus
