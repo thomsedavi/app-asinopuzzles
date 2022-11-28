@@ -17,7 +17,7 @@ export const Heading1 = styled.h1<HeaderProps>`
   text-align: center;
   text-shadow: 0.05em 0.05em var(--accent);
   font-variant: small-caps;
-  margin: 0.5em 0;
+  margin: 0;
   padding: 0.5em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
   border: ${props => props.editable ? "1px solid var(--accent-pale)" : "none"};
@@ -26,7 +26,7 @@ export const Heading1 = styled.h1<HeaderProps>`
 export const Heading2 = styled.h2`
   text-align: center;
   text-shadow: 0.05em 0.05em var(--accent);
-  margin: 1em 0 0.5em;
+  margin: 0em;
 `;
 
 interface ParagraphProps {
@@ -85,12 +85,9 @@ export const Button = styled.button`
   }
 `;
 
-
-
 export const ToggleButton = styled.button`
-  margin-left: auto;
+  margin: 0.5em 0 0.5em auto;
   display: block;
-  margin: 0.5em;
   border: none;
   box-shadow: 0.2em 0.2em var(--accent);
   background: var(--color);
