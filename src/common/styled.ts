@@ -85,7 +85,11 @@ export const Button = styled.button`
   }
 `;
 
-export const ToggleButton = styled.button`
+interface ToggleButtonProps {
+  width?: string;
+}
+
+export const ToggleButton = styled.button<ToggleButtonProps>`
   margin: 0.5em 0 0.5em auto;
   display: block;
   border: none;
@@ -96,6 +100,7 @@ export const ToggleButton = styled.button`
   font-size: 1em;
   padding: 4px 10px;
   font-family: inherit;
+  width: ${props => props.width ?? 'auto'};
 
   &:hover {
     background: var(--hover);
