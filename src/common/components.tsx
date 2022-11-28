@@ -2,6 +2,7 @@ import React from 'react';
 import { convertDocumentToElements, convertStringToDocument } from './utils';
 import { Document } from '../interfaces';
 import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput, TableCell, TableCellInput, ToggleButton } from './styled';
+import { Icon } from './icons';
 
 interface EditToggleButtonProps {
   mode: 'read' | 'update';
@@ -10,7 +11,7 @@ interface EditToggleButtonProps {
 
 export const EditToggleButton = (props: EditToggleButtonProps): JSX.Element => {
   return <ToggleButton onClick={props.onClick}>
-    {props.mode === 'read' ? 'Edit' : 'View'} 🔄
+    {props.mode === 'read' ? 'Edit' : 'View'} 🔄<Icon />
   </ToggleButton>;
 }
 
@@ -129,7 +130,6 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
   if (props.editState === 'editing') {
     return <>
       <TextArea
-        onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => { console.log(event.target); console.log(event.currentTarget); props.onClickSave(); }}
         autoFocus
         value={props.inputValue}
         disabled={props.isWorking}
