@@ -12,6 +12,7 @@
   --hue-magenta: 300;
   --hue-pink: 330;
   --color-light: hsla(var(--hue-azure),25%,100%,1);
+  --color-light-transparent: hsla(var(--hue-azure),25%,100%,0.5);
   --color-light-hover: hsla(var(--hue-azure),25%,75%,1);
   --color-light-disabled: hsla(var(--hue-azure),25%,50%,1);
   --color-light-accent: hsla(var(--hue-chartreuse),75%,50%,1);
@@ -27,6 +28,7 @@
   --color-light-success: hsla(var(--hue-green),100%,35%,1);
   --color-light-boop: hsla(var(--hue-yellow),75%,50%,1);
   --color-dark: hsla(var(--hue-azure),25%,5%,1);
+  --color-dark-transparent: hsla(var(--hue-azure),25%,5%,0.5);
   --color-dark-hover: hsla(var(--hue-azure),25%,25%,1);
   --color-dark-disabled: hsla(var(--hue-azure),25%,50%,1);
   --color-dark-accent: hsla(var(--hue-pink),75%,50%,1);
@@ -46,6 +48,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: var(--color-dark);
+    --overlay-color: var(--color-dark-transparent);
     --color: var(--color-light);
     --hover: var(--color-light-hover);
     --disabled: var(--color-light-disabled);
@@ -67,6 +70,7 @@
 @media (prefers-color-scheme: light) {
   :root {
     --background-color: var(--color-light);
+    --overlay-color: var(--color-light-transparent);
     --color: var(--color-dark);
     --hover: var(--color-dark-hover);
     --disabled: var(--color-dark-disabled);

@@ -11,7 +11,8 @@ const About = (props: AboutPageProps) => {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    console.log(event);
+    const eventConst = { ...event };
+    console.log(eventConst);
     event.preventDefault();
     setIsLoading(true);
   }
