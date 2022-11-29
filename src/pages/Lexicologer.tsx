@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, EditToggleButton, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Paragraph, ParagraphAccent, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
+import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Overlay, Paragraph, ParagraphAccent, Placeholder, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -26,6 +26,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ solutionValue, setSolutionValue ] = React.useState<string>('');
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame | undefined>(
     useLoaderData() as LexicologerGame ??
     (props.mode === 'create' && defaultGame) ??
@@ -34,8 +35,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
 
-  const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    console.log(event);
+  const onClickLoader = () => {
+    setIsLoading(true);
   }
 
   if (lexicologerGame === undefined) {
@@ -289,6 +290,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const toggleButtonMode: 'create' | 'read' | 'update' = mode === 'read' ? (lexicologerGame.id === undefined ? 'create' : 'update') : 'read';
 
   return <>
+    {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
     <Container>
       {(mode === 'create' || props.userId === lexicologerGame.userId) && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}

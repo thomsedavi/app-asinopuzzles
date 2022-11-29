@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonGroup, ButtonLink, Container, Heading1, Heading2, Paragraph, TextLink } from '../common/styled';
+import { ButtonGroup, ButtonLink, Container, Heading1, Heading2, Overlay, Paragraph, Placeholder, TextLink } from '../common/styled';
 import Layout from './Layout';
 
 interface MiscellanyProps {
@@ -8,13 +8,15 @@ interface MiscellanyProps {
 
 const Miscellany = (props: MiscellanyProps) => {
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    console.log(event);
+  const onClickLoader = () => {
+    setIsLoading(true);
   }
 
   return (
     <>
+      {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         <Heading1>Miscellany</Heading1>

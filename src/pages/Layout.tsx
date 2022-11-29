@@ -5,7 +5,7 @@ interface LayoutProps {
   userId?: string | null;
   isBurgerOpen: boolean;
   setIsBurgerOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onClickLoader: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  onClickLoader: () => void;
 }
 
 const Layout = (props: LayoutProps) => {

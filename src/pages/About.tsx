@@ -10,8 +10,7 @@ const About = (props: AboutPageProps) => {
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    console.log(event.currentTarget.href);
+  const onClickLoader = () => {
     setIsLoading(true);
   }
 

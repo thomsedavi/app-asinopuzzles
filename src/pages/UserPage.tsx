@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
-import { Container, Heading1 } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { User } from '../interfaces';
 import Layout from './Layout';
@@ -16,6 +16,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ inputValue, setInputValue ] = React.useState<string | undefined>();
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
@@ -87,12 +88,13 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       });
   }
 
-  const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    console.log(event);
+  const onClickLoader = () => {
+    setIsLoading(true);
   }
 
   if (user) {
     return <>
+      {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         {user.id === props.userId && <EditToggleButton mode={mode} onClick={() => setMode(mode === 'read' ? 'update' : 'read')} />}

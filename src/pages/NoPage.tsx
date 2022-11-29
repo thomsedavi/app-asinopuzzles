@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Heading1 } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder } from '../common/styled';
 import Layout from './Layout';
 
 interface NoPageProps {
@@ -8,12 +8,14 @@ interface NoPageProps {
 
 const NoPage = (props: NoPageProps) => {
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    console.log(event);
+  const onClickLoader = () => {
+    setIsLoading(true);
   }
 
   return <>
+    {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
     <Container>
       <Heading1>404</Heading1>
