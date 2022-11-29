@@ -358,7 +358,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           rows={8}
           cols={40}
           maxLength={4000}
-          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setSolutionValue(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setSolutionValue(event.currentTarget.value)}
         />
         <ParagraphAccent>
           {solutionValue.replaceAll('\n', '').length ?? '?'}/{lexicologerGame.characterLimit ?? '?'}

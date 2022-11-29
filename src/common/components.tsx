@@ -43,7 +43,7 @@ export const EditableTableCellParagraph = (props: EditableElementTableCellProps)
 
     return <>
       <TableCell editing colSpan={2}>
-        <TableCellInput onBlur={props.onClickSave} autoFocus maxLength={props.maxLength} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
+        <TableCellInput onBlur={props.onClickSave} autoFocus maxLength={props.maxLength} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.currentTarget.value)} />
       </TableCell>
     </>
   } else if (props.editState === 'editable') {
@@ -70,7 +70,7 @@ export const SingleNumberInput = (props: SingleNumberInputProps): JSX.Element =>
     <InlineLabel htmlFor={props.id}>{props.label}</InlineLabel>
     <InlineInput short type="number" id={props.id} name={props.id} min={props.min ?? 0} value={props.value}
                  disabled={props.isWorking}
-                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
+                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.currentTarget.value)} />
   </>;
 }
 
@@ -101,7 +101,7 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
 
     return <>
       <Heading1>
-        <Input onBlur={props.onClickSave} autoFocus maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)} />
+        <Input onBlur={props.onClickSave} autoFocus maxLength={64} disabled={props.isWorking} value={props.inputValue} onKeyDown={onKeyDown} onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.currentTarget.value)} />
       </Heading1>
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
@@ -137,7 +137,7 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
         rows={8}
         cols={40}
         maxLength={4000}
-        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.target.value)}
+        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(event.currentTarget.value)}
       />
       <ButtonGroup>
         <Button onClick={props.onClickSave} disabled={props.isWorking}>Save</Button>
