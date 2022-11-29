@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Heading1, Heading2, Paragraph } from '../common/styled';
+import { Container, Heading1, Heading2, Overlay, Paragraph } from '../common/styled';
 import Layout from './Layout';
 
 interface AboutPageProps {
@@ -8,13 +8,17 @@ interface AboutPageProps {
 
 const About = (props: AboutPageProps) => {
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     console.log(event);
+    event.preventDefault();
+    setIsLoading(true);
   }
 
   return (
     <>
+      {isLoading && <Overlay>…</Overlay>}
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         <Heading1>About</Heading1>
