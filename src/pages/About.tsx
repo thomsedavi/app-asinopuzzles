@@ -9,9 +9,13 @@ interface AboutPageProps {
 const About = (props: AboutPageProps) => {
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
 
+  const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    console.log(event);
+  }
+
   return (
     <>
-      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         <Heading1>About</Heading1>
         <Heading2>Asino Puzzles</Heading2>

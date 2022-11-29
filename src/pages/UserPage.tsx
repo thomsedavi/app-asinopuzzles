@@ -87,9 +87,13 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       });
   }
 
+  const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    console.log(event);
+  }
+
   if (user) {
     return <>
-      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         {user.id === props.userId && <EditToggleButton mode={mode} onClick={() => setMode(mode === 'read' ? 'update' : 'read')} />}
         <EditableElementHeading1 editState={mode === 'update' && user.id === props.userId ? (editingValue === 'NAME' ? 'editing' : 'editable') : 'disabled'}
@@ -116,7 +120,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     </>;
   } else {
     return<>
-      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         <Heading1>User not found</Heading1>
       </Container>

@@ -34,14 +34,18 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
 
+  const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    console.log(event);
+  }
+
   if (lexicologerGame === undefined) {
     return <>
-      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Heading1>Please log in to create a Lexicologer game</Heading1>
     </>
   } else if (mode === 'update' && (props.userId === undefined || props.userId === null || props.userId !== lexicologerGame.userId)) {
     return <>
-      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Heading1>401</Heading1>
     </>
   }
@@ -285,7 +289,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const toggleButtonMode: 'create' | 'read' | 'update' = mode === 'read' ? (lexicologerGame.id === undefined ? 'create' : 'update') : 'read';
 
   return <>
-    <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+    <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
     <Container>
       {(mode === 'create' || props.userId === lexicologerGame.userId) && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}
       <EditableElementHeading1

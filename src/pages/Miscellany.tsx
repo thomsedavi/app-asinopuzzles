@@ -9,9 +9,13 @@ interface MiscellanyProps {
 const Miscellany = (props: MiscellanyProps) => {
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
 
+  const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    console.log(event);
+  }
+
   return (
     <>
-      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+      <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         <Heading1>Miscellany</Heading1>
         <Heading2>Lexicologer</Heading2>

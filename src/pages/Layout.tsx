@@ -5,6 +5,7 @@ interface LayoutProps {
   userId?: string | null;
   isBurgerOpen: boolean;
   setIsBurgerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onClickLoader: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
 const Layout = (props: LayoutProps) => {
@@ -56,7 +57,7 @@ const Layout = (props: LayoutProps) => {
         </HeaderLinkInternal>
         <HeaderLinkInternal to='/miscellany'>MISCELLANY</HeaderLinkInternal>
         <HeaderLinkInternal to='/about'>ABOUT</HeaderLinkInternal>
-        {props.userId && <HeaderLinkInternal to={`/users/${props.userId}`}>PROFILE</HeaderLinkInternal>}
+        {props.userId && <HeaderLinkInternal to={`/users/${props.userId}`} onClick={props.onClickLoader}>PROFILE</HeaderLinkInternal>}
         {props.userId && <HeaderLinkExternal href='/logout'>LOGOUT</HeaderLinkExternal>}
         {!props.userId && <HeaderLinkExternal href='/login'>LOGIN</HeaderLinkExternal>}
       </Container>
