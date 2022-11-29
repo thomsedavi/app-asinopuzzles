@@ -97,7 +97,7 @@ export const ToggleButton = styled.button<ToggleButtonProps>`
   background: var(--color);
   color: var(--background-color);
   cursor: pointer;
-  font-size: 1em;
+  font-size: 0.8em;
   padding: 4px 10px;
   font-family: inherit;
   width: ${props => props.width ?? 'auto'};
