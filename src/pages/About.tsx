@@ -12,7 +12,6 @@ const About = (props: AboutPageProps) => {
 
   const onClickLoader = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     console.log(event.currentTarget.href);
-    event.preventDefault();
     setIsLoading(true);
   }
 
