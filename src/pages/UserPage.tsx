@@ -21,7 +21,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
   const [ savedState, setSavedState] = React.useState<'show' | 'fade' | 'hide'>('hide');
-  const [ saveFadeTimestamp, setSaveFadeTimestamp ] = React.useState<number>(Date.now());
+  const [ saveFadeTimestamp, setSaveFadeTimestamp ] = React.useState<string>(Date.now().toString());
 
   const saveName = (): void => {
     if (isWorking) {
@@ -43,7 +43,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setSavedState('show');
 
           setTimeout(() => {
-            const timeStamp = Date.now()
+            const timeStamp = Date.now().toString();
 
             setSavedState('fade');
             setSaveFadeTimestamp(timeStamp);
