@@ -49,6 +49,8 @@ const UserPage = (props: UserPageProps): JSX.Element => {
             setSaveFadeTimestamp(timeStamp);
 
             setTimeout(() => {
+              console.log(saveFadeTimestamp);
+              console.log(timeStamp);
               saveFadeTimestamp === timeStamp && setSavedState('hide');
             }, 5000);
           }, 1000);
