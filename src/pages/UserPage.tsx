@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
+import { saveStateHandler } from '../common/saveState';
 import { Container, Heading1, Overlay, Placeholder, Saved } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { User } from '../interfaces';
@@ -20,8 +21,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
-  const [ savedState, setSavedState] = React.useState<'show' | 'fade' | 'hide'>('hide');
-  const [ saveStateTimeout, setSaveStateTimeout ] = React.useState<NodeJS.Timeout | undefined>(undefined);
+  const saveState = new saveStateHandler();
 
   const saveName = (): void => {
     if (isWorking) {
@@ -36,10 +36,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     if (name === user.name)
       return;
 
-    if (saveStateTimeout !== undefined) {
-      clearTimeout(saveStateTimeout);
-      setSaveStateTimeout(undefined);
-    }
+    saveState.clearTimeout();
 
     fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
       .then((response: Response) => {
@@ -48,17 +45,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          setSavedState('show');
-
-          setTimeout(() => {
-            setSavedState('fade');
-
-            const newSaveStateTimeout = setTimeout(() => {
-              setSavedState('hide');
-            }, 4000);
-
-            setSaveStateTimeout(newSaveStateTimeout);
-          }, 1000);
+          saveState.show();
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
@@ -80,6 +67,11 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
     const biography = convertStringToDocument(inputValue);
 
+    if (biography === user.biography)
+      return;
+
+    saveState.clearTimeout();
+
     fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
       .then((response: Response) => {
         if (response.status === 200) {
@@ -87,6 +79,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
+          saveState.show();
         } else if (response.status === 400) {
           response.text()
             .then((error: string) => {
@@ -117,7 +110,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
-        {savedState !== 'hide' && <Saved isFading={savedState === 'fade'}>Saved!</Saved>}
+        {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fade'}>Saved!</Saved>}
         {user.id === props.userId && <EditToggleButton mode={mode} onClick={() => setMode(mode === 'read' ? 'update' : 'read')} />}
         <EditableElementHeading1 editState={mode === 'update' && user.id === props.userId ? (editingValue === 'NAME' ? 'editing' : 'editable') : 'disabled'}
                                  value={user.name ?? 'Anonymous'}
