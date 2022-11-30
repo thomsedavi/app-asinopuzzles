@@ -215,6 +215,7 @@ interface SavedProps {
 export const Saved = styled.div<SavedProps>`
   position: absolute;
   left: 0;
+  top: 0;
   background-color: var(--opposite);
   color: var(--background-color);
   padding: 4px 10px;

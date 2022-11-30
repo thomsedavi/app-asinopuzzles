@@ -131,8 +131,8 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  isWorking={isWorking}
                                  placeholder='User Biography'
                                  errorMessage={errorMessage} />
+        {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fade'}>Saved!</Saved>}
       </Container>
-      {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fade'}>Saved!</Saved>}
       {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     </>;
   } else {

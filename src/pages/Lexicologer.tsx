@@ -388,8 +388,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             <Button onClick={() => navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`)}>Copy Link to Clipboard</Button>
           </ButtonGroup>
         </>}
+        {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fade'}>Saved!</Saved>}
     </Container>
-    {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fade'}>Saved!</Saved>}
     {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
   </>;
 }
