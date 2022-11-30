@@ -220,7 +220,7 @@ export const Saved = styled.div<SavedProps>`
   padding: 4px 10px;
   font-size: 0.8em;
   box-shadow: 0.2em 0.2em var(--color);
-  transition: ${props => props.isFading ? '10s' : 'auto'};
+  transition: ${props => props.isFading ? '20s' : 'auto'};
   opacity: ${props => props.isFading ? '0' : '1'};
 `;
 

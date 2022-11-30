@@ -16,16 +16,12 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ inputValue, setInputValue ] = React.useState<string | undefined>();
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [ isLoading, setIsLoading ] = React.useState(false);
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
   const [ savedState, setSavedState] = React.useState<'show' | 'fade' | 'hide'>('hide');
-  const [ saveFadeTimestamp, setSaveFadeTimestamp ] = React.useState<number>(Date.now());
-
-  const currentSaveFadeTimestamp = (): number => {
-    return saveFadeTimestamp;
-  }
+  const [ saveStateTimeout, setSaveStateTimeout ] = React.useState<NodeJS.Timeout | undefined>(undefined);
 
   const saveName = (): void => {
     if (isWorking) {
@@ -34,10 +30,16 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
     setErrorMessage(undefined);
     setIsWorking(true);
-    const timeStamp = Date.now();
-    console.log(timeStamp);
 
     let name = tidyString(inputValue);
+
+    if (name === user.name)
+      return;
+
+    if (saveStateTimeout !== undefined) {
+      clearTimeout(saveStateTimeout);
+      setSaveStateTimeout(undefined);
+    }
 
     fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
       .then((response: Response) => {
@@ -49,18 +51,14 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setSavedState('show');
 
           setTimeout(() => {
-            setTimeout(() => {
-              console.log(currentSaveFadeTimestamp());
-              console.log(timeStamp);
-              currentSaveFadeTimestamp() === timeStamp && setSavedState('hide');
+            setSavedState('show');
+
+            const newSaveStateTimeout = setTimeout(() => {
+              setSavedState('hide');
             }, 5000);
 
-            setSavedState('fade');
-            console.log(timeStamp);
-            setSaveFadeTimestamp(timeStamp);
-            console.log(currentSaveFadeTimestamp());
-
-          }, 1000);
+            setSaveStateTimeout(newSaveStateTimeout);
+          }, 5000);
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
