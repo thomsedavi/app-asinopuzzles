@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
-import { saveStateHandler } from '../common/saveState';
+import { useSaveStatus } from '../common/saveState';
 import { Container, Heading1, Overlay, Placeholder, Saved } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { User } from '../interfaces';
@@ -21,7 +21,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
-  const saveState = new saveStateHandler();
+  const saveState = useSaveStatus();
 
   const saveName = (): void => {
     if (isWorking) {
