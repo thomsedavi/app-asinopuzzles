@@ -51,7 +51,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setSavedState('show');
 
           setTimeout(() => {
-            setSavedState('show');
+            setSavedState('fade');
 
             const newSaveStateTimeout = setTimeout(() => {
               setSavedState('hide');
