@@ -144,7 +144,6 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
         <Button onClick={props.onClickCancel} disabled={props.isWorking}>Cancel</Button>
       </ButtonGroup>
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
-      {convertDocumentToElements(convertStringToDocument(props.inputValue))}
     </>
   } else if (props.editState === 'editable') {
     return <>

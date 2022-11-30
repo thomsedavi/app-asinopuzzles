@@ -104,3 +104,15 @@ body {
     display: none;
   }
 }
+
+@media (768px <= width < 992px) {
+  body {
+    font-size: 1.1em;
+  }
+}
+
+@media (992px <= width) {
+  body {
+    font-size: 1.2em;
+  }
+}
