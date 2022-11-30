@@ -96,8 +96,6 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
   if (user) {
     return <>
-      {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
-      <Overlay><Placeholder>…</Placeholder></Overlay>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         {showSaved && <Saved>Saved!</Saved>}
@@ -123,6 +121,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  placeholder='User Biography'
                                  errorMessage={errorMessage} />
       </Container>
+      {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     </>;
   } else {
     return<>

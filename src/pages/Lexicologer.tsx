@@ -290,7 +290,6 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const toggleButtonMode: 'create' | 'read' | 'update' = mode === 'read' ? (lexicologerGame.id === undefined ? 'create' : 'update') : 'read';
 
   return <>
-    {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
     <Container>
       {(mode === 'create' || props.userId === lexicologerGame.userId) && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}
@@ -382,6 +381,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           </ButtonGroup>
         </>}
     </Container>
+    {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
   </>;
 }
 

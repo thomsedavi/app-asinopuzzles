@@ -15,11 +15,11 @@ const NoPage = (props: NoPageProps) => {
   }
 
   return <>
-    {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
     <Container>
       <Heading1>404</Heading1>
     </Container>
+    {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
   </>;
 };
 

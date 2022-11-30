@@ -16,7 +16,6 @@ const About = (props: AboutPageProps) => {
 
   return (
     <>
-      {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         <Heading1>About</Heading1>
@@ -28,6 +27,7 @@ const About = (props: AboutPageProps) => {
         <Paragraph>Lotographia lives in Aotearoa New Zealand. They grew up with an Amiga 1000 and had ambitions to grow up to make Amiga games for a living. Sadly the Amiga system did not survive the 1990's and it is impossible to earn a living making games for a dead computer. Now they make proper adult software for a living and web games in their spare time. They are also trying to write a novel about making computer games for the Amiga computer.</Paragraph>
         <Paragraph>Their IRL name is David Thomsen.</Paragraph>
       </Container>
+      {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     </>
   );
 };

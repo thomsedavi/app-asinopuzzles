@@ -16,7 +16,6 @@ const Miscellany = (props: MiscellanyProps) => {
 
   return (
     <>
-      {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
         <Heading1>Miscellany</Heading1>
@@ -27,6 +26,7 @@ const Miscellany = (props: MiscellanyProps) => {
           <ButtonLink to="/lexicologers/create">Create Lexicologer Game</ButtonLink>
         </ButtonGroup>}
       </Container>
+      {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     </>
   );
 };
