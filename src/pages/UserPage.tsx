@@ -41,13 +41,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setIsWorking(false);
           setSavedState('show');
 
-          useEffect(() => {
-            const fadeTimeout = setTimeout(() => {
-              setSavedState('fade');          
-            }, 5000)
-        
-            return () => clearTimeout(fadeTimeout)
-          }, [savedState])
+          bounce();
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
@@ -57,6 +51,16 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
       });
+  }
+
+  const bounce = (): void => {
+    useEffect(() => {
+      const fadeTimeout = setTimeout(() => {
+        setSavedState('fade');          
+      }, 5000)
+  
+      return () => clearTimeout(fadeTimeout)
+    }, [savedState]);
   }
 
   const saveBiography = (): void => {
