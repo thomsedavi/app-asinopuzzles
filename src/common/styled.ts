@@ -192,6 +192,7 @@ export const TextLink = styled.a`
 `;
 
 export const Container = styled.div`
+  position: relative;
   margin: 0 auto;
 
   @media (width < 576px) {
@@ -205,6 +206,11 @@ export const Container = styled.div`
   @media (768px <= width) {
     width: 37em;
   }
+`;
+
+export const Saved = styled.div`
+  position: absolute;
+  right: 0;
 `;
 
 export const Burger = styled.svg`
