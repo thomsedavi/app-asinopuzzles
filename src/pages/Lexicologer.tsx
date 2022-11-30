@@ -137,16 +137,18 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             setLexicologerGame(gameResponse);
             setIsWorking(false);
             setMode('update');
-            saveState.show();
+            saveState.showSuccess();
           });
       } else {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
+        saveState.showFailure();
       }
     })
     .catch(() => {
       setIsWorking(false);
       setErrorMessage('Unknown Error');
+      saveState.showFailure();
     });
   }
 
@@ -167,16 +169,18 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           .then((gameResponse: LexicologerGame) => {
             setLexicologerGame(gameResponse);
             setIsWorking(false);
-            saveState.show();
+            saveState.showSuccess();
           });
       } else {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
+        saveState.showFailure();
       }
     })
     .catch(() => {
       setIsWorking(false);
       setErrorMessage('Unknown Error');
+      saveState.showFailure();
     });
   }
 
@@ -388,7 +392,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             <Button onClick={() => navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`)}>Copy Link to Clipboard</Button>
           </ButtonGroup>
         </>}
-        {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fade'}>Saved!</Saved>}
+        {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fadeFailure' || saveState.state === 'fadeSuccess'}>{(saveState.state === 'showSuccess' || saveState.state === 'fadeSuccess') ? 'Saved!' : 'Error!'}</Saved>}
     </Container>
     {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
   </>;

@@ -45,15 +45,17 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          saveState.show();
+          saveState.showSuccess();
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
+          saveState.showFailure();
         }
       })
       .catch(() => {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
+        saveState.showFailure();
       });
   }
 
@@ -79,26 +81,30 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          saveState.show();
+          saveState.showSuccess();
         } else if (response.status === 400) {
           response.text()
             .then((error: string) => {
               if (error === 'BIOGRAPHY_TOO_LONG') {
                 setIsWorking(false);
                 setErrorMessage('Biography is too long');
+                saveState.showFailure();
               } else {
                 setIsWorking(false);
                 setErrorMessage('Unknown Error');
+                saveState.showFailure();
               }
             });
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
+          saveState.showFailure();
         }
       })
       .catch(() => {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
+        saveState.showFailure();
       });
   }
 
@@ -131,7 +137,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  isWorking={isWorking}
                                  placeholder='User Biography'
                                  errorMessage={errorMessage} />
-        {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fade'}>Saved!</Saved>}
+        {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fadeFailure' || saveState.state === 'fadeSuccess'}>{(saveState.state === 'showSuccess' || saveState.state === 'fadeSuccess') ? 'Saved!' : 'Error!'}</Saved>}
       </Container>
       {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     </>;

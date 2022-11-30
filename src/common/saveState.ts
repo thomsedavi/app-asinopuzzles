@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function useSaveStatus() {
-  const [ state, setState ] = React.useState<'show' | 'fade' | 'hide'>('hide');
+  const [ state, setState ] = React.useState<'showFailure' | 'fadeFailure' | 'showSuccess' | 'fadeSuccess' | 'hide'>('hide');
   const [ saveStateTimeout, setSaveStateTimeout ] = React.useState<NodeJS.Timeout | undefined>(undefined);
 
   return {
@@ -9,21 +9,37 @@ export function useSaveStatus() {
       if (saveStateTimeout !== undefined) {
         clearTimeout(saveStateTimeout);
         setSaveStateTimeout(undefined);
-        setState('hide');
       }
     },
-    show: () => {
-      setState('show');
+    showSuccess: () => {
+      setState('showSuccess');
 
-      setTimeout(() => {
-        setState('fade');
+      const newFadeStateTimeout = setTimeout(() => {
+        setState('fadeSuccess');
   
-        const newSaveStateTimeout = setTimeout(() => {
+        const newHideStateTimeout = setTimeout(() => {
           setState('hide');
         }, 4000);
   
-        setSaveStateTimeout(newSaveStateTimeout);
-      }, 1000);  
+        setSaveStateTimeout(newHideStateTimeout);
+      }, 1000);
+
+      setSaveStateTimeout(newFadeStateTimeout);
+    },
+    showFailure: () => {
+      setState('showFailure');
+
+      const newFadeStateTimeout = setTimeout(() => {
+        setState('fadeFailure');
+  
+        const newHideStateTimeout = setTimeout(() => {
+          setState('hide');
+        }, 4000);
+  
+        setSaveStateTimeout(newHideStateTimeout);
+      }, 1000);
+
+      setSaveStateTimeout(newFadeStateTimeout);
     },
     state: state
   };
