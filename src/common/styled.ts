@@ -210,7 +210,12 @@ export const Container = styled.div`
 
 export const Saved = styled.div`
   position: absolute;
-  right: 0;
+  left: 0;
+  background-color: var(--opposite);
+  color: var(--background-color);
+  padding: 4px 10px;
+  font-size: 0.8em;
+  box-shadow: 0.2em 0.2em var(--color);
 `;
 
 export const Burger = styled.svg`

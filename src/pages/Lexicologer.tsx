@@ -26,7 +26,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const [ solutionValue, setSolutionValue ] = React.useState<string>('');
   const [ editingValue, setEditingValue ] = React.useState<string | undefined>();
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [ isLoading, setIsLoading ] = React.useState(false);
   const [ lexicologerGame, setLexicologerGame ] = React.useState<LexicologerGame | undefined>(
     useLoaderData() as LexicologerGame ??
     (props.mode === 'create' && defaultGame) ??
