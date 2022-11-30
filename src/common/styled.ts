@@ -208,16 +208,16 @@ export const Container = styled.div`
   }
 `;
 
-interface SavedProps {
+interface FlashProps {
   isFading: boolean;
-  isError: boolean;
+  color: 'accent' | 'opposite' | 'failure';
 }
 
-export const Saved = styled.div<SavedProps>`
+export const Flash = styled.div<FlashProps>`
   position: absolute;
   left: 0;
   top: 0;
-  background-color: ${props => props.isError ? 'var(--failure)' : 'var(--opposite)'};
+  background-color: var(--${props => props.color});
   color: var(--background-color);
   padding: 4px 10px;
   font-size: 0.8em;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
-import { useSaveStatus } from '../common/saveState';
-import { Container, Heading1, Overlay, Placeholder, Saved } from '../common/styled';
+import { useState } from '../common/saveState';
+import { Container, Heading1, Overlay, Placeholder, Flash } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { User } from '../interfaces';
 import Layout from './Layout';
@@ -21,7 +21,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
-  const saveState = useSaveStatus();
+  const state = useState();
 
   const saveName = (): void => {
     if (isWorking) {
@@ -36,7 +36,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     if (name === user.name)
       return;
 
-    saveState.clearTimeout();
+    state.clearFlashTimeout();
 
     fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
       .then((response: Response) => {
@@ -45,17 +45,17 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          saveState.showSuccess();
+          state.showFlash('Saved!', 'opposite');
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
-          saveState.showFailure();
+          state.showFlash('Error!', 'failure');
         }
       })
       .catch(() => {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
-        saveState.showFailure();
+        state.showFlash('Error!', 'failure');
       });
   }
 
@@ -72,7 +72,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     if (biography === user.biography)
       return;
 
-    saveState.clearTimeout();
+    state.clearFlashTimeout();
 
     fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
       .then((response: Response) => {
@@ -81,30 +81,30 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          saveState.showSuccess();
+          state.showFlash('Saved!', 'opposite');
         } else if (response.status === 400) {
           response.text()
             .then((error: string) => {
               if (error === 'BIOGRAPHY_TOO_LONG') {
                 setIsWorking(false);
                 setErrorMessage('Biography is too long');
-                saveState.showFailure();
+                state.showFlash('Error!', 'failure');
               } else {
                 setIsWorking(false);
                 setErrorMessage('Unknown Error');
-                saveState.showFailure();
+                state.showFlash('Error!', 'failure');
               }
             });
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
-          saveState.showFailure();
+          state.showFlash('Error!', 'failure');
         }
       })
       .catch(() => {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
-        saveState.showFailure();
+        state.showFlash('Error!', 'failure');
       });
   }
 
@@ -137,7 +137,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  isWorking={isWorking}
                                  placeholder='User Biography'
                                  errorMessage={errorMessage} />
-        {saveState.state !== 'hide' && <Saved isError={saveState.state === 'fadeFailure' || saveState.state === 'showFailure'} isFading={saveState.state === 'fadeFailure' || saveState.state === 'fadeSuccess'}>{(saveState.state === 'showSuccess' || saveState.state === 'fadeSuccess') ? 'Saved!' : 'Error!'}</Saved>}
+        {state.flash.state !== 'hide' && <Flash color={state.flash.color} isFading={state.flash.state === 'fade'}>{state.flash.message}</Flash>}
       </Container>
       {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     </>;

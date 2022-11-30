@@ -1,46 +1,35 @@
 import React from 'react';
 
-export function useSaveStatus() {
-  const [ state, setState ] = React.useState<'showFailure' | 'fadeFailure' | 'showSuccess' | 'fadeSuccess' | 'hide'>('hide');
-  const [ saveStateTimeout, setSaveStateTimeout ] = React.useState<NodeJS.Timeout | undefined>(undefined);
+export function useState() {
+  const [ flashMessage, setFlashMessage ] = React.useState<string | undefined>(undefined);
+  const [ flashState, setFlashState ] = React.useState<'show' | 'fade' | 'hide'>('hide');
+  const [ flashColor, setFlashColor ] = React.useState<'accent' | 'opposite' | 'failure'>('opposite');
+  const [ saveFlashTimeout, setFlashTimeout ] = React.useState<NodeJS.Timeout | undefined>(undefined);
 
   return {
-    clearTimeout: () => {
-      if (saveStateTimeout !== undefined) {
-        clearTimeout(saveStateTimeout);
-        setSaveStateTimeout(undefined);
+    clearFlashTimeout: () => {
+      if (saveFlashTimeout !== undefined) {
+        clearTimeout(saveFlashTimeout);
+        setFlashTimeout(undefined);
       }
     },
-    showSuccess: () => {
-      setState('showSuccess');
+    showFlash: (message: string, color: 'accent' | 'opposite' | 'failure') => {
+      setFlashColor(color);
+      setFlashState('show');
+      setFlashMessage(message);
 
       const newFadeStateTimeout = setTimeout(() => {
-        setState('fadeSuccess');
+        setFlashState('fade');
   
         const newHideStateTimeout = setTimeout(() => {
-          setState('hide');
+          setFlashState('hide');
         }, 4000);
   
-        setSaveStateTimeout(newHideStateTimeout);
+        setFlashTimeout(newHideStateTimeout);
       }, 1000);
 
-      setSaveStateTimeout(newFadeStateTimeout);
+      setFlashTimeout(newFadeStateTimeout);
     },
-    showFailure: () => {
-      setState('showFailure');
-
-      const newFadeStateTimeout = setTimeout(() => {
-        setState('fadeFailure');
-  
-        const newHideStateTimeout = setTimeout(() => {
-          setState('hide');
-        }, 4000);
-  
-        setSaveStateTimeout(newHideStateTimeout);
-      }, 1000);
-
-      setSaveStateTimeout(newFadeStateTimeout);
-    },
-    state: state
+    flash: { state: flashState, color: flashColor, message: flashMessage }
   };
 }

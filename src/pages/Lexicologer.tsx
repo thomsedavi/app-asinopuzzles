@@ -2,8 +2,8 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, EditToggleButton, SingleNumberInput } from '../common/components';
-import { useSaveStatus } from '../common/saveState';
-import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Overlay, Paragraph, ParagraphAccent, Placeholder, Saved, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
+import { useState } from '../common/saveState';
+import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Overlay, Paragraph, ParagraphAccent, Placeholder, Flash, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -35,7 +35,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   );
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
-  const saveState = useSaveStatus();
+  const state = useState();
 
   const onClickLoader = () => {
     setIsLoading(true);
@@ -127,7 +127,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setErrorMessage(undefined);
     setIsWorking(true);
 
-    saveState.clearTimeout();
+    state.clearFlashTimeout();
 
     fetch(`/api/lexicologers`, { method: 'POST', body: JSON.stringify(lexicologerGame) })
     .then((response: Response) => {
@@ -137,18 +137,18 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             setLexicologerGame(gameResponse);
             setIsWorking(false);
             setMode('update');
-            saveState.showSuccess();
+            state.showFlash('Saved!', 'opposite');
           });
       } else {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
-        saveState.showFailure();
+        state.showFlash('Error!', 'failure');
       }
     })
     .catch(() => {
       setIsWorking(false);
       setErrorMessage('Unknown Error');
-      saveState.showFailure();
+      state.showFlash('Error!', 'failure');
     });
   }
 
@@ -160,7 +160,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setErrorMessage(undefined);
     setIsWorking(true);
 
-    saveState.clearTimeout();
+    state.clearFlashTimeout();
 
     fetch(`/api/lexicologers/${lexicologerGame.id}`, { method: 'PUT', body: JSON.stringify(lexicologerGame) })
     .then((response: Response) => {
@@ -169,18 +169,18 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           .then((gameResponse: LexicologerGame) => {
             setLexicologerGame(gameResponse);
             setIsWorking(false);
-            saveState.showSuccess();
+            state.showFlash('Saved!', 'opposite');
           });
       } else {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
-        saveState.showFailure();
+        state.showFlash('Error!', 'failure');
       }
     })
     .catch(() => {
       setIsWorking(false);
       setErrorMessage('Unknown Error');
-      saveState.showFailure();
+      state.showFlash('Error!', 'failure');
     });
   }
 
@@ -299,6 +299,11 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     });
   }
 
+  const copyLink = () => {
+    navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`);
+    state.showFlash('Copied!', 'accent');
+  }
+
   const toggleButtonMode: 'create' | 'read' | 'update' = mode === 'read' ? (lexicologerGame.id === undefined ? 'create' : 'update') : 'read';
 
   return <>
@@ -389,10 +394,10 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           <Paragraph>Link for this game:<br />
           <Code>{window.location.origin}/lexicologers/{lexicologerGame.id}</Code></Paragraph>
           <ButtonGroup>
-            <Button onClick={() => navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`)}>Copy Link to Clipboard</Button>
+            <Button onClick={copyLink}>Copy Link to Clipboard</Button>
           </ButtonGroup>
         </>}
-        {saveState.state !== 'hide' && <Saved isError={saveState.state === 'fadeFailure' || saveState.state === 'showFailure'} isFading={saveState.state === 'fadeFailure' || saveState.state === 'fadeSuccess'}>{(saveState.state === 'showSuccess' || saveState.state === 'fadeSuccess') ? 'Saved!' : 'Error!'}</Saved>}
+        {state.flash.state !== 'hide' && <Flash color={state.flash.color} isFading={state.flash.state === 'fade'}>{state.flash.message}</Flash>}
     </Container>
     {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
   </>;
