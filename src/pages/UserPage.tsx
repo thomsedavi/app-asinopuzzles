@@ -21,7 +21,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
   const [ savedState, setSavedState] = React.useState<'show' | 'fade' | 'hide'>('hide');
-  const [ saveFadeTimestamp, setSaveFadeTimestamp ] = React.useState<string>(Date.now().toString());
+  const [ saveCounter, setSaveCounter ] = React.useState<number>(0);
 
   const saveName = (): void => {
     if (isWorking) {
@@ -43,15 +43,14 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setSavedState('show');
 
           setTimeout(() => {
-            const timeStamp = Date.now().toString();
-
             setSavedState('fade');
-            setSaveFadeTimestamp(timeStamp);
+            setSaveCounter((prevState: number) => prevState + 1);
+            const currentSaveCounter = saveCounter;
 
             setTimeout(() => {
-              console.log(saveFadeTimestamp);
-              console.log(timeStamp);
-              saveFadeTimestamp === timeStamp && setSavedState('hide');
+              console.log(currentSaveCounter);
+              console.log(saveCounter);
+              saveCounter === currentSaveCounter && setSavedState('hide');
             }, 5000);
           }, 1000);
         } else {
