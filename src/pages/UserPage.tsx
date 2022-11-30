@@ -45,12 +45,12 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setTimeout(() => {
             setSavedState('fade');
             setSaveCounter((prevState: number) => prevState + 1);
-            const currentSaveCounter = saveCounter;
+            const currentSaveCounter = saveCounter.toString();
 
             setTimeout(() => {
               console.log(currentSaveCounter);
               console.log(saveCounter);
-              saveCounter === currentSaveCounter && setSavedState('hide');
+              saveCounter.toString() === currentSaveCounter && setSavedState('hide');
             }, 5000);
           }, 1000);
         } else {
