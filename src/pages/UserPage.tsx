@@ -45,7 +45,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          state.showFlash('Saved!', 'opposite');
+          state.showFlash('Name updated!', 'opposite');
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
@@ -81,7 +81,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          state.showFlash('Saved!', 'opposite');
+          state.showFlash('Biography updated!', 'opposite');
         } else if (response.status === 400) {
           response.text()
             .then((error: string) => {

@@ -137,7 +137,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             setLexicologerGame(gameResponse);
             setIsWorking(false);
             setMode('update');
-            state.showFlash('Saved!', 'opposite');
+            state.showFlash('Game created!', 'opposite');
           });
       } else {
         setIsWorking(false);
@@ -169,7 +169,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           .then((gameResponse: LexicologerGame) => {
             setLexicologerGame(gameResponse);
             setIsWorking(false);
-            state.showFlash('Saved!', 'opposite');
+            state.showFlash('Game updated!', 'opposite');
           });
       } else {
         setIsWorking(false);
@@ -301,7 +301,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 
   const copyLink = () => {
     navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`);
-    state.showFlash('Copied!', 'accent');
+    state.showFlash('Link copied!', 'accent');
   }
 
   const toggleButtonMode: 'create' | 'read' | 'update' = mode === 'read' ? (lexicologerGame.id === undefined ? 'create' : 'update') : 'read';
