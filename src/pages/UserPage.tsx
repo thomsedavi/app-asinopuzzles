@@ -23,6 +23,10 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ savedState, setSavedState] = React.useState<'show' | 'fade' | 'hide'>('hide');
   const [ saveFadeTimestamp, setSaveFadeTimestamp ] = React.useState<number>(Date.now());
 
+  const currentSaveFadeTimestamp = (): number => {
+    return saveFadeTimestamp;
+  }
+
   const saveName = (): void => {
     if (isWorking) {
       return;
@@ -46,15 +50,15 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
           setTimeout(() => {
             setTimeout(() => {
-              console.log(saveFadeTimestamp);
+              console.log(currentSaveFadeTimestamp());
               console.log(timeStamp);
-              saveFadeTimestamp === timeStamp && setSavedState('hide');
+              currentSaveFadeTimestamp() === timeStamp && setSavedState('hide');
             }, 5000);
 
             setSavedState('fade');
             console.log(timeStamp);
             setSaveFadeTimestamp(timeStamp);
-            console.log(saveFadeTimestamp);
+            console.log(currentSaveFadeTimestamp());
 
           }, 1000);
         } else {
