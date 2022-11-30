@@ -45,17 +45,17 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setSavedState('show');
 
           setTimeout(() => {
+            setTimeout(() => {
+              console.log(saveFadeTimestamp);
+              console.log(timeStamp);
+              saveFadeTimestamp === timeStamp && setSavedState('hide');
+            }, 5000);
 
             setSavedState('fade');
             console.log(timeStamp);
             setSaveFadeTimestamp(timeStamp);
             console.log(saveFadeTimestamp);
 
-            setTimeout(() => {
-              console.log(saveFadeTimestamp);
-              console.log(timeStamp);
-              saveFadeTimestamp === timeStamp && setSavedState('hide');
-            }, 5000);
           }, 1000);
         } else {
           setIsWorking(false);
