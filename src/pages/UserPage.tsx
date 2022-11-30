@@ -96,6 +96,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
   if (user) {
     return <>
+      {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
       <Overlay><Placeholder>…</Placeholder></Overlay>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
