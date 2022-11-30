@@ -21,7 +21,6 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
   const [ savedState, setSavedState] = React.useState<'show' | 'fade' | 'hide'>('hide');
-  const [ saveCounter, setSaveCounter ] = React.useState<number>(0);
 
   const saveName = (): void => {
     if (isWorking) {
@@ -44,15 +43,10 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
           setTimeout(() => {
             setSavedState('fade');
-            setSaveCounter((prevState: number) => prevState + 1);
-            const currentSaveCounter = saveCounter.toString();
-
-            setTimeout(() => {
-              console.log(currentSaveCounter);
-              console.log(saveCounter);
-              saveCounter.toString() === currentSaveCounter && setSavedState('hide');
-            }, 5000);
-          }, 1000);
+            return 'test';
+          }, 1000, (test: string) => {
+            console.log(test);
+          });
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
