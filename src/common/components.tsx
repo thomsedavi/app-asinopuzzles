@@ -1,5 +1,5 @@
 import React from 'react';
-import { convertDocumentToElements, convertStringToDocument } from './utils';
+import { convertDocumentToElements } from './utils';
 import { Document } from '../interfaces';
 import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput, TableCell, TableCellInput, ToggleButton } from './styled';
 import { Icon } from './icons';
