@@ -55,10 +55,10 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
             const newSaveStateTimeout = setTimeout(() => {
               setSavedState('hide');
-            }, 5000);
+            }, 4000);
 
             setSaveStateTimeout(newSaveStateTimeout);
-          }, 5000);
+          }, 1000);
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
