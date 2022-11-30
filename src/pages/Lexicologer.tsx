@@ -2,7 +2,8 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, EditToggleButton, SingleNumberInput } from '../common/components';
-import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Overlay, Paragraph, ParagraphAccent, Placeholder, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
+import { useSaveStatus } from '../common/saveState';
+import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Overlay, Paragraph, ParagraphAccent, Placeholder, Saved, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { LexicologerGame, LexicologerRequiredWord } from '../interfaces';
 import Layout from './Layout';
@@ -34,6 +35,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   );
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
+  const saveState = useSaveStatus();
 
   const onClickLoader = () => {
     setIsLoading(true);
@@ -125,6 +127,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setErrorMessage(undefined);
     setIsWorking(true);
 
+    saveState.clearTimeout();
+
     fetch(`/api/lexicologers`, { method: 'POST', body: JSON.stringify(lexicologerGame) })
     .then((response: Response) => {
       if (response.status === 200) {
@@ -133,6 +137,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             setLexicologerGame(gameResponse);
             setIsWorking(false);
             setMode('update');
+            saveState.show();
           });
       } else {
         setIsWorking(false);
@@ -153,6 +158,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setErrorMessage(undefined);
     setIsWorking(true);
 
+    saveState.clearTimeout();
+
     fetch(`/api/lexicologers/${lexicologerGame.id}`, { method: 'PUT', body: JSON.stringify(lexicologerGame) })
     .then((response: Response) => {
       if (response.status === 200) {
@@ -160,6 +167,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           .then((gameResponse: LexicologerGame) => {
             setLexicologerGame(gameResponse);
             setIsWorking(false);
+            saveState.show();
           });
       } else {
         setIsWorking(false);
@@ -381,6 +389,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           </ButtonGroup>
         </>}
     </Container>
+    {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fade'}>Saved!</Saved>}
     {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
   </>;
 }
