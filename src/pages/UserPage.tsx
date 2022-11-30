@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { Container, Heading1, Overlay, Placeholder, Saved } from '../common/styled';
@@ -21,6 +21,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
   const [ savedState, setSavedState] = React.useState<'show' | 'fade' | 'hide'>('hide');
+  const [ saveFadeTimestamp, setSaveFadeTimestamp ] = React.useState<number>(Date.now());
 
   const saveName = (): void => {
     if (isWorking) {
@@ -29,6 +30,8 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
     setErrorMessage(undefined);
     setIsWorking(true);
+    const timeStamp = Date.now();
+    console.log(timeStamp);
 
     let name = tidyString(inputValue);
 
@@ -41,7 +44,17 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setIsWorking(false);
           setSavedState('show');
 
-          bounce();
+          setTimeout(() => {
+
+            setSavedState('fade');
+            setSaveFadeTimestamp(timeStamp);
+
+            setTimeout(() => {
+              console.log(saveFadeTimestamp);
+              console.log(timeStamp);
+              saveFadeTimestamp === timeStamp && setSavedState('hide');
+            }, 5000);
+          }, 1000);
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
@@ -51,16 +64,6 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         setIsWorking(false);
         setErrorMessage('Unknown Error');
       });
-  }
-
-  const bounce = (): void => {
-    useEffect(() => {
-      const fadeTimeout = setTimeout(() => {
-        setSavedState('fade');          
-      }, 5000)
-  
-      return () => clearTimeout(fadeTimeout)
-    }, [savedState]);
   }
 
   const saveBiography = (): void => {
