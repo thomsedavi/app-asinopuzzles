@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { Container, Heading1, Overlay, Placeholder, Saved } from '../common/styled';
@@ -41,12 +41,13 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setIsWorking(false);
           setSavedState('show');
 
-          setTimeout(() => {
-            setSavedState('fade');
-            return 'test';
-          }, 1000, (test: string) => {
-            console.log(test);
-          });
+          useEffect(() => {
+            const fadeTimeout = setTimeout(() => {
+              setSavedState('fade');          
+            }, 5000)
+        
+            return () => clearTimeout(fadeTimeout)
+          }, [savedState])
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
