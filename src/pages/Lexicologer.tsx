@@ -300,6 +300,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   }
 
   const copyLink = () => {
+    state.clearFlashTimeout();
     navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`);
     state.showFlash('Link copied!', 'accent');
   }
