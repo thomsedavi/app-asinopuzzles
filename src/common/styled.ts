@@ -26,7 +26,8 @@ export const Heading1 = styled.h1<HeaderProps>`
 export const Heading2 = styled.h2`
   text-align: center;
   text-shadow: 0.05em 0.05em var(--accent);
-  margin: 0em;
+  margin: 0.5em 0 0.25em;
+  padding: 0.25em;
 `;
 
 interface ParagraphProps {

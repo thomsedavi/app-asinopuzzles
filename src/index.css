@@ -111,8 +111,14 @@ body {
   }
 }
 
-@media (992px <= width) {
+@media (992px <= width < 1200px) {
   body {
     font-size: 1.2em;
+  }
+}
+
+@media (1200px <= width) {
+  body {
+    font-size: 1.3em;
   }
 }
