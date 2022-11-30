@@ -208,7 +208,11 @@ export const Container = styled.div`
   }
 `;
 
-export const Saved = styled.div`
+interface SavedProps {
+  isFading: boolean;
+}
+
+export const Saved = styled.div<SavedProps>`
   position: absolute;
   left: 0;
   background-color: var(--opposite);
@@ -216,6 +220,8 @@ export const Saved = styled.div`
   padding: 4px 10px;
   font-size: 0.8em;
   box-shadow: 0.2em 0.2em var(--color);
+  transition: ${props => props.isFading ? '10s' : 'auto'};
+  opacity: ${props => props.isFading ? '0' : '1'};
 `;
 
 export const Burger = styled.svg`
@@ -288,7 +294,7 @@ export const InlineInput = styled.input<InlineInputProps>`
   display: inline-block;
   margin-left: 0.5em;
   box-sizing: border-box;
-  width: ${props => props.short ? '4em' : ''}
+  width: ${props => props.short ? '4em' : ''};
 `;
 
 export const InputGroup = styled.div`

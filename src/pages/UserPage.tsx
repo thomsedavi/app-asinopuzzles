@@ -20,7 +20,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
-  const [ showSaved, setShowSaved] = React.useState<boolean>(false);
+  const [ savedState, setSavedState] = React.useState<'show' | 'fade' | 'hide'>('hide');
 
   const saveName = (): void => {
     if (isWorking) {
@@ -39,7 +39,11 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          setShowSaved(true);
+          setSavedState('show');
+
+          setTimeout(() => {
+            setSavedState('fade');
+          }, 2000)
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
@@ -98,7 +102,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Container>
-        {showSaved && <Saved>Saved!</Saved>}
+        {savedState !== 'hide' && <Saved isFading={savedState === 'fade'}>Saved!</Saved>}
         {user.id === props.userId && <EditToggleButton mode={mode} onClick={() => setMode(mode === 'read' ? 'update' : 'read')} />}
         <EditableElementHeading1 editState={mode === 'update' && user.id === props.userId ? (editingValue === 'NAME' ? 'editing' : 'editable') : 'disabled'}
                                  value={user.name ?? 'Anonymous'}
