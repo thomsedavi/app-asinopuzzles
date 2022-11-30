@@ -210,13 +210,14 @@ export const Container = styled.div`
 
 interface SavedProps {
   isFading: boolean;
+  isError: boolean;
 }
 
 export const Saved = styled.div<SavedProps>`
   position: absolute;
   left: 0;
   top: 0;
-  background-color: var(--opposite);
+  background-color: ${props => props.isError ? 'var(--failure)' : 'var(--opposite)'};
   color: var(--background-color);
   padding: 4px 10px;
   font-size: 0.8em;

@@ -392,7 +392,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             <Button onClick={() => navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`)}>Copy Link to Clipboard</Button>
           </ButtonGroup>
         </>}
-        {saveState.state !== 'hide' && <Saved isFading={saveState.state === 'fadeFailure' || saveState.state === 'fadeSuccess'}>{(saveState.state === 'showSuccess' || saveState.state === 'fadeSuccess') ? 'Saved!' : 'Error!'}</Saved>}
+        {saveState.state !== 'hide' && <Saved isError={saveState.state === 'fadeFailure' || saveState.state === 'showFailure'} isFading={saveState.state === 'fadeFailure' || saveState.state === 'fadeSuccess'}>{(saveState.state === 'showSuccess' || saveState.state === 'fadeSuccess') ? 'Saved!' : 'Error!'}</Saved>}
     </Container>
     {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
   </>;
