@@ -31,7 +31,8 @@ export const Heading2 = styled.h2`
 `;
 
 interface ParagraphProps {
-  editable?: boolean
+  editable?: boolean;
+  fontWeight?: string;
 }
 
 export const Paragraph = styled.p<ParagraphProps>`
@@ -40,6 +41,7 @@ export const Paragraph = styled.p<ParagraphProps>`
   padding: 0.25em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
   border: ${props => props.editable ? "1px solid var(--accent-faded)" : "1px solid transparent"};
+  font-weight: ${props => props.fontWeight ?? '400'};
 `;
 
 export const Code = styled.code`
