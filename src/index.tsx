@@ -12,7 +12,7 @@ import { Placeholder } from './common/styled';
 import Lexicologer from './pages/Lexicologer';
 
 interface AppState {
-  userId?: string | null;
+  user?: User | null;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -34,23 +34,23 @@ export default class App extends React.Component<{}, AppState> {
               .then((response: Response) => response.json())
               .then((userValue: User) => {
                 this.setState({
-                  userId: userValue.id
+                  user: userValue
                 });
               })
               .catch(() => {
                 this.setState({
-                  userId: null
+                  user: null
                 });  
               });
           } else {
             this.setState({
-              userId: null
+              user: null
             });  
           }
         })
         .catch(() => {
           this.setState({
-            userId: null
+            user: null
           });
         });
       }, 1000);
@@ -65,49 +65,49 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   render = (): JSX.Element => {
-    if (this.state.userId === undefined) {
+    if (this.state.user === undefined) {
       return <Placeholder>…</Placeholder>
     } else {
       const router = createBrowserRouter([
         {
           index: true,
-          element: <Home userId={this.state.userId} />,
+          element: <Home userId={this.state.user?.id} />,
         },
         {
           path: "/miscellany",
-          element: <Miscellany userId={this.state.userId} />,
+          element: <Miscellany userId={this.state.user?.id} />,
         },
         {
           path: "/lexicologers/:lexicologerId/edit",
-          element: <Lexicologer userId={this.state.userId} mode='update' />,
+          element: <Lexicologer user={this.state.user} mode='update' />,
           loader: this.lexicologerLoader
         },
         {
           path: "/lexicologers/create",
-          element: <Lexicologer userId={this.state.userId} mode='create' />,
+          element: <Lexicologer user={this.state.user} mode='create' />,
         },
         {
           path: "/lexicologers/:lexicologerId",
-          element: <Lexicologer userId={this.state.userId} mode='read' />,
+          element: <Lexicologer user={this.state.user} mode='read' />,
           loader: this.lexicologerLoader
         },
         {
           path: "/about",
-          element: <About userId={this.state.userId} />,
+          element: <About userId={this.state.user?.id} />,
         },
         {
           path: "/users/:userId/edit",
-          element: <UserPage userId={this.state.userId} mode='update' />,
+          element: <UserPage userId={this.state.user?.id} mode='update' />,
           loader: this.userLoader
         },
         {
           path: "/users/:userId",
-          element: <UserPage userId={this.state.userId} mode='read' />,
+          element: <UserPage userId={this.state.user?.id} mode='read' />,
           loader: this.userLoader
         },
         {
           path: "/*",
-          element: <NoPage userId={this.state.userId} />,
+          element: <NoPage userId={this.state.user?.id} />,
         },
       ]);
   
