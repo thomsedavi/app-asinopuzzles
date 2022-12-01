@@ -18,8 +18,8 @@ export function useState() {
         setFlashState('fade');
   
         const newHideStateTimeout = setTimeout(() => {
-          flashState === 'fade' && setFlashState('hide');
-        }, 4000);
+          setFlashState('hide');
+        }, 3000);
   
         setFlashTimeout(newHideStateTimeout);
       }, 1000);

@@ -222,7 +222,7 @@ export const Flash = styled.div<FlashProps>`
   padding: 4px 10px;
   font-size: 0.8em;
   box-shadow: 0.2em 0.2em var(--color);
-  transition: ${props => props.isFading ? '3s' : 'auto'};
+  transition: ${props => props.isFading ? '2s' : 'auto'};
   opacity: ${props => props.isFading ? '0' : '1'};
 `;
 
