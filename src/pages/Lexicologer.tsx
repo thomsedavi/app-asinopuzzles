@@ -127,8 +127,6 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setErrorMessage(undefined);
     setIsWorking(true);
 
-    state.clearFlashTimeout();
-
     fetch(`/api/lexicologers`, { method: 'POST', body: JSON.stringify(lexicologerGame) })
     .then((response: Response) => {
       if (response.status === 200) {
@@ -159,8 +157,6 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
 
     setErrorMessage(undefined);
     setIsWorking(true);
-
-    state.clearFlashTimeout();
 
     fetch(`/api/lexicologers/${lexicologerGame.id}`, { method: 'PUT', body: JSON.stringify(lexicologerGame) })
     .then((response: Response) => {
@@ -300,7 +296,6 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   }
 
   const copyLink = () => {
-    state.clearFlashTimeout();
     navigator.clipboard.writeText(`${window.location.origin}/lexicologers/${lexicologerGame.id}`);
     state.showFlash('Link copied!', 'accent');
   }

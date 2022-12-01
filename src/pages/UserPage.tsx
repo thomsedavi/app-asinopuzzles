@@ -36,8 +36,6 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     if (name === user.name)
       return;
 
-    state.clearFlashTimeout();
-
     fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
       .then((response: Response) => {
         if (response.status === 200) {
@@ -71,8 +69,6 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
     if (biography === user.biography)
       return;
-
-    state.clearFlashTimeout();
 
     fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
       .then((response: Response) => {

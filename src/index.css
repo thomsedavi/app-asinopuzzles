@@ -24,8 +24,6 @@
   --color-light-opposite-pale: hsla(var(--hue-violet),75%,65%,1);;
   --color-light-opposite-strong: hsla(var(--hue-violet),75%,35%,1);;
   --color-light-shadow: hsla(var(--hue-azure),25%,25%,1);
-  --color-light-failure: hsla(var(--hue-red),100%,50%,1);
-  --color-light-success: hsla(var(--hue-green),100%,35%,1);
   --color-light-boop: hsla(var(--hue-yellow),75%,50%,1);
   --color-dark: hsla(var(--hue-azure),25%,5%,1);
   --color-dark-transparent: hsla(var(--hue-azure),25%,5%,0.75);
@@ -40,8 +38,6 @@
   --color-dark-opposite-pale: hsla(var(--hue-mint),75%,65%,1);;
   --color-dark-opposite-strong: hsla(var(--hue-mint),75%,35%,1);;
   --color-dark-shadow: hsla(var(--hue-azure),25%,25%,1);
-  --color-dark-failure: hsla(var(--hue-red),100%,50%,1);
-  --color-dark-success: hsla(var(--hue-green),100%,35%,1);
   --color-dark-boop: hsla(var(--hue-violet),75%,50%,1);
 }
 
@@ -60,8 +56,8 @@
     --opposite-pale: var(--color-dark-opposite-pale);
     --opposite-strong: var(--color-dark-opposite-strong);
     --shadow: var(--color-dark-shadow);
-    --failure: var(--color-dark-failure);
-    --success: var(--color-dark-success);
+    --failure: var(--accent-pale);
+    --success: var(--opposite-pale);
     --background-color-information: var(--color-dark-accent-background);
     --boop: var(--color-dark-boop);
   }
@@ -82,8 +78,8 @@
     --opposite-pale: var(--color-light-opposite-pale);
     --opposite-strong: var(--color-light-opposite-strong);
     --shadow: var(--color-light-shadow);
-    --failure: var(--color-light-failure);
-    --success: var(--color-light-success);
+    --failure: var(--opposite-pale);
+    --success: var(--accent-pale);
     --background-color-information: var(--color-light-accent-background);
     --boop: var(--color-light-boop);
   }

@@ -7,13 +7,12 @@ export function useState() {
   const [ saveFlashTimeout, setFlashTimeout ] = React.useState<NodeJS.Timeout | undefined>(undefined);
 
   return {
-    clearFlashTimeout: () => {
+    showFlash: (message: string, color: 'accent' | 'opposite' | 'failure') => {
       if (saveFlashTimeout !== undefined) {
         clearTimeout(saveFlashTimeout);
         setFlashTimeout(undefined);
       }
-    },
-    showFlash: (message: string, color: 'accent' | 'opposite' | 'failure') => {
+
       setFlashColor(color);
       setFlashState('show');
       setFlashMessage(message);
