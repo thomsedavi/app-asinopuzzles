@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertDocumentToElements } from './utils';
 import { Document } from '../interfaces';
-import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput, TableCell, TableCellInput, ToggleButton } from './styled';
+import { TextArea, Heading1, ErrorMessage, ButtonGroup, Button, EditIcon, Input, InlineLabel, InlineInput, TableCell, TableCellInput, ToggleButton, ParagraphContainer } from './styled';
 import { Icon } from './icons';
 
 interface EditToggleButtonProps {
@@ -146,9 +146,9 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else if (props.editState === 'editable') {
-    return <>
+    return <ParagraphContainer>
       {convertDocumentToElements(props.value, props.onClickEdit)}
-    </>
+    </ParagraphContainer>
   } else {
     return <>
       {convertDocumentToElements(props.value)}

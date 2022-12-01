@@ -192,6 +192,10 @@ export const TextLink = styled.a`
   font-weight: 700;
 `;
 
+export const ParagraphContainer = styled.p`
+
+`;
+
 export const Container = styled.div`
   position: relative;
   margin: 0 auto;
