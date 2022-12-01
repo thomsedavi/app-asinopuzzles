@@ -34,7 +34,7 @@ interface ParagraphContainerProps {
   editable?: boolean;
 }
 
-export const ParagraphContainer = styled.p<ParagraphContainerProps>`
+export const ParagraphContainer = styled.div<ParagraphContainerProps>`
   margin: 0.25em 0;
   cursor: ${props => props.editable ? "pointer" : "auto"};
   border: ${props => props.editable ? "1px solid var(--accent-faded)" : "1px solid transparent"};
