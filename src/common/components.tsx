@@ -127,6 +127,8 @@ interface EditableElementDocumentProps {
 }
 
 export const EditableElementDocument = (props: EditableElementDocumentProps): JSX.Element => {
+  const editable = props.onClickEdit !== undefined;
+
   if (props.editState === 'editing') {
     return <>
       <TextArea
@@ -146,8 +148,8 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else if (props.editState === 'editable') {
-    return <ParagraphContainer>
-      {convertDocumentToElements(props.value, props.onClickEdit)}
+    return <ParagraphContainer editable={editable}>
+      {convertDocumentToElements(props.value, editable)}
     </ParagraphContainer>
   } else {
     return <>

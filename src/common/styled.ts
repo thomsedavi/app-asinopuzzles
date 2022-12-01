@@ -30,17 +30,23 @@ export const Heading2 = styled.h2`
   padding: 0.25em;
 `;
 
-interface ParagraphProps {
+interface ParagraphContainerProps {
   editable?: boolean;
+}
+
+export const ParagraphContainer = styled.p<ParagraphContainerProps>`
+  margin: 0.25em 0;
+  cursor: ${props => props.editable ? "pointer" : "auto"};
+  border: ${props => props.editable ? "1px solid var(--accent-faded)" : "1px solid transparent"};
+`;
+
+interface ParagraphProps {
   fontWeight?: string;
 }
 
 export const Paragraph = styled.p<ParagraphProps>`
   text-align: center;
-  margin: 0.25em 0;
   padding: 0.25em;
-  cursor: ${props => props.editable ? "pointer" : "auto"};
-  border: ${props => props.editable ? "1px solid var(--accent-faded)" : "1px solid transparent"};
   font-weight: ${props => props.fontWeight ?? '400'};
 `;
 
@@ -190,10 +196,6 @@ export const HeaderLinkExternal = styled.a`
 export const TextLink = styled.a`
   color: var(--accent-pale);
   font-weight: 700;
-`;
-
-export const ParagraphContainer = styled.p`
-
 `;
 
 export const Container = styled.div`
