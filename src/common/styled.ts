@@ -18,7 +18,6 @@ export const Heading1 = styled.h1<HeaderProps>`
   text-shadow: 0.05em 0.05em var(--accent);
   font-variant: small-caps;
   margin: 0.25em 0;
-  padding: 0.25em;
   cursor: ${props => props.editable ? "pointer" : "auto"};
   border: ${props => props.editable ? "1px solid var(--accent-faded)" : "1px solid transparent"};
 `;

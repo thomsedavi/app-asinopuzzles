@@ -152,8 +152,8 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
       {convertDocumentToElements(props.value, editable)}
     </ParagraphContainer>
   } else {
-    return <>
+    return <ParagraphContainer>
       {convertDocumentToElements(props.value)}
-    </>
+    </ParagraphContainer>
   }
 }
