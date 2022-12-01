@@ -15,14 +15,10 @@ export function useState() {
       setFlashMessage(message);
 
       const newFadeStateTimeout = setTimeout(() => {
-        saveFlashTimeout && clearTimeout(saveFlashTimeout);
-
         setFlashState('fade');
   
         const newHideStateTimeout = setTimeout(() => {
-          saveFlashTimeout && clearTimeout(saveFlashTimeout);
-
-          setFlashState('hide');
+          flashState === 'fade' && setFlashState('hide');
         }, 4000);
   
         setFlashTimeout(newHideStateTimeout);
