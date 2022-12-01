@@ -8,19 +8,20 @@ export function useState() {
 
   return {
     showFlash: (message: string, color: 'accent' | 'opposite' | 'failure') => {
-      if (saveFlashTimeout !== undefined) {
-        clearTimeout(saveFlashTimeout);
-        setFlashTimeout(undefined);
-      }
+      saveFlashTimeout && clearTimeout(saveFlashTimeout);
 
       setFlashColor(color);
       setFlashState('show');
       setFlashMessage(message);
 
       const newFadeStateTimeout = setTimeout(() => {
+        saveFlashTimeout && clearTimeout(saveFlashTimeout);
+
         setFlashState('fade');
   
         const newHideStateTimeout = setTimeout(() => {
+          saveFlashTimeout && clearTimeout(saveFlashTimeout);
+
           setFlashState('hide');
         }, 4000);
   
