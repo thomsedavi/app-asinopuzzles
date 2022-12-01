@@ -317,7 +317,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         placeholder='Lexicologer Game Title'
         isWorking={isWorking}
       />
-      <Paragraph><TextLink href={`/users/${lexicologerGame.user.id}`} onClick={() => setIsLoading(true)}>{lexicologerGame.user.name}</TextLink></Paragraph>
+      {mode === 'read' && <Paragraph><TextLink href={`/users/${lexicologerGame.user.id}`} onClick={() => setIsLoading(true)}>{lexicologerGame.user.name}</TextLink></Paragraph>}
+      {mode !== 'read' && <Paragraph>{lexicologerGame.user.name}</Paragraph>}
       <EditableElementDocument
         editState={mode !== 'read' && isEditable ? (editingValue === 'DETAILS' ? 'editing' : 'editable') : 'disabled'}
         value={lexicologerGame.details ?? {}}
