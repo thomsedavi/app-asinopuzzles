@@ -48,6 +48,7 @@ export const Paragraph = styled.p<ParagraphProps>`
   text-align: center;
   padding: 0.25em;
   font-weight: ${props => props.fontWeight ?? '400'};
+  margin: 0;
 `;
 
 export const Code = styled.code`
