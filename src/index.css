@@ -99,25 +99,25 @@ body {
   margin: 0;
 }
 
-@media (width < 576px) {
+@media (max-width: 575.98px) {
   nav.burger-closed > div > div, nav.burger-closed > div > a:not(.logo) {
     display: none;
   }
 }
 
-@media (768px <= width < 992px) {
+@media (min-width: 768px) and (max-width: 991.98px) {
   body {
     font-size: 1.1em;
   }
 }
 
-@media (992px <= width < 1200px) {
+@media (min-width: 992px) and (max-width: 1199.98px) {
   body {
     font-size: 1.2em;
   }
 }
 
-@media (1200px <= width) {
+@media (min-width: 1200px) {
   body {
     font-size: 1.3em;
   }

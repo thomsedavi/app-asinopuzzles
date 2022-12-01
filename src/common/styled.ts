@@ -157,11 +157,11 @@ export const HeaderLinkInternal = styled(NavLink)`
     color: var(--hover);
   }
 
-  @media (width < 576px) {
+  @media (max-width: 575.98px) {
     display: block;
   }
 
-  @media (576px <= width) {
+  @media (min-width: 576px) {
     display: inline-block;
   }
 `;
@@ -176,11 +176,11 @@ export const HeaderLinkExternal = styled.a`
     color: var(--hover);
   }
 
-  @media (width < 576px) {
+  @media (max-width: 575.98px) {
     display: block;
   }
 
-  @media (576px <= width) {
+  @media (min-width: 576px) {
     display: inline-block;
   }
 `;
@@ -195,15 +195,15 @@ export const Container = styled.div`
   position: relative;
   margin: 0 auto;
 
-  @media (width < 576px) {
+  @media (max-width: 575.98px) {
     width: 21em;
   }
 
-  @media (576px <= width < 768px) {
+  @media (min-width: 576px) and (max-width: 767.98px) {
     width: 35em;
   }
 
-  @media (768px <= width) {
+  @media (min-width: 768px) {
     width: 37em;
   }
 `;
@@ -230,7 +230,7 @@ export const Burger = styled.svg`
   float: right;
   cursor: pointer;
 
-  @media (576px <= width) {
+  @media (min-width: 576px) {
     display: none;
   }
 `;
@@ -238,11 +238,11 @@ export const Burger = styled.svg`
 export const LogoLarge = styled.svg`
   height: 1.4em;
 
-  @media (width < 576px) {
+  @media (max-width: 575.98px) {
     display: none;
   }
 
-  @media (576px <= width) {
+  @media (min-width: 576px) {
     display: inline-block;
   }
 `;
@@ -251,11 +251,11 @@ export const LogoSmall = styled.svg`
   display: block;
   height: 1.15em;
 
-  @media (width < 576px) {
+  @media (max-width: 575.98px) {
     display: block;
   }
 
-  @media (576px <= width) {
+  @media (min-width: 576px) {
     display: none;
   }
 `;
@@ -324,15 +324,15 @@ export const Table = styled.table<TableProps>`
   table-layout: fixed;
   margin: 0 auto;
 
-  @media (width < 576px) {
+  @media (max-width: 575.98px) {
     width: ${props => props.smallWidth ?? props.width ?? 'auto'};
   }
 
-  @media (576px <= width < 768px) {
+  @media (min-width: 576px) and (max-width: 767.98px) {
     width: ${props => props.mediumWidth ?? props.width ?? 'auto'};
   }
 
-  @media (768px <= width) {
+  @media (min-width: 768px) {
     width: ${props => props.largeWidth ?? props.width ?? 'auto'};
   }
 `;
@@ -348,15 +348,15 @@ interface ColumnProps {
 }
 
 export const Column = styled.col<ColumnProps>`
-  @media (width < 576px) {
+  @media (max-width: 575.98px) {
     width: ${props => props.smallWidth ?? props.width ?? 'auto'};
   }
 
-  @media (576px <= width < 768px) {
+  @media (min-width: 576px) and (max-width: 767.98px) {
     width: ${props => props.mediumWidth ?? props.width ?? 'auto'};
   }
 
-  @media (768px <= width) {
+  @media (min-width: 768px) {
     width: ${props => props.largeWidth ?? props.width ?? 'auto'};
   }
 `;
