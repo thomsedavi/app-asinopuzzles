@@ -15,7 +15,8 @@ interface LexicologerProps {
 
 const Lexicologer = (props: LexicologerProps): JSX.Element => {
   const defaultGame: LexicologerGame | undefined = props.user !== undefined && props.user !== null ? {
-    user: props.user,
+    userId: props.user.id,
+    userName: props.user.name,
     title: 'Lexicologer Game',
     characterLimit: 140,
     details: { sections: [ { type: 'PARAGRAPH', element: { text: 'Try to write something within the character limit that makes use of all the words listed below' } } ] },
@@ -46,7 +47,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       <Layout userId={props.user?.id} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Heading1>Please log in to create a Lexicologer game</Heading1>
     </>
-  } else if (mode === 'update' && (props.user === undefined || props.user === null || props.user?.id !== lexicologerGame.user.id)) {
+  } else if (mode === 'update' && (props.user === undefined || props.user === null || props.user?.id !== lexicologerGame.userId)) {
     return <>
       <Layout userId={props.user?.id} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Heading1>401</Heading1>
@@ -180,7 +181,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     });
   }
 
-  const isEditable = mode !== 'read' && props.user !== undefined && props.user !== null && lexicologerGame.user.id === props.user?.id;
+  const isEditable = mode !== 'read' && props.user !== undefined && props.user !== null && lexicologerGame.userId === props.user?.id;
 
   const requiredWords: JSX.Element[] | undefined = lexicologerGame?.requiredWords?.map((word: LexicologerRequiredWord, index: number) => {
     return <TableRow key={`requiredWordRow${index}`}>
@@ -305,7 +306,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
   return <>
     <Layout userId={props.user?.id} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
     <Container>
-      {(mode === 'create' || props.user?.id === lexicologerGame.user.id) && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}
+      {(mode === 'create' || props.user?.id === lexicologerGame.userId) && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}
       <EditableElementHeading1
         editState={mode !== 'read' && isEditable ? (editingValue === 'TITLE' ? 'editing' : 'editable') : 'disabled'}
         value={lexicologerGame.title ?? 'Lexicologer Game'}
@@ -317,8 +318,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         placeholder='Lexicologer Game Title'
         isWorking={isWorking}
       />
-      {mode === 'read' && <Paragraph><TextLink href={`/users/${lexicologerGame.user.id}`} target='_blank'>{lexicologerGame.user.name}</TextLink></Paragraph>}
-      {mode !== 'read' && <Paragraph fontWeight='700'>{lexicologerGame.user.name}</Paragraph>}
+      {mode === 'read' && <Paragraph><TextLink href={`/users/${lexicologerGame.userId}`} target='_blank'>{lexicologerGame.userName}</TextLink></Paragraph>}
+      {mode !== 'read' && <Paragraph fontWeight='700'>{lexicologerGame.userName}</Paragraph>}
       <EditableElementDocument
         editState={mode !== 'read' && isEditable ? (editingValue === 'DETAILS' ? 'editing' : 'editable') : 'disabled'}
         value={lexicologerGame.details ?? {}}

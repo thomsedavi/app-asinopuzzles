@@ -28,7 +28,8 @@ export interface LexicologerRequiredWord {
 
 export interface LexicologerGame {
   id?: string;
-  user: User;
+  userId?: string;
+  userName?: string;
   title?: string;
   details?: Document;
   characterLimit?: number,
