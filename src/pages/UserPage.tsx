@@ -131,15 +131,15 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const lexicologerSort = (a: LexicologerGame, b: LexicologerGame): number => {
     if (lexicologerSortColumn === 'title') {
       if (lexicologerSortOrder === 'ascending') {
-        return (a.title ?? '') < (b.title ?? '') ? 1 : -1;
+        return (a.title ?? '') > (b.title ?? '') ? 1 : -1;
       } else {
-        return (a.title ?? '') < (b.title ?? '') ? -1 : 1;
+        return (a.title ?? '') > (b.title ?? '') ? -1 : 1;
       }
     } else {
       if (lexicologerSortOrder === 'ascending') {
-        return (a.dateCreated ?? '') < (b.dateCreated ?? '') ? 1 : -1;
+        return (a.dateCreated ?? '') > (b.dateCreated ?? '') ? 1 : -1;
       } else {
-        return (a.dateCreated ?? '') < (b.dateCreated ?? '') ? -1 : 1;
+        return (a.dateCreated ?? '') > (b.dateCreated ?? '') ? -1 : 1;
       }
     }
   }
