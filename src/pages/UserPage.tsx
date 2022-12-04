@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Heading1, Overlay, Placeholder, Flash } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { User } from '../interfaces';
 import Layout from './Layout';
@@ -21,6 +21,8 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
   const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
+  const [ lexicologerSortColumn, setLexicologerSortColumn ] = React.useState<'title' | 'date'>('title');
+  const [ lexicologerSortOrder, setLexicologerSortOrder ] = React.useState<'descending' | 'ascending'>('descending');
   const state = useState();
 
   const saveName = (): void => {
@@ -108,6 +110,24 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     setIsLoading(true);
   }
 
+  const toggleLexicologerSort = (columnName: 'title' | 'date') => {
+    if (columnName === 'title') {
+      if (lexicologerSortColumn === 'title') {
+        setLexicologerSortOrder(value => value === 'ascending' ? 'descending' : 'ascending');
+      } else {
+        setLexicologerSortColumn('title');
+        setLexicologerSortOrder('descending');
+      }
+    } else {
+      if (lexicologerSortColumn === 'date') {
+        setLexicologerSortOrder(value => value === 'ascending' ? 'descending' : 'ascending');
+      } else {
+        setLexicologerSortColumn('date');
+        setLexicologerSortOrder('descending');
+      }
+    }
+  }
+
   if (user) {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
@@ -134,6 +154,25 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                                  placeholder='User Biography'
                                  errorMessage={errorMessage} />
         {state.flash.state !== 'hide' && <Flash color={state.flash.color} isFading={state.flash.state === 'fade'}>{state.flash.message}</Flash>}
+        {user.id === props.userId && (user.lexicologers?.length ?? 0) > 0 && <>
+          <Heading2>Lexicologers</Heading2>
+          <Table>
+          <TableRow>
+            <TableHeader title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
+            <TableHeader title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
+            <TableHeader title='Actions'>Actions</TableHeader>
+          </TableRow>                        
+          </Table>
+        </>}
+        {user.id !== props.userId && (user.lexicologers?.length ?? 0) > 0 && <>
+          <Heading2>Lexicologers</Heading2>
+          <Table>
+          <TableRow>
+            <TableHeader title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
+            <TableHeader title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
+          </TableRow>            
+          </Table>
+        </>}
       </Container>
       {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
     </>;
