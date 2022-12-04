@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, formatDate, tidyString } from '../common/utils';
 import { LexicologerGame, User } from '../interfaces';
 import Layout from './Layout';
@@ -185,7 +185,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
             </TableRow>
             {user.lexicologers?.sort(lexicologerSort).map((lexicologer: LexicologerGame, index: number) => <TableRow key={`lexicologer${index}`}>
               <TableCell>
-                {lexicologer.title}
+                <TextLink href={`/lexicologers/${lexicologer.id}`} onClick={onClickLoader}>{lexicologer.title}</TextLink>
               </TableCell>
               <TableCell>
                 {lexicologer.dateCreated !== undefined ? formatDate(lexicologer.dateCreated) : '(unknown)'}
@@ -208,6 +208,14 @@ const UserPage = (props: UserPageProps): JSX.Element => {
               <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👆' : ' 👇')}</TableHeader>
               <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👆' : ' 👇')}</TableHeader>
             </TableRow>            
+            {user.lexicologers?.sort(lexicologerSort).map((lexicologer: LexicologerGame, index: number) => <TableRow key={`lexicologer${index}`}>
+              <TableCell>
+              <TextLink href={`/lexicologers/${lexicologer.id}`} onClick={onClickLoader}>{lexicologer.title}</TextLink>
+              </TableCell>
+              <TableCell>
+                {lexicologer.dateCreated !== undefined ? formatDate(lexicologer.dateCreated) : '(unknown)'}
+              </TableCell>
+            </TableRow>)}
           </Table>
         </>}
       </Container>
