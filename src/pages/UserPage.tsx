@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-modal';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
@@ -23,6 +24,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
   const [ lexicologerSortColumn, setLexicologerSortColumn ] = React.useState<'title' | 'date'>('title');
   const [ lexicologerSortOrder, setLexicologerSortOrder ] = React.useState<'descending' | 'ascending'>('descending');
+  const [ isDeleteLexicologerModalOpen, setIsDeleteLexicologerModalOpen ] = React.useState<boolean>(false);
   const state = useState();
 
   const saveName = (): void => {
@@ -192,7 +194,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
               </TableCell>
               <TableCell>
                 <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}>✏️</TableCellLink>
-                <TableCellAction>➖</TableCellAction>
+                <TableCellAction onClick={() => setIsDeleteLexicologerModalOpen(true)}>➖</TableCellAction>
               </TableCell>
             </TableRow>)}
           </Table>
@@ -220,6 +222,16 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         </>}
       </Container>
       {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
+      <Modal
+        isOpen={isDeleteLexicologerModalOpen}
+        onRequestClose={() => setIsDeleteLexicologerModalOpen(false)}
+        style={{}}
+        contentLabel="Delete Lexicologer"
+      >
+        <h2>Hello</h2>
+        <button onClick={() => setIsDeleteLexicologerModalOpen(false)}>close</button>
+        <div>I am a modal</div>
+      </Modal>
     </>;
   } else {
     return<>
