@@ -2,6 +2,18 @@ import React from 'react';
 import { Document, Section, Element } from '../interfaces';
 import { EditIcon, Paragraph } from './styled';
 
+export const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+
+  const year = date.getFullYear().toString();
+  let month = (date.getMonth() + 1).toString();
+  month.length === 1 && (month = '0' + month);
+  let day = (date.getDate() + 1).toString();
+  day.length === 1 && (day = '0' + day);
+
+  return `${year}-${month}-${day}`;
+}
+
 // TODO trim line endings and stuff
 export const tidyString = (input?: string): string => {
   let output = input ?? ''

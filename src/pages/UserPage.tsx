@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
 import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction } from '../common/styled';
-import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
+import { convertDocumentToString, convertStringToDocument, formatDate, tidyString } from '../common/utils';
 import { LexicologerGame, User } from '../interfaces';
 import Layout from './Layout';
 
@@ -131,15 +131,15 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const lexicologerSort = (a: LexicologerGame, b: LexicologerGame): number => {
     if (lexicologerSortColumn === 'title') {
       if (lexicologerSortOrder === 'ascending') {
-        return (a.title ?? '') < (b.title ?? '') ? 1 : 0;
+        return (a.title ?? '') < (b.title ?? '') ? 1 : -1;
       } else {
-        return (a.title ?? '') < (b.title ?? '') ? 0 : 1;
+        return (a.title ?? '') < (b.title ?? '') ? -1 : 1;
       }
     } else {
       if (lexicologerSortOrder === 'ascending') {
-        return (a.dateCreated ?? '') < (b.dateCreated ?? '') ? 1 : 0;
+        return (a.dateCreated ?? '') < (b.dateCreated ?? '') ? 1 : -1;
       } else {
-        return (a.dateCreated ?? '') < (b.dateCreated ?? '') ? 0 : 1;
+        return (a.dateCreated ?? '') < (b.dateCreated ?? '') ? -1 : 1;
       }
     }
   }
@@ -188,7 +188,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                 {lexicologer.title}
               </TableCell>
               <TableCell>
-                {lexicologer.dateCreated}
+                {lexicologer.dateCreated !== undefined ? formatDate(lexicologer.dateCreated) : '(unknown)'}
               </TableCell>
               <TableCell>
                 <TableCellAction>✏️</TableCellAction>
