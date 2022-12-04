@@ -191,7 +191,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                 {lexicologer.dateCreated !== undefined ? formatDate(lexicologer.dateCreated) : '(unknown)'}
               </TableCell>
               <TableCell>
-                <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}>✏️test</TableCellLink>
+                <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}>✏️</TableCellLink>
                 <TableCellAction>➖</TableCellAction>
               </TableCell>
             </TableRow>)}

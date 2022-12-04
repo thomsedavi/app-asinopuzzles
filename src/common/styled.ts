@@ -410,7 +410,9 @@ export const TableCellAction = styled.span`
 `;
 
 export const TableCellLink = styled.a`
-  cursor: pointer;
+  text-decoration: none;
+  color: var(--accent-pale);
+  font-weight: 700;
 `;
 
 export const TableCellInput = styled.input`
