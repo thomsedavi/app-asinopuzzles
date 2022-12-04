@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, formatDate, tidyString } from '../common/utils';
 import { LexicologerGame, User } from '../interfaces';
 import Layout from './Layout';
@@ -174,8 +174,8 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           <Heading2>Lexicologers</Heading2>
           <Table>
             <ColumnGroup>
-              <Column smallWidth='8.2em' mediumWidth='22.2em' largeWidth='24.2em' />
-              <Column smallWidth='8.2em' mediumWidth='8.2em' largeWidth='8.2em' />
+              <Column smallWidth='10.2em' mediumWidth='24.2em' largeWidth='26.2em' />
+              <Column smallWidth='6.2em' mediumWidth='6.2em' largeWidth='6.2em' />
               <Column width='4.6em' />
             </ColumnGroup>
             <TableRow>
@@ -191,7 +191,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                 {lexicologer.dateCreated !== undefined ? formatDate(lexicologer.dateCreated) : '(unknown)'}
               </TableCell>
               <TableCell>
-                <TableCellAction>✏️</TableCellAction>
+                <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}>✏️test</TableCellLink>
                 <TableCellAction>➖</TableCellAction>
               </TableCell>
             </TableRow>)}
@@ -201,8 +201,8 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           <Heading2>Lexicologers</Heading2>
           <Table>
             <ColumnGroup>
-              <Column smallWidth='12.8em' mediumWidth='26.8em' largeWidth='28.8em' />
-              <Column smallWidth='8.2em' mediumWidth='8.2em' largeWidth='8.2em' />
+              <Column smallWidth='14.8em' mediumWidth='28.8em' largeWidth='30.8em' />
+              <Column smallWidth='6.2em' mediumWidth='6.2em' largeWidth='6.2em' />
             </ColumnGroup>
             <TableRow>
               <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👆' : ' 👇')}</TableHeader>

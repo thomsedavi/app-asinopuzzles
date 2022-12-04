@@ -409,6 +409,10 @@ export const TableCellAction = styled.span`
   cursor: pointer;
 `;
 
+export const TableCellLink = styled.a`
+  cursor: pointer;
+`;
+
 export const TableCellInput = styled.input`
   font-size: 1em;
   width: 100%;
