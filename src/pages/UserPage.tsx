@@ -2,9 +2,9 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
-import { User } from '../interfaces';
+import { LexicologerGame, User } from '../interfaces';
 import Layout from './Layout';
 
 interface UserPageProps {
@@ -128,6 +128,22 @@ const UserPage = (props: UserPageProps): JSX.Element => {
     }
   }
 
+  const lexicologerSort = (a: LexicologerGame, b: LexicologerGame): number => {
+    if (lexicologerSortColumn === 'title') {
+      if (lexicologerSortOrder === 'ascending') {
+        return (a.title ?? '') < (b.title ?? '') ? 1 : 0;
+      } else {
+        return (a.title ?? '') < (b.title ?? '') ? 0 : 1;
+      }
+    } else {
+      if (lexicologerSortOrder === 'ascending') {
+        return (a.dateCreated ?? '') < (b.dateCreated ?? '') ? 1 : 0;
+      } else {
+        return (a.dateCreated ?? '') < (b.dateCreated ?? '') ? 0 : 1;
+      }
+    }
+  }
+
   if (user) {
     return <>
       <Layout userId={props.userId} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
@@ -157,29 +173,41 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         {user.id === props.userId && (user.lexicologers?.length ?? 0) > 0 && <>
           <Heading2>Lexicologers</Heading2>
           <Table>
-          <ColumnGroup>
-            <Column smallWidth='8.2em' mediumWidth='22.2em' largeWidth='24.2em' />
-            <Column smallWidth='8.2em' mediumWidth='8.2em' largeWidth='8.2em' />
-            <Column width='4.6em' />
-          </ColumnGroup>
-          <TableRow>
-            <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
-            <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
-            <TableHeader title='Actions'>Actions</TableHeader>
-          </TableRow>                        
+            <ColumnGroup>
+              <Column smallWidth='8.2em' mediumWidth='22.2em' largeWidth='24.2em' />
+              <Column smallWidth='8.2em' mediumWidth='8.2em' largeWidth='8.2em' />
+              <Column width='4.6em' />
+            </ColumnGroup>
+            <TableRow>
+              <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👆' : ' 👇')}</TableHeader>
+              <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👆' : ' 👇')}</TableHeader>
+              <TableHeader title='Actions'>Actions</TableHeader>
+            </TableRow>
+            {user.lexicologers?.sort(lexicologerSort).map((lexicologer: LexicologerGame, index: number) => <TableRow key={`lexicologer${index}`}>
+              <TableCell>
+                {lexicologer.title}
+              </TableCell>
+              <TableCell>
+                {lexicologer.dateCreated}
+              </TableCell>
+              <TableCell>
+                <TableCellAction>✏️</TableCellAction>
+                <TableCellAction>➖</TableCellAction>
+              </TableCell>
+            </TableRow>)}
           </Table>
         </>}
         {user.id !== props.userId && (user.lexicologers?.length ?? 0) > 0 && <>
           <Heading2>Lexicologers</Heading2>
           <Table>
-          <ColumnGroup>
-            <Column smallWidth='12.8em' mediumWidth='26.8em' largeWidth='28.8em' />
-            <Column smallWidth='8.2em' mediumWidth='8.2em' largeWidth='8.2em' />
-          </ColumnGroup>
-          <TableRow>
-            <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
-            <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
-          </TableRow>            
+            <ColumnGroup>
+              <Column smallWidth='12.8em' mediumWidth='26.8em' largeWidth='28.8em' />
+              <Column smallWidth='8.2em' mediumWidth='8.2em' largeWidth='8.2em' />
+            </ColumnGroup>
+            <TableRow>
+              <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👆' : ' 👇')}</TableHeader>
+              <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👆' : ' 👇')}</TableHeader>
+            </TableRow>            
           </Table>
         </>}
       </Container>
