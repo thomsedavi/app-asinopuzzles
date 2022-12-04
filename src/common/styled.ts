@@ -371,12 +371,17 @@ export const Column = styled.col<ColumnProps>`
 export const TableRow = styled.tr`
 `;
 
-export const TableHeader = styled.th`
+interface TableHeaderProps {
+  clickable?: boolean;
+}
+
+export const TableHeader = styled.th<TableHeaderProps>`
   border: 1px solid var(--color);
   padding: 0.5em;
   overflow: hidden;
   text-overflow: ellipsis;
   box-sizing: border-box;
+  cursor: ${props => props.clickable ? "pointer" : "auto"};
 `;
 
 interface TableCellProps {

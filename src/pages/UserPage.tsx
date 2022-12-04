@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
 import { User } from '../interfaces';
 import Layout from './Layout';
@@ -157,9 +157,14 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         {user.id === props.userId && (user.lexicologers?.length ?? 0) > 0 && <>
           <Heading2>Lexicologers</Heading2>
           <Table>
+          <ColumnGroup>
+            <Column smallWidth='8.2em' mediumWidth='22.2em' largeWidth='24.2em' />
+            <Column smallWidth='8.2em' mediumWidth='8.2em' largeWidth='8.2em' />
+            <Column width='4.6em' />
+          </ColumnGroup>
           <TableRow>
-            <TableHeader title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
-            <TableHeader title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
+            <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
+            <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
             <TableHeader title='Actions'>Actions</TableHeader>
           </TableRow>                        
           </Table>
@@ -167,9 +172,13 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         {user.id !== props.userId && (user.lexicologers?.length ?? 0) > 0 && <>
           <Heading2>Lexicologers</Heading2>
           <Table>
+          <ColumnGroup>
+            <Column smallWidth='12.8em' mediumWidth='26.8em' largeWidth='28.8em' />
+            <Column smallWidth='8.2em' mediumWidth='8.2em' largeWidth='8.2em' />
+          </ColumnGroup>
           <TableRow>
-            <TableHeader title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
-            <TableHeader title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
+            <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
+            <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👇' : ' 👆')}</TableHeader>
           </TableRow>            
           </Table>
         </>}
