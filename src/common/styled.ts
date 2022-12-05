@@ -76,7 +76,7 @@ export const EditIcon = styled.span`
 `;
 
 export const Button = styled.button`
-  margin: 0.5em 0.5em 1.5em;
+  margin: 0.5em;
   border: none;
   box-shadow: 0.2em 0.2em var(--accent);
   background: var(--color);
