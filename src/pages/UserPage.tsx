@@ -245,8 +245,6 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       <Modal
         isOpen={lexicologerToDelete !== undefined}
         onRequestClose={() => setLexicologerToDelete(undefined)}
-        className="modal"
-        overlayClassName="modal-overlay"
         style={{}}
         contentLabel="Delete Lexicologer"
       >
