@@ -104,12 +104,13 @@ body {
   width: 16em;
   padding: 0 1em;
   outline: none;
+  box-shadow: 0.2em 0.2em var(--accent), -0.2em -0.2em var(--opposite);
 }
 
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: var(--accent-faded);
+  background-color: var(--overlay-color);
 }
 
 @media (max-width: 575.98px) {
