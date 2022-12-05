@@ -148,7 +148,7 @@ export const EditableElementDocument = (props: EditableElementDocumentProps): JS
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else if (props.editState === 'editable') {
-    return <ParagraphContainer editable={editable}>
+    return <ParagraphContainer editable={editable} onClick={props.onClickEdit}>
       {convertDocumentToElements(props.value, editable)}
     </ParagraphContainer>
   } else {
