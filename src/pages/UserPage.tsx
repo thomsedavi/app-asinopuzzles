@@ -267,7 +267,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         <Paragraph>Are you sure you want to delete the Lexicologer <Emphasis>{user.lexicologers?.find(l => l.id === lexicologerToDelete)?.title}</Emphasis>?</Paragraph>
         <ButtonGroup>
           <Button disabled={isWorking} onClick={deleteLexicologer}>Delete</Button>
-          <Button disabled={isWorking} onClick={() => setLexicologerToDelete(undefined)}>Cancel</Button>
+          <Button disabled={isWorking} onClick={() => { setErrorMessage(undefined); setLexicologerToDelete(undefined) ;}}>Cancel</Button>
         </ButtonGroup>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </Modal>
