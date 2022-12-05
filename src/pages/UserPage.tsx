@@ -127,6 +127,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
           setUser({...user, lexicologers: lexicologers});
           setIsWorking(false);
+          setLexicologerToDelete(undefined);
           state.showFlash('Lexicologer Deleted!', 'opposite');
         } else {
           setIsWorking(false);

@@ -52,6 +52,11 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
       <Layout userId={props.user?.id} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
       <Heading1>401</Heading1>
     </>
+  } else if (mode === 'read' && lexicologerGame.id === undefined) {
+    return <>
+      <Layout userId={props.user?.id} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
+      <Heading1>401</Heading1>
+    </>
   }
 
   const saveName = () => {
