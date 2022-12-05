@@ -95,6 +95,14 @@ body {
   margin: 0;
 }
 
+.modal {
+  background-color: red;
+}
+
+.modal-overlay {
+  background-color: green;
+}
+
 @media (max-width: 575.98px) {
   nav.burger-closed > div > div, nav.burger-closed > div > a:not(.logo) {
     display: none;
