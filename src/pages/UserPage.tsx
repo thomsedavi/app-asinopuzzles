@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink, ButtonGroup, Button, Paragraph } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink, ButtonGroup, Button, Paragraph, Emphasis } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, formatDate, tidyString } from '../common/utils';
 import { LexicologerGame, User } from '../interfaces';
 import Layout from './Layout';
@@ -251,7 +251,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         contentLabel="Delete Lexicologer"
       >
         <Heading2>Delete Lexicologer</Heading2>
-        <Paragraph>Are you sure you want to delete the Lexicologer "{user.lexicologers?.find(l => l.id === lexicologerToDelete)?.title}"?</Paragraph>
+        <Paragraph>Are you sure you want to delete the Lexicologer <Emphasis>{user.lexicologers?.find(l => l.id === lexicologerToDelete)?.title}</Emphasis>?</Paragraph>
         <ButtonGroup>
           <Button disabled={isWorking} onClick={deleteLexicologer}>Delete</Button>
           <Button disabled={isWorking} onClick={() => setLexicologerToDelete(undefined)}>Cancel</Button>

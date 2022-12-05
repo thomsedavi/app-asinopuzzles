@@ -445,6 +445,11 @@ export const SuccessSpan = styled.span`
   }
 `;
 
+export const Emphasis = styled.span`
+  font-weight: 700;
+  color: var(--accent-pale);
+`;
+
 export const Overlay = styled.div`
   position: fixed;
   inset: 0;

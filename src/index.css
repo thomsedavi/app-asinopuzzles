@@ -103,6 +103,7 @@ body {
   transform: translate(-50%, -50%);
   width: 16em;
   padding: 0 1em;
+  outline: none;
 }
 
 .modal-overlay {
