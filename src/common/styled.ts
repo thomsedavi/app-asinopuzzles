@@ -75,14 +75,14 @@ export const EditIcon = styled.span`
 `;
 
 export const Button = styled.button`
-  margin: 0.5em;
+  margin: 0.5em 0.5em 1.5em;
   border: none;
   box-shadow: 0.2em 0.2em var(--accent);
   background: var(--color);
   color: var(--background-color);
   cursor: pointer;
   font-size: 1em;
-  padding: 4px 10px;
+  padding: 0.3em 0.6em;
   font-family: inherit;
 
   &:hover {
@@ -107,7 +107,7 @@ export const ToggleButton = styled.button<ToggleButtonProps>`
   color: var(--background-color);
   cursor: pointer;
   font-size: 0.8em;
-  padding: 4px 10px;
+  padding: 0.3em 0.6em;
   font-family: inherit;
   width: ${props => props.width ?? 'auto'};
 
