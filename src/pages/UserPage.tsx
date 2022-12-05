@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink, ButtonGroup, Button, Paragraph } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, formatDate, tidyString } from '../common/utils';
 import { LexicologerGame, User } from '../interfaces';
 import Layout from './Layout';
@@ -24,7 +24,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
   const [ user, setUser ] = React.useState<User>(useLoaderData() as User);
   const [ lexicologerSortColumn, setLexicologerSortColumn ] = React.useState<'title' | 'date'>('title');
   const [ lexicologerSortOrder, setLexicologerSortOrder ] = React.useState<'descending' | 'ascending'>('descending');
-  const [ isDeleteLexicologerModalOpen, setIsDeleteLexicologerModalOpen ] = React.useState<boolean>(false);
+  const [ lexicologerToDelete, setLexicologerToDelete ] = React.useState<string | undefined>(undefined);
   const state = useState();
 
   const saveName = (): void => {
@@ -32,13 +32,13 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       return;
     }
 
-    setErrorMessage(undefined);
-    setIsWorking(true);
-
     let name = tidyString(inputValue);
 
     if (name === user.name)
       return;
+
+    setErrorMessage(undefined);
+    setIsWorking(true);
 
     fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
       .then((response: Response) => {
@@ -66,13 +66,13 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       return;
     }
 
-    setErrorMessage(undefined);
-    setIsWorking(true);
-
     const biography = convertStringToDocument(inputValue);
 
     if (biography === user.biography)
       return;
+
+    setErrorMessage(undefined);
+    setIsWorking(true);
 
     fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
       .then((response: Response) => {
@@ -100,6 +100,26 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setErrorMessage('Unknown Error');
           state.showFlash('Error!', 'failure');
         }
+      })
+      .catch(() => {
+        setIsWorking(false);
+        setErrorMessage('Unknown Error');
+        state.showFlash('Error!', 'failure');
+      });
+  }
+
+  const deleteLexicologer = () => {
+    if (lexicologerToDelete === undefined)
+      return;
+
+    setErrorMessage(undefined);
+    setIsWorking(true);
+
+    fetch(`/api/lexicologers/${lexicologerToDelete}`, { method: 'DELETE'})
+      .then((response: Response) => {
+        console.log('response', response);
+
+        setIsWorking(false);
       })
       .catch(() => {
         setIsWorking(false);
@@ -194,7 +214,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
               </TableCell>
               <TableCell>
                 <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}>✏️</TableCellLink>
-                <TableCellAction onClick={() => setIsDeleteLexicologerModalOpen(true)}>➖</TableCellAction>
+                <TableCellAction onClick={() => setLexicologerToDelete(lexicologer.id)}>➖</TableCellAction>
               </TableCell>
             </TableRow>)}
           </Table>
@@ -223,14 +243,17 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       </Container>
       {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
       <Modal
-        isOpen={isDeleteLexicologerModalOpen}
-        onRequestClose={() => setIsDeleteLexicologerModalOpen(false)}
+        isOpen={lexicologerToDelete !== undefined}
+        onRequestClose={() => setLexicologerToDelete(undefined)}
         style={{}}
         contentLabel="Delete Lexicologer"
       >
-        <h2>Hello</h2>
-        <button onClick={() => setIsDeleteLexicologerModalOpen(false)}>close</button>
-        <div>I am a modal</div>
+        <Heading2>Delete Lexicologer</Heading2>
+        <Paragraph>Are you sure you want to delete the Lexicologer "{user.lexicologers?.find(l => l.id === lexicologerToDelete)?.title}"?</Paragraph>
+        <ButtonGroup>
+          <Button disabled={isWorking} onClick={deleteLexicologer}>Delete</Button>
+          <Button disabled={isWorking} onClick={() => setLexicologerToDelete(undefined)}>Cancel</Button>
+        </ButtonGroup>
       </Modal>
     </>;
   } else {
