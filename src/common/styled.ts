@@ -20,6 +20,7 @@ export const Heading1 = styled.h1<HeaderProps>`
   margin: 0.25em 0;
   cursor: ${props => props.editable ? "pointer" : "auto"};
   border: ${props => props.editable ? "1px solid var(--accent-faded)" : "1px solid transparent"};
+  word-wrap: break-word;
 `;
 
 export const Heading2 = styled.h2`

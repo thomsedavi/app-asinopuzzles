@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink, ButtonGroup, Button, Paragraph, Emphasis } from '../common/styled';
+import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink, ButtonGroup, Button, Paragraph, Emphasis, ErrorMessage } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, formatDate, tidyString } from '../common/utils';
 import { LexicologerGame, User } from '../interfaces';
 import Layout from './Layout';
@@ -47,7 +47,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          state.showFlash('Name updated!', 'opposite');
+          state.showFlash('Name Updated!', 'opposite');
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
@@ -81,7 +81,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
-          state.showFlash('Biography updated!', 'opposite');
+          state.showFlash('Biography Updated!', 'opposite');
         } else if (response.status === 400) {
           response.text()
             .then((error: string) => {
@@ -117,9 +117,22 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
     fetch(`/api/lexicologers/${lexicologerToDelete}`, { method: 'DELETE'})
       .then((response: Response) => {
-        console.log('response', response);
+        if (response.status === 200) {
+          const lexicologers = user.lexicologers ?? [];
 
-        setIsWorking(false);
+          const lexicologer = lexicologers.find(lexicologer => lexicologer.id === lexicologerToDelete)!;
+          const index = lexicologers.indexOf(lexicologer);
+          
+          lexicologers.splice(index, 1);
+
+          setUser({...user, lexicologers: lexicologers});
+          setIsWorking(false);
+          state.showFlash('Lexicologer Deleted!', 'opposite');
+        } else {
+          setIsWorking(false);
+          setErrorMessage('Unknown Error');
+          state.showFlash('Error!', 'failure');
+        }
       })
       .catch(() => {
         setIsWorking(false);
@@ -256,6 +269,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
           <Button disabled={isWorking} onClick={deleteLexicologer}>Delete</Button>
           <Button disabled={isWorking} onClick={() => setLexicologerToDelete(undefined)}>Cancel</Button>
         </ButtonGroup>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </Modal>
     </>;
   } else {
