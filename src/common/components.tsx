@@ -11,7 +11,7 @@ interface EditToggleButtonProps {
 
 export const EditToggleButton = (props: EditToggleButtonProps): JSX.Element => {
   return <ToggleButton onClick={props.onClick} width='5em'>
-    {props.mode === 'read' ? 'Edit' : 'View'} <Icon />
+    {props.mode === 'read' ? 'Edit' : 'View'} <Icon type='switch' fill='--background-color' />
   </ToggleButton>;
 }
 
@@ -49,7 +49,7 @@ export const EditableTableCellParagraph = (props: EditableElementTableCellProps)
   } else if (props.editState === 'editable') {
     return <>
       <TableCell noBorderRight noPaddingRight editable onClick={props.onClickEdit} title={props.value}>{props.value}</TableCell>
-      <TableCell noBorderLeft noPaddingLeft editable onClick={props.onClickEdit}><EditIcon>✏️</EditIcon></TableCell>
+      <TableCell noBorderLeft noPaddingLeft editable onClick={props.onClickEdit}><Icon type='pencil' fill='--background-color' /></TableCell>
     </>;
   } else {
     return <TableCell colSpan={2} title={props.value}>{props.value}</TableCell>;
