@@ -347,10 +347,10 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         </Information>
         <Table>
           <ColumnGroup>
-            <Column smallWidth='6.2em' mediumWidth='6.2em' largeWidth='6.2em' />
-            <Column width='2em' />
-            <Column smallWidth='6.2em' mediumWidth='20.2em' largeWidth='22.2em' />
-            <Column width='2em' />
+            <Column smallWidth='6.6em' mediumWidth='6.6em' largeWidth='6.6em' />
+            <Column width='1.6em' />
+            <Column smallWidth='6.6em' mediumWidth='20.6em' largeWidth='22.6em' />
+            <Column width='1.6em' />
             <Column width='4.6em' />
           </ColumnGroup>
           <TableRow>
