@@ -71,10 +71,6 @@ export const Input = styled.input`
   width: 80%;
 `;
 
-export const EditIcon = styled.span`
-  text-shadow: none;
-`;
-
 export const Button = styled.button`
   margin: 0.5em;
   border: none;

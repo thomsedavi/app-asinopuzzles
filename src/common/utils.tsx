@@ -1,6 +1,7 @@
 import React from 'react';
 import { Document, Section, Element } from '../interfaces';
-import { EditIcon, Paragraph } from './styled';
+import { Icon } from './icons';
+import { Paragraph } from './styled';
 
 export const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
@@ -55,7 +56,7 @@ export const convertDocumentToElements = (document?: Document, editable?: boolea
     if (section.type === 'PARAGRAPH') {
       if (section.element) {
         if (editable && index === document!.sections!.length - 1) {
-          test.push(<Paragraph key={`s${index}`}>{section.element.text} <EditIcon>✏️</EditIcon></Paragraph>);
+          test.push(<Paragraph key={`s${index}`}>{section.element.text} <Icon type='pencil' fill='--color' /></Paragraph>);
         } else {
           test.push(<Paragraph key={`s${index}`}>{section.element.text}</Paragraph>);
         }
@@ -73,7 +74,7 @@ export const convertDocumentToElements = (document?: Document, editable?: boolea
         });
 
         if (editable && index === document!.sections!.length - 1) {
-          test.push(<Paragraph key={`s${index}`}>{paragraphBits} <EditIcon>✏️</EditIcon></Paragraph>);
+          test.push(<Paragraph key={`s${index}`}>{paragraphBits} <Icon type='pencil' fill='--color' /></Paragraph>);
         } else {
           test.push(<Paragraph key={`s${index}`}>{paragraphBits}</Paragraph>);
         }

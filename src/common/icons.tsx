@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface IconProps {
   type: 'switch' | 'pencil';
-  fill: '--background-color';
+  fill: '--background-color' | '--color';
 }
 
 export const Icon = (props: IconProps): JSX.Element => {
@@ -17,8 +17,8 @@ export const Icon = (props: IconProps): JSX.Element => {
       <Path fill={props.fill} d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
     </>}
     {props.type === 'pencil' && <>
-      <Path fill={props.fill} d="M20,20L50,20L80,50L60,50L50,40L50,30L20,30Z" />
-      <Path fill={props.fill} d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
+      <Path fill={props.fill} d="M70,20L80,30L45,65L35,55Z" />
+      <Path fill={props.fill} d="M30,60L40,70L20,80Z" />
     </>}
   </Svg>;
 }
@@ -32,7 +32,7 @@ const Svg = styled.svg`
 `;
 
 interface PathProps {
-  fill: '--background-color';
+  fill: '--background-color' | '--color';
 }
 
 const Path = styled.path<PathProps>`
