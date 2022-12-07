@@ -209,7 +209,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         isWorking={isWorking}
       />
       <TableCell textAlign='center'>
-        <TableCellAction onClick={() => !isWorking && randomiseWord(index)}><Icon title='random' type='switch' fillPrimary='--color' /></TableCellAction>
+        <TableCellAction marginRight onClick={() => !isWorking && randomiseWord(index)}><Icon title='random' type='switch' fillPrimary='--color' /></TableCellAction>
         <TableCellAction onClick={() => !isWorking && deleteRequiredWord(index)}><Icon title='delete' fillSecondary='--opposite' type='delete'/></TableCellAction>
       </TableCell>
     </TableRow>;

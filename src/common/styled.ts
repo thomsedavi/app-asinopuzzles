@@ -404,8 +404,13 @@ export const TableCell = styled.td<TableCellProps>`
   text-align: ${props => props.textAlign ?? 'start'};
 `;
 
-export const TableCellAction = styled.span`
+interface TableCellActionProps {
+  marginRight?: boolean;
+}
+
+export const TableCellAction = styled.span<TableCellActionProps>`
   cursor: pointer;
+  margin-right: ${props => props.marginRight ? '0.5em' :'0'};
 `;
 
 export const TableCellLink = styled.a`
