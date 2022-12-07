@@ -33,9 +33,9 @@ export const Icon = (props: IconProps): JSX.Element => {
       <PathPrimary fill={props.fillPrimary ?? '--color'} d="M45,20L55,20L55,45L80,45L80,55L55,55L55,80L45,80L45,55L20,55L20,45L45,45Z" />
     </>}
     {props.type === 'delete' && <>
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M40,50L60,50L55,80L45,80Z" />
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M70,50L80,50L75,80L65,80Z" />
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M20,50L30,50L35,80L25,80Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M40,45L60,45L55,80L45,80Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M70,45L80,45L75,80L65,80Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M20,45L30,45L35,80L25,80Z" />
       <PathPrimary fill={props.fillSecondary ?? '--color'} d="M20,30L30,30L35,20L65,20L70,30L80,30L80,40L20,40Z" />
     </>}
   </Svg></span>;
