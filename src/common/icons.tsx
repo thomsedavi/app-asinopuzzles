@@ -11,28 +11,30 @@ export const Icon = (props: IconProps): JSX.Element => {
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
-              xmlSpace="preserve"
-              fill={props.fill} >
+              xmlSpace="preserve" >
     {props.type === 'switch' && <>
-      <path d="M20,20L50,20L80,50L60,50L50,40L50,30L20,30Z" />
-      <path d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
+      <Path fill={props.fill} d="M20,20L50,20L80,50L60,50L50,40L50,30L20,30Z" />
+      <Path fill={props.fill} d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
     </>}
     {props.type === 'pencil' && <>
-      <path d="M20,20L50,20L80,50L60,50L50,40L50,30L20,30Z" />
-      <path d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
+      <Path fill={props.fill} d="M20,20L50,20L80,50L60,50L50,40L50,30L20,30Z" />
+      <Path fill={props.fill} d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
     </>}
   </Svg>;
 }
 
-interface SvgProps {
-  fill: '--background-color';
-}
-
-const Svg = styled.svg<SvgProps>`
+const Svg = styled.svg`
   overflow: visible;
   height: 1em;
   width: 1em;
   position: relative;
   top: 0.1em;
+`;
+
+interface PathProps {
+  fill: '--background-color';
+}
+
+const Path = styled.path<PathProps>`
   fill: var(${props => props.fill});
 `;
