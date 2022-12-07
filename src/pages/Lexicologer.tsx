@@ -2,6 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, EditToggleButton, SingleNumberInput } from '../common/components';
+import { Icon } from '../common/icons';
 import { useState } from '../common/saveState';
 import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Overlay, Paragraph, ParagraphAccent, Placeholder, Flash, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea, TextLink } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, tidyString } from '../common/utils';
@@ -208,7 +209,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         isWorking={isWorking}
       />
       <TableCell>
-        <TableCellAction onClick={() => !isWorking && randomiseWord(index)}>🎲</TableCellAction>
+        <TableCellAction onClick={() => !isWorking && randomiseWord(index)}><Icon type='switch' fillPrimary='--color' /></TableCellAction>
         <TableCellAction onClick={() => !isWorking && deleteRequiredWord(index)}>➖</TableCellAction>
       </TableCell>
     </TableRow>;
