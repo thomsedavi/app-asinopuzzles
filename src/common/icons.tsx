@@ -37,7 +37,7 @@ export const Icon = (props: IconProps): JSX.Element => {
       <Path fill={props.fillPrimary ?? '--color'} d="M0,40L20,40L30,100L20,100Z" />
       <Path fill={props.fillPrimary ?? '--color'} d="M30,40L70,40L60,100L40,100Z" />
       <Path fill={props.fillPrimary ?? '--color'} d="M80,40L100,40L80,100L70,100Z" />
-      <Path fill={props.fillSecondary ?? '--color'} d="M30,0L70,0L30,80L100,20L100,30L0,30L0,20L20,20Z" />
+      <Path fill={props.fillSecondary ?? '--color'} d="M30,0L70,0L80,20L100,20L100,30L0,30L0,20L20,20Z" />
     </>}
   </Svg></span>;
 }
