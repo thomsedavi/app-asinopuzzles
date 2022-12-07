@@ -19,10 +19,10 @@ export const Icon = (props: IconProps): JSX.Element => {
       <Path fill={props.fillPrimary ?? '--color'} d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
     </>}
     {props.type === 'pencil' && <>
-      <Path fill={props.fillPrimary ?? '--color'} d="M35,90L100,90L100,100L0,100Z" />
+      <Path fill={props.fillPrimary ?? '--color'} d="M35,90L100,90L100,100L10,100Z" />
       <Path fill={props.fillPrimary ?? '--color'} d="M80,10L90,20L30,80L20,70Z" />
       <Path fill={props.fillSecondary ?? '--color'} d="M15,75L25,85L0,100Z" />
-      <Path fill={props.fillSecondary ?? '--color'} d="M90,0L100,10L95,5L85,5Z" />
+      <Path fill={props.fillSecondary ?? '--color'} d="M90,0L100,10L95,15L85,5Z" />
     </>}
     {props.type === 'up' && <>
       <Path fill={props.fillPrimary ?? '--color'} d="M50,35L80,65L20,65Z" />
@@ -34,10 +34,10 @@ export const Icon = (props: IconProps): JSX.Element => {
       <Path fill={props.fillPrimary ?? '--color'} d="M45,20L55,20L55,45L80,45L80,55L55,55L55,80L45,80L45,55L20,55L20,45L45,45Z" />
     </>}
     {props.type === 'delete' && <>
-      <Path fill={props.fillPrimary ?? '--color'} d="M40,45L60,45L55,80L45,80Z" />
-      <Path fill={props.fillPrimary ?? '--color'} d="M70,45L80,45L75,80L65,80Z" />
-      <Path fill={props.fillPrimary ?? '--color'} d="M20,45L30,45L35,80L25,80Z" />
-      <Path fill={props.fillSecondary ?? '--color'} d="M20,30L30,30L35,20L65,20L70,30L80,30L80,40L20,40Z" />
+      <Path fill={props.fillPrimary ?? '--color'} d="M0,40L20,40L30,100L20,100Z" />
+      <Path fill={props.fillPrimary ?? '--color'} d="M30,40L70,40L60,100L40,100Z" />
+      <Path fill={props.fillPrimary ?? '--color'} d="M80,40L100,40L80,100L70,100Z" />
+      <Path fill={props.fillSecondary ?? '--color'} d="M30,0L70,0L30,80L100,20L100,30L0,30L0,20L20,20Z" />
     </>}
   </Svg></span>;
 }

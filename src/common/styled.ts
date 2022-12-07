@@ -413,10 +413,15 @@ export const TableCellAction = styled.span<TableCellActionProps>`
   margin-right: ${props => props.marginRight ? '0.5em' :'0'};
 `;
 
-export const TableCellLink = styled.a`
+interface TableCellLinkProps {
+  marginRight?: boolean;
+}
+
+export const TableCellLink = styled.a<TableCellLinkProps>`
   text-decoration: none;
   color: var(--accent-pale);
   font-weight: 700;
+  margin-right: ${props => props.marginRight ? '0.5em' :'0'};
 `;
 
 export const TableCellInput = styled.input`
