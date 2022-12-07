@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface IconProps {
-  type: 'switch' | 'pencil';
+  type?: 'switch' | 'pencil' | 'up' | 'down';
   fillPrimary?: '--background-color' | '--color' | '--accent';
   fillSecondary?: '--background-color' | '--color' | '--accent';
 }
@@ -20,6 +20,9 @@ export const Icon = (props: IconProps): JSX.Element => {
     {props.type === 'pencil' && <>
       <PathPrimary fill={props.fillPrimary ?? '--color'} d="M70,20L80,30L45,65L35,55Z" />
       <PathSecondary fill={props.fillSecondary ?? '--color'} d="M30,60L40,70L20,80Z" />
+    </>}
+    {props.type === 'up' && <>
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M40,35L80,65L20,65Z" />
     </>}
   </Svg>;
 }

@@ -217,7 +217,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
             </ColumnGroup>
             <TableRow>
               <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' && (lexicologerSortOrder === 'ascending' ? ' 👆' : ' 👇')}</TableHeader>
-              <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ' 👆' : ' 👇')}</TableHeader>
+              <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' && (lexicologerSortOrder === 'ascending' ? ` ${<Icon type='up' />}` : ' 👇')}</TableHeader>
               <TableHeader title='Actions'>Actions</TableHeader>
             </TableRow>
             {user.lexicologers?.sort(lexicologerSort).map((lexicologer: LexicologerGame, index: number) => <TableRow key={`lexicologer${index}`}>
