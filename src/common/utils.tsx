@@ -56,7 +56,7 @@ export const convertDocumentToElements = (document?: Document, editable?: boolea
     if (section.type === 'PARAGRAPH') {
       if (section.element) {
         if (editable && index === document!.sections!.length - 1) {
-          test.push(<Paragraph key={`s${index}`}>{section.element.text} <Icon type='pencil' fill='--color' /></Paragraph>);
+          test.push(<Paragraph key={`s${index}`}>{section.element.text} <Icon type='pencil' fillSecondary='--accent' /></Paragraph>);
         } else {
           test.push(<Paragraph key={`s${index}`}>{section.element.text}</Paragraph>);
         }
@@ -74,7 +74,7 @@ export const convertDocumentToElements = (document?: Document, editable?: boolea
         });
 
         if (editable && index === document!.sections!.length - 1) {
-          test.push(<Paragraph key={`s${index}`}>{paragraphBits} <Icon type='pencil' fill='--color' /></Paragraph>);
+          test.push(<Paragraph key={`s${index}`}>{paragraphBits} <Icon type='pencil' fillSecondary='--accent' /></Paragraph>);
         } else {
           test.push(<Paragraph key={`s${index}`}>{paragraphBits}</Paragraph>);
         }

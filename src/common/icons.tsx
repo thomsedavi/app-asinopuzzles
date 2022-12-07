@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 interface IconProps {
   type: 'switch' | 'pencil';
-  fill: '--background-color' | '--color';
+  fillPrimary?: '--background-color' | '--color' | '--accent';
+  fillSecondary?: '--background-color' | '--color' | '--accent';
 }
 
 export const Icon = (props: IconProps): JSX.Element => {
@@ -13,12 +14,12 @@ export const Icon = (props: IconProps): JSX.Element => {
               xmlnsXlink="http://www.w3.org/1999/xlink"
               xmlSpace="preserve" >
     {props.type === 'switch' && <>
-      <Path fill={props.fill} d="M20,20L50,20L80,50L60,50L50,40L50,30L20,30Z" />
-      <Path fill={props.fill} d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M20,20L50,20L80,50L60,50L50,40L50,30L20,30Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
     </>}
     {props.type === 'pencil' && <>
-      <Path fill={props.fill} d="M70,20L80,30L45,65L35,55Z" />
-      <Path fill={props.fill} d="M30,60L40,70L20,80Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M70,20L80,30L45,65L35,55Z" />
+      <PathSecondary fill={props.fillSecondary ?? '--color'} d="M30,60L40,70L20,80Z" />
     </>}
   </Svg>;
 }
@@ -32,9 +33,13 @@ const Svg = styled.svg`
 `;
 
 interface PathProps {
-  fill: '--background-color' | '--color';
+  fill: '--background-color' | '--color' | '--accent';
 }
 
-const Path = styled.path<PathProps>`
+const PathPrimary = styled.path<PathProps>`
+  fill: var(${props => props.fill});
+`;
+
+const PathSecondary = styled.path<PathProps>`
   fill: var(${props => props.fill});
 `;

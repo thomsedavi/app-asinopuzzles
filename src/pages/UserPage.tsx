@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
+import { Icon } from '../common/icons';
 import { useState } from '../common/saveState';
 import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink, ButtonGroup, Button, Paragraph, Emphasis, ErrorMessage } from '../common/styled';
 import { convertDocumentToString, convertStringToDocument, formatDate, tidyString } from '../common/utils';
@@ -227,7 +228,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                 {lexicologer.dateCreated !== undefined ? formatDate(lexicologer.dateCreated) : '(unknown)'}
               </TableCell>
               <TableCell>
-                <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}>✏️</TableCellLink>
+                <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}><Icon type='pencil' fillSecondary='--accent' /></TableCellLink>
                 <TableCellAction onClick={() => setLexicologerToDelete(lexicologer.id)}>➖</TableCellAction>
               </TableCell>
             </TableRow>)}
