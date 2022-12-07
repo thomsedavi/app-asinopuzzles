@@ -388,6 +388,7 @@ interface TableCellProps {
   noBorderLeft?: boolean;
   noPaddingRight?: boolean;
   noPaddingLeft?: boolean;
+  textAlign?: 'center';
 }
 
 export const TableCell = styled.td<TableCellProps>`
@@ -400,6 +401,7 @@ export const TableCell = styled.td<TableCellProps>`
   border-left: ${props => props.noBorderLeft ? "none" : "auto"};
   padding-right: ${props => props.noPaddingRight ? 0 : props.editing ? "0.4em" : "0.5em"};
   padding-left: ${props => props.noPaddingLeft ? 0 : props.editing ? "0.4em" : "0.5em"};
+  text-align: ${props => props.textAlign ?? 'start'};
 `;
 
 export const TableCellAction = styled.span`
