@@ -22,7 +22,10 @@ export const Icon = (props: IconProps): JSX.Element => {
       <PathSecondary fill={props.fillSecondary ?? '--color'} d="M30,60L40,70L20,80Z" />
     </>}
     {props.type === 'up' && <>
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M40,35L80,65L20,65Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M50,35L80,65L20,65Z" />
+    </>}
+    {props.type === 'down' && <>
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M20,35L80,35L50,65Z" />
     </>}
   </Svg>;
 }
