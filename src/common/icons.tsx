@@ -18,7 +18,7 @@ export const Icon = (props: IconProps): JSX.Element => {
       <PathPrimary fill={props.fillPrimary ?? '--color'} d="M80,80L50,80L20,50L40,50L50,60L50,70L80,70Z" />
     </>}
     {props.type === 'pencil' && <>
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M25,75L80,75L80,80L20,80Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M55,70L80,70L80,80L30,80Z" />
       <PathPrimary fill={props.fillPrimary ?? '--color'} d="M70,20L80,30L45,65L35,55Z" />
       <PathSecondary fill={props.fillSecondary ?? '--color'} d="M30,60L40,70L20,80Z" />
     </>}
