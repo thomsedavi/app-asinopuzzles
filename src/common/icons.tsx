@@ -29,7 +29,7 @@ export const Icon = (props: IconProps): JSX.Element => {
       <PathPrimary fill={props.fillPrimary ?? '--color'} d="M20,35L80,35L50,65Z" />
     </>}
     {props.type === 'create' && <>
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M35,20L55,20L55,35L80,35L80,55L55,55L55,80L35,80L35,55L20,55L20,35L35,35Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M45,20L55,20L55,45L80,45L80,55L55,55L55,80L45,80L45,55L20,55L20,45L45,45Z" />
     </>}
   </Svg>;
 }
