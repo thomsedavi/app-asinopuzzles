@@ -229,7 +229,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
               </TableCell>
               <TableCell>
                 <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}><Icon type='pencil' fillSecondary='--accent' /></TableCellLink>
-                <TableCellAction onClick={() => setLexicologerToDelete(lexicologer.id)}>➖</TableCellAction>
+                <TableCellAction onClick={() => setLexicologerToDelete(lexicologer.id)}><Icon type='delete'/></TableCellAction>
               </TableCell>
             </TableRow>)}
           </Table>
