@@ -363,7 +363,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           <TableRow>
             <TableCell colSpan={2}></TableCell>
             <TableCell colSpan={2}></TableCell>
-            <TableCell><span onClick={() => !isWorking && createRequiredWord()} style={{ cursor: 'pointer' }}>➕</span></TableCell>
+            <TableCell><span onClick={() => !isWorking && createRequiredWord()} style={{ cursor: 'pointer' }}><Icon type='create' /></span></TableCell>
           </TableRow>
         </Table>
       </>}
