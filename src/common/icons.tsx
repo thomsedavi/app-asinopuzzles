@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface IconProps {
+  title: string;
   type?: 'switch' | 'pencil' | 'up' | 'down' | 'create' | 'delete';
   fillPrimary?: '--background-color' | '--color' | '--accent' | '--opposite';
   fillSecondary?: '--background-color' | '--color' | '--accent' | '--opposite';
 }
 
 export const Icon = (props: IconProps): JSX.Element => {
-  return <Svg viewBox="0 0 100 100"
+  return <span title={props.title}><Svg viewBox="0 0 100 100"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -37,7 +38,7 @@ export const Icon = (props: IconProps): JSX.Element => {
       <PathPrimary fill={props.fillPrimary ?? '--color'} d="M20,50L30,50L35,80L25,80Z" />
       <PathPrimary fill={props.fillSecondary ?? '--color'} d="M20,30L30,30L35,20L65,20L70,30L80,30L80,40L20,40Z" />
     </>}
-  </Svg>;
+  </Svg></span>;
 }
 
 const Svg = styled.svg`

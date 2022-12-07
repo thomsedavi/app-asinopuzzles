@@ -11,7 +11,7 @@ interface EditToggleButtonProps {
 
 export const EditToggleButton = (props: EditToggleButtonProps): JSX.Element => {
   return <ToggleButton onClick={props.onClick} width='5em'>
-    {props.mode === 'read' ? 'Edit' : 'View'} <Icon type='switch' fillPrimary='--background-color' />
+    {props.mode === 'read' ? 'Edit' : 'View'} <Icon title='edit' type='switch' fillPrimary='--background-color' />
   </ToggleButton>;
 }
 
@@ -49,7 +49,7 @@ export const EditableTableCellParagraph = (props: EditableElementTableCellProps)
   } else if (props.editState === 'editable') {
     return <>
       <TableCell noBorderRight noPaddingRight editable onClick={props.onClickEdit} title={props.value}>{props.value}</TableCell>
-      <TableCell noBorderLeft noPaddingLeft editable onClick={props.onClickEdit}><Icon type='pencil' fillSecondary='--accent' /></TableCell>
+      <TableCell noBorderLeft noPaddingLeft editable onClick={props.onClickEdit}><Icon title='edit' type='pencil' fillSecondary='--accent' /></TableCell>
     </>;
   } else {
     return <TableCell colSpan={2} title={props.value}>{props.value}</TableCell>;
@@ -106,7 +106,7 @@ export const EditableElementHeading1 = (props: EditableElementHeading1Props): JS
       {props.errorMessage && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   } else if (props.editState === 'editable') {
-    return <Heading1 editable onClick={props.onClickEdit} title={props.value}>{props.value} <Icon type='pencil' fillSecondary='--accent' /></Heading1>
+    return <Heading1 editable onClick={props.onClickEdit} title={props.value}>{props.value} <Icon title='edit' type='pencil' fillSecondary='--accent' /></Heading1>
   } else {
     return <Heading1 title={props.value}>{props.value}</Heading1>
   }

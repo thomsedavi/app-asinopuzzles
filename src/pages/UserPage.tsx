@@ -216,8 +216,8 @@ const UserPage = (props: UserPageProps): JSX.Element => {
               <Column width='4.6em' />
             </ColumnGroup>
             <TableRow>
-              <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' ? [' ', <Icon type={lexicologerSortOrder === 'ascending' ? 'up' : 'down'} />] : [' ', <Icon />]}</TableHeader>
-              <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' ? [' ', <Icon type={lexicologerSortOrder === 'ascending' ? 'up' : 'down'} />] : [' ', <Icon />]}</TableHeader>
+              <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' ? [' ', <Icon title='sort' type={lexicologerSortOrder === 'ascending' ? 'up' : 'down'} />] : [' ', <Icon title='sort' />]}</TableHeader>
+              <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' ? [' ', <Icon title='sort' type={lexicologerSortOrder === 'ascending' ? 'up' : 'down'} />] : [' ', <Icon title='sort' />]}</TableHeader>
               <TableHeader title='Actions'>Actions</TableHeader>
             </TableRow>
             {user.lexicologers?.sort(lexicologerSort).map((lexicologer: LexicologerGame, index: number) => <TableRow key={`lexicologer${index}`}>
@@ -228,8 +228,8 @@ const UserPage = (props: UserPageProps): JSX.Element => {
                 {lexicologer.dateCreated !== undefined ? formatDate(lexicologer.dateCreated) : '(unknown)'}
               </TableCell>
               <TableCell>
-                <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}><Icon type='pencil' fillSecondary='--accent' /></TableCellLink>
-                <TableCellAction onClick={() => setLexicologerToDelete(lexicologer.id)}><Icon fillSecondary='--opposite' type='delete'/></TableCellAction>
+                <TableCellLink href={`/lexicologers/${lexicologer.id}/edit`} onClick={onClickLoader}><Icon title='edit' type='pencil' fillSecondary='--accent' /></TableCellLink>
+                <TableCellAction onClick={() => setLexicologerToDelete(lexicologer.id)}><Icon title='delete' fillSecondary='--opposite' type='delete'/></TableCellAction>
               </TableCell>
             </TableRow>)}
           </Table>
@@ -242,8 +242,8 @@ const UserPage = (props: UserPageProps): JSX.Element => {
               <Column smallWidth='6.2em' mediumWidth='6.2em' largeWidth='6.2em' />
             </ColumnGroup>
             <TableRow>
-              <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' ? [' ', <Icon type={lexicologerSortOrder === 'ascending' ? 'up' : 'down'} />] : [' ', <Icon />]}</TableHeader>
-              <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' ? [' ', <Icon type={lexicologerSortOrder === 'ascending' ? 'up' : 'down'} />] : [' ', <Icon />]}</TableHeader>
+              <TableHeader clickable title='Title' onClick={() => toggleLexicologerSort('title')}>Title{lexicologerSortColumn === 'title' ? [' ', <Icon title='sort' type={lexicologerSortOrder === 'ascending' ? 'up' : 'down'} />] : [' ', <Icon title='sort' />]}</TableHeader>
+              <TableHeader clickable title='Date' onClick={() => toggleLexicologerSort('date')}>Date{lexicologerSortColumn === 'date' ? [' ', <Icon title='sort' type={lexicologerSortOrder === 'ascending' ? 'up' : 'down'} />] : [' ', <Icon title='sort' />]}</TableHeader>
             </TableRow>            
             {user.lexicologers?.sort(lexicologerSort).map((lexicologer: LexicologerGame, index: number) => <TableRow key={`lexicologer${index}`}>
               <TableCell>

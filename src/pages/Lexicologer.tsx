@@ -209,8 +209,8 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
         isWorking={isWorking}
       />
       <TableCell>
-        <TableCellAction onClick={() => !isWorking && randomiseWord(index)}><Icon type='switch' fillPrimary='--color' /></TableCellAction>
-        <TableCellAction onClick={() => !isWorking && deleteRequiredWord(index)}><Icon fillSecondary='--opposite' type='delete'/></TableCellAction>
+        <TableCellAction onClick={() => !isWorking && randomiseWord(index)}><Icon title='random' type='switch' fillPrimary='--color' /></TableCellAction>
+        <TableCellAction onClick={() => !isWorking && deleteRequiredWord(index)}><Icon title='delete' fillSecondary='--opposite' type='delete'/></TableCellAction>
       </TableCell>
     </TableRow>;
   });
@@ -363,7 +363,7 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
           <TableRow>
             <TableCell colSpan={2}></TableCell>
             <TableCell colSpan={2}></TableCell>
-            <TableCell><span onClick={() => !isWorking && createRequiredWord()} style={{ cursor: 'pointer' }}><Icon type='create' /></span></TableCell>
+            <TableCell><span onClick={() => !isWorking && createRequiredWord()} style={{ cursor: 'pointer' }}><Icon title='add required word' type='create' /></span></TableCell>
           </TableRow>
         </Table>
       </>}
