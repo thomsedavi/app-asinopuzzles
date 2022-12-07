@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 interface IconProps {
   type?: 'switch' | 'pencil' | 'up' | 'down' | 'create' | 'delete';
-  fillPrimary?: '--background-color' | '--color' | '--accent';
-  fillSecondary?: '--background-color' | '--color' | '--accent';
+  fillPrimary?: '--background-color' | '--color' | '--accent' | '--opposite';
+  fillSecondary?: '--background-color' | '--color' | '--accent' | '--opposite';
 }
 
 export const Icon = (props: IconProps): JSX.Element => {
@@ -32,10 +32,10 @@ export const Icon = (props: IconProps): JSX.Element => {
       <PathPrimary fill={props.fillPrimary ?? '--color'} d="M45,20L55,20L55,45L80,45L80,55L55,55L55,80L45,80L45,55L20,55L20,45L45,45Z" />
     </>}
     {props.type === 'delete' && <>
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M20,35L80,35L80,45L20,45Z" />
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M40,55L60,55L55,80L45,80Z" />
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M70,55L80,55L70,80L65,80Z" />
-      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M20,55L30,55L35,80L30,80Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M40,50L60,50L55,80L45,80Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M70,50L80,50L75,80L65,80Z" />
+      <PathPrimary fill={props.fillPrimary ?? '--color'} d="M20,50L30,50L35,80L25,80Z" />
+      <PathPrimary fill={props.fillSecondary ?? '--color'} d="M20,30L30,30L35,20L65,20L70,30L80,30L80,40L20,40Z" />
     </>}
   </Svg>;
 }
@@ -49,7 +49,7 @@ const Svg = styled.svg`
 `;
 
 interface PathProps {
-  fill: '--background-color' | '--color' | '--accent';
+  fill: '--background-color' | '--color' | '--accent' | '--opposite';
 }
 
 const PathPrimary = styled.path<PathProps>`
