@@ -15,8 +15,8 @@ export const Icon = (props: IconProps): JSX.Element => {
               xmlnsXlink="http://www.w3.org/1999/xlink"
               xmlSpace="preserve" >
     {props.type === 'switch' && <>
-      <Path fill={props.fillPrimary ?? '--color'} d="M10,40L10,30C10,19,19,10,30,10L70,10C81,10,90,19,90,30L90,40L100,40L80,60L60,40L70,40L70,30L30,30L30,40Z" />
-      <Path fill={props.fillPrimary ?? '--color'} d="M90,60L90,70C90,81,81,90,70,90L30,90C19,90,10,79,10,70L10,60L0,60L20,40L40,60L30,60L30,70L70,70L70,60Z" />
+      <Path fill={props.fillPrimary ?? '--color'} d="M15,35L15,25C15,14,24,5,35,5L65,5C76,5,85,14,85,25L85,35L100,35L75,60L50,35L65,35L65,25L35,25L35,35Z" />
+      <Path fill={props.fillPrimary ?? '--color'} d="M85,65L85,75C85,86,76,95,65,95L35,95C24,95,15,84,15,75L15,65L0,65L25,40L50,65L35,65L35,75L65,75L65,65Z" />
     </>}
     {props.type === 'pencil' && <>
       <Path fill={props.fillPrimary ?? '--color'} d="M35,90L100,90L100,100L10,100Z" />
