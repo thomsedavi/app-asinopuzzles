@@ -1,4 +1,4 @@
-import { User } from "../interfaces";
+import { LexicologerGame, User } from "../interfaces";
 
 export const isLocalhost = (): boolean => {
   return window.location.hostname === 'localhost';
@@ -47,6 +47,33 @@ export const getUser = async (id: string | undefined): Promise<User | undefined>
   }
 }
 
+export const postLexicologer = async (lexicologer: LexicologerGame): Promise<LexicologerGame | string | undefined> => {
+  if (isLocalhost()) {
+    const storedUser = window.localStorage.getItem('user_0-00');
+    const user: User = JSON.parse(storedUser!);
+
+    if (user.lexicologers) {
+      return Promise.resolve(undefined);
+    } else {
+      return Promise.resolve(undefined);
+    }
+  } else {
+    const response: Response = await fetch('/api/lexicologers', { method: 'POST', body: JSON.stringify(lexicologer) });
+
+    if (response.status === 200) {
+      const json = await response.json();
+
+      return Promise.resolve(json);
+    } else if (response.status === 400) {
+      var text = await response.text();
+
+      return Promise.resolve(text);
+    } else {
+      return Promise.resolve(undefined);
+    }
+  }
+}
+
 export const putUser = async (user: User): Promise<User | undefined | string> => {
   if (isLocalhost()) {
     if (user.id === '0-00') {
@@ -77,11 +104,7 @@ export const putUser = async (user: User): Promise<User | undefined | string> =>
     } else if (response.status === 400) {
       var text = await response.text();
 
-      if (text === 'BIOGRAPHY_TOO_LONG') {
-        return Promise.resolve('Biography too long');
-      } else {
-        return Promise.resolve(text);
-      }
+      return Promise.resolve(text);
     } else {
       return Promise.resolve(undefined);
     }
