@@ -25,7 +25,7 @@ export const getUser = async (id: string | undefined): Promise<User> => {
         ]
       });
     } else {
-      throw new Error();
+      throw Promise.resolve(undefined);
     }
   } else {
     const response: Response = await fetch(`/api/users/${id}`, { method: 'GET' });
@@ -35,7 +35,7 @@ export const getUser = async (id: string | undefined): Promise<User> => {
 
       return Promise.resolve(json);
     } else {
-      throw new Error();
+      throw Promise.resolve(undefined);
     }
   }
 }
