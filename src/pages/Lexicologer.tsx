@@ -356,17 +356,21 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
             <Column width='1.6em' />
             <Column width='4.6em' />
           </ColumnGroup>
-          <TableRow>
-            <TableHeader title='Primary Word' colSpan={2}>Primary Word</TableHeader>
-            <TableHeader title='Secondary Words' colSpan={2}>Secondary Words</TableHeader>
-            <TableHeader title='Actions'>Actions</TableHeader>
-          </TableRow>
-          {requiredWords}
-          <TableRow>
-            <TableCell colSpan={2}></TableCell>
-            <TableCell colSpan={2}></TableCell>
-            <TableCell><span onClick={() => !isWorking && createRequiredWord()} style={{ cursor: 'pointer' }}><Icon title='add required word' type='create' /></span></TableCell>
-          </TableRow>
+          <thead>
+            <TableRow>
+              <TableHeader title='Primary Word' colSpan={2}>Primary Word</TableHeader>
+              <TableHeader title='Secondary Words' colSpan={2}>Secondary Words</TableHeader>
+              <TableHeader title='Actions'>Actions</TableHeader>
+            </TableRow>
+          </thead>
+          <tbody>
+            {requiredWords}
+            <TableRow>
+              <TableCell colSpan={2}></TableCell>
+              <TableCell colSpan={2}></TableCell>
+              <TableCell><span onClick={() => !isWorking && createRequiredWord()} style={{ cursor: 'pointer' }}><Icon title='add required word' type='create' /></span></TableCell>
+            </TableRow>
+          </tbody>
         </Table>
       </>}
       {mode === 'read' && <>
