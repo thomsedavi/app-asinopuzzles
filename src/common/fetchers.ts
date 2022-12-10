@@ -4,7 +4,7 @@ export const isLocalhost = (): boolean => {
   return window.location.hostname === 'localhost';
 }
 
-export const getUser = (id: string | undefined): User => {
+export const getUser = async (id: string | undefined): Promise<User> => {
   if (isLocalhost()) {
     if (id === '0-00') {
       return {
@@ -28,19 +28,17 @@ export const getUser = (id: string | undefined): User => {
       throw new Error();
     }
   } else {
-    fetch(`/api/users/${id}`, { method: 'GET' })
-      .then((response: Response) => {
-        if (response.status === 200) {
-          response.json()
-            .then((json: any) => {
-              console.log(json);
+    const response: Response = await fetch(`/api/users/${id}`, { method: 'GET' });
 
-              return json;
-            });
-        } else {
-          throw new Error();
-        }      
-      });  
+    if (response.status === 200) {
+      const json = await response.json();
+
+      console.log(json);
+
+      return json;
+    } else {
+      throw new Error();
+    }
   }
 
   throw new Error();
