@@ -10,7 +10,7 @@ import './index.css';
 import { User } from './interfaces';
 import { Placeholder } from './common/styled';
 import Lexicologer from './pages/Lexicologer';
-import { getUser, isLocalhost } from './common/fetchers';
+import { getLexicologer, getUser, isLocalhost } from './common/fetchers';
 
 interface AppState {
   user?: User | null;
@@ -75,11 +75,11 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   userLoader = async ({ params }: LoaderFunctionArgs) => {
-    return getUser(params.userId);
+    return getUser(params.id);
   }
 
   lexicologerLoader = async ({ params }: LoaderFunctionArgs) => {
-    return fetch(`/api/lexicologers/${params.lexicologerId}`, { method: 'GET' });
+    return getLexicologer(params.id);
   }
 
   render = (): JSX.Element => {
@@ -96,7 +96,7 @@ export default class App extends React.Component<{}, AppState> {
           element: <Miscellany userId={this.state.user?.id} />,
         },
         {
-          path: "/lexicologers/:lexicologerId/edit",
+          path: "/lexicologers/:id/edit",
           element: <Lexicologer user={this.state.user} mode='update' />,
           loader: this.lexicologerLoader
         },
@@ -105,7 +105,7 @@ export default class App extends React.Component<{}, AppState> {
           element: <Lexicologer user={this.state.user} mode='create' />,
         },
         {
-          path: "/lexicologers/:lexicologerId",
+          path: "/lexicologers/:id",
           element: <Lexicologer user={this.state.user} mode='read' />,
           loader: this.lexicologerLoader
         },
@@ -114,12 +114,12 @@ export default class App extends React.Component<{}, AppState> {
           element: <About userId={this.state.user?.id} />,
         },
         {
-          path: "/users/:userId/edit",
+          path: "/users/:id/edit",
           element: <UserPage userId={this.state.user?.id} mode='update' />,
           loader: this.userLoader
         },
         {
-          path: "/users/:userId",
+          path: "/users/:id",
           element: <UserPage userId={this.state.user?.id} mode='read' />,
           loader: this.userLoader
         },

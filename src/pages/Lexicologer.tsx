@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
 import { EditableElementDocument, EditableElementHeading1, EditableTableCellParagraph, EditToggleButton, SingleNumberInput } from '../common/components';
-import { postLexicologer } from '../common/fetchers';
+import { postLexicologer, putLexicologer } from '../common/fetchers';
 import { Icon } from '../common/icons';
 import { useState } from '../common/saveState';
 import { Button, ButtonGroup, Code, Column, ColumnGroup, Container, ErrorMessage, FailureSpan, Heading1, Information, InputGroup, Overlay, Paragraph, ParagraphAccent, Placeholder, Flash, SuccessSpan, Table, TableCell, TableCellAction, TableHeader, TableRow, TextArea, TextLink } from '../common/styled';
@@ -162,15 +162,16 @@ const Lexicologer = (props: LexicologerProps): JSX.Element => {
     setErrorMessage(undefined);
     setIsWorking(true);
 
-    fetch(`/api/lexicologers/${lexicologerGame.id}`, { method: 'PUT', body: JSON.stringify(lexicologerGame) })
-    .then((response: Response) => {
-      if (response.status === 200) {
-        response.json()
-          .then((gameResponse: LexicologerGame) => {
-            setLexicologerGame(gameResponse);
-            setIsWorking(false);
-            state.showFlash('Game updated!', 'opposite');
-          });
+    putLexicologer(lexicologerGame)
+    .then((response: LexicologerGame | undefined | string) => {
+      if (response && typeof response !== 'string') {
+        setLexicologerGame(response);
+        setIsWorking(false);
+        state.showFlash('Game Updated!', 'opposite');
+      } else if (response && typeof response === 'string') {
+        setIsWorking(false);
+        setErrorMessage(response);
+        state.showFlash('Error!', 'failure');
       } else {
         setIsWorking(false);
         setErrorMessage('Unknown Error');

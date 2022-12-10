@@ -95,6 +95,67 @@ export const putUser = async (user: User): Promise<User | undefined | string> =>
   }
 }
 
+export const getLexicologer = async (id: string | undefined): Promise<LexicologerGame | string | undefined> => {
+  if (isLocalhost()) {
+    const storedLexicologer = window.localStorage.getItem('lexicologer_' + id);
+
+    if (storedLexicologer) {
+      return Promise.resolve(JSON.parse(storedLexicologer));
+    } else {
+      return Promise.resolve(undefined);
+    }
+  } else {
+    const response: Response = await fetch(`/api/lexicologers/${id}`, { method: 'GET' });
+
+    if (response.status === 200) {
+      const json = await response.json();
+
+      return Promise.resolve(json);
+    } else {
+      return Promise.resolve(undefined);
+    }
+  }
+}
+
+export const putLexicologer = async (lexicologer: LexicologerGame): Promise<LexicologerGame | undefined | string> => {
+  if (isLocalhost()) {
+      const storedUserString = window.localStorage.getItem('user_0-00');
+
+      if (storedUserString) {
+        const date = getISODate();
+        const storedUser: User = JSON.parse(storedUserString);
+
+        storedUser.lexicologers?.forEach(userLexicologer => {
+          userLexicologer.id === lexicologer.id && (userLexicologer.dateUpdated = date);
+          userLexicologer.id === lexicologer.id && (userLexicologer.title = lexicologer.title);
+        });
+
+        lexicologer.dateUpdated = date;
+
+        window.localStorage.setItem('user_0-00', JSON.stringify(storedUser));
+        window.localStorage.setItem('lexicologer_' + lexicologer.id, JSON.stringify(lexicologer));
+
+        return Promise.resolve(lexicologer);
+      } else {
+        return Promise.resolve(undefined);      
+      }
+  } else {
+    const response: Response = await fetch(`/api/lexicologers/${lexicologer.id}`, { method: 'PUT', body: JSON.stringify(lexicologer) });
+
+    if (response.status === 200) {
+      const json = await response.json();
+
+      return Promise.resolve(json);
+    } else if (response.status === 400) {
+      var text = await response.text();
+
+      return Promise.resolve(text);
+    } else {
+      return Promise.resolve(undefined);
+    }
+  }
+}
+
 export const postLexicologer = async (lexicologer: LexicologerGame): Promise<LexicologerGame | string | undefined> => {
   if (isLocalhost()) {
     const storedUser = window.localStorage.getItem('user_0-00');
@@ -114,7 +175,7 @@ export const postLexicologer = async (lexicologer: LexicologerGame): Promise<Lex
       }
 
       lexicologer.id = '0-00-' + idSuffix;
-      
+
       user.lexicologers.push({ id: lexicologer.id, title: lexicologer.title, dateCreated: date, dateUpdated: date});
       window.localStorage.setItem('user_0-00', JSON.stringify(user));
       window.localStorage.setItem('lexicologer_' + lexicologer.id, JSON.stringify(lexicologer));
