@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
+import { putUser } from '../common/fetchers';
 import { Icon } from '../common/icons';
 import { useState } from '../common/saveState';
 import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink, ButtonGroup, Button, Paragraph, Emphasis, ErrorMessage } from '../common/styled';
@@ -35,20 +36,27 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
     let name = tidyString(inputValue);
 
-    if (name === user.name)
+    if (name === user.name) {
+      setEditingValue(undefined);
+      setInputValue(undefined);
       return;
+    }
 
     setErrorMessage(undefined);
     setIsWorking(true);
 
-    fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ name: name }) })
-      .then((response: Response) => {
-        if (response.status === 200) {
-          setUser({...user, name: name});
+    putUser({ id: props.userId!, name: name })
+      .then((response: User | undefined | string) => {
+        if (response && typeof response !== 'string') {
+          setUser({...response, name: name});
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
           state.showFlash('Name Updated!', 'opposite');
+        } else if (response && typeof response === 'string') {
+          setIsWorking(false);
+          setErrorMessage(response);
+          state.showFlash('Error!', 'failure');
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');
@@ -69,33 +77,27 @@ const UserPage = (props: UserPageProps): JSX.Element => {
 
     const biography = convertStringToDocument(inputValue);
 
-    if (biography === user.biography)
+    if (biography === user.biography) {
+      setEditingValue(undefined);
+      setInputValue(undefined);
       return;
+    }
 
     setErrorMessage(undefined);
     setIsWorking(true);
 
-    fetch(`/api/users/${props.userId}`, { method: 'PUT', body: JSON.stringify({ biography: biography }) })
-      .then((response: Response) => {
-        if (response.status === 200) {
-          setUser({...user, biography: biography});
+    putUser({ id: props.userId!, biography: biography })
+      .then((response: User | undefined | string) => {
+        if (response && typeof response !== 'string') {
+          setUser({...response, biography: biography});
           setEditingValue(undefined);
           setInputValue(undefined);
           setIsWorking(false);
           state.showFlash('Biography Updated!', 'opposite');
-        } else if (response.status === 400) {
-          response.text()
-            .then((error: string) => {
-              if (error === 'BIOGRAPHY_TOO_LONG') {
-                setIsWorking(false);
-                setErrorMessage('Biography is too long');
-                state.showFlash('Error!', 'failure');
-              } else {
-                setIsWorking(false);
-                setErrorMessage('Unknown Error');
-                state.showFlash('Error!', 'failure');
-              }
-            });
+        } else if (response && typeof response === 'string') {
+          setIsWorking(false);
+          setErrorMessage(response);
+          state.showFlash('Error!', 'failure');
         } else {
           setIsWorking(false);
           setErrorMessage('Unknown Error');

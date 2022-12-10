@@ -32,7 +32,7 @@ export const getUser = async (id: string | undefined): Promise<User | undefined>
         ]
       });
     } else {
-      Promise.resolve(undefined);
+      return Promise.resolve(undefined);
     }
   } else {
     const response: Response = await fetch(`/api/users/${id}`, { method: 'GET' });
@@ -42,7 +42,48 @@ export const getUser = async (id: string | undefined): Promise<User | undefined>
 
       return Promise.resolve(json);
     } else {
-      Promise.resolve(undefined);
+      return Promise.resolve(undefined);
+    }
+  }
+}
+
+export const putUser = async (user: User): Promise<User | undefined | string> => {
+  if (isLocalhost()) {
+    if (user.id === '0-00') {
+      const storedUserString = window.localStorage.getItem('user_0-00');
+
+      if (storedUserString) {
+        var storedUser: User = JSON.parse(storedUserString);
+
+        user.name && (storedUser.name = user.name);
+        user.biography && (storedUser.biography = user.biography);
+
+        window.localStorage.setItem('user_0-00', JSON.stringify(storedUser));
+
+        return Promise.resolve(storedUser);
+      } else {
+        return Promise.resolve(undefined);      
+      }
+    } else {
+      return Promise.resolve(undefined);
+    }
+  } else {
+    const response: Response = await fetch(`/api/users/${user.id}`, { method: 'PUT', body: JSON.stringify(user) });
+
+    if (response.status === 200) {
+      const json = await response.json();
+
+      return Promise.resolve(json);
+    } else if (response.status === 400) {
+      var text = await response.text();
+
+      if (text === 'BIOGRAPHY_TOO_LONG') {
+        return Promise.resolve('Biography too long');
+      } else {
+        return Promise.resolve(text);
+      }
+    } else {
+      return Promise.resolve(undefined);
     }
   }
 }
