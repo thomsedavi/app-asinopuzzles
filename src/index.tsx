@@ -10,6 +10,7 @@ import './index.css';
 import { User } from './interfaces';
 import { Placeholder } from './common/styled';
 import Lexicologer from './pages/Lexicologer';
+import { getUser } from './common/fetchers';
 
 interface AppState {
   user?: User | null;
@@ -57,7 +58,7 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   userLoader = async ({ params }: LoaderFunctionArgs) => {
-    return fetch(`/api/users/${params.userId}`, { method: 'GET' });
+    return getUser(params.userId);
   }
 
   lexicologerLoader = async ({ params }: LoaderFunctionArgs) => {
