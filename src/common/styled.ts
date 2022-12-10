@@ -176,6 +176,7 @@ export const HeaderLinkExternal = styled.a`
   text-decoration: none;
   padding: 0.5em 0.5em;
   text-shadow: 1px 0px 1px var(--accent);
+  cursor: pointer;
 
   &:hover {
     color: var(--hover);

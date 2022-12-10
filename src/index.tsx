@@ -10,7 +10,7 @@ import './index.css';
 import { User } from './interfaces';
 import { Placeholder } from './common/styled';
 import Lexicologer from './pages/Lexicologer';
-import { getUser } from './common/fetchers';
+import { getUser, isLocalhost } from './common/fetchers';
 
 interface AppState {
   user?: User | null;
@@ -25,36 +25,48 @@ export default class App extends React.Component<{}, AppState> {
     this.userLoader = this.userLoader.bind(this);
   }
 
-  componentDidMount = (): void => {
-    setTimeout(() => {
-      fetch('/.auth/me', { method: 'GET'})
-        .then((response: Response) => response.json())
-        .then((authValue: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
-          if (authValue.clientPrincipal !== null) {
-            fetch(`/api/users/${authValue.clientPrincipal.userId}`, { method: 'GET' })
-              .then((response: Response) => response.json())
-              .then((userValue: User) => {
-                this.setState({
-                  user: userValue
+  componentDidMount = async (): Promise<void> => {
+    if (isLocalhost()) {
+      if(window.localStorage.getItem('loggedIn') === 'true') {
+        this.setState({
+          user: await getUser('0-00')
+        });
+      } else {
+        this.setState({
+          user: null
+        })
+      }
+    } else {
+      setTimeout(() => {
+        fetch('/.auth/me', { method: 'GET'})
+          .then((response: Response) => response.json())
+          .then((authValue: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
+            if (authValue.clientPrincipal !== null) {
+              fetch(`/api/users/${authValue.clientPrincipal.userId}`, { method: 'GET' })
+                .then((response: Response) => response.json())
+                .then((userValue: User) => {
+                  this.setState({
+                    user: userValue
+                  });
+                })
+                .catch(() => {
+                  this.setState({
+                    user: null
+                  });  
                 });
-              })
-              .catch(() => {
-                this.setState({
-                  user: null
-                });  
-              });
-          } else {
+            } else {
+              this.setState({
+                user: null
+              });  
+            }
+          })
+          .catch(() => {
             this.setState({
               user: null
-            });  
-          }
-        })
-        .catch(() => {
-          this.setState({
-            user: null
+            });
           });
-        });
-      }, 1000);
+        }, 1000);  
+    }
   }
 
   userLoader = async ({ params }: LoaderFunctionArgs) => {

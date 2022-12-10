@@ -7,14 +7,21 @@ export const isLocalhost = (): boolean => {
 export const getUser = async (id: string | undefined): Promise<User | undefined> => {
   if (isLocalhost()) {
     if (id === '0-00') {
-      return Promise.resolve({
-        id: '0-00',
-        name: 'Lotographia',
-        biography: { sections: [{ type: 'PARAGRAPH', element: { text: 'The Website Creator' } }] },
-        lexicologers: [
-          { id: '0-00-000', title: 'My Lexicologer', dateCreated: '2022-12-01T09:34:19.442646Z', dateUpdated: '2022-12-01T09:34:19.442646Z' }
-        ]
-      });
+      const storedUser = window.localStorage.getItem('user_0-00');
+
+      if (storedUser) {
+        return Promise.resolve(JSON.parse(storedUser));
+      } else {
+        const newUser: User = {
+          id: '0-00',
+          name: 'Local Test',
+          biography: { sections: [{ type: 'PARAGRAPH', element: { text: 'Local Test User' } }] }
+        }
+
+        window.localStorage.setItem('user_0-00', JSON.stringify(newUser));
+
+        return Promise.resolve(newUser);
+      }
     } else if (id === '1-11') {
       return Promise.resolve({
         id: '1-11',

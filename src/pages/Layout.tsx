@@ -1,4 +1,5 @@
 import React from 'react';
+import { isLocalhost } from '../common/fetchers';
 import { Burger, Container, HeaderLinkExternal, HeaderLinkInternal, LogoLarge, LogoSmall, Navigation, PathAccent, PathFill } from '../common/styled';
 
 interface LayoutProps {
@@ -58,8 +59,10 @@ const Layout = (props: LayoutProps) => {
         <HeaderLinkInternal to='/miscellany'>MISCELLANY</HeaderLinkInternal>
         <HeaderLinkInternal to='/about'>ABOUT</HeaderLinkInternal>
         {props.userId && <HeaderLinkInternal to={`/users/${props.userId}`} onClick={props.onClickLoader}>PROFILE</HeaderLinkInternal>}
-        {props.userId && <HeaderLinkExternal href='/logout'>LOGOUT</HeaderLinkExternal>}
-        {!props.userId && <HeaderLinkExternal href='/login'>LOGIN</HeaderLinkExternal>}
+        {!isLocalhost() && props.userId && <HeaderLinkExternal href='/logout'>LOGOUT</HeaderLinkExternal>}
+        {isLocalhost() && props.userId && <HeaderLinkExternal onClick={() => { window.localStorage.removeItem('loggedIn'); window.location.reload() }}>LOGOUT</HeaderLinkExternal>}
+        {!isLocalhost() && !props.userId && <HeaderLinkExternal href='/login'>LOGIN</HeaderLinkExternal>}
+        {isLocalhost() && !props.userId && <HeaderLinkExternal onClick={() => { window.localStorage.setItem('loggedIn', 'true'); window.location.reload() }}>LOGIN</HeaderLinkExternal>}
       </Container>
     </Navigation>
   )
