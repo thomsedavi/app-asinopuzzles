@@ -1,4 +1,4 @@
-import { LexicologerGame, User } from "../interfaces";
+import { LexicologerGame, LexicologerSummary, User } from "../interfaces";
 
 export const isLocalhost = (): boolean => {
   return window.location.hostname === 'localhost';
@@ -91,6 +91,38 @@ export const putUser = async (user: User): Promise<User | undefined | string> =>
       return Promise.resolve(text);
     } else {
       return Promise.resolve(undefined);
+    }
+  }
+}
+
+export const deleteLexicologer = async (id: string | undefined): Promise<boolean> => {
+  if (isLocalhost()) {
+    const storedUserString = window.localStorage.getItem('user_0-00');
+
+    if (storedUserString) {
+      const storedUser: User = JSON.parse(storedUserString);
+      let deleteIndex = -1;
+
+      storedUser.lexicologers?.forEach((userLexicologer: LexicologerSummary, index: number) => {
+        userLexicologer.id === id && (deleteIndex = index);
+      });
+
+      storedUser.lexicologers?.splice(deleteIndex, 1);
+
+      window.localStorage.setItem('user_0-00', JSON.stringify(storedUser));
+      window.localStorage.removeItem('lexicologer_' + id);
+
+      return Promise.resolve(true);
+    } else {
+      return Promise.resolve(false);
+    }
+  } else {
+    const response: Response = await fetch(`/api/lexicologers/${id}`, { method: 'DELETE' });
+
+    if (response.status === 200) {
+      return Promise.resolve(true);
+    } else {
+      return Promise.resolve(false);
     }
   }
 }

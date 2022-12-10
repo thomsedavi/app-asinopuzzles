@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useLoaderData } from 'react-router-dom';
 import { EditableElementDocument, EditableElementHeading1, EditToggleButton } from '../common/components';
-import { putUser } from '../common/fetchers';
+import { deleteLexicologer, putUser } from '../common/fetchers';
 import { Icon } from '../common/icons';
 import { useState } from '../common/saveState';
 import { Container, Heading1, Overlay, Placeholder, Flash, Heading2, Table, TableRow, TableHeader, ColumnGroup, Column, TableCell, TableCellAction, TextLink, TableCellLink, ButtonGroup, Button, Paragraph, Emphasis, ErrorMessage } from '../common/styled';
@@ -111,16 +111,16 @@ const UserPage = (props: UserPageProps): JSX.Element => {
       });
   }
 
-  const deleteLexicologer = () => {
+  const confirmDeleteLexicologer = () => {
     if (lexicologerToDelete === undefined)
       return;
 
     setErrorMessage(undefined);
     setIsWorking(true);
 
-    fetch(`/api/lexicologers/${lexicologerToDelete}`, { method: 'DELETE'})
-      .then((response: Response) => {
-        if (response.status === 200) {
+    deleteLexicologer(lexicologerToDelete)
+      .then((response: boolean) => {
+        if (response) {
           const lexicologers = user.lexicologers ?? [];
 
           const lexicologer = lexicologers.find(lexicologer => lexicologer.id === lexicologerToDelete)!;
@@ -278,7 +278,7 @@ const UserPage = (props: UserPageProps): JSX.Element => {
         <Heading2>Delete Lexicologer</Heading2>
         <Paragraph>Are you sure you want to delete <Emphasis>{user.lexicologers?.find(l => l.id === lexicologerToDelete)?.title}</Emphasis>?</Paragraph>
         <ButtonGroup>
-          <Button disabled={isWorking} onClick={deleteLexicologer}>Delete</Button>
+          <Button disabled={isWorking} onClick={confirmDeleteLexicologer}>Delete</Button>
           <Button disabled={isWorking} onClick={() => { setErrorMessage(undefined); setLexicologerToDelete(undefined) ;}}>Cancel</Button>
         </ButtonGroup>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
