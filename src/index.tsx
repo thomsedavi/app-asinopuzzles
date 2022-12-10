@@ -42,12 +42,17 @@ export default class App extends React.Component<{}, AppState> {
           .then((response: Response) => response.json())
           .then((authValue: { clientPrincipal: { identityProvider: 'aadb2c', userId: string } | null}) => {
             if (authValue.clientPrincipal !== null) {
-              fetch(`/api/users/${authValue.clientPrincipal.userId}`, { method: 'GET' })
-                .then((response: Response) => response.json())
-                .then((userValue: User) => {
-                  this.setState({
-                    user: userValue
-                  });
+              getUser(authValue.clientPrincipal.userId)
+                .then((response: User | undefined) => {
+                  if (response) {
+                    this.setState({
+                      user: response
+                    });
+                  } else {
+                    this.setState({
+                      user: null
+                    });    
+                  }
                 })
                 .catch(() => {
                   this.setState({
