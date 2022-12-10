@@ -4,7 +4,7 @@ export const isLocalhost = (): boolean => {
   return window.location.hostname === 'localhost';
 }
 
-export const getUser = async (id: string | undefined): Promise<User> => {
+export const getUser = async (id: string | undefined): Promise<User | undefined> => {
   if (isLocalhost()) {
     if (id === '0-00') {
       return Promise.resolve({
@@ -25,7 +25,7 @@ export const getUser = async (id: string | undefined): Promise<User> => {
         ]
       });
     } else {
-      throw Promise.resolve(undefined);
+      Promise.resolve(undefined);
     }
   } else {
     const response: Response = await fetch(`/api/users/${id}`, { method: 'GET' });
@@ -35,7 +35,7 @@ export const getUser = async (id: string | undefined): Promise<User> => {
 
       return Promise.resolve(json);
     } else {
-      throw Promise.resolve(undefined);
+      Promise.resolve(undefined);
     }
   }
 }
