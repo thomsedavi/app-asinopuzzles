@@ -3,7 +3,7 @@ export interface Element {
 }
 
 export interface Section {
-  type?: string;
+  type?: 'PARAGRAPH';
   element?: Element;
   elements?: Element[];
 }
@@ -16,7 +16,7 @@ export interface User {
   id: string;
   name?: string;
   biography?: Document;
-  lexicologers?: { id?: string, title?: string }[];
+  lexicologers?: LexicologerSummary[];
   dateCreated?: string;
   dateUpdated?: string;
 }
@@ -24,6 +24,13 @@ export interface User {
 export interface LexicologerRequiredWord {
   primaryWord?: string;
   secondaryWords?: string[];
+}
+
+export interface LexicologerSummary{
+  id?: string;
+  title?: string;
+  dateCreated?: string;
+  dateUpdated?: string;
 }
 
 export interface LexicologerGame {
