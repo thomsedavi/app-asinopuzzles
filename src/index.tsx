@@ -10,7 +10,8 @@ import './index.css';
 import { User } from './interfaces';
 import { Placeholder } from './common/styled';
 import Lexicologer from './pages/Lexicologer';
-import { getLexicologer, getUser, isLocalhost } from './common/fetchers';
+import { getPuzzle, getLexicologer, getUser, isLocalhost } from './common/fetchers';
+import Puzzle from './pages/Puzzle';
 
 interface AppState {
   user?: User | null;
@@ -82,6 +83,10 @@ export default class App extends React.Component<{}, AppState> {
     return getLexicologer(params.id);
   }
 
+  puzzleLoader = async({ params }: LoaderFunctionArgs) => {
+    return getPuzzle(params.id);
+  }
+
   render = (): JSX.Element => {
     if (this.state.user === undefined) {
       return <Placeholder>…</Placeholder>
@@ -94,6 +99,20 @@ export default class App extends React.Component<{}, AppState> {
         {
           path: "/miscellany",
           element: <Miscellany userId={this.state.user?.id} />,
+        },
+        {
+          path: "/puzzles/:id/edit",
+          element: <Puzzle user={this.state.user} mode='update' />,
+          loader: this.puzzleLoader
+        },
+        {
+          path: "/puzzles/create",
+          element: <Puzzle user={this.state.user} mode='create' />,
+        },
+        {
+          path: "/puzzles/:id",
+          element: <Puzzle user={this.state.user} mode='read' />,
+          loader: this.puzzleLoader
         },
         {
           path: "/lexicologers/:id/edit",
