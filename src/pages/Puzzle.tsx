@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Flash, Heading1, Overlay, Placeholder } from '../common/styled';
+import { Button, ButtonGroup, Container, Flash, Heading1, Heading2, Overlay, Placeholder } from '../common/styled';
 import { User, AsinoPuzzle } from '../interfaces';
 import Layout from './Layout';
 
@@ -15,7 +15,7 @@ const Puzzle = (props: PuzzleProps): JSX.Element => {
   const defaultGame: AsinoPuzzle | undefined = props.user !== undefined && props.user !== null ? {
     userId: props.user.id,
     userName: props.user.name,
-    title: 'Lexicologer Game'
+    title: 'Asino Puzzle'
   } : undefined;
 
   const [ mode, setMode ] = React.useState<'create' | 'read' | 'update'>(props.mode);
@@ -54,7 +54,13 @@ const Puzzle = (props: PuzzleProps): JSX.Element => {
     <Layout userId={props.user?.id} isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} onClickLoader={onClickLoader} />
     <Container>
       {(mode === 'create' || props.user?.id === asinoPuzzle.userId) && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}
-
+      {mode === 'create' && asinoPuzzle.layer === undefined && <>
+        <Heading2>Select Layout</Heading2>
+        <ButtonGroup>
+          <Button>Sudoku</Button>
+          <Button>Blank</Button>
+        </ButtonGroup>
+      </>}
       {state.flash.state !== 'hide' && <Flash color={state.flash.color} isFading={state.flash.state === 'fade'}>{state.flash.message}</Flash>}
     </Container>
     {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}

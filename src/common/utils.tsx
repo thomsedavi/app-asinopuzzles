@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Section, Element } from '../interfaces';
+import { Document, Section, Element, AsinoPuzzle, AsinoNumber, AsinoClass, AsinoObject, AsinoLayer } from '../interfaces';
 import { Icon } from './icons';
 import { Paragraph } from './styled';
 
@@ -141,4 +141,48 @@ export const convertStringToDocument = (text?: string): Document => {
   }
 
   return document;
+}
+
+export const generateDefaultSudoku = (puzzle: AsinoPuzzle): AsinoPuzzle => {
+  const objects: AsinoObject[] = [];
+  const classes: AsinoClass[] = [];
+  const numbers: AsinoNumber[] = [
+    { name: 'Cell Size', description: 'Width and Height of Cells', value: 560},
+    { name: 'Size', description: 'View of all Cells', operation: 'PRODUCT', numbers: ['9', 'Cell Size'] },
+    { name: '0', description: '0', value: 0}
+  ];
+  const layers: AsinoLayer[] = [
+    { type: 'GROUP', name: 'Layout', description: 'Layout', layers: ['Interfaces', 'Divisions'] }
+  ];
+  const interfaceLayers: string[] = [];
+
+  for (let y = 1; y <= 9; y++) {
+    const yString = y.toString();
+
+    numbers.push({ name: yString, description: yString, value: y });
+    numbers.push({ name: `X${yString}`, description: `X${yString}`, operation: 'PRODUCT', numbers: [(y - 1).toString(), 'Cell Size'] });
+    numbers.push({ name: `Y${yString}`, description: `Y${yString}`, operation: 'PRODUCT', numbers: [(y - 1).toString(), 'Cell Size'] });
+    classes.push({ name: yString, description: yString, collection: 'Numbers', number: yString, symbol: yString });
+
+    for (let x = 1; x <= 9; x++) {
+      const xString = x.toString();
+      const coordinate = `R${yString}C${xString}`;
+
+      objects.push({ name: coordinate, description: coordinate, collection: 'Numbers' });
+      layers.push({ type: 'INTERFACE', name: coordinate, description: coordinate, object: coordinate, x: `X${xString}`, y: `Y${yString}`, width: 'Cell Size', height: 'Cell Size' });
+      interfaceLayers.push(coordinate);
+    }
+  }
+
+  layers.push({ type: 'GROUP', name: 'Interfaces', description: 'Interfaces', layers: interfaceLayers });
+
+  puzzle.layer = 'Layout';
+  puzzle.size = 'Size'
+  puzzle.collections = [{ name: 'Numbers', description: 'Numbers Collection' }];
+  puzzle.numbers = numbers;
+  puzzle.classes = classes;
+  puzzle.objects = objects;
+  puzzle.layers = layers;
+
+  return puzzle;
 }

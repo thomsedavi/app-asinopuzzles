@@ -60,6 +60,7 @@ export interface AsinoPuzzle {
   userId?: string;
   userName?: string;
   layer?: string;
+  size?: string;
   collections?: AsinoCollection[];
   objects?: AsinoObject[];
   classes?: AsinoClass[];
@@ -141,6 +142,7 @@ export const asinoPuzzle: AsinoPuzzle = {
   userId: '0-00',
   title: 'My Test Puzzle',
   layer: 'Layout',
+  size: 'Size',
   collections: [
     {
       name: 'Numbers',
@@ -716,6 +718,15 @@ export const asinoPuzzle: AsinoPuzzle = {
       name: 'Cell Size',
       description: 'Width and Height of Cells',
       value: 560
+    },
+    {
+      name: 'Size',
+      description: 'View of all Cells',
+      operation: 'PRODUCT',
+      numbers: [
+        '9',
+        'Cell Size'
+      ]
     },
     {
       name: 'X1',
