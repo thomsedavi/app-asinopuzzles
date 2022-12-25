@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { EditToggleButton } from '../common/components';
 import { useState } from '../common/saveState';
-import { Container, Heading1 } from '../common/styled';
+import { Container, Flash, Heading1, Overlay, Placeholder } from '../common/styled';
 import { User, AsinoPuzzle } from '../interfaces';
 import Layout from './Layout';
 
@@ -26,8 +26,8 @@ const Puzzle = (props: PuzzleProps): JSX.Element => {
     (props.mode === 'create' && defaultGame) ??
     undefined
   );
-  const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
-  const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
+  //const [ isWorking, setIsWorking ] = React.useState<boolean>(false);
+  //const [ errorMessage, setErrorMessage ] = React.useState<string | undefined>();
   const state = useState();
 
   const onClickLoader = () => {
@@ -55,7 +55,9 @@ const Puzzle = (props: PuzzleProps): JSX.Element => {
     <Container>
       {(mode === 'create' || props.user?.id === asinoPuzzle.userId) && <EditToggleButton mode={mode} onClick={() => setMode(toggleButtonMode)} />}
 
+      {state.flash.state !== 'hide' && <Flash color={state.flash.color} isFading={state.flash.state === 'fade'}>{state.flash.message}</Flash>}
     </Container>
+    {isLoading && <Overlay><Placeholder>…</Placeholder></Overlay>}
   </>;
 }
 
