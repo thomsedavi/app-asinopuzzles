@@ -21,7 +21,7 @@ const Puzzle = (props: PuzzleProps): JSX.Element => {
   const [ mode, setMode ] = React.useState<'create' | 'read' | 'update'>(props.mode);
   const [ isBurgerOpen, setIsBurgerOpen ] = React.useState<boolean>(false);
   const [ isLoading, setIsLoading ] = React.useState(false);
-  const [ asinoPuzzle, setAsinoPuzzle ] = React.useState<AsinoPuzzle | undefined>(
+  const [ asinoPuzzle ] = React.useState<AsinoPuzzle | undefined>(
     useLoaderData() as AsinoPuzzle ??
     (props.mode === 'create' && defaultGame) ??
     undefined
@@ -46,7 +46,7 @@ const Puzzle = (props: PuzzleProps): JSX.Element => {
     </>
   }
 
-  const isEditable = mode !== 'read' && props.user !== undefined && props.user !== null && asinoPuzzle.userId === props.user?.id;
+  //const isEditable = mode !== 'read' && props.user !== undefined && props.user !== null && asinoPuzzle.userId === props.user?.id;
 
   const toggleButtonMode: 'create' | 'read' | 'update' = mode === 'read' ? (asinoPuzzle.id === undefined ? 'create' : 'update') : 'read';
 
